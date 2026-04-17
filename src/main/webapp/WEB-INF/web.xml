@@ -1,0 +1,16 @@
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- 404 Page -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/Pages/ErrorPage/404.jsp</location>
+    </error-page>
+
+    <!-- 500 Page -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/Pages/ErrorPage/500.jsp</location>
+    </error-page>
+
+</web-app>
