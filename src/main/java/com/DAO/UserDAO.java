@@ -80,8 +80,8 @@ public class UserDAO {
         return null;
     }
 
-    public boolean updateCustomerProfile(int id, String user, String phone, String license, String addr, String pass) {
-        String sql = "UPDATE customer SET customer_username=?, customer_phoneNo=?, customer_license=?, customer_address=?, password=? WHERE customer_id=?";
+    public boolean updateCustomerProfile(int id, String user, String phone, String license, String addr, String pass, String image) {
+        String sql = "UPDATE customer SET customer_username=?, customer_phoneNo=?, customer_license=?, customer_address=?, password=?, customer_image=? WHERE customer_id=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user);
@@ -89,7 +89,8 @@ public class UserDAO {
             stmt.setString(3, license);
             stmt.setString(4, addr);
             stmt.setString(5, pass);
-            stmt.setInt(6, id);
+            stmt.setString(6, image);
+            stmt.setInt(7, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
