@@ -1,6 +1,7 @@
 package com.controller.user;
 
 import com.DAO.UserDashboardDAO;
+import com.DAO.NotificationDAO;
 import com.model.Booking;
 import com.model.Customer;
 import jakarta.servlet.ServletException;
@@ -33,6 +34,12 @@ public class UserServlet extends HttpServlet {
 
         int customerId = loggedInUser.getCustomer_id();
         String path = request.getServletPath();
+
+        // --- Fetch Notifications for all User pages ---
+        NotificationDAO notifDAO = new NotificationDAO();
+        request.setAttribute("totalNotifCount", notifDAO.getTotalNotificationCount());
+        request.setAttribute("recentNotifs", notifDAO.getRecentNotifications());
+        // ----------------------------------------------
 
         switch (path) {
             case "/userDashboard":

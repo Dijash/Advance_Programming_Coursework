@@ -1,24 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<%@ taglib prefix="sql" uri="jakarta.tags.sql" %>
-
-<%-- Database Connection --%>
-<sql:setDataSource var="dbConnection" driver="com.mysql.cj.jdbc.Driver"
-                   url="jdbc:mysql://localhost:3306/java_coursework"
-                   user="root" password=""/>
-
-<%-- Fetch Total Notification Count --%>
-<sql:query var="totalNotification" dataSource="${dbConnection}">
-     SELECT COUNT(*) as count FROM notification;
-</sql:query>
-
-<%-- Fetch Recent Notifications for Dropdown --%>
-<sql:query var="recentNotifications" dataSource="${dbConnection}">
-     SELECT notification_type, notification_description, notification_date
-     FROM notification
-     ORDER BY notification_date DESC LIMIT 5;
-</sql:query>
 
 <!doctype html>
 <html lang="en">
@@ -410,7 +392,7 @@
           <div class="dropdown-wrapper">
             <button class="btn-notif" id="notifBtn">
               Notifications
-              <span class="notif-badge"><c:out value="${totalNotification.rows[0].count}" default="0" /></span>
+              <span class="notif-badge"><c:out value="${totalNotifCount}" default="0" /></span>
             </button>
 
             <div class="notif-dropdown" id="notifMenu">
@@ -418,15 +400,15 @@
                 Recent Broadcasts
               </div>
               <div class="notif-list">
-                <c:forEach var="notif" items="${recentNotifications.rows}">
+                <c:forEach var="n" items="${recentNotifs}">
                   <div class="notif-item">
-                    <strong><c:out value="${notif.notification_type}"/></strong>
-                    <p><c:out value="${notif.notification_description}"/></p>
-                    <small>Date: <c:out value="${notif.notification_date}"/></small>
+                    <strong><c:out value="${n.type}"/></strong>
+                    <p><c:out value="${n.description}"/></p>
+                    <small>Date: <c:out value="${n.date}"/></small>
                   </div>
                 </c:forEach>
 
-                <c:if test="${empty recentNotifications.rows}">
+                <c:if test="${empty recentNotifs}">
                   <div class="notif-item" style="text-align: center; color: var(--text-muted);">
                     No active system alerts.
                   </div>
