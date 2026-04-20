@@ -1,18 +1,22 @@
-<%@ page import="model.Customer" %>
+<%@ page import="com.model.Customer" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Customer loggedInUser = (Customer) session.getAttribute("user");
     String username = (loggedInUser != null) ? loggedInUser.getCustomer_username() : "User";
     String email    = (loggedInUser != null) ? loggedInUser.getCustomer_email()    : "";
-    String fullName = (loggedInUser != null) ? loggedInUser.getFullName()          : "User";
+
+    // Safely piece together the full name just in case getFullName() doesn't exist in your model
+    String fName = (loggedInUser != null && loggedInUser.getFirst_name() != null) ? loggedInUser.getFirst_name() : "User";
+    String lName = (loggedInUser != null && loggedInUser.getLast_name() != null) ? loggedInUser.getLast_name() : "";
+    String fullName = fName + " " + lName;
+
     // Build avatar initials: first letter of first_name + first letter of last_name
     String avatarInitial = username.length() > 0 ? String.valueOf(username.charAt(0)).toUpperCase() : "U";
-    if (loggedInUser != null && loggedInUser.getFirst_name() != null && loggedInUser.getLast_name() != null) {
+    if (loggedInUser != null && loggedInUser.getFirst_name() != null && loggedInUser.getLast_name() != null && loggedInUser.getFirst_name().length() > 0 && loggedInUser.getLast_name().length() > 0) {
         avatarInitial = String.valueOf(loggedInUser.getFirst_name().charAt(0)).toUpperCase()
                       + String.valueOf(loggedInUser.getLast_name().charAt(0)).toUpperCase();
     }
 %>
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

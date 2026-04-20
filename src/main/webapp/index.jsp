@@ -977,7 +977,7 @@ nav {
           <li><a href="#about">Services</a></li>
           <li><a href="#deals">Rental Deals</a></li>
           <li><a href="#choose">About</a></li>
-          <li><a href="#client">Contact Us</a></li>
+          <li><a href="<%= request.getContextPath() %>/contact">Contact Us</a></li>
         </ul>
         <div class="nav_buttons">
           <a href="<%= request.getContextPath() %>/login" class="button button_outline">Login</a>
