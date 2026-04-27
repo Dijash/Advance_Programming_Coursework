@@ -69,7 +69,7 @@ public class UserDAO {
                         rs.getString("customer_username"),
                         rs.getString("referral_code"),
                         rs.getString("password"),
-                        rs.getString("customer_image"), // <-- Added this to fix the 15-parameter constructor error
+                        rs.getString("customer_image"),
                         rs.getTimestamp("created_at")
                 );
             }
@@ -100,14 +100,14 @@ public class UserDAO {
 
     public boolean checkEmailExists(String email) {
         String sql = "SELECT customer_email FROM customer WHERE customer_email = ?";
-        try (java.sql.Connection conn = com.util.DBConnection.getConnection();
-             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);
-            try (java.sql.ResultSet rs = stmt.executeQuery()) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next();
             }
-        } catch (java.sql.SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -116,8 +116,8 @@ public class UserDAO {
     public boolean updatePasswordByEmail(String email, String newPassword) {
         String sql = "UPDATE customer SET password = ? WHERE customer_email = ?";
 
-        try (java.sql.Connection conn = com.util.DBConnection.getConnection();
-             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, newPassword);
             stmt.setString(2, email);
@@ -125,7 +125,7 @@ public class UserDAO {
             int rowsUpdated = stmt.executeUpdate();
             return rowsUpdated > 0;
 
-        } catch (java.sql.SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }

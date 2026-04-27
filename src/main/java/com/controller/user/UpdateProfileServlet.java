@@ -1,6 +1,6 @@
 package com.controller.user;
 
-import com.DAO.UserDAO;
+import com.service.UserService;
 import com.model.Customer;
 import com.util.PasswordUtil;
 import jakarta.servlet.ServletException;
@@ -12,9 +12,9 @@ import java.io.IOException;
 
 @WebServlet("/updateProfile")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-        maxFileSize = 1024 * 1024 * 10,      // 10 MB limit
-        maxRequestSize = 1024 * 1024 * 15    // 15 MB total
+        fileSizeThreshold = 1024 * 1024 * 1,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 15
 )
 public class UpdateProfileServlet extends HttpServlet {
 
@@ -57,8 +57,8 @@ public class UpdateProfileServlet extends HttpServlet {
             imageToSave = fileName;
         }
 
-        UserDAO dao = new UserDAO();
-        boolean success = dao.updateCustomerProfile(
+        UserService userService = new UserService();
+        boolean success = userService.updateProfile(
                 currentUser.getCustomer_id(),
                 newUsername,
                 newPhone,
@@ -69,8 +69,7 @@ public class UpdateProfileServlet extends HttpServlet {
         );
 
         if (success) {
-            // Re-fetch the user to ensure session holds the absolute latest data (including new photo)
-            Customer updatedUser = dao.getCustomerByEmail(currentUser.getCustomer_email());
+            Customer updatedUser = userService.getCustomerByEmail(currentUser.getCustomer_email());
             session.setAttribute("user", updatedUser);
             response.sendRedirect("settings?success=true");
         } else {

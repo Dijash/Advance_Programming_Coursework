@@ -16,7 +16,7 @@ public class Customer {
     private String customer_username;
     private String referral_code;
     private String password;
-    private String customer_image; // ADDED IMAGE FIELD
+    private String customer_image;
     private Timestamp created_at;
 
     public Customer(int customer_id, String first_name, String last_name, String gender,
@@ -54,8 +54,9 @@ public class Customer {
     public String getCustomer_country() { return customer_country; }
     public String getGender() { return gender; }
     public String getReferral_code() { return referral_code; }
-    public String getCustomer_image() { return customer_image; } // NEW GETTER
+    public String getCustomer_image() { return customer_image; }
     public Timestamp getCreated_at() { return created_at; }
+
     public String getFullName() {
         return first_name + " " + last_name;
     }
