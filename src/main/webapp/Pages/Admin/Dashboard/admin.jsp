@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page isELIgnored="false" %>
 
 <!doctype html>
 <html lang="en">
@@ -42,8 +43,8 @@
              </div>
 
              <div class="stat-card">
-               <h3>Total Revenue</h3>
-               <div class="value">₹<c:out value="${totalRevenue}" default="0" /></div>
+                 <h3>Total Revenue</h3>
+                 <div class="value" style="color: #22c55e;">₹<c:out value="${totalRevenue}" default="0" /></div>
              </div>
 
              <div class="stat-card">

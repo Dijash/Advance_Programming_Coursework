@@ -1,6 +1,6 @@
 package com.controller.admin;
 
-import com.service.AdminService;
+import com.service.NotificationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -14,7 +14,6 @@ public class DeleteNotificationServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        // Ensure to check admin auth if needed
 
         String idParam = request.getParameter("id");
 
@@ -22,8 +21,8 @@ public class DeleteNotificationServlet extends HttpServlet {
             try {
                 int notificationId = Integer.parseInt(idParam);
 
-                AdminService adminService = new AdminService();
-                boolean success = adminService.deleteNotification(notificationId);
+                NotificationService notifService = new NotificationService();
+                boolean success = notifService.deleteNotification(notificationId);
 
                 if (success) {
                     response.sendRedirect(request.getContextPath() + "/manageNotification?msg=deleted");
