@@ -5,17 +5,15 @@
     String username = (loggedInUser != null) ? loggedInUser.getCustomer_username() : "User";
     String email    = (loggedInUser != null) ? loggedInUser.getCustomer_email()    : "";
 
-    // Safely piece together the full name just in case getFullName() doesn't exist in your model
+
     String fName = (loggedInUser != null && loggedInUser.getFirst_name() != null) ? loggedInUser.getFirst_name() : "User";
     String lName = (loggedInUser != null && loggedInUser.getLast_name() != null) ? loggedInUser.getLast_name() : "";
     String fullName = fName + " " + lName;
 
-    // Build avatar initials: first letter of first_name + first letter of last_name
-    String avatarInitial = username.length() > 0 ? String.valueOf(username.charAt(0)).toUpperCase() : "U";
-    if (loggedInUser != null && loggedInUser.getFirst_name() != null && loggedInUser.getLast_name() != null && loggedInUser.getFirst_name().length() > 0 && loggedInUser.getLast_name().length() > 0) {
-        avatarInitial = String.valueOf(loggedInUser.getFirst_name().charAt(0)).toUpperCase()
-                      + String.valueOf(loggedInUser.getLast_name().charAt(0)).toUpperCase();
-    }
+    // Profile image path (null/empty means fall back to initials)
+    String profileImage = (loggedInUser != null && loggedInUser.getCustomer_image() != null && !loggedInUser.getCustomer_image().trim().isEmpty())
+                          ? loggedInUser.getCustomer_image().trim()
+                          : null;
 %>
 <html lang="en">
   <head>
@@ -63,9 +61,7 @@ body {
   line-height: 1.7;
 }
 
-/* ========================================
-   BUTTONS
-======================================== */
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -180,9 +176,7 @@ nav {
   line-height: 1;
 }
 
-/* ========================================
-   USER AVATAR & DROPDOWN
-======================================== */
+
 .user_avatar_wrap {
   position: relative;
   display: flex;
@@ -205,6 +199,14 @@ nav {
   font-size: 0.85rem;
   flex-shrink: 0;
   letter-spacing: 0.5px;
+  overflow: hidden;
+}
+
+.user_avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .user_name_nav {
@@ -213,7 +215,6 @@ nav {
   color: #1e293b;
 }
 
-/* DROPDOWN – HIDDEN BY DEFAULT */
 .user_dropdown {
   display: none;
   position: absolute;
@@ -228,7 +229,7 @@ nav {
   overflow: hidden;
 }
 
-/* DROPDOWN – VISIBLE WHEN OPEN CLASS IS ADDED */
+
 .user_dropdown.open {
   display: block;
   animation: dropdownFade 0.15s ease;
@@ -282,9 +283,7 @@ nav {
   color: #b91c1c;
 }
 
-/* ========================================
-   HEADER HERO
-======================================== */
+
 .header_container {
   display: flex;
   align-items: center;
@@ -328,9 +327,7 @@ nav {
   margin: 0 0 1.5rem 0;
 }
 
-/* ========================================
-   SEARCH FORM
-======================================== */
+
 .header_form {
   background: white;
   max-width: 1100px;
@@ -406,9 +403,7 @@ nav {
   align-items: center;
 }
 
-/* ========================================
-   HOW IT WORKS
-======================================== */
+
 .about_container {
   background: #f8fafc;
 }
@@ -464,9 +459,7 @@ nav {
   font-size: 0.92rem;
 }
 
-/* ========================================
-   DEALS / TABS
-======================================== */
+
 .deals {
   padding: 4rem 1rem;
   background: #f1f5f9;
@@ -654,9 +647,7 @@ nav {
   color: #94a3b8;
 }
 
-/* ========================================
-   WHY CHOOSE US
-======================================== */
+
 .choose_container {
   display: flex;
   flex-wrap: wrap;
@@ -741,9 +732,7 @@ nav {
   color: #64748b;
 }
 
-/* ========================================
-   SUBSCRIBE
-======================================== */
+
 .subscribe_container {
   display: flex;
   flex-wrap: wrap;
@@ -805,9 +794,7 @@ nav {
   border-color: #2563eb;
 }
 
-/* ========================================
-   TESTIMONIALS
-======================================== */
+
 .client_container {
   background: #f8fafc;
   padding: 2rem 0;
@@ -873,9 +860,7 @@ nav {
   line-height: 1.6;
 }
 
-/* ========================================
-   FOOTER
-======================================== */
+
 .footer {
   background: #0f172a;
   color: #cbd5e1;
@@ -994,9 +979,7 @@ nav {
   color: #475569;
 }
 
-/* ========================================
-   RESPONSIVE
-======================================== */
+
 @media (max-width: 1048px) {
   .nav_links {
     display: none;
@@ -1082,7 +1065,7 @@ nav {
   </head>
   <body>
 
-    <%-- ========== HEADER / NAV ========== --%>
+
     <header>
       <nav>
         <div class="nav_header">
@@ -1101,10 +1084,14 @@ nav {
           <li><a href="<%= request.getContextPath() %>/contact">Contact Us</a></li>
         </ul>
 
-        <%-- ===== USER AVATAR DROPDOWN (shown when logged in) ===== --%>
+
         <div class="nav_buttons">
           <div class="user_avatar_wrap" id="userAvatarWrap">
-            <div class="user_avatar"><%= avatarInitial %></div>
+            <div class="user_avatar">
+              <% if (profileImage != null) { %>
+                <img src="<%= request.getContextPath() %>/Assets/Profiles/<%= profileImage %>" alt="<%= username %>" />
+              <% } %>
+            </div>
             <span class="user_name_nav"><%= username %></span>
             <%-- Chevron down --%>
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1150,7 +1137,6 @@ nav {
       </div>
     </header>
 
-    <%-- ========== SEARCH FORM ========== --%>
     <section class="header_form">
       <form action="<%= request.getContextPath() %>/home">
         <div class="input_group">
@@ -1200,7 +1186,7 @@ nav {
       </form>
     </section>
 
-    <%-- ========== HOW IT WORKS ========== --%>
+
     <section class="section_container about_container" id="about">
       <h2 class="section_header">How it works</h2>
       <p class="section_description">
@@ -1233,7 +1219,7 @@ nav {
       </div>
     </section>
 
-    <%-- ========== DEALS / TABS ========== --%>
+
     <section class="deals" id="deals">
       <div class="section_container deals_container">
         <h2 class="section_header">Most popular car rental deals</h2>
@@ -1362,7 +1348,7 @@ nav {
       </div>
     </section>
 
-    <%-- ========== WHY CHOOSE US ========== --%>
+
     <section class="choose_container" id="choose">
       <div class="choose_image">
         <img src="<%= request.getContextPath() %>/Assets/why choosed us.jpeg" alt="Happy customer with car" />
@@ -1394,7 +1380,6 @@ nav {
       </div>
     </section>
 
-    <%-- ========== SUBSCRIBE ========== --%>
     <section class="subscribe_container">
       <div class="subscribe_image">
         <img src="<%= request.getContextPath() %>/Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
@@ -1468,13 +1453,13 @@ nav {
       </div>
     </section>
 
-    <%-- ========== FOOTER ========== --%>
+
     <footer class="footer">
       <div class="section_container footer_container">
         <div class="footer_col">
           <div class="footer_logo">
             <a href="#" class="logo">
-              <img src="https://placehold.co/60x60/ffffff/0f172a?text=R" alt="RentAll logo" />
+              <img src="#" alt="RentAll logo" />
               <span>RentAll</span>
             </a>
           </div>

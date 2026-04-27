@@ -45,9 +45,7 @@ body {
   line-height: 1.7;
 }
 
-/* ========================================
-   BUTTONS
-======================================== */
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -96,9 +94,7 @@ body {
   flex-shrink: 0;
 }
 
-/* ========================================
-   NAVBAR
-======================================== */
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -161,9 +157,7 @@ nav {
   line-height: 1;
 }
 
-/* ========================================
-   HEADER HERO
-======================================== */
+
 .header_container {
   display: flex;
   align-items: center;
@@ -207,9 +201,6 @@ nav {
   margin: 0 0 1.5rem 0;
 }
 
-/* ========================================
-   SEARCH FORM
-======================================== */
 .header_form {
   background: white;
   max-width: 1100px;
@@ -285,9 +276,7 @@ nav {
   align-items: center;
 }
 
-/* ========================================
-   HOW IT WORKS
-======================================== */
+
 .about_container {
   background: #f8fafc;
 }
@@ -533,9 +522,7 @@ nav {
   color: #94a3b8;
 }
 
-/* ========================================
-   WHY CHOOSE US
-======================================== */
+
 .choose_container {
   display: flex;
   flex-wrap: wrap;
@@ -620,9 +607,7 @@ nav {
   color: #64748b;
 }
 
-/* ========================================
-   SUBSCRIBE
-======================================== */
+
 .subscribe_container {
   display: flex;
   flex-wrap: wrap;
@@ -684,9 +669,7 @@ nav {
   border-color: #2563eb;
 }
 
-/* ========================================
-   TESTIMONIALS
-======================================== */
+
 .client_container {
   background: #f8fafc;
   padding: 2rem 0;
@@ -752,9 +735,7 @@ nav {
   line-height: 1.6;
 }
 
-/* ========================================
-   FOOTER
-======================================== */
+
 .footer {
   background: #0f172a;
   color: #cbd5e1;
@@ -961,7 +942,6 @@ nav {
   </head>
   <body>
 
-    <!_ ========== HEADER / NAV ========== _>
     <header>
       <nav>
         <div class="nav_header">
@@ -1000,7 +980,7 @@ nav {
       </div>
     </header>
 
-    <!_ ========== SEARCH FORM ========== _>
+
     <section class="header_form">
       <form action="/">
         <div class="input_group">
@@ -1054,7 +1034,6 @@ nav {
       </form>
     </section>
 
-    <!_ ========== HOW IT WORKS ========== _>
     <section class="section_container about_container" id="about">
       <h2 class="section_header">How it works</h2>
       <p class="section_description">
@@ -1090,7 +1069,7 @@ nav {
       </div>
     </section>
 
-    <!_ ========== DEALS / TABS ========== _>
+
     <section class="deals" id="deals">
       <div class="section_container deals_container">
         <h2 class="section_header">Most popular car rental deals</h2>
@@ -1126,7 +1105,6 @@ nav {
             </label>
           </div>
 
-          <!_ Panel: Toyota Corolla _>
           <div class="deal_panel" id="panel-corolla">
             <div class="deal_image">
               <img src="Assets/range-1.jpg" alt="Toyota Corolla" />
@@ -1169,7 +1147,7 @@ nav {
             </div>
           </div>
 
-          <!_ Panel: Toyota Noah _>
+
           <div class="deal_panel" id="panel-noah">
             <div class="deal_image">
               <img src="Assets/range-2.jpg" alt="Toyota Noah" />
@@ -1212,7 +1190,7 @@ nav {
             </div>
           </div>
 
-          <!_ Panel: Mitsubishi Pajero _>
+
           <div class="deal_panel" id="panel-pajero">
             <div class="deal_image">
               <img src="Assets/range-3.jpg" alt="Mitsubishi Pajero" />
@@ -1256,7 +1234,7 @@ nav {
             </div>
           </div>
 
-          <!_ Panel: Suzuki Swift _>
+
           <div class="deal_panel" id="panel-swift">
             <div class="deal_image">
               <img src="Assets/range-4.jpg" alt="Suzuki Swift" />
@@ -1303,7 +1281,7 @@ nav {
       </div>
     </section>
 
-    <!_ ========== WHY CHOOSE US ========== _>
+
     <section class="choose_container" id="choose">
       <div class="choose_image">
         <img src="Assets/why choosed us.jpeg" alt="Happy customer with car" />
@@ -1359,7 +1337,7 @@ nav {
       </div>
     </section>
 
-    <!_ ========== SUBSCRIBE ========== _>
+
     <section class="subscribe_container">
       <div class="subscribe_image">
         <img src="Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
@@ -1377,7 +1355,7 @@ nav {
       </div>
     </section>
 
-    <!_ ========== TESTIMONIALS ========== _>
+
     <section class="section_container client_container" id="client">
       <h2 class="section_header">What people say about us</h2>
       <p class="section_description">
@@ -1441,7 +1419,6 @@ nav {
       </div>
     </section>
 
-    <!_ ========== FOOTER ========== _>
     <footer class="footer">
       <div class="section_container footer_container">
         <div class="footer_col">
@@ -1515,9 +1492,6 @@ nav {
             </li>
           </ul>
         </div>
-      </div>
-      <div class="footer_bottom">
-        &copy; 2024 RentAll. All rights reserved.
       </div>
     </footer>
   </body>

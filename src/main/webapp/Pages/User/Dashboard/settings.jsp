@@ -530,7 +530,7 @@
               </div>
               <div class="form-group">
                 <label>New Password</label>
-                <input type="password" name="password" class="info-box" placeholder="Leave blank to keep current">
+                <input type="password" name="password" class="info-box" placeholder="*******">
               </div>
 
               <h3 class="section-title">Legal & Contact</h3>
