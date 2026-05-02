@@ -2,19 +2,6 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="com.model.Customer" %>
 <%@ page isELIgnored="false" %>
-<%
-    Customer loggedInUser = (Customer) session.getAttribute("user");
-    String username = (loggedInUser != null) ? loggedInUser.getCustomer_username() : "User";
-    String email    = (loggedInUser != null) ? loggedInUser.getCustomer_email()    : "";
-
-    String fName = (loggedInUser != null && loggedInUser.getFirst_name() != null) ? loggedInUser.getFirst_name() : "User";
-    String lName = (loggedInUser != null && loggedInUser.getLast_name() != null) ? loggedInUser.getLast_name() : "";
-    String fullName = fName + " " + lName;
-
-    String profileImage = (loggedInUser != null && loggedInUser.getCustomer_image() != null && !loggedInUser.getCustomer_image().trim().isEmpty())
-                          ? loggedInUser.getCustomer_image().trim()
-                          : null;
-%>
 <!doctype html>
 <html lang="en">
 
@@ -603,6 +590,7 @@
                     </svg>
                 </button>
             </div>
+
             <ul class="nav_links" id="nav-links">
                 <li><a href="<%= request.getContextPath() %>/rentalDeals">Rental Deals</a></li>
                 <li><a href="<%= request.getContextPath() %>/about">About</a></li>
@@ -610,45 +598,58 @@
             </ul>
 
             <div class="nav_buttons">
-                <% if (loggedInUser != null) { %>
-                    <div class="user_avatar_wrap" id="userAvatarWrap">
-                        <div class="user_avatar">
-                            <% if (profileImage != null) { %>
-                                <img src="<%= request.getContextPath() %>/Assets/Profiles/<%= profileImage %>" alt="<%= username %>" />
-                            <% } else { %>
-                                <%= String.valueOf(fName.charAt(0)).toUpperCase() %>
-                            <% } %>
-                        </div>
-                        <span class="user_name_nav"><%= username %></span>
-                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><polyline points="6 9 12 15 18 9"/></svg>
-
-                        <div class="user_dropdown" id="userDropdown">
-                            <div class="dropdown_header">
-                                <p><%= fullName %></p>
-                                <span><%= email %></span>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user}">
+                        <!-- Authenticated User Dropdown -->
+                        <div class="user_avatar_wrap" id="userAvatarWrap">
+                            <div class="user_avatar">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.user.customer_image}">
+                                        <img src="<%= request.getContextPath() %>/Assets/Profiles/${sessionScope.user.customer_image}" alt="${sessionScope.user.customer_username}" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <!-- Fallback SVG if no profile image exists -->
+                                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: white; width: 20px; height: 20px;">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
-                            <a href="<%= request.getContextPath() %>/userDashboard" class="dropdown_item">
-                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                                Dashboard
-                            </a>
-                            <a href="<%= request.getContextPath() %>/settings" class="dropdown_item">
-                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                My Profile
-                            </a>
-                            <a href="<%= request.getContextPath() %>/myBookings" class="dropdown_item">
-                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                My Bookings
-                            </a>
-                            <a href="<%= request.getContextPath() %>/logout" class="dropdown_item danger">
-                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                                Log Out
-                            </a>
+                            <span class="user_name_nav">
+                                ${not empty sessionScope.user.customer_username ? sessionScope.user.customer_username : 'User'}
+                            </span>
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><polyline points="6 9 12 15 18 9"/></svg>
+
+                            <div class="user_dropdown" id="userDropdown">
+                                <div class="dropdown_header">
+                                    <p>${not empty sessionScope.user.first_name ? sessionScope.user.first_name : 'User'} ${sessionScope.user.last_name}</p>
+                                    <span>${sessionScope.user.customer_email}</span>
+                                </div>
+                                <a href="<%= request.getContextPath() %>/userDashboard" class="dropdown_item">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                    Dashboard
+                                </a>
+                                <a href="<%= request.getContextPath() %>/settings" class="dropdown_item">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    My Profile
+                                </a>
+                                <a href="<%= request.getContextPath() %>/myBookings" class="dropdown_item">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    My Bookings
+                                </a>
+                                <a href="<%= request.getContextPath() %>/logout" class="dropdown_item danger">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                                    Log Out
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                <% } else { %>
-                    <a href="<%= request.getContextPath() %>/login" class="button button_outline">Login</a>
-                    <a href="<%= request.getContextPath() %>/register" class="button">Register</a>
-                <% } %>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Guest User Logic -->
+                        <a href="<%= request.getContextPath() %>/login" class="button button_outline">Login</a>
+                        <a href="<%= request.getContextPath() %>/register" class="button">Register</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </nav>
     </header>

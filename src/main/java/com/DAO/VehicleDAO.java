@@ -127,7 +127,6 @@ public class VehicleDAO {
         return vehicle;
     }
 
-    // --- NEW METHOD ADDED ---
     public List<Vehicle> getAllVehicles() {
         List<Vehicle> list = new ArrayList<>();
         String sql = "SELECT * FROM vehicle ORDER BY vehicle_id DESC";
