@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,16 +9,12 @@
     <title>Login</title>
   </head>
 
-<%
-    String error = (String) request.getAttribute("error");
-    if (error != null) {
-%>
+  <c:if test="${not empty error}">
     <script>
-        alert("<%= error %>");
+        alert("${error}");
     </script>
-<%
-    }
-%>
+  </c:if>
+
   <body style="background-image: url('<%= request.getContextPath() %>/Assets/Background.jpg'); background-size: cover; background-position: center;">
     <div class="main">
       <div class="form-head">
