@@ -25,7 +25,8 @@ public class ToggleFavoriteServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            out.print("{"status":"unauthorized"}");
+            // FIX 1: Escaped inner quotes so the string literal compiles correctly
+            out.print("{\"status\":\"unauthorized\"}");
             return;
         }
 
@@ -38,11 +39,12 @@ public class ToggleFavoriteServlet extends HttpServlet {
             FavoriteDAO favDAO = new FavoriteDAO();
             boolean isFavorited = favDAO.toggleFavorite(customerId, vehicleId);
 
-            out.print("{"status":"success", "isFavorited":" + isFavorited + "}");
+            // FIX 2: Moved the closing quote so isFavorited boolean is concatenated outside the string
+            out.print("{\"status\":\"success\", \"isFavorited\":" + isFavorited + "}");
 
         } catch (Exception e) {
             e.printStackTrace();
-            out.print("{"status":"error", "message":"server_error"}");
+            out.print("{\"status\":\"error\", \"message\":\"server_error\"}");
         }
     }
 }
