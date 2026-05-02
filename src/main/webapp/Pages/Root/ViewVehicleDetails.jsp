@@ -580,7 +580,9 @@
         <nav>
             <div class="nav_header">
                 <div class="nav_logo">
-                    <a href="<%= request.getContextPath() %>/home" class="logo"><span>RentAll</span></a>
+                    <a href="${pageContext.request.contextPath}${not empty sessionScope.user ? '/home' : '/'}" class="logo">
+                        <span>RentAll</span>
+                    </a>
                 </div>
                 <button class="nav_menu_button" aria-label="Toggle menu" id="menu-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
