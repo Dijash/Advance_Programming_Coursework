@@ -685,6 +685,12 @@
   </style>
 </head>
 
+<c:if test="${not empty error}">
+  <script>
+      alert("${error}");
+  </script>
+</c:if>
+
 <body>
   <!-- Header -->
   <header style="background: white; border-bottom: 1px solid #e2e8f0;">
@@ -849,15 +855,29 @@
                   <!-- Content Area -->
                   <div class="hc_content">
 
-                    <!-- Floating Heart Button -->
-                   <button class="fav_btn <c:forEach var='fId' items='${favoriteIds}'><c:if test='${fId == v.vehicle_id}'>active</c:if></c:forEach>"
-                           id="fav-btn-${v.vehicle_id}"
-                           onclick="toggleFavorite(this, ${v.vehicle_id})"
-                           aria-label="Add to favorites">
-                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                       </svg>
-                   </button>
+                    <!-- Floating Heart Button (No AJAX) -->
+                    <c:choose>
+                        <c:when test="${empty sessionScope.user}">
+                            <!-- Guest: Redirect to login immediately -->
+                            <button class="fav_btn" onclick="window.location.href='<%= request.getContextPath() %>/login'" aria-label="Add to favorites">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </button>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Logged In: Standard HTML Form Post -->
+                            <form action="<%= request.getContextPath() %>/toggleFavorite" method="POST" style="margin:0; padding:0; position:absolute; top:2rem; right:2rem;">
+                                <input type="hidden" name="vehicleId" value="${v.vehicle_id}">
+                                <button type="submit" class="fav_btn <c:forEach var='fId' items='${favoriteIds}'><c:if test='${fId == v.vehicle_id}'>active</c:if></c:forEach>" style="position:static; top:auto; right:auto;" aria-label="Add to favorites">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+
                     <div class="hc_header">
                       <!-- Title fetching from database -->
                       <h2>${v.vehicle_brand} ${v.vehicle_type}</h2>
@@ -1018,33 +1038,6 @@
         // Close when clicking outside
         document.addEventListener('click', function() {
           dropdown.classList.remove('open');
-        });
-      }
-
-      // Helper Script to Handle ID-based Favorites
-      function toggleFavorite(buttonElement, vehicleId) {
-        fetch('<%= request.getContextPath() %>/toggleFavorite', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: 'vehicleId=' + vehicleId
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'unauthorized') {
-            alert("You must be logged in to favorite a vehicle.");
-            window.location.href = '<%= request.getContextPath() %>/login';
-          } else if (data.status === 'success') {
-            if (data.isFavorited) {
-              buttonElement.classList.add('active');
-            } else {
-              buttonElement.classList.remove('active');
-            }
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
         });
       }
   </script>

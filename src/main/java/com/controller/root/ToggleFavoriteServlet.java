@@ -1,7 +1,7 @@
-package com.controller.root; // Make sure this matches your folder structure!
+package com.controller.root;
 
 import com.DAO.FavoriteDAO;
-import com.model.Customer; // Required to get the user ID
+import com.model.Customer;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/toggleFavorite")
 public class ToggleFavoriteServlet extends HttpServlet {
@@ -19,14 +18,10 @@ public class ToggleFavoriteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-
         HttpSession session = request.getSession(false);
+
         if (session == null || session.getAttribute("user") == null) {
-            // FIX 1: Escaped inner quotes so the string literal compiles correctly
-            out.print("{\"status\":\"unauthorized\"}");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
@@ -37,14 +32,19 @@ public class ToggleFavoriteServlet extends HttpServlet {
             int vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
 
             FavoriteDAO favDAO = new FavoriteDAO();
-            boolean isFavorited = favDAO.toggleFavorite(customerId, vehicleId);
+            favDAO.toggleFavorite(customerId, vehicleId);
 
-            // FIX 2: Moved the closing quote so isFavorited boolean is concatenated outside the string
-            out.print("{\"status\":\"success\", \"isFavorited\":" + isFavorited + "}");
+            String referer = request.getHeader("Referer");
+
+            if (referer != null && !referer.isEmpty()) {
+                response.sendRedirect(referer);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/rentalDeals");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
-            out.print("{\"status\":\"error\", \"message\":\"server_error\"}");
+            response.sendRedirect(request.getContextPath() + "/rentalDeals");
         }
     }
 }
