@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RentAll | 500 - Engine Trouble</title>
+  <title>RentAll | 505 - Protocol Error</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary: #0f172a;
       --accent: #3b82f6;
-      --danger: #ef4444; /* Red color for error */
+      --warning: #f59e0b; /* Yellow/Orange for protocol warning */
       --bg-main: #f8fafc;
       --card-bg: #ffffff;
       --text-muted: #64748b;
@@ -39,7 +39,7 @@
       width: 90%;
       text-align: center;
       border: 1px solid var(--border);
-      border-bottom: 6px solid var(--danger); /* Red border for 500 */
+      border-bottom: 6px solid var(--warning); /* Warning border for 505 */
       position: relative;
     }
 
@@ -68,11 +68,11 @@
       gap: 2px;
     }
 
-    /* Smoke animation for engine trouble */
-    .error-code .smoke {
-      color: var(--danger);
+    /* Glitch/Jitter animation for transmission error */
+    .error-code .glitch {
+      color: var(--warning);
       display: inline-block;
-      animation: puff 3s ease-in-out infinite alternate;
+      animation: jitter 0.5s linear infinite;
     }
 
     .error-title {
@@ -104,9 +104,9 @@
     }
 
     .btn-home:hover {
-      background: var(--danger);
+      background: var(--warning);
       transform: translateY(-2px);
-      box-shadow: 0 8px 15px -3px rgba(239, 68, 68, 0.3);
+      box-shadow: 0 8px 15px -3px rgba(245, 158, 11, 0.3);
     }
 
     .btn-home svg {
@@ -119,10 +119,13 @@
       transform: translateX(-4px);
     }
 
-    @keyframes puff {
-      0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-      50% { transform: translateY(-5px) scale(1.05) rotate(5deg); opacity: 0.8; }
-      100% { transform: translateY(-10px) scale(1.1) rotate(-5deg); opacity: 0.6; filter: blur(1px); }
+    @keyframes jitter {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-2px, 1px); }
+      40% { transform: translate(1px, -1px); opacity: 0.8; }
+      60% { transform: translate(-1px, 2px); }
+      80% { transform: translate(2px, -1px); opacity: 0.9;}
+      100% { transform: translate(0, 0); }
     }
   </style>
 </head>
@@ -131,20 +134,20 @@
     <a href="<%= request.getContextPath() %>/home" class="logo">Rent<span>All</span></a>
 
     <div class="error-code">
-      5<span class="smoke">0</span>0
+      5<span class="glitch">0</span>5
     </div>
 
-    <div class="error-title">Engine Overheated!</div>
+    <div class="error-title">Transmission Error!</div>
 
     <div class="error-message">
-      Whoops! Something went wrong under the hood on our end. Our mechanics have been notified and are working on it right now.
+      Your browser is communicating with a protocol our servers don't support. Try updating your browser to continue the journey.
     </div>
 
     <a href="<%= request.getContextPath() %>/home" class="btn-home">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
-      Return to Safety
+      Return Home
     </a>
   </div>
 </body>
