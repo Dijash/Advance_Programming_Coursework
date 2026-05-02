@@ -946,7 +946,7 @@ nav {
       <nav>
         <div class="nav_header">
           <div class="nav_logo">
-            <a href="<%= request.getContextPath() %>/" class="logo"><span>RentAll</span></a>
+            <a href="<%= request.getContextPath() %>/Home" class="logo"><span>RentAll</span></a>
           </div>
           <!_ Hamburger Menu Icon _>
           <button class="nav_menu_button"  aria-label="Toggle menu">
@@ -954,7 +954,6 @@ nav {
           </button>
         </div>
         <ul class="nav_links" id="nav-links">
-          <li><a href="#about">Services</a></li>
           <li><a href="#deals">Rental Deals</a></li>
           <li><a href="#choose">About</a></li>
           <li><a href="<%= request.getContextPath() %>/contact">Contact Us</a></li>

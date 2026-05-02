@@ -425,6 +425,7 @@
         <nav>
           <a href="<%= request.getContextPath() %>/userDashboard">Dashboard</a>
           <a href="<%= request.getContextPath() %>/myBookings">My Bookings</a>
+          <li><a href="<%= request.getContextPath() %>/myFavorites" >My Favorites</a></li>
           <a href="<%= request.getContextPath() %>/settings" class="active">Settings</a>
         </nav>
         <a href="<%= request.getContextPath() %>/logout" class="logout">Logout</a>

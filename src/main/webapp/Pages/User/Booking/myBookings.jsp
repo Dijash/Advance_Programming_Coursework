@@ -4,501 +4,120 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentAll | My Bookings</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-      :root {
-        --primary: #0f172a;
-        --sidebar-active: #334155;
-        --accent: #3b82f6;
-        --accent-hover: #2563eb;
-        --success: #10b981;
-        --warning: #f59e0b;
-        --danger: #ef4444;
-        --bg-main: #f8fafc;
-        --card-bg: #ffffff;
-        --text-main: #1e293b;
-        --text-muted: #64748b;
-        --border: #e2e8f0;
-        --radius-lg: 12px;
-        --radius-md: 8px;
-        --radius-sm: 4px;
-        --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
+        :root {
+            --primary: #0f172a;
+            --sidebar-active: #334155;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-main: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Poppins", sans-serif; background-color: var(--bg-main); display: flex; min-height: 100vh; }
 
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: var(--bg-main);
-        color: var(--text-main);
-        display: flex;
-        min-height: 100vh;
-      }
+        .sidebar { width: 260px; background: var(--primary); color: white; padding: 2rem 1.5rem; position: fixed; height: 100vh; display: flex; flex-direction: column; }
+        .sidebar h2 { font-size: 1.5rem; margin-bottom: 2.5rem; }
+        .sidebar nav a { text-decoration: none; color: #94a3b8; padding: 0.8rem 1rem; display: block; border-radius: var(--radius-md); margin-bottom: 0.5rem; transition: 0.3s; }
+        .sidebar nav a:hover, .sidebar nav a.active { background: var(--sidebar-active); color: white; }
+        .logout { margin-top: auto; background: var(--danger); color: white !important; text-align: center; padding: 0.8rem 1rem; border-radius: var(--radius-md); text-decoration: none; }
 
-      /* Sidebar */
-      .sidebar {
-        width: 260px;
-        background: var(--primary);
-        color: white;
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        height: 100vh;
-      }
-      .sidebar h2 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 2.5rem;
-      }
-      .sidebar nav ul {
-        list-style: none;
-      }
-      .sidebar nav a {
-        text-decoration: none;
-        color: #94a3b8;
-        padding: 0.8rem 1rem;
-        display: flex;
-        align-items: center;
-        border-radius: var(--radius-md);
-        margin-bottom: 0.5rem;
-        transition: 0.3s;
-        font-weight: 500;
-      }
-      .sidebar nav a:hover,
-      .sidebar nav a.active {
-        background: var(--sidebar-active);
-        color: white;
-      }
+        main { flex: 1; margin-left: 260px; }
+        .top-navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; border-bottom: 1px solid var(--border); }
 
-      .logout {
-        margin-top: auto;
-        background: var(--danger);
-        color: white !important;
-        display: flex;
-        justify-content: center;
-        padding: 0.8rem 1rem;
-        border-radius: var(--radius-md);
-        text-decoration: none;
-        font-weight: 500;
-        transition: 0.3s;
-      }
-      .logout:hover {
-        background: #dc2626;
-      }
+        .dashboard-content { padding: 2.5rem; }
+        .content-box { background: var(--card-bg); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border); box-shadow: var(--shadow); }
 
-      /* Main Area */
-      main {
-        flex: 1;
-        margin-left: 260px;
-        display: flex;
-        flex-direction: column;
-      }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 1rem; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; border-bottom: 2px solid var(--bg-main); }
+        td { padding: 1.25rem 1rem; font-size: 0.9rem; border-bottom: 1px solid var(--bg-main); }
 
-      /* Top Nav */
-      .top-navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.5rem 2.5rem;
-        background: var(--bg-main);
-        border-bottom: 1px solid var(--border);
-      }
-      .welcome-text h1 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--primary);
-      }
-      .welcome-text p {
-        font-size: 0.9rem;
-        color: var(--text-muted);
-      }
+        .status-container { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-      .user-actions {
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-      }
-
-      .btn-home {
-        text-decoration: none;
-        background: transparent;
-        color: var(--text-main);
-        padding: 0.6rem 1.2rem;
-        border-radius: var(--radius-md);
-        font-weight: 600;
-        font-size: 0.9rem;
-        border: 1px solid var(--border);
-        transition: 0.2s;
-      }
-      .btn-home:hover {
-        background: var(--card-bg);
-        border-color: #cbd5e1;
-        box-shadow: var(--shadow);
-      }
-
-      /* Notification Dropdown */
-      .dropdown-wrapper {
-        position: relative;
-      }
-      .btn-notif {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        padding: 0.6rem 1.2rem;
-        border-radius: var(--radius-md);
-        font-weight: 600;
-        font-size: 0.9rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--text-main);
-        transition: 0.2s;
-      }
-      .btn-notif:hover {
-        border-color: var(--accent);
-      }
-      .notif-badge {
-        background: var(--danger);
-        color: white;
-        padding: 2px 6px;
-        border-radius: var(--radius-sm);
-        font-size: 0.75rem;
-      }
-
-      .notif-dropdown {
-        position: absolute;
-        top: calc(100% + 0.5rem);
-        right: 0;
-        width: 340px;
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-md);
-        box-shadow: var(--shadow-lg);
-        display: none;
-        flex-direction: column;
-        z-index: 100;
-        overflow: hidden;
-      }
-      .notif-dropdown.show {
-        display: flex;
-      }
-      .notif-header {
-        padding: 1rem;
-        border-bottom: 1px solid var(--border);
-        background: var(--bg-main);
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: var(--primary);
-      }
-      .notif-list {
-        max-height: 320px;
-        overflow-y: auto;
-      }
-      .notif-item {
-        padding: 1rem;
-        border-bottom: 1px solid var(--border);
-        transition: background 0.2s;
-        text-align: left;
-      }
-      .notif-item:last-child {
-        border-bottom: none;
-      }
-      .notif-item:hover {
-        background: #f8fafc;
-      }
-      .notif-item strong {
-        display: block;
-        font-size: 0.85rem;
-        color: var(--accent);
-        margin-bottom: 0.25rem;
-      }
-      .notif-item p {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        margin-bottom: 0.5rem;
-        line-height: 1.4;
-      }
-      .notif-item small {
-        font-size: 0.7rem;
-        color: #94a3b8;
-        display: block;
-      }
-
-      /* User Profile & Avatar Styles */
-      .user-profile {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 600;
-        padding-left: 1.25rem;
-        border-left: 2px solid var(--border);
-        color: var(--primary);
-      }
-      .profile-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        box-shadow: var(--shadow);
-        border: 2px solid white;
-      }
-      .default-avatar {
-        background-color: #e2e8f0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64748b;
-      }
-      .default-avatar svg {
-        width: 24px;
-        height: 24px;
-      }
-
-      /* Dashboard Content */
-      .dashboard-content {
-        padding: 2.5rem;
-      }
-
-      /* Table */
-      .content-box {
-        background: var(--card-bg);
-        border-radius: var(--radius-lg);
-        padding: 1.5rem;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--border);
-      }
-      .content-box h3 {
-        font-size: 1.2rem;
-        margin-bottom: 1.5rem;
-        font-weight: 600;
-        color: var(--primary);
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      th {
-        text-align: left;
-        padding: 1rem;
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        border-bottom: 2px solid var(--bg-main);
-      }
-      td {
-        padding: 1.25rem 1rem;
-        font-size: 0.9rem;
-        border-bottom: 1px solid var(--bg-main);
-      }
-
-      /* Immersive Status */
-      .status-container {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 600;
-        font-size: 0.85rem;
-      }
-      .status-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-      }
-
-      .btn-action {
-        text-decoration: none;
-        background: var(--bg-main);
-        color: var(--primary);
-        padding: 8px 16px;
-        border-radius: var(--radius-md);
-        font-size: 0.85rem;
-        font-weight: 600;
-        border: 1px solid var(--border);
-        transition: 0.2s;
-      }
-      .btn-action:hover {
-        background: var(--primary);
-        color: white;
-      }
-
-      /* Empty State */
-      .empty-state {
-        text-align: center;
-        padding: 4rem 2rem;
-        color: var(--text-muted);
-      }
-      .empty-state h4 {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        color: var(--primary);
-      }
-      .empty-state p {
-        font-size: 0.9rem;
-      }
+        .btn-action { text-decoration: none; background: var(--bg-main); color: var(--primary); padding: 8px 16px; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; }
+        .btn-action:hover { background: var(--primary); color: white; }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <aside class="sidebar">
-      <h2>RentAll</h2>
-      <nav>
-        <ul>
-          <li>
-            <a href="<%= request.getContextPath() %>/userDashboard">Dashboard</a>
-          </li>
-          <li>
-            <a href="<%= request.getContextPath() %>/myBookings" class="active">My Bookings</a>
-          </li>
-          <li>
-            <a href="<%= request.getContextPath() %>/settings">Settings</a>
-          </li>
-        </ul>
-      </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout">Logout</a>
+        <h2>RentAll</h2>
+        <nav>
+            <a href="${pageContext.request.contextPath}/userDashboard">Dashboard</a>
+            <a href="${pageContext.request.contextPath}/myBookings" class="active">My Bookings</a>
+            <a href="${pageContext.request.contextPath}/myFavorites">My Favorites</a>
+            <a href="${pageContext.request.contextPath}/settings">Settings</a>
+        </nav>
+        <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
     </aside>
 
     <main>
-      <header class="top-navbar">
-        <div class="welcome-text">
-          <h1>Booking History</h1>
-          <p>Review all your past and active reservations.</p>
-        </div>
-
-        <div class="user-actions">
-          <a href="<%= request.getContextPath() %>/home" class="btn-home">Return to Home</a>
-
-          <div class="dropdown-wrapper">
-            <button class="btn-notif" id="notifBtn">
-              Notifications
-              <span class="notif-badge">
-                  <c:out value="${totalNotifCount}" default="0"/>
-              </span>
-            </button>
-            <div class="notif-dropdown" id="notifMenu">
-              <div class="notif-header">Recent Broadcasts</div>
-              <div class="notif-list">
-                <c:forEach var="n" items="${recentNotifs}">
-                  <div class="notif-item">
-                    <strong><c:out value="${n.type}"/></strong>
-                    <p><c:out value="${n.description}" /></p>
-                    <small>Date: <c:out value="${n.date}"/></small>
-                  </div>
-                </c:forEach>
-                <c:if test="${empty recentNotifs}">
-                  <div class="notif-item" style="text-align: center; color: var(--text-muted)">
-                    No active system alerts.
-                  </div>
-                </c:if>
-              </div>
+        <header class="top-navbar">
+            <div class="welcome-text">
+                <h1>Booking History</h1>
+                <p>Review all your past and active reservations.</p>
             </div>
-          </div>
+            <a href="${pageContext.request.contextPath}/home" class="btn-action">Return to Home</a>
+        </header>
 
-          <div class="user-profile">
-            <c:choose>
-                <c:when test="${not empty sessionScope.user.customer_image}">
-                    <img src="<%= request.getContextPath() %>/Assets/Profiles/${sessionScope.user.customer_image}" alt="Profile Photo" class="profile-avatar" />
-                </c:when>
-                <c:otherwise>
-                    <div class="profile-avatar default-avatar">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
-                    </div>
-                </c:otherwise>
-            </c:choose>
-            <span><c:out value="${sessionScope.user.customer_username}" default="Profile"/></span>
-          </div>
-          </div>
-      </header>
-
-      <div class="dashboard-content">
-        <section class="content-box">
-          <h3>All Reservations</h3>
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Vehicle Model</th>
-                  <th>License Plate</th>
-                  <th>Rental Period</th>
-                  <th>Total Fare</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:forEach var="booking" items="${userAllBookings}">
-                  <tr>
-                    <td>
-                      <span style="font-weight: 600; color: var(--primary)"><c:out value="${booking.vehicleDetails}"/></span>
-                    </td>
-                    <td style="color: var(--text-muted); font-family: monospace">
-                      <c:out value="${booking.numberPlate}" default="N/A" />
-                    </td>
-                    <td style="color: var(--text-main)">
-                      <c:out value="${booking.startDate}" /> &nbsp;&rarr;&nbsp; <c:out value="${booking.endDate}" />
-                    </td>
-                    <td style="font-weight: 600">
-                      ₹ <c:out value="${booking.totalPrice}" />
-                    </td>
-                    <td>
-                      <div class="status-container" style="color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Completed' ? '#64748b' : '#f59e0b')};">
-                        <span class="status-dot" style="background-color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Completed' ? '#64748b' : '#f59e0b')}; box-shadow: 0 0 8px ${booking.status == 'On Track' ? 'rgba(16,185,129,0.4)' : (booking.status == 'Completed' ? 'rgba(100,116,139,0.3)' : 'rgba(245,158,11,0.4)')};"></span>
-                        <c:out value="${booking.status}" />
-                      </div>
-                    </td>
-                    <td>
-                      <a href="<%= request.getContextPath() %>/viewUserBooking?id=${booking.bookingId}" class="btn-action">Details</a>
-                    </td>
-                  </tr>
-                </c:forEach>
-              </tbody>
-            </table>
-
-            <c:if test="${empty userAllBookings}">
-              <div class="empty-state">
-                <h4>No bookings found</h4>
-                <p>You haven't rented any vehicles with us yet.</p>
-              </div>
-            </c:if>
-          </div>
-        </section>
-      </div>
+        <div class="dashboard-content">
+            <section class="content-box">
+                <h3>All Reservations</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle</th>
+                            <th>License Plate</th>
+                            <th>Rental Period</th>
+                            <th>Fare</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="booking" items="${userAllBookings}">
+                            <tr>
+                                <td><strong>${booking.vehicleDetails}</strong></td>
+                                <td style="font-family: monospace;">${booking.numberPlate}</td>
+                                <td>${booking.startDate} - ${booking.endDate}</td>
+                                <td>₹ ${booking.totalPrice}</td>
+                                <td>
+                                    <div class="status-container" style="color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Pending' ? '#f59e0b' : (booking.status == 'Cancelled' ? '#ef4444' : '#64748b'))};">
+                                        <span class="status-dot" style="background-color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Pending' ? '#f59e0b' : (booking.status == 'Cancelled' ? '#ef4444' : '#64748b'))};"></span>
+                                        ${booking.status}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="display: flex; gap: 8px; align-items: center;">
+                                        <a href="${pageContext.request.contextPath}/viewUserBooking?id=${booking.bookingId}" class="btn-action">Details</a>
+                                        <c:if test="${booking.status == 'Pending'}">
+                                            <form action="${pageContext.request.contextPath}/cancelBooking" method="POST" onsubmit="return confirm('Cancel this booking?')">
+                                                <input type="hidden" name="bookingId" value="${booking.bookingId}">
+                                                <button type="submit" class="btn-action" style="color: var(--danger); border-color: #fca5a5; background: #fff1f1;">Cancel</button>
+                                            </form>
+                                        </c:if>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </section>
+        </div>
     </main>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const notifBtn = document.getElementById("notifBtn");
-        const notifMenu = document.getElementById("notifMenu");
-
-        notifBtn.addEventListener("click", function (event) {
-          event.stopPropagation();
-          notifMenu.classList.toggle("show");
-        });
-
-        window.addEventListener("click", function () {
-          if (notifMenu.classList.contains("show")) {
-            notifMenu.classList.remove("show");
-          }
-        });
-
-        notifMenu.addEventListener("click", function (event) {
-          event.stopPropagation();
-        });
-      });
-    </script>
-  </body>
+</body>
 </html>

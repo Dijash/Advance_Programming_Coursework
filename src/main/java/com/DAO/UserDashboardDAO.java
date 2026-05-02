@@ -10,7 +10,7 @@ public class UserDashboardDAO {
 
     public int getActiveBookingsCount(int customerId) {
         int count = 0;
-        String sql = "SELECT COUNT(*) FROM booking WHERE customer_id = ? AND booking_status IN ('On Track', 'Extended')";
+        String sql = "SELECT COUNT(*) FROM booking WHERE customer_id = ? AND booking_status IN ('On Track', 'Extended', 'Pending')";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
 
@@ -38,7 +38,7 @@ public class UserDashboardDAO {
 
     public double getTotalSpent(int customerId) {
         double total = 0;
-        String sql = "SELECT SUM(total_price) as total FROM booking WHERE customer_id = ?";
+        String sql = "SELECT SUM(total_price) as total FROM booking WHERE customer_id = ? AND booking_status != 'Cancelled'";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -119,5 +119,20 @@ public class UserDashboardDAO {
             }
         } catch (SQLException e) { e.printStackTrace(); }
         return bookings;
+    }
+
+    public boolean cancelBooking(int bookingId) {
+        String sql = "UPDATE booking SET booking_status = 'Cancelled' WHERE booking_id = ?";
+        try (java.sql.Connection conn = com.util.DBConnection.getConnection();
+             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, bookingId);
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -352,6 +352,12 @@
         font-size: 0.85rem;
       }
 
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+
       .btn-action {
         text-decoration: none;
         background: var(--bg-main);
@@ -361,6 +367,7 @@
         font-size: 0.8rem;
         font-weight: 600;
         border: 1px solid var(--border);
+        cursor: pointer;
       }
     </style>
   </head>
@@ -371,6 +378,7 @@
         <ul>
           <li><a href="<%= request.getContextPath() %>/userDashboard" class="active">Dashboard</a></li>
           <li><a href="<%= request.getContextPath() %>/myBookings">My Bookings</a></li>
+          <li><a href="<%= request.getContextPath() %>/myFavorites" >My Favorites</a></li>
           <li><a href="<%= request.getContextPath() %>/settings">Settings</a></li>
         </ul>
       </nav>
@@ -491,16 +499,28 @@
                     </td>
                     <td>
                       <div class="status-container"
-                           style="color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Completed' ? '#64748b' : '#f59e0b')};">
-                        <span class=""
-                              style="background-color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Completed' ? '#64748b' : '#f59e0b')};
-                                     box-shadow: 0 0 8px ${booking.status == 'On Track' ? 'rgba(16,185,129,0.4)' : (booking.status == 'Completed' ? 'rgba(100,116,139,0.3)' : 'rgba(245,158,11,0.4)')};">
+                           style="color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Pending' ? '#f59e0b' : (booking.status == 'Cancelled' ? '#ef4444' : '#64748b'))};">
+                        <span class="status-dot"
+                              style="background-color: ${booking.status == 'On Track' ? '#10b981' : (booking.status == 'Pending' ? '#f59e0b' : (booking.status == 'Cancelled' ? '#ef4444' : '#64748b'))};
+                                     box-shadow: 0 0 8px ${booking.status == 'On Track' ? 'rgba(16,185,129,0.4)' : (booking.status == 'Pending' ? 'rgba(245,158,11,0.4)' : (booking.status == 'Cancelled' ? 'rgba(239,68,68,0.4)' : 'rgba(100,116,139,0.3)'))};">
                         </span>
                         <c:out value="${booking.status}" />
                       </div>
                     </td>
                     <td>
-                      <a href="<%= request.getContextPath() %>/viewUserBooking?id=${booking.bookingId}" class="btn-action">Details</a>
+                      <div style="display: flex; gap: 8px; align-items: center;">
+                        <a href="<%= request.getContextPath() %>/viewUserBooking?id=${booking.bookingId}" class="btn-action">Details</a>
+
+                        <%-- ONLY show cancel button if status is Pending --%>
+                        <c:if test="${booking.status == 'Pending'}">
+                          <form action="<%= request.getContextPath() %>/cancelBooking" method="POST" style="margin: 0;" onsubmit="return confirm('Cancel this booking?')">
+                            <input type="hidden" name="bookingId" value="${booking.bookingId}">
+                            <button type="submit" class="btn-action" style="color: var(--danger); border-color: #fca5a5; background: #fff1f1; cursor: pointer;">
+                              Cancel
+                            </button>
+                          </form>
+                        </c:if>
+                      </div>
                     </td>
                   </tr>
                 </c:forEach>
