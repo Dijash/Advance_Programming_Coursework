@@ -556,7 +556,6 @@
         </button>
       </div>
       <ul class="nav_links" id="nav-links">
-        <li><a href="<%= request.getContextPath() %>/services">Services</a></li>
         <li><a href="<%= request.getContextPath() %>/rentalDeals">Rental Deals</a></li>
         <li><a href="<%= request.getContextPath() %>/about">About</a></li>
         <li><a href="<%= request.getContextPath() %>/contact" class="active">Contact Us</a></li>

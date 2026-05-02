@@ -45,7 +45,7 @@
             <div class="field">
               <label>Profile Photo</label>
               <div class="field-inner">
-                <input type="file" id="customer_image" name="customer_image" accept="image/*" style="padding-top: 8px;" />
+                <input type="file" id="customer_image" name="customer_image" accept="image/*" style="padding-top: 8px;" required/>
               </div>
             </div>
 
