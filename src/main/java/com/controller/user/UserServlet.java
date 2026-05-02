@@ -1,23 +1,27 @@
-package com.controller.user;
+package com.controller.user; // Ensure this matches your package structure!
 
 import com.DAO.UserDashboardDAO;
 import com.DAO.NotificationDAO;
+import com.DAO.FavoriteDAO;
 import com.model.Booking;
 import com.model.Customer;
+import com.model.Vehicle;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/userDashboard", "/myBookings", "/settings", "/viewUserBooking"})
+@WebServlet({"/userDashboard", "/myBookings", "/settings", "/viewUserBooking", "/myFavorites"})
 public class UserServlet extends HttpServlet {
 
     private UserDashboardDAO userDAO;
+    private FavoriteDAO favoriteDAO;
 
     @Override
     public void init() throws ServletException {
         userDAO = new UserDashboardDAO();
+        favoriteDAO = new FavoriteDAO();
     }
 
     @Override
@@ -35,11 +39,9 @@ public class UserServlet extends HttpServlet {
         int customerId = loggedInUser.getCustomer_id();
         String path = request.getServletPath();
 
-        // --- Fetch Notifications for all User pages ---
         NotificationDAO notifDAO = new NotificationDAO();
         request.setAttribute("totalNotifCount", notifDAO.getTotalNotificationCount());
         request.setAttribute("recentNotifs", notifDAO.getRecentNotifications());
-        // ----------------------------------------------
 
         switch (path) {
             case "/userDashboard":
@@ -88,6 +90,14 @@ public class UserServlet extends HttpServlet {
                 } else {
                     response.sendRedirect(request.getContextPath() + "/myBookings");
                 }
+                break;
+
+            case "/myFavorites":
+                List<Vehicle> favoriteVehicles = favoriteDAO.getFavoriteVehiclesByCustomerId(customerId);
+
+                request.setAttribute("favoriteVehicles", favoriteVehicles);
+
+                request.getRequestDispatcher("/Pages/User/Dashboard/myFavorites.jsp").forward(request, response);
                 break;
 
             case "/settings":

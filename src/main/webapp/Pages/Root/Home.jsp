@@ -21,7 +21,6 @@
           </button>
         </div>
         <ul class="nav_links" id="nav-links">
-          <li><a href="#about">Services</a></li>
           <li><a href="#deals">Rental Deals</a></li>
           <li><a href="#choose">About</a></li>
           <li><a href="<%= request.getContextPath() %>/contact">Contact Us</a></li>
