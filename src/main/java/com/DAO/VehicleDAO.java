@@ -45,17 +45,26 @@ public class VehicleDAO {
     public boolean deleteVehicle(int vehicleId) {
         boolean isDeleted = false;
 
-        String sql = "DELETE FROM vehicle WHERE vehicle_id = ?";
+        String sqlDeleteFavorites = "DELETE FROM favorites WHERE vehicle_id = ?";
+        String sqlDeleteBookings = "DELETE FROM booking WHERE vehicle_id = ?";
+        String sqlDeleteVehicle = "DELETE FROM vehicle WHERE vehicle_id = ?";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection()) {
+            try (PreparedStatement psFav = conn.prepareStatement(sqlDeleteFavorites)) {
+                psFav.setInt(1, vehicleId);
+                psFav.executeUpdate();
+            }
 
-            statement.setInt(1, vehicleId);
-
-            int rowsAffected = statement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                isDeleted = true;
+            try (PreparedStatement psBook = conn.prepareStatement(sqlDeleteBookings)) {
+                psBook.setInt(1, vehicleId);
+                psBook.executeUpdate();
+            }
+            try (PreparedStatement psVeh = conn.prepareStatement(sqlDeleteVehicle)) {
+                psVeh.setInt(1, vehicleId);
+                int rowsAffected = psVeh.executeUpdate();
+                if (rowsAffected > 0) {
+                    isDeleted = true;
+                }
             }
 
         } catch (SQLException e) {
@@ -65,7 +74,6 @@ public class VehicleDAO {
 
         return isDeleted;
     }
-
     public boolean updateVehicle(int vehicleId, String brand, String type, String color, String numberPlate, String condition, String status, String image) {
         boolean isUpdated = false;
 
@@ -152,12 +160,6 @@ public class VehicleDAO {
         }
         return list;
     }
-
-    // ==========================================
-    // NEW METHODS REQUIRED FOR HOME & REPORT PAGES
-    // ==========================================
-
-    // Gets a limited number of top/popular vehicles for the Index landing page
     public List<Vehicle> getTopVehicles(int limit) {
         List<Vehicle> list = new ArrayList<>();
         String sql = "SELECT * FROM vehicle ORDER BY vehicle_id ASC LIMIT ?";
@@ -224,4 +226,5 @@ public class VehicleDAO {
         }
         return count;
     }
+
 }

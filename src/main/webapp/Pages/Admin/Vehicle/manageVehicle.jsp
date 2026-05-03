@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="sql" uri="jakarta.tags.sql" %>
-
-<sql:setDataSource var="dbConnection" driver="com.mysql.cj.jdbc.Driver"
-                   url="jdbc:mysql://localhost:3306/java_coursework"
-                   user="root" password=""/>
-
-<sql:query var="allVehicles" dataSource="${dbConnection}">
-    SELECT
-        vehicle_id, vehicle_brand, vehicle_type, vehicle_color,
-        vehicle_numberPlate, vehicle_condition, vehicle_status,
-        vehicle_image FROM vehicle ORDER BY vehicle_id DESC;
-</sql:query>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,11 +19,7 @@
         --radius: 16px;
         --sidebar-width: 260px;
       }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
         font-family: "Poppins", sans-serif;
         background: var(--bg-light);
@@ -64,15 +47,9 @@
         font-weight: 700;
         letter-spacing: -0.5px;
       }
-      .sidebar h2 span {
-        color: #3498db;
-      }
-      .sidebar nav {
-        flex: 1;
-      }
-      .sidebar ul {
-        list-style: none;
-      }
+      .sidebar h2 span { color: #3498db; }
+      .sidebar nav { flex: 1; }
+      .sidebar ul { list-style: none; }
       .sidebar a {
         text-decoration: none;
         color: #ffffff;
@@ -132,14 +109,29 @@
         box-shadow: var(--shadow);
       }
 
-      /* --- FIXED TABLE CSS START --- */
-      .table-responsive {
-        overflow-x: auto;
+      /* Notification CSS */
+      .alert {
+          padding: 15px;
+          border-radius: 8px;
+          margin-bottom: 20px;
+          font-weight: 600;
       }
+      .alert-error {
+          background: #fceceb;
+          color: #c0392b;
+          border: 1px solid #f5c6cb;
+      }
+      .alert-success {
+          background: #eafaf1;
+          color: #27ae60;
+          border: 1px solid #c3e6cb;
+      }
+
+      .table-responsive { overflow-x: auto; }
       table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 900px; /* Slightly wider to accommodate everything */
+        min-width: 900px;
       }
       table th {
         background: #f8fafc;
@@ -150,7 +142,7 @@
         letter-spacing: 0.5px;
         padding: 16px;
         text-align: left;
-        border-bottom: 2px solid #e2e8f0; /* Stronger header border */
+        border-bottom: 2px solid #e2e8f0;
       }
       table td {
         padding: 16px;
@@ -159,11 +151,8 @@
         vertical-align: middle;
         color: #334155;
       }
-      table tr:hover td {
-        background: #fdfdfd;
-      }
+      table tr:hover td { background: #fdfdfd; }
 
-      /* Prevent the image and action columns from squishing */
       table th:first-child, table td:first-child { width: 100px; }
       table th:last-child, table td:last-child { width: 220px; white-space: nowrap; }
 
@@ -175,17 +164,10 @@
         display: inline-block;
         background-size: cover;
         background-position: center;
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); /* Nice inner border for photos */
-      }
-      /* --- FIXED TABLE CSS END --- */
-
-      /* --- ACTION BUTTON CSS START --- */
-      .action-buttons {
-        display: flex;
-        gap: 8px;
-        align-items: center;
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
       }
 
+      .action-buttons { display: flex; gap: 8px; align-items: center; }
       .action-btn {
         border: none;
         padding: 0 16px;
@@ -210,8 +192,6 @@
       .action-btn-edit:hover { background-color: #f39c12; color: white; box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3); }
       .action-btn-delete { background-color: #fceceb; color: #c0392b; }
       .action-btn-delete:hover { background-color: #e74c3c; color: white; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); }
-      /* --- ACTION BUTTON CSS END --- */
-
     </style>
   </head>
   <body>
@@ -226,7 +206,6 @@
           <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
           <li><a href="<%= request.getContextPath() %>/manageNotification"><span>Notifications</span></a></li>
           <li><a href="<%= request.getContextPath() %>/report"><span>Reports</span></a></li>
-
         </ul>
       </nav>
       <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
@@ -239,6 +218,22 @@
       </div>
 
       <div class="content-box">
+
+        <%-- ADDED: Alert Notifications Block --%>
+        <c:if test="${not empty sessionScope.errorMsg}">
+            <div class="alert alert-error">
+                <c:out value="${sessionScope.errorMsg}" />
+                <c:remove var="errorMsg" scope="session" />
+            </div>
+        </c:if>
+
+        <c:if test="${not empty sessionScope.successMsg}">
+            <div class="alert alert-success">
+                <c:out value="${sessionScope.successMsg}" />
+                <c:remove var="successMsg" scope="session" />
+            </div>
+        </c:if>
+
         <div class="table-responsive">
           <table>
             <thead>
@@ -254,7 +249,7 @@
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="car" items="${allVehicles.rows}">
+              <c:forEach var="car" items="${vehicles}">
                 <tr>
                   <td>
                     <div class="vehicle-thumb" style="background-image: url('<%= request.getContextPath() %>/Assets/${car.vehicle_image}')"></div>
@@ -277,9 +272,7 @@
                   <td>
                     <div class="action-buttons">
                         <a href="<%= request.getContextPath() %>/viewVehicle?id=${car.vehicle_id}" class="action-btn action-btn-view">View</a>
-
                         <a href="<%= request.getContextPath() %>/editVehicle?id=${car.vehicle_id}" class="action-btn action-btn-edit">Edit</a>
-
                         <form action="<%= request.getContextPath() %>/deleteVehicle" method="POST" style="display: contents;">
                             <input type="hidden" name="vehicle_id" value="${car.vehicle_id}">
                             <button type="submit" class="action-btn action-btn-delete" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</button>
@@ -289,7 +282,7 @@
                 </tr>
               </c:forEach>
 
-              <c:if test="${empty allVehicles.rows}">
+              <c:if test="${empty vehicles}">
                  <tr>
                     <td colspan="8" style="text-align: center; color: #7f8c8d; padding: 40px;">No vehicles found in the fleet.</td>
                  </tr>
