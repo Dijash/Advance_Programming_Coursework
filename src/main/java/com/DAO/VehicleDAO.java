@@ -32,7 +32,7 @@ public class VehicleDAO {
             int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
-                isAdded = true; // Successfully inserted
+                isAdded = true;
             }
 
         } catch (SQLException e) {
@@ -82,8 +82,8 @@ public class VehicleDAO {
             statement.setString(4, numberPlate);
             statement.setString(5, condition);
             statement.setString(6, status);
-            statement.setString(7, image); // Bind the new image parameter
-            statement.setInt(8, vehicleId); // ID shifts to position 8
+            statement.setString(7, image);
+            statement.setInt(8, vehicleId);
 
             int rowsAffected = statement.executeUpdate();
 
@@ -151,5 +151,77 @@ public class VehicleDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    // ==========================================
+    // NEW METHODS REQUIRED FOR HOME & REPORT PAGES
+    // ==========================================
+
+    // Gets a limited number of top/popular vehicles for the Index landing page
+    public List<Vehicle> getTopVehicles(int limit) {
+        List<Vehicle> list = new ArrayList<>();
+        String sql = "SELECT * FROM vehicle ORDER BY vehicle_id ASC LIMIT ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, limit);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                list.add(new Vehicle(
+                        rs.getInt("vehicle_id"),
+                        rs.getString("vehicle_brand"),
+                        rs.getString("vehicle_type"),
+                        rs.getString("vehicle_color"),
+                        rs.getString("vehicle_numberPlate"),
+                        rs.getString("vehicle_condition"),
+                        rs.getString("vehicle_status"),
+                        rs.getString("vehicle_image")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    // Gets the total count of all vehicles for the Admin Report Dashboard
+    public int getTotalVehicleCount() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM vehicle";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getVehicleCountByStatus(String status) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM vehicle WHERE vehicle_status = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, status);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

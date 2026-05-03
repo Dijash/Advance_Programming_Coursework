@@ -8,14 +8,14 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
+// REMOVED "/report" from here to prevent URL collision with ReportServlet
 @WebServlet({
         "/admin",
         "/manageBooking", "/viewBooking", "/editBooking", "/updateBooking", "/deleteBooking",
         "/manageVehicles", "/addVehicle", "/viewVehicle", "/editVehicle",
         "/manageCustomers", "/viewCustomer", "/deleteCustomer",
         "/manageReviews", "/deleteReview",
-        "/manageNotification", "/sendNotification",
-        "/report"
+        "/manageNotification", "/sendNotification"
 })
 public class AdminServlet extends HttpServlet {
 
@@ -109,6 +109,7 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("reviews", reviewService.getAllReviews());
                 request.getRequestDispatcher("/Pages/Admin/Review/reviews.jsp").forward(request, response);
                 break;
+
 
             default:
                 request.getRequestDispatcher("/index.jsp").forward(request, response);

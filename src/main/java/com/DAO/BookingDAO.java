@@ -100,4 +100,20 @@ public class BookingDAO {
             stmt.setInt(1, bookingId); stmt.executeUpdate();
         } catch (SQLException e) { e.printStackTrace(); }
     }
+    public int getTotalBookingCount() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM booking";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }
