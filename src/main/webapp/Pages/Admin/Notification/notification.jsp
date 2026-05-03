@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="jakarta.tags.core" %> <%@
 taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
-<sql:setDataSource
-  var="dbConnection"
-  driver="com.mysql.cj.jdbc.Driver"
-  url="jdbc:mysql://localhost:3306/java_coursework"
-  user="root"
-  password=""
-/>
-
-<sql:query var="notifHistory" dataSource="${dbConnection}">
-  SELECT * FROM notification ORDER BY notification_date DESC;
-</sql:query>
 
 <!doctype html>
 <html lang="en">
@@ -222,41 +211,38 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="row" items="${notifHistory.rows}">
+              <%-- Iterate over the list of objects sent from the Servlet --%>
+              <c:forEach var="row" items="${notifHistory}">
                 <tr style="border-bottom: 1px solid #f1f5f9">
                   <td style="padding: 15px; color: #1e293b">
-                    <strong><c:out value="${row.notification_type}" /></strong>
+                    <%-- Use the property names from your Notification model (Java class) --%>
+                    <strong><c:out value="${row.type}" /></strong>
                   </td>
                   <td style="padding: 15px">
                     <div class="notif-msg">
-                      <c:out value="${row.notification_description}" />
+                      <c:out value="${row.description}" />
                     </div>
                   </td>
                   <td style="padding: 15px; font-size: 0.8rem; color: #94a3b8">
-                    ${row.notification_date}
+                    <c:out value="${row.date}" />
                   </td>
 
                   <td style="padding: 15px; text-align: center">
+                    <%-- Use row.id to match your Java model property --%>
                     <a
-                      href="<%= request.getContextPath() %>/deleteNotification?id=${row.notification_id}"
+                      href="<%= request.getContextPath() %>/deleteNotification?id=${row.id}"
                       class="btn-delete"
-                      onclick="
-                        return confirm(
-                          'Are you sure you want to delete this notification?',
-                        );
-                      "
+                      onclick="return confirm('Are you sure you want to delete this notification?');"
                     >
                       Delete
                     </a>
                   </td>
                 </tr>
               </c:forEach>
-              <c:if test="${empty notifHistory.rows}">
+
+              <c:if test="${empty notifHistory}">
                 <tr>
-                  <td
-                    colspan="4"
-                    style="text-align: center; padding: 30px; color: #94a3b8"
-                  >
+                  <td colspan="4" style="text-align: center; padding: 30px; color: #94a3b8">
                     No notifications sent yet.
                   </td>
                 </tr>

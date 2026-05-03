@@ -2,26 +2,6 @@
   <%@ taglib prefix="c" uri="jakarta.tags.core" %>
     <%@ taglib prefix="sql" uri="jakarta.tags.sql" %>
 
-      <%-- Database Connection --%>
-        <sql:setDataSource var="dbConnection" driver="com.mysql.cj.jdbc.Driver"
-          url="jdbc:mysql://localhost:3306/java_coursework" user="root" password="" />
-
-        <%-- Fetch Reviews with Customer Names --%>
-          <sql:query var="allReviews" dataSource="${dbConnection}">
-            SELECT
-            r.review_id,
-            c.first_name,
-            c.last_name,
-            r.review_description,
-            r.review_date
-            FROM
-            review r
-            JOIN
-            customer c ON r.customer_id = c.customer_id
-            ORDER BY
-            r.review_date DESC;
-          </sql:query>
-
           <!doctype html>
           <html lang="en">
 
@@ -115,29 +95,29 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach var="row" items="${allReviews.rows}">
+                        <c:forEach var="r" items="${reviews}">
                           <tr>
                             <td>
                               <span class="customer-name">
-                                <c:out value="${row.first_name} ${row.last_name}" />
+                                <%-- Matches getCustomerName() in your Review class --%>
+                                <c:out value="${r.customerName}" />
                               </span>
-                              <span class="review-date">ID: #
-                                <c:out value="${row.review_id}" />
-                              </span>
+                              <span class="review-date">ID: #<c:out value="${r.reviewId}" /></span>
                             </td>
                             <td>
-                              <div class="review-desc">"
-                                <c:out value="${row.review_description}" />"
+                              <div class="review-desc">
+                                <%-- Matches getReviewDescription() --%>
+                                "<c:out value="${r.reviewDescription}" />"
                               </div>
                             </td>
                             <td>
-                              <c:out value="${row.review_date}" />
+                              <%-- Matches getReviewDate() --%>
+                              <c:out value="${r.reviewDate}" />
                             </td>
                             <td>
-                              <form action="deleteReview" method="POST" style="display:inline;">
-                                <input type="hidden" name="reviewId" value="${row.review_id}">
-                                <button type="submit" class="btn-delete"
-                                  onclick="return confirm('Delete this review?');">
+                              <form action="${pageContext.request.contextPath}/deleteReview" method="POST" style="display:inline;">
+                                <input type="hidden" name="reviewId" value="${r.reviewId}">
+                                <button type="submit" class="btn-delete" onclick="return confirm('Delete this review?');">
                                   Delete
                                 </button>
                               </form>
@@ -145,9 +125,9 @@
                           </tr>
                         </c:forEach>
 
-                        <c:if test="${empty allReviews.rows}">
+                        <c:if test="${empty reviews}">
                           <tr>
-                            <td colspan="4" style="text-align: center; padding: 40px">
+                            <td colspan="4" style="text-align: center; padding: 40px; color: #64748b;">
                               No reviews found in the database.
                             </td>
                           </tr>

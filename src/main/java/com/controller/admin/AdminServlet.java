@@ -139,6 +139,12 @@ public class AdminServlet extends HttpServlet {
                 break;
 
             case "/deleteReview":
+                String idParam = request.getParameter("reviewId");
+                if (idParam != null && !idParam.isEmpty()) {
+                    int id = Integer.parseInt(idParam);
+                    ReviewService reviewService = new ReviewService();
+                    reviewService.deleteReview(id);
+                }
                 response.sendRedirect(request.getContextPath() + "/manageReviews");
                 break;
 

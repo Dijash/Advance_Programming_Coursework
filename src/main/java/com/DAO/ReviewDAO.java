@@ -31,4 +31,15 @@ public class ReviewDAO {
         } catch (SQLException e) { e.printStackTrace(); }
         return reviews;
     }
+    public boolean deleteReview(int reviewId) {
+        String sql = "DELETE FROM review WHERE review_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, reviewId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
