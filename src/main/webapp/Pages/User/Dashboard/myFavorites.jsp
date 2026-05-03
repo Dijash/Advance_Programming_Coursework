@@ -1,20 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.model.Customer" %>
-<%
-    Customer loggedInUser = (Customer) session.getAttribute("user");
-    String username = (loggedInUser != null) ? loggedInUser.getCustomer_username() : "User";
-    String email    = (loggedInUser != null) ? loggedInUser.getCustomer_email()    : "";
 
-    String fName = (loggedInUser != null && loggedInUser.getFirst_name() != null) ? loggedInUser.getFirst_name() : "User";
-    String lName = (loggedInUser != null && loggedInUser.getLast_name() != null) ? loggedInUser.getLast_name() : "";
-    String fullName = fName + " " + lName;
-
-    String profileImage = (loggedInUser != null && loggedInUser.getCustomer_image() != null && !loggedInUser.getCustomer_image().trim().isEmpty())
-                          ? loggedInUser.getCustomer_image().trim()
-                          : null;
-%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -191,36 +180,39 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li><a href="<%= request.getContextPath() %>/userDashboard">Dashboard</a></li>
-          <li><a href="<%= request.getContextPath() %>/myBookings">My Bookings</a></li>
-          <!-- ADDED FAVORITES TO SIDEBAR -->
-          <li><a href="<%= request.getContextPath() %>/myFavorites" class="active">My Favorites</a></li>
-          <li><a href="<%= request.getContextPath() %>/settings">Settings</a></li>
+          <li><a href="${pageContext.request.contextPath}/userDashboard">Dashboard</a></li>
+          <li><a href="${pageContext.request.contextPath}/myBookings">My Bookings</a></li>
+          <li><a href="${pageContext.request.contextPath}/myFavorites" class="active">My Favorites</a></li>
+          <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout">Logout</a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
     </aside>
 
     <main>
       <header class="top-navbar">
         <div class="welcome-text">
-          <h1>My Favorites</h1>
+          <h1>
+            Hello, <c:out value="${not empty sessionScope.user.first_name ? sessionScope.user.first_name : sessionScope.user.customer_username}" default="Driver" />
+          </h1>
           <p>Vehicles you have saved for later.</p>
         </div>
 
         <div class="user-actions">
-          <a href="<%= request.getContextPath() %>/rentalDeals" class="btn-home">Browse Fleet</a>
+          <a href="${pageContext.request.contextPath}/rentalDeals" class="btn-home">Browse Fleet</a>
 
           <div class="user-profile">
             <c:choose>
                 <c:when test="${not empty sessionScope.user.customer_image}">
-                    <img src="<%= request.getContextPath() %>/Assets/Profiles/${sessionScope.user.customer_image}" alt="Profile Photo" class="profile-avatar" />
+                    <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}" alt="Profile Photo" class="profile-avatar" />
                 </c:when>
                 <c:otherwise>
-                    <div class="profile-avatar"><%= String.valueOf(fName.charAt(0)).toUpperCase() %></div>
+                    <div class="profile-avatar" style="background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; text-transform: uppercase;">
+                        <c:out value="${fn:substring(not empty sessionScope.user.first_name ? sessionScope.user.first_name : sessionScope.user.customer_username, 0, 1)}" default="U" />
+                    </div>
                 </c:otherwise>
             </c:choose>
-            <span><%= username %></span>
+            <span><c:out value="${sessionScope.user.customer_username}" /></span>
           </div>
         </div>
       </header>
@@ -234,29 +226,31 @@
               <div class="favorites-grid">
                 <c:forEach var="v" items="${favoriteVehicles}">
 
-                  <div class="fav-card" id="fav-card-${v.vehicle_id}">
-                    <img src="<%= request.getContextPath() %>/Assets/${v.vehicle_image}" alt="${v.vehicle_brand}" class="fav-img" onerror="this.src='https://placehold.co/600x400/f1f5f9/94a3b8?text=Vehicle'"/>
+                  <div class="fav-card">
+                    <img src="${pageContext.request.contextPath}/Assets/${v.vehicle_image}" alt="${v.vehicle_brand}" class="fav-img" onerror="this.src='https://placehold.co/600x400/f1f5f9/94a3b8?text=Vehicle'"/>
 
                     <div class="fav-info">
-                      <h4>${v.vehicle_brand} ${v.vehicle_type}</h4>
-                      <p>${v.vehicle_color} | ${v.vehicle_numberPlate}</p>
+                      <h4><c:out value="${v.vehicle_brand}" /> <c:out value="${v.vehicle_type}" /></h4>
+                      <p><c:out value="${v.vehicle_color}" /> | <c:out value="${v.vehicle_numberPlate}" /></p>
 
                       <div class="fav-price">
                         NPR 4,500 <span>/ day</span>
                       </div>
 
                       <div class="fav-actions">
-                        <a href="<%= request.getContextPath() %>/viewVehicleDetails?id=${v.vehicle_id}" class="btn-book" ${v.vehicle_status != 'Available' ? 'style="background:#94a3b8; pointer-events:none;"' : ''}>
+                        <a href="${pageContext.request.contextPath}/viewVehicleDetails?id=${v.vehicle_id}" class="btn-book" ${v.vehicle_status != 'Available' ? 'style="background:#94a3b8; pointer-events:none;"' : ''}>
                           ${v.vehicle_status == 'Available' ? 'Book Now' : 'Unavailable'}
                         </a>
 
-                        <!-- Remove button triggers the same toggle API, then removes card from screen -->
-                        <button class="btn-remove" onclick="removeFavorite(${v.vehicle_id})" title="Remove from favorites">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="3 6 5 6 21 6"></polyline>
-                              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                          </svg>
-                        </button>
+                        <form action="${pageContext.request.contextPath}/toggleFavorite" method="POST" style="margin: 0;">
+                          <input type="hidden" name="vehicleId" value="${v.vehicle_id}" />
+                          <button type="submit" class="btn-remove" title="Remove from favorites">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -272,7 +266,7 @@
                 </svg>
                 <h4 style="color: var(--primary); margin-bottom: 0.5rem;">No Favorites Yet</h4>
                 <p>You haven't saved any vehicles to your favorites.</p>
-                <a href="<%= request.getContextPath() %>/rentalDeals" class="btn-home" style="display: inline-block; margin-top: 1rem; color: var(--accent); border-color: var(--accent);">Browse Fleet</a>
+                <a href="${pageContext.request.contextPath}/rentalDeals" class="btn-home" style="display: inline-block; margin-top: 1rem; color: var(--accent); border-color: var(--accent);">Browse Fleet</a>
               </div>
             </c:otherwise>
           </c:choose>
@@ -280,35 +274,5 @@
         </section>
       </div>
     </main>
-
-    <script>
-      function removeFavorite(vehicleId) {
-        // Re-use your working ToggleFavoriteServlet
-        fetch('<%= request.getContextPath() %>/toggleFavorite', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: 'vehicleId=' + vehicleId
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'success' && !data.isFavorited) {
-            // Remove the card from the UI instantly
-            const card = document.getElementById('fav-card-' + vehicleId);
-            if(card) {
-                card.remove();
-            }
-
-            // Check if grid is now empty
-            const grid = document.querySelector('.favorites-grid');
-            if (grid && grid.children.length === 0) {
-                location.reload(); // Reload to show the nice empty state
-            }
-          }
-        })
-        .catch(error => console.error('Error:', error));
-      }
-    </script>
   </body>
 </html>
