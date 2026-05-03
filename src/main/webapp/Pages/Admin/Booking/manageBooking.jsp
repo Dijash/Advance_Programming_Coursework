@@ -7,8 +7,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentAll | Bookings</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/AdminStyle.css">
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/ManageBooking.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Admin/Dashboard/Admin.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Booking/ManageBooking.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {

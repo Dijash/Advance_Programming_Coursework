@@ -7,11 +7,7 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
   <head>
     <meta charset="UTF-8" />
     <title>RentAll | Manage Notifications</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="<%= request.getContextPath() %>/CSS/AdminStyle.css"
-    />
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Admin/Dashboard/Admin.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"

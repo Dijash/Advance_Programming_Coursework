@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/LoginStyle.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Auth/LoginStyle.css">
     <title>Login</title>
   </head>
 

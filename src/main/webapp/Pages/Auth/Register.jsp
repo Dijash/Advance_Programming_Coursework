@@ -7,7 +7,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/RegisterStyle.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Auth/RegisterStyle.css">
 
   </head>
 
