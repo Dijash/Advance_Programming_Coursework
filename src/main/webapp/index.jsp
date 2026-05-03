@@ -1120,415 +1120,91 @@
   </section>
 
 
-  <section class="deals" id="deals">
-    <div class="section_container deals_container">
-      <h2 class="section_header">Most popular car rental deals</h2>
-      <p class="section_description">
-        Explore our top car rental deals, handpicked to give you the best value.
-      </p>
+     <section class="deals" id="deals">
+           <div class="section_container deals_container">
+             <h2 class="section_header">Most popular car rental deals</h2>
+             <p class="section_description">
+               Explore our top car rental deals, handpicked to give you the best value.
+             </p>
 
-      <div class="deals_tabs_wrapper">
-        <input type="radio" name="deal" id="tab-corolla" hidden checked />
-        <input type="radio" name="deal" id="tab-noah" hidden />
-        <input type="radio" name="deal" id="tab-pajero" hidden />
-        <input type="radio" name="deal" id="tab-swift" hidden />
+             <div class="deals_tabs_wrapper">
+               <input type="radio" name="deal" id="tab-corolla" hidden checked />
 
-        <div class="deals_tabs">
-          <label for="tab-corolla" class="deals_tab">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-4h10l2 4h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2" />
-              <circle cx="7.5" cy="17" r="2.5" />
-              <circle cx="16.5" cy="17" r="2.5" />
-            </svg>
-            Toyota Corolla
-          </label>
-          <label for="tab-noah" class="deals_tab">
-            <!_ Bus/Van _>
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="1" y="3" width="15" height="13" rx="2" />
-                <path d="M16 8h4l3 5v3h-7V8z" />
-                <circle cx="5.5" cy="18.5" r="2.5" />
-                <circle cx="18.5" cy="18.5" r="2.5" />
-              </svg>
-              Toyota Noah
-          </label>
-          <label for="tab-pajero" class="deals_tab">
-            <!_ Truck/SUV _>
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 3h15v13H1z" />
-                <path d="M16 8h4l3 3v5h-7V8z" />
-                <circle cx="5.5" cy="18.5" r="2.5" />
-                <circle cx="18.5" cy="18.5" r="2.5" />
-              </svg>
-              Mitsubishi Pajero
-          </label>
-          <label for="tab-swift" class="deals_tab">
-            <!_ Hatchback / small car _>
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17H3a2 2 0 0 1-2-2v-4l3-6h12l3 6v4a2 2 0 0 1-2 2h-2" />
-                <circle cx="7" cy="17" r="2" />
-                <circle cx="17" cy="17" r="2" />
-                <path d="M5 9h14" />
-              </svg>
-              Suzuki Swift
-          </label>
-        </div>
+               <div class="deal_panel" id="panel-corolla">
+                 <div class="deal_image">
+                   <img src="<%= request.getContextPath() %>/Assets/toyota.jpg" alt="Toyota Corolla" />
+                 </div>
+                 <div class="deal_info">
+                   <h3>Toyota Corolla</h3>
+                   <p class="deal_tagline">Comfortable sedan — ideal for city &amp; highway</p>
+                   <div class="deal_specs">
+                     <div class="spec">
+                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M7.5 5.5C7.01665 5.5 6.60835 5.33335 6.275 5C5.94165 4.66666 5.775 4.25834 5.775 3.775C5.775 3.29167 5.94165 2.875 6.275 2.525C6.60835 2.175 7.01665 2 7.5 2C7.98335 2 8.4 2.175 8.75 2.525C9.1 2.875 9.275 3.29167 9.275 3.775C9.275 4.25834 9.1 4.66666 8.75 5C8.4 5.33335 7.98335 5.5 7.5 5.5ZM13.925 19.5H6.9C6.46665 19.5 6.09585 19.3584 5.7875 19.075C5.47915 18.7917 5.28335 18.4333 5.2 18L2.875 6.375H4.45L6.625 18H13.925V19.5ZM19.925 22L16.975 16.875H9.125C8.69165 16.875 8.30415 16.75 7.9625 16.5C7.62085 16.25 7.40835 15.9166 7.325 15.5L6.15 9.3C6 8.53335 6.19165 7.85415 6.725 7.2625C7.25835 6.67085 7.925 6.375 8.725 6.375C9.30835 6.375 9.80835 6.5625 10.225 6.9375C10.6417 7.3125 10.9083 7.78335 11.025 8.35L12.175 14.35H16.325C16.6584 14.35 16.95 14.45 17.2 14.65C17.45 14.85 17.6584 15.0917 17.825 15.375L21.25 21.25L19.925 22Z" fill="black"/>
+                       </svg>
 
-        <div class="deal_panel" id="panel-corolla">
-          <div class="deal_image">
-            <img src="Assets/range-1.jpg" alt="Toyota Corolla" />
-          </div>
-          <div class="deal_info">
-            <h3>Toyota Corolla</h3>
-            <p class="deal_tagline">Comfortable sedan — ideal for city &amp; highway</p>
-            <div class="deal_specs">
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7.5 5.5C7.01665 5.5 6.60835 5.33335 6.275 5C5.94165 4.66666 5.775 4.25834 5.775 3.775C5.775 3.29167 5.94165 2.875 6.275 2.525C6.60835 2.175 7.01665 2 7.5 2C7.98335 2 8.4 2.175 8.75 2.525C9.1 2.875 9.275 3.29167 9.275 3.775C9.275 4.25834 9.1 4.66666 8.75 5C8.4 5.33335 7.98335 5.5 7.5 5.5ZM13.925 19.5H6.9C6.46665 19.5 6.09585 19.3584 5.7875 19.075C5.47915 18.7917 5.28335 18.4333 5.2 18L2.875 6.375H4.45L6.625 18H13.925V19.5ZM19.925 22L16.975 16.875H9.125C8.69165 16.875 8.30415 16.75 7.9625 16.5C7.62085 16.25 7.40835 15.9166 7.325 15.5L6.15 9.3C6 8.53335 6.19165 7.85415 6.725 7.2625C7.25835 6.67085 7.925 6.375 8.725 6.375C9.30835 6.375 9.80835 6.5625 10.225 6.9375C10.6417 7.3125 10.9083 7.78335 11.025 8.35L12.175 14.35H16.325C16.6584 14.35 16.95 14.45 17.2 14.65C17.45 14.85 17.6584 15.0917 17.825 15.375L21.25 21.25L19.925 22Z"
-                    fill="black" />
-                </svg>
+                       <span>5</span><small>Seats</small>
+                     </div>
+                     <div class="spec">
+                       <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M3.5 80C1.5 80 -0.0833333 79.3056 -1.25 77.9167C-2.41667 76.5278 -3 74.8889 -3 73C-3 71.4333 -2.60267 70.0444 -1.808 68.8333C-1.01333 67.6222 0.0393333 66.8333 1.5 66.5V52.3333C0.0387 51.9444 -1.01467 51.1556 -1.809 49.9444C-2.60333 48.7333 -3.00067 47.3444 -3 45.7778C-3 43.8889 -2.41667 42.25 -1.25 40.8611C-0.0833333 39.4722 1.5 38.7778 3.5 38.7778C5.5 38.7778 7.08333 39.4722 8.25 40.8611C9.41667 42.25 10 43.8889 10 45.7778C10 47.3444 9.60333 48.7333 8.809 49.9444C8.01467 51.1556 6.96133 51.9444 5.5 52.3333V58.6667H18.5V52.3333C17.0387 51.9444 15.9853 51.1556 15.24 49.9444C14.4947 48.7333 14.1313 47.3444 14.5 45.7778C14.5 43.8889 15.0833 42.25 16.25 40.8611C17.4167 39.4722 19 38.7778 21 38.7778C23 38.7778 24.5833 39.4722 25.75 40.8611C26.9167 42.25 27.5 43.8889 27.5 45.7778C27.5 47.3444 27.1033 48.7333 26.309 49.9444C25.5147 51.1556 24.4613 51.9444 23 52.3333V58.6667H34.5C35.1667 58.6667 35.7167 58.4345 36.15 57.97C36.5833 57.5056 36.8333 56.9511 36.5 56.2222V52.3333C35.0387 51.9444 33.9853 51.1556 33.24 49.9444C32.4947 48.7333 32.1313 47.3444 32.5 45.7778C32.5 43.8889 33.0833 42.25 34.25 40.8611C35.4167 39.4722 37 38.7778 39 38.7778C41 38.7778 42.5833 39.4722 43.75 40.8611C44.9167 42.25 45.5 43.8889 45.5 45.7778C45.5 47.3444 45.1033 48.7333 44.309 49.9444C43.5147 51.1556 42.4613 51.9444 41 52.3333V56.2222C41 58.1111 40.4167 59.75 39.25 61.1389C38.0833 62.5278 36.5 63.2222 34.5 63.2222H23V66.5C24.4613 66.8889 25.5147 67.6778 26.309 68.8889C27.1033 70.1 27.5 71.4889 27.5 73C27.5 74.8889 26.9167 76.5278 25.75 77.9167C24.5833 79.3056 23 80 21 80C19 80 17.4167 79.3056 16.25 77.9167C15.0833 76.5278 14.5 74.8889 14.5 73C14.5 71.4333 14.8967 70.0444 15.691 68.8333C16.4853 67.6222 17.5387 66.8333 19 66.5V63.2222H5.5V66.5C6.96133 66.8889 8.01467 67.6778 8.809 68.8889C9.60333 70.1 10 71.4889 10 73C10 74.8889 9.41667 76.5278 8.25 77.9167C7.08333 79.3056 5.5 80 3.5 80Z" fill="black"/>
+                       </svg>
 
-                <span>5</span><small>Seats</small>
-              </div>
-              <div class="spec">
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3.5 80C1.5 80 -0.0833333 79.3056 -1.25 77.9167C-2.41667 76.5278 -3 74.8889 -3 73C-3 71.4333 -2.60267 70.0444 -1.808 68.8333C-1.01333 67.6222 0.0393333 66.8333 1.5 66.5V52.3333C0.0387 51.9444 -1.01467 51.1556 -1.809 49.9444C-2.60333 48.7333 -3.00067 47.3444 -3 45.7778C-3 43.8889 -2.41667 42.25 -1.25 40.8611C-0.0833333 39.4722 1.5 38.7778 3.5 38.7778C5.5 38.7778 7.08333 39.4722 8.25 40.8611C9.41667 42.25 10 43.8889 10 45.7778C10 47.3444 9.60333 48.7333 8.809 49.9444C8.01467 51.1556 6.96133 51.9444 5.5 52.3333V58.6667H18.5V52.3333C17.0387 51.9444 15.9853 51.1556 15.24 49.9444C14.4947 48.7333 14.1313 47.3444 14.5 45.7778C14.5 43.8889 15.0833 42.25 16.25 40.8611C17.4167 39.4722 19 38.7778 21 38.7778C23 38.7778 24.5833 39.4722 25.75 40.8611C26.9167 42.25 27.5 43.8889 27.5 45.7778C27.5 47.3444 27.1033 48.7333 26.309 49.9444C25.5147 51.1556 24.4613 51.9444 23 52.3333V58.6667H34.5C35.1667 58.6667 35.7167 58.4345 36.15 57.97C36.5833 57.5056 36.8333 56.9511 36.5 56.2222V52.3333C35.0387 51.9444 33.9853 51.1556 33.24 49.9444C32.4947 48.7333 32.1313 47.3444 32.5 45.7778C32.5 43.8889 33.0833 42.25 34.25 40.8611C35.4167 39.4722 37 38.7778 39 38.7778C41 38.7778 42.5833 39.4722 43.75 40.8611C44.9167 42.25 45.5 43.8889 45.5 45.7778C45.5 47.3444 45.1033 48.7333 44.309 49.9444C43.5147 51.1556 42.4613 51.9444 41 52.3333V56.2222C41 58.1111 40.4167 59.75 39.25 61.1389C38.0833 62.5278 36.5 63.2222 34.5 63.2222H23V66.5C24.4613 66.8889 25.5147 67.6778 26.309 68.8889C27.1033 70.1 27.5 71.4889 27.5 73C27.5 74.8889 26.9167 76.5278 25.75 77.9167C24.5833 79.3056 23 80 21 80C19 80 17.4167 79.3056 16.25 77.9167C15.0833 76.5278 14.5 74.8889 14.5 73C14.5 71.4333 14.8967 70.0444 15.691 68.8333C16.4853 67.6222 17.5387 66.8333 19 66.5V63.2222H5.5V66.5C6.96133 66.8889 8.01467 67.6778 8.809 68.8889C9.60333 70.1 10 71.4889 10 73C10 74.8889 9.41667 76.5278 8.25 77.9167C7.08333 79.3056 5.5 80 3.5 80Z"
-                    fill="black" />
-                </svg>
+                       <span>Auto</span><small>Transmission</small>
+                     </div>
+                     <div class="spec">
+                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M3 2H6C6.28 2 6.53 2.11 6.71 2.29L8.79 4.38L9.59 3.59C10 3.2 10.5 3 11 3H17C17.5 3 18 3.2 18.41 3.59L19.41 4.59C19.8 5 20 5.5 20 6V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H8C7.46957 21 6.96086 20.7893 6.58579 20.4142C6.21071 20.0391 6 19.5304 6 19V8C6 7.5 6.2 7 6.59 6.59L7.38 5.79L5.59 4H3V2ZM11 5V7H17V5H11ZM11.41 11L9.41 9H8V10.41L10 12.41V15.59L8 17.59V19H9.41L11.41 17H14.59L16.59 19H18V17.59L16 15.59V12.41L18 10.41V9H16.59L14.59 11H11.41ZM12 13H14V15H12V13Z" fill="black"/>
+                       </svg>
+                       <span>Petrol</span><small>Fuel</small>
+                     </div>
+                     <div class="spec">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 20V15.85L5.75 19.05L4.35 17.65L9 13V11H7L2.35 15.65L0.95 14.25L4.15 11H0V9H4.15L0.95 5.75L2.35 4.35L7 9H9V7L4.35 2.35L5.75 0.95L9 4.15V0H11V4.15L14.25 0.95L15.65 2.35L11 7V9H13L17.65 4.35L19.05 5.75L15.85 9H20V11H15.85L19.05 14.25L17.65 15.65L13 11H11V13L15.65 17.65L14.25 19.05L11 15.85V20H9Z" fill="black"/>
+                            </svg>
 
-                <span>Auto</span><small>Transmission</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3 2H6C6.28 2 6.53 2.11 6.71 2.29L8.79 4.38L9.59 3.59C10 3.2 10.5 3 11 3H17C17.5 3 18 3.2 18.41 3.59L19.41 4.59C19.8 5 20 5.5 20 6V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H8C7.46957 21 6.96086 20.7893 6.58579 20.4142C6.21071 20.0391 6 19.5304 6 19V8C6 7.5 6.2 7 6.59 6.59L7.38 5.79L5.59 4H3V2ZM11 5V7H17V5H11ZM11.41 11L9.41 9H8V10.41L10 12.41V15.59L8 17.59V19H9.41L11.41 17H14.59L16.59 19H18V17.59L16 15.59V12.41L18 10.41V9H16.59L14.59 11H11.41ZM12 13H14V15H12V13Z"
-                    fill="black" />
-                </svg>
-                <span>Petrol</span><small>Fuel</small>
-              </div>
-              <div class="spec">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M9 20V15.85L5.75 19.05L4.35 17.65L9 13V11H7L2.35 15.65L0.95 14.25L4.15 11H0V9H4.15L0.95 5.75L2.35 4.35L7 9H9V7L4.35 2.35L5.75 0.95L9 4.15V0H11V4.15L14.25 0.95L15.65 2.35L11 7V9H13L17.65 4.35L19.05 5.75L15.85 9H20V11H15.85L19.05 14.25L17.65 15.65L13 11H11V13L15.65 17.65L14.25 19.05L11 15.85V20H9Z"
-                    fill="black" />
-                </svg>
+                       <span>AC</span><small>Climate</small>
+                     </div>
+                     <div class="spec">
+                       <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                       <rect width="27" height="27" fill="url(#pattern0_659_11)"/>
+                       <defs>
+                       <pattern id="pattern0_659_11" patternContentUnits="objectBoundingBox" width="1" height="1">
+                       <use xlink:href="#image0_659_11" transform="scale(0.0208333)"/>
+                       </pattern>
+                       <image id="image0_659_11" width="48" height="48" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADhUlEQVR4AeyZP+hOURjH32QwGCiDwUBRBgPFhDIYDEwYhLARg7IYmFAkUUgmhBCFWGTAYEIooigUZaAMikHx+b6ve3s97/O+9/zuOee6ya/v9557n3PO85zvveffe37jOsP/JpG1Cz6G3+DPSL6g/mE4DSbDMAGziaCG7yGdCyfAWMjndpxIyCrSJPAE6M3fxvt0mAMTcXoBLoHR8ATsxGvSz4w/i/EYLsOZMAqegLVRHsMrT6HoDagvQlIPVoC6j/f2V+N+RgQXUPcttNC40JfQF7F5Qc+eAK/iFYxqQF0+pP4K+BVaLMOwH9aCFVDLSWClZ5RbAz3swFhrZrICpuLIwntrtkzo800K7oYeTmEc86C2Arz5/jOOU2Ivzs5DCw3mqxiVkoTBCgirFV9qMy6eQos5GE7AYFgBXhf6HuwtvKC6pfq8UltrHQYJJKmGFeB1oY/VbmqVeE2t9dDDQYyaYklGwwoYXTp97jVcHoAWGgfablSuD1aAVkfrLPezdrz3nSDaRFauD1aAlFtf760h8fMP/KnffyG10Pqw1Br7n62A/rziXgGK+1ypVvgtQ5xrfdAWx80OEeBWzGC8iE9vfdDe7Ah5LtokQA3U9Kmvoft+buBhORxA2wRoXdg00MqeQQvcwBhtmwA19S6X49BCXWlgVhqDAOsv67N+FXpdaStRNb2S9GAFVC4cvWrZr6O6kg4GygZYAfpMZebvm4WkmsoK6mfgHWwFX3H/JoI6/Sh8KdUvNMXSwP2EX4uV/QYrwNu4aY++kUoFNRvoRKGg8nWCUZfqEoUvpdrkFbG8nYEGsmLSpE7HCsi1cesGS3gpe4oVkDBGM67+C2jmPQ+PEvMFtHt8h+uCH7hvHHUEaHeq5X4yre2feTSwZmF7AhtDHQEnad1p6EE/E4ed/Xjlo211BOiUbVTgl6MyU+dZASHrwKKKRsyvyE+abQV4K7ENqCV+G0bvBEONP0teY7ACQgJrw3eUgt6/nR5gDzoOoVwSWAHe5ilJoFxOrABtY3PFyuLXCsgSJKdTK0Cra854yX3/cwKSv6HcDu0XCFnIqtuUv0Q5W1oBWsge5Y8fFUHjtNyuWAHyfEyXFlObSe2Iu030BJwj5xZsI57TKP2PjaQHT4DU6WTgTK9Ia656qTq1+GOx9QSoxSqko415POyDl+C9v8DrxDwEF0P9Q7wcvDx38QsAAP//tMOe8AAAAAZJREFUAwAgErz1jFVUaQAAAABJRU5ErkJggg=="/>
+                       </defs>
+                       </svg>
 
-                <span>AC</span><small>Climate</small>
-              </div>
-              <div class="spec">
-                <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <rect width="27" height="27" fill="url(#pattern0_659_11)" />
-                  <defs>
-                    <pattern id="pattern0_659_11" patternContentUnits="objectBoundingBox" width="1" height="1">
-                      <use xlink:href="#image0_659_11" transform="scale(0.0208333)" />
-                    </pattern>
-                    <image id="image0_659_11" width="48" height="48" preserveAspectRatio="none"
-                      xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADhUlEQVR4AeyZP+hOURjH32QwGCiDwUBRBgPFhDIYDEwYhLARg7IYmFAkUUgmhBCFWGTAYEIooigUZaAMikHx+b6ve3s97/O+9/zuOee6ya/v9557n3PO85zvveffe37jOsP/JpG1Cz6G3+DPSL6g/mE4DSbDMAGziaCG7yGdCyfAWMjndpxIyCrSJPAE6M3fxvt0mAMTcXoBLoHR8ATsxGvSz4w/i/EYLsOZMAqegLVRHsMrT6HoDagvQlIPVoC6j/f2V+N+RgQXUPcttNC40JfQF7F5Qc+eAK/iFYxqQF0+pP4K+BVaLMOwH9aCFVDLSWClZ5RbAz3swFhrZrICpuLIwntrtkzo800K7oYeTmEc86C2Arz5/jOOU2Ivzs5DCw3mqxiVkoTBCgirFV9qMy6eQos5GE7AYFgBXhf6HuwtvKC6pfq8UltrHQYJJKmGFeB1oY/VbmqVeE2t9dDDQYyaYklGwwoYXTp97jVcHoAWGgfablSuD1aAVkfrLPezdrz3nSDaRFauD1aAlFtf760h8fMP/KnffyG10Pqw1Br7n62A/rziXgGK+1ypVvgtQ5xrfdAWx80OEeBWzGC8iE9vfdDe7Ah5LtokQA3U9Kmvoft+buBhORxA2wRoXdg00MqeQQvcwBhtmwA19S6X49BCXWlgVhqDAOsv67N+FXpdaStRNb2S9GAFVC4cvWrZr6O6kg4GygZYAfpMZebvm4WkmsoK6mfgHWwFX3H/JoI6/Sh8KdUvNMXSwP2EX4uV/QYrwNu4aY++kUoFNRvoRKGg8nWCUZfqEoUvpdrkFbG8nYEGsmLSpE7HCsi1cesGS3gpe4oVkDBGM67+C2jmPQ+PEvMFtHt8h+uCH7hvHHUEaHeq5X4yre2feTSwZmF7AhtDHQEnad1p6EE/E4ed/Xjlo211BOiUbVTgl6MyU+dZASHrwKKKRsyvyE+abQV4K7ENqCV+G0bvBEONP0teY7ACQgJrw3eUgt6/nR5gDzoOoVwSWAHe5ilJoFxOrABtY3PFyuLXCsgSJKdTK0Cra854yX3/cwKSv6HcDu0XCFnIqtuUv0Q5W1oBWsge5Y8fFUHjtNyuWAHyfEyXFlObSe2Iu030BJwj5xZsI57TKP2PjaQHT4DU6WTgTK9Ia656qTq1+GOx9QSoxSqko415POyDl+C9v8DrxDwEF0P9Q7wcvDx38QsAAP//tMOe8AAAAAZJREFUAwAgErz1jFVUaQAAAABJRU5ErkJggg==" />
-                  </defs>
-                </svg>
+                       <span>4 Doors</span><small>Body</small>
+                     </div>
+                     <div class="spec">
+                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       <g clip-path="url(#clip0_659_15)">
+                       <path d="M19 4H17V3C17 2.73478 16.8946 2.48043 16.7071 2.29289C16.5196 2.10536 16.2652 2 16 2C15.7348 2 15.4804 2.10536 15.2929 2.29289C15.1054 2.48043 15 2.73478 15 3V4H9V3C9 2.73478 8.89464 2.48043 8.70711 2.29289C8.51957 2.10536 8.26522 2 8 2C7.73478 2 7.48043 2.10536 7.29289 2.29289C7.10536 2.48043 7 2.73478 7 3V4H5C4.20435 4 3.44129 4.31607 2.87868 4.87868C2.31607 5.44129 2 6.20435 2 7V19C2 19.7956 2.31607 20.5587 2.87868 21.1213C3.44129 21.6839 4.20435 22 5 22H19C19.7956 22 20.5587 21.6839 21.1213 21.1213C21.6839 20.5587 22 19.7956 22 19V7C22 6.20435 21.6839 5.44129 21.1213 4.87868C20.5587 4.31607 19.7956 4 19 4ZM20 19C20 19.2652 19.8946 19.5196 19.7071 19.7071C19.5196 19.8946 19.2652 20 19 20H5C4.73478 20 4.48043 19.8946 4.29289 19.7071C4.10536 19.5196 4 19.2652 4 19V12H20V19ZM20 10H4V7C4 6.73478 4.10536 6.48043 4.29289 6.29289C4.48043 6.10536 4.73478 6 5 6H7V7C7 7.26522 7.10536 7.51957 7.29289 7.70711C7.48043 7.89464 7.73478 8 8 8C8.26522 8 8.51957 7.89464 8.70711 7.70711C8.89464 7.51957 9 7.26522 9 7V6H15V7C15 7.26522 15.1054 7.51957 15.2929 7.70711C15.4804 7.89464 15.7348 8 16 8C16.2652 8 16.5196 7.89464 16.7071 7.70711C16.8946 7.51957 17 7.26522 17 7V6H19C19.2652 6 19.5196 6.10536 19.7071 6.29289C19.8946 6.48043 20 6.73478 20 7V10Z" fill="black"/>
+                       </g>
+                       <defs>
+                       <clipPath id="clip0_659_15">
+                       <rect width="24" height="24" fill="white"/>
+                       </clipPath>
+                       </defs>
+                       </svg>
+                       <span>2022</span><small>Year</small>
+                     </div>
+                   </div>
+                   <div class="deal_price_row">
+                     <div class="deal_price">NPR 4,500 <small>/ day</small></div>
+              <a href="<%= request.getContextPath() %>/rentalDeals" class="button" ${v.vehicle_status != 'Available' ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>
+                         Book Now
+                       </a>
+                   </div>
+                 </div>
+               </div>
+               </div>
+             </div>
+           </div>
+         </section>
 
-                <span>4 Doors</span><small>Body</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_659_15)">
-                    <path
-                      d="M19 4H17V3C17 2.73478 16.8946 2.48043 16.7071 2.29289C16.5196 2.10536 16.2652 2 16 2C15.7348 2 15.4804 2.10536 15.2929 2.29289C15.1054 2.48043 15 2.73478 15 3V4H9V3C9 2.73478 8.89464 2.48043 8.70711 2.29289C8.51957 2.10536 8.26522 2 8 2C7.73478 2 7.48043 2.10536 7.29289 2.29289C7.10536 2.48043 7 2.73478 7 3V4H5C4.20435 4 3.44129 4.31607 2.87868 4.87868C2.31607 5.44129 2 6.20435 2 7V19C2 19.7956 2.31607 20.5587 2.87868 21.1213C3.44129 21.6839 4.20435 22 5 22H19C19.7956 22 20.5587 21.6839 21.1213 21.1213C21.6839 20.5587 22 19.7956 22 19V7C22 6.20435 21.6839 5.44129 21.1213 4.87868C20.5587 4.31607 19.7956 4 19 4ZM20 19C20 19.2652 19.8946 19.5196 19.7071 19.7071C19.5196 19.8946 19.2652 20 19 20H5C4.73478 20 4.48043 19.8946 4.29289 19.7071C4.10536 19.5196 4 19.2652 4 19V12H20V19ZM20 10H4V7C4 6.73478 4.10536 6.48043 4.29289 6.29289C4.48043 6.10536 4.73478 6 5 6H7V7C7 7.26522 7.10536 7.51957 7.29289 7.70711C7.48043 7.89464 7.73478 8 8 8C8.26522 8 8.51957 7.89464 8.70711 7.70711C8.89464 7.51957 9 7.26522 9 7V6H15V7C15 7.26522 15.1054 7.51957 15.2929 7.70711C15.4804 7.89464 15.7348 8 16 8C16.2652 8 16.5196 7.89464 16.7071 7.70711C16.8946 7.51957 17 7.26522 17 7V6H19C19.2652 6 19.5196 6.10536 19.7071 6.29289C19.8946 6.48043 20 6.73478 20 7V10Z"
-                      fill="black" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_659_15">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <span>2022</span><small>Year</small>
-              </div>
-            </div>
-            <div class="deal_price_row">
-              <div class="deal_price">NPR 4,500 <small>/ day</small></div>
-              <a href="<%= request.getContextPath() %>/viewVehicleDetails?id=${v.vehicle_id}" class="button"
-                ${v.vehicle_status !='Available' ? 'style="pointer-events: none; opacity: 0.6;"' : '' }>
-                Book Now
-              </a>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="deal_panel" id="panel-noah">
-          <div class="deal_image">
-            <img src="Assets/range-2.jpg" alt="Toyota Noah" />
-          </div>
-          <div class="deal_info">
-            <h3>Toyota Noah</h3>
-            <p class="deal_tagline">Comfortable sedan — ideal for city &amp; highway</p>
-            <div class="deal_specs">
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7.5 5.5C7.01665 5.5 6.60835 5.33335 6.275 5C5.94165 4.66666 5.775 4.25834 5.775 3.775C5.775 3.29167 5.94165 2.875 6.275 2.525C6.60835 2.175 7.01665 2 7.5 2C7.98335 2 8.4 2.175 8.75 2.525C9.1 2.875 9.275 3.29167 9.275 3.775C9.275 4.25834 9.1 4.66666 8.75 5C8.4 5.33335 7.98335 5.5 7.5 5.5ZM13.925 19.5H6.9C6.46665 19.5 6.09585 19.3584 5.7875 19.075C5.47915 18.7917 5.28335 18.4333 5.2 18L2.875 6.375H4.45L6.625 18H13.925V19.5ZM19.925 22L16.975 16.875H9.125C8.69165 16.875 8.30415 16.75 7.9625 16.5C7.62085 16.25 7.40835 15.9166 7.325 15.5L6.15 9.3C6 8.53335 6.19165 7.85415 6.725 7.2625C7.25835 6.67085 7.925 6.375 8.725 6.375C9.30835 6.375 9.80835 6.5625 10.225 6.9375C10.6417 7.3125 10.9083 7.78335 11.025 8.35L12.175 14.35H16.325C16.6584 14.35 16.95 14.45 17.2 14.65C17.45 14.85 17.6584 15.0917 17.825 15.375L21.25 21.25L19.925 22Z"
-                    fill="black" />
-                </svg>
-
-                <span>5</span><small>Seats</small>
-              </div>
-              <div class="spec">
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3.5 80C1.5 80 -0.0833333 79.3056 -1.25 77.9167C-2.41667 76.5278 -3 74.8889 -3 73C-3 71.4333 -2.60267 70.0444 -1.808 68.8333C-1.01333 67.6222 0.0393333 66.8333 1.5 66.5V52.3333C0.0387 51.9444 -1.01467 51.1556 -1.809 49.9444C-2.60333 48.7333 -3.00067 47.3444 -3 45.7778C-3 43.8889 -2.41667 42.25 -1.25 40.8611C-0.0833333 39.4722 1.5 38.7778 3.5 38.7778C5.5 38.7778 7.08333 39.4722 8.25 40.8611C9.41667 42.25 10 43.8889 10 45.7778C10 47.3444 9.60333 48.7333 8.809 49.9444C8.01467 51.1556 6.96133 51.9444 5.5 52.3333V58.6667H18.5V52.3333C17.0387 51.9444 15.9853 51.1556 15.24 49.9444C14.4947 48.7333 14.1313 47.3444 14.5 45.7778C14.5 43.8889 15.0833 42.25 16.25 40.8611C17.4167 39.4722 19 38.7778 21 38.7778C23 38.7778 24.5833 39.4722 25.75 40.8611C26.9167 42.25 27.5 43.8889 27.5 45.7778C27.5 47.3444 27.1033 48.7333 26.309 49.9444C25.5147 51.1556 24.4613 51.9444 23 52.3333V58.6667H34.5C35.1667 58.6667 35.7167 58.4345 36.15 57.97C36.5833 57.5056 36.8333 56.9511 36.5 56.2222V52.3333C35.0387 51.9444 33.9853 51.1556 33.24 49.9444C32.4947 48.7333 32.1313 47.3444 32.5 45.7778C32.5 43.8889 33.0833 42.25 34.25 40.8611C35.4167 39.4722 37 38.7778 39 38.7778C41 38.7778 42.5833 39.4722 43.75 40.8611C44.9167 42.25 45.5 43.8889 45.5 45.7778C45.5 47.3444 45.1033 48.7333 44.309 49.9444C43.5147 51.1556 42.4613 51.9444 41 52.3333V56.2222C41 58.1111 40.4167 59.75 39.25 61.1389C38.0833 62.5278 36.5 63.2222 34.5 63.2222H23V66.5C24.4613 66.8889 25.5147 67.6778 26.309 68.8889C27.1033 70.1 27.5 71.4889 27.5 73C27.5 74.8889 26.9167 76.5278 25.75 77.9167C24.5833 79.3056 23 80 21 80C19 80 17.4167 79.3056 16.25 77.9167C15.0833 76.5278 14.5 74.8889 14.5 73C14.5 71.4333 14.8967 70.0444 15.691 68.8333C16.4853 67.6222 17.5387 66.8333 19 66.5V63.2222H5.5V66.5C6.96133 66.8889 8.01467 67.6778 8.809 68.8889C9.60333 70.1 10 71.4889 10 73C10 74.8889 9.41667 76.5278 8.25 77.9167C7.08333 79.3056 5.5 80 3.5 80Z"
-                    fill="black" />
-                </svg>
-
-                <span>Auto</span><small>Transmission</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3 2H6C6.28 2 6.53 2.11 6.71 2.29L8.79 4.38L9.59 3.59C10 3.2 10.5 3 11 3H17C17.5 3 18 3.2 18.41 3.59L19.41 4.59C19.8 5 20 5.5 20 6V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H8C7.46957 21 6.96086 20.7893 6.58579 20.4142C6.21071 20.0391 6 19.5304 6 19V8C6 7.5 6.2 7 6.59 6.59L7.38 5.79L5.59 4H3V2ZM11 5V7H17V5H11ZM11.41 11L9.41 9H8V10.41L10 12.41V15.59L8 17.59V19H9.41L11.41 17H14.59L16.59 19H18V17.59L16 15.59V12.41L18 10.41V9H16.59L14.59 11H11.41ZM12 13H14V15H12V13Z"
-                    fill="black" />
-                </svg>
-                <span>Petrol</span><small>Fuel</small>
-              </div>
-              <div class="spec">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M9 20V15.85L5.75 19.05L4.35 17.65L9 13V11H7L2.35 15.65L0.95 14.25L4.15 11H0V9H4.15L0.95 5.75L2.35 4.35L7 9H9V7L4.35 2.35L5.75 0.95L9 4.15V0H11V4.15L14.25 0.95L15.65 2.35L11 7V9H13L17.65 4.35L19.05 5.75L15.85 9H20V11H15.85L19.05 14.25L17.65 15.65L13 11H11V13L15.65 17.65L14.25 19.05L11 15.85V20H9Z"
-                    fill="black" />
-                </svg>
-
-                <span>AC</span><small>Climate</small>
-              </div>
-              <div class="spec">
-                <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <rect width="27" height="27" fill="url(#pattern0_659_11)" />
-                  <defs>
-                    <pattern id="pattern0_659_11" patternContentUnits="objectBoundingBox" width="1" height="1">
-                      <use xlink:href="#image0_659_11" transform="scale(0.0208333)" />
-                    </pattern>
-                    <image id="image0_659_11" width="48" height="48" preserveAspectRatio="none"
-                      xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADhUlEQVR4AeyZP+hOURjH32QwGCiDwUBRBgPFhDIYDEwYhLARg7IYmFAkUUgmhBCFWGTAYEIooigUZaAMikHx+b6ve3s97/O+9/zuOee6ya/v9557n3PO85zvveffe37jOsP/JpG1Cz6G3+DPSL6g/mE4DSbDMAGziaCG7yGdCyfAWMjndpxIyCrSJPAE6M3fxvt0mAMTcXoBLoHR8ATsxGvSz4w/i/EYLsOZMAqegLVRHsMrT6HoDagvQlIPVoC6j/f2V+N+RgQXUPcttNC40JfQF7F5Qc+eAK/iFYxqQF0+pP4K+BVaLMOwH9aCFVDLSWClZ5RbAz3swFhrZrICpuLIwntrtkzo800K7oYeTmEc86C2Arz5/jOOU2Ivzs5DCw3mqxiVkoTBCgirFV9qMy6eQos5GE7AYFgBXhf6HuwtvKC6pfq8UltrHQYJJKmGFeB1oY/VbmqVeE2t9dDDQYyaYklGwwoYXTp97jVcHoAWGgfablSuD1aAVkfrLPezdrz3nSDaRFauD1aAlFtf760h8fMP/KnffyG10Pqw1Br7n62A/rziXgGK+1ypVvgtQ5xrfdAWx80OEeBWzGC8iE9vfdDe7Ah5LtokQA3U9Kmvoft+buBhORxA2wRoXdg00MqeQQvcwBhtmwA19S6X49BCXWlgVhqDAOsv67N+FXpdaStRNb2S9GAFVC4cvWrZr6O6kg4GygZYAfpMZebvm4WkmsoK6mfgHWwFX3H/JoI6/Sh8KdUvNMXSwP2EX4uV/QYrwNu4aY++kUoFNRvoRKGg8nWCUZfqEoUvpdrkFbG8nYEGsmLSpE7HCsi1cesGS3gpe4oVkDBGM67+C2jmPQ+PEvMFtHt8h+uCH7hvHHUEaHeq5X4yre2feTSwZmF7AhtDHQEnad1p6EE/E4ed/Xjlo211BOiUbVTgl6MyU+dZASHrwKKKRsyvyE+abQV4K7ENqCV+G0bvBEONP0teY7ACQgJrw3eUgt6/nR5gDzoOoVwSWAHe5ilJoFxOrABtY3PFyuLXCsgSJKdTK0Cra854yX3/cwKSv6HcDu0XCFnIqtuUv0Q5W1oBWsge5Y8fFUHjtNyuWAHyfEyXFlObSe2Iu030BJwj5xZsI57TKP2PjaQHT4DU6WTgTK9Ia656qTq1+GOx9QSoxSqko415POyDl+C9v8DrxDwEF0P9Q7wcvDx38QsAAP//tMOe8AAAAAZJREFUAwAgErz1jFVUaQAAAABJRU5ErkJggg==" />
-                  </defs>
-                </svg>
-
-                <span>4 Doors</span><small>Body</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_659_15)">
-                    <path
-                      d="M19 4H17V3C17 2.73478 16.8946 2.48043 16.7071 2.29289C16.5196 2.10536 16.2652 2 16 2C15.7348 2 15.4804 2.10536 15.2929 2.29289C15.1054 2.48043 15 2.73478 15 3V4H9V3C9 2.73478 8.89464 2.48043 8.70711 2.29289C8.51957 2.10536 8.26522 2 8 2C7.73478 2 7.48043 2.10536 7.29289 2.29289C7.10536 2.48043 7 2.73478 7 3V4H5C4.20435 4 3.44129 4.31607 2.87868 4.87868C2.31607 5.44129 2 6.20435 2 7V19C2 19.7956 2.31607 20.5587 2.87868 21.1213C3.44129 21.6839 4.20435 22 5 22H19C19.7956 22 20.5587 21.6839 21.1213 21.1213C21.6839 20.5587 22 19.7956 22 19V7C22 6.20435 21.6839 5.44129 21.1213 4.87868C20.5587 4.31607 19.7956 4 19 4ZM20 19C20 19.2652 19.8946 19.5196 19.7071 19.7071C19.5196 19.8946 19.2652 20 19 20H5C4.73478 20 4.48043 19.8946 4.29289 19.7071C4.10536 19.5196 4 19.2652 4 19V12H20V19ZM20 10H4V7C4 6.73478 4.10536 6.48043 4.29289 6.29289C4.48043 6.10536 4.73478 6 5 6H7V7C7 7.26522 7.10536 7.51957 7.29289 7.70711C7.48043 7.89464 7.73478 8 8 8C8.26522 8 8.51957 7.89464 8.70711 7.70711C8.89464 7.51957 9 7.26522 9 7V6H15V7C15 7.26522 15.1054 7.51957 15.2929 7.70711C15.4804 7.89464 15.7348 8 16 8C16.2652 8 16.5196 7.89464 16.7071 7.70711C16.8946 7.51957 17 7.26522 17 7V6H19C19.2652 6 19.5196 6.10536 19.7071 6.29289C19.8946 6.48043 20 6.73478 20 7V10Z"
-                      fill="black" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_659_15">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <span>2022</span><small>Year</small>
-              </div>
-            </div>
-            <div class="deal_price_row">
-              <div class="deal_price">NPR 7,000 <small>/ day</small></div>
-              <a href="#" class="button">Book Now
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="deal_panel" id="panel-pajero">
-          <div class="deal_image">
-            <img src="Assets/range-3.jpg" alt="Mitsubishi Pajero" />
-          </div>
-          <div class="deal_info">
-            <h3>Mitsubishi Pajero</h3>
-            <p class="deal_tagline">Comfortable sedan — ideal for city &amp; highway</p>
-            <div class="deal_specs">
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7.5 5.5C7.01665 5.5 6.60835 5.33335 6.275 5C5.94165 4.66666 5.775 4.25834 5.775 3.775C5.775 3.29167 5.94165 2.875 6.275 2.525C6.60835 2.175 7.01665 2 7.5 2C7.98335 2 8.4 2.175 8.75 2.525C9.1 2.875 9.275 3.29167 9.275 3.775C9.275 4.25834 9.1 4.66666 8.75 5C8.4 5.33335 7.98335 5.5 7.5 5.5ZM13.925 19.5H6.9C6.46665 19.5 6.09585 19.3584 5.7875 19.075C5.47915 18.7917 5.28335 18.4333 5.2 18L2.875 6.375H4.45L6.625 18H13.925V19.5ZM19.925 22L16.975 16.875H9.125C8.69165 16.875 8.30415 16.75 7.9625 16.5C7.62085 16.25 7.40835 15.9166 7.325 15.5L6.15 9.3C6 8.53335 6.19165 7.85415 6.725 7.2625C7.25835 6.67085 7.925 6.375 8.725 6.375C9.30835 6.375 9.80835 6.5625 10.225 6.9375C10.6417 7.3125 10.9083 7.78335 11.025 8.35L12.175 14.35H16.325C16.6584 14.35 16.95 14.45 17.2 14.65C17.45 14.85 17.6584 15.0917 17.825 15.375L21.25 21.25L19.925 22Z"
-                    fill="black" />
-                </svg>
-
-                <span>5</span><small>Seats</small>
-              </div>
-              <div class="spec">
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3.5 80C1.5 80 -0.0833333 79.3056 -1.25 77.9167C-2.41667 76.5278 -3 74.8889 -3 73C-3 71.4333 -2.60267 70.0444 -1.808 68.8333C-1.01333 67.6222 0.0393333 66.8333 1.5 66.5V52.3333C0.0387 51.9444 -1.01467 51.1556 -1.809 49.9444C-2.60333 48.7333 -3.00067 47.3444 -3 45.7778C-3 43.8889 -2.41667 42.25 -1.25 40.8611C-0.0833333 39.4722 1.5 38.7778 3.5 38.7778C5.5 38.7778 7.08333 39.4722 8.25 40.8611C9.41667 42.25 10 43.8889 10 45.7778C10 47.3444 9.60333 48.7333 8.809 49.9444C8.01467 51.1556 6.96133 51.9444 5.5 52.3333V58.6667H18.5V52.3333C17.0387 51.9444 15.9853 51.1556 15.24 49.9444C14.4947 48.7333 14.1313 47.3444 14.5 45.7778C14.5 43.8889 15.0833 42.25 16.25 40.8611C17.4167 39.4722 19 38.7778 21 38.7778C23 38.7778 24.5833 39.4722 25.75 40.8611C26.9167 42.25 27.5 43.8889 27.5 45.7778C27.5 47.3444 27.1033 48.7333 26.309 49.9444C25.5147 51.1556 24.4613 51.9444 23 52.3333V58.6667H34.5C35.1667 58.6667 35.7167 58.4345 36.15 57.97C36.5833 57.5056 36.8333 56.9511 36.5 56.2222V52.3333C35.0387 51.9444 33.9853 51.1556 33.24 49.9444C32.4947 48.7333 32.1313 47.3444 32.5 45.7778C32.5 43.8889 33.0833 42.25 34.25 40.8611C35.4167 39.4722 37 38.7778 39 38.7778C41 38.7778 42.5833 39.4722 43.75 40.8611C44.9167 42.25 45.5 43.8889 45.5 45.7778C45.5 47.3444 45.1033 48.7333 44.309 49.9444C43.5147 51.1556 42.4613 51.9444 41 52.3333V56.2222C41 58.1111 40.4167 59.75 39.25 61.1389C38.0833 62.5278 36.5 63.2222 34.5 63.2222H23V66.5C24.4613 66.8889 25.5147 67.6778 26.309 68.8889C27.1033 70.1 27.5 71.4889 27.5 73C27.5 74.8889 26.9167 76.5278 25.75 77.9167C24.5833 79.3056 23 80 21 80C19 80 17.4167 79.3056 16.25 77.9167C15.0833 76.5278 14.5 74.8889 14.5 73C14.5 71.4333 14.8967 70.0444 15.691 68.8333C16.4853 67.6222 17.5387 66.8333 19 66.5V63.2222H5.5V66.5C6.96133 66.8889 8.01467 67.6778 8.809 68.8889C9.60333 70.1 10 71.4889 10 73C10 74.8889 9.41667 76.5278 8.25 77.9167C7.08333 79.3056 5.5 80 3.5 80Z"
-                    fill="black" />
-                </svg>
-
-                <span>Auto</span><small>Transmission</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3 2H6C6.28 2 6.53 2.11 6.71 2.29L8.79 4.38L9.59 3.59C10 3.2 10.5 3 11 3H17C17.5 3 18 3.2 18.41 3.59L19.41 4.59C19.8 5 20 5.5 20 6V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H8C7.46957 21 6.96086 20.7893 6.58579 20.4142C6.21071 20.0391 6 19.5304 6 19V8C6 7.5 6.2 7 6.59 6.59L7.38 5.79L5.59 4H3V2ZM11 5V7H17V5H11ZM11.41 11L9.41 9H8V10.41L10 12.41V15.59L8 17.59V19H9.41L11.41 17H14.59L16.59 19H18V17.59L16 15.59V12.41L18 10.41V9H16.59L14.59 11H11.41ZM12 13H14V15H12V13Z"
-                    fill="black" />
-                </svg>
-                <span>Petrol</span><small>Fuel</small>
-              </div>
-              <div class="spec">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M9 20V15.85L5.75 19.05L4.35 17.65L9 13V11H7L2.35 15.65L0.95 14.25L4.15 11H0V9H4.15L0.95 5.75L2.35 4.35L7 9H9V7L4.35 2.35L5.75 0.95L9 4.15V0H11V4.15L14.25 0.95L15.65 2.35L11 7V9H13L17.65 4.35L19.05 5.75L15.85 9H20V11H15.85L19.05 14.25L17.65 15.65L13 11H11V13L15.65 17.65L14.25 19.05L11 15.85V20H9Z"
-                    fill="black" />
-                </svg>
-
-                <span>AC</span><small>Climate</small>
-              </div>
-              <div class="spec">
-                <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <rect width="27" height="27" fill="url(#pattern0_659_11)" />
-                  <defs>
-                    <pattern id="pattern0_659_11" patternContentUnits="objectBoundingBox" width="1" height="1">
-                      <use xlink:href="#image0_659_11" transform="scale(0.0208333)" />
-                    </pattern>
-                    <image id="image0_659_11" width="48" height="48" preserveAspectRatio="none"
-                      xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADhUlEQVR4AeyZP+hOURjH32QwGCiDwUBRBgPFhDIYDEwYhLARg7IYmFAkUUgmhBCFWGTAYEIooigUZaAMikHx+b6ve3s97/O+9/zuOee6ya/v9557n3PO85zvveffe37jOsP/JpG1Cz6G3+DPSL6g/mE4DSbDMAGziaCG7yGdCyfAWMjndpxIyCrSJPAE6M3fxvt0mAMTcXoBLoHR8ATsxGvSz4w/i/EYLsOZMAqegLVRHsMrT6HoDagvQlIPVoC6j/f2V+N+RgQXUPcttNC40JfQF7F5Qc+eAK/iFYxqQF0+pP4K+BVaLMOwH9aCFVDLSWClZ5RbAz3swFhrZrICpuLIwntrtkzo800K7oYeTmEc86C2Arz5/jOOU2Ivzs5DCw3mqxiVkoTBCgirFV9qMy6eQos5GE7AYFgBXhf6HuwtvKC6pfq8UltrHQYJJKmGFeB1oY/VbmqVeE2t9dDDQYyaYklGwwoYXTp97jVcHoAWGgfablSuD1aAVkfrLPezdrz3nSDaRFauD1aAlFtf760h8fMP/KnffyG10Pqw1Br7n62A/rziXgGK+1ypVvgtQ5xrfdAWx80OEeBWzGC8iE9vfdDe7Ah5LtokQA3U9Kmvoft+buBhORxA2wRoXdg00MqeQQvcwBhtmwA19S6X49BCXWlgVhqDAOsv67N+FXpdaStRNb2S9GAFVC4cvWrZr6O6kg4GygZYAfpMZebvm4WkmsoK6mfgHWwFX3H/JoI6/Sh8KdUvNMXSwP2EX4uV/QYrwNu4aY++kUoFNRvoRKGg8nWCUZfqEoUvpdrkFbG8nYEGsmLSpE7HCsi1cesGS3gpe4oVkDBGM67+C2jmPQ+PEvMFtHt8h+uCH7hvHHUEaHeq5X4yre2feTSwZmF7AhtDHQEnad1p6EE/E4ed/Xjlo211BOiUbVTgl6MyU+dZASHrwKKKRsyvyE+abQV4K7ENqCV+G0bvBEONP0teY7ACQgJrw3eUgt6/nR5gDzoOoVwSWAHe5ilJoFxOrABtY3PFyuLXCsgSJKdTK0Cra854yX3/cwKSv6HcDu0XCFnIqtuUv0Q5W1oBWsge5Y8fFUHjtNyuWAHyfEyXFlObSe2Iu030BJwj5xZsI57TKP2PjaQHT4DU6WTgTK9Ia656qTq1+GOx9QSoxSqko415POyDl+C9v8DrxDwEF0P9Q7wcvDx38QsAAP//tMOe8AAAAAZJREFUAwAgErz1jFVUaQAAAABJRU5ErkJggg==" />
-                  </defs>
-                </svg>
-
-                <span>4 Doors</span><small>Body</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_659_15)">
-                    <path
-                      d="M19 4H17V3C17 2.73478 16.8946 2.48043 16.7071 2.29289C16.5196 2.10536 16.2652 2 16 2C15.7348 2 15.4804 2.10536 15.2929 2.29289C15.1054 2.48043 15 2.73478 15 3V4H9V3C9 2.73478 8.89464 2.48043 8.70711 2.29289C8.51957 2.10536 8.26522 2 8 2C7.73478 2 7.48043 2.10536 7.29289 2.29289C7.10536 2.48043 7 2.73478 7 3V4H5C4.20435 4 3.44129 4.31607 2.87868 4.87868C2.31607 5.44129 2 6.20435 2 7V19C2 19.7956 2.31607 20.5587 2.87868 21.1213C3.44129 21.6839 4.20435 22 5 22H19C19.7956 22 20.5587 21.6839 21.1213 21.1213C21.6839 20.5587 22 19.7956 22 19V7C22 6.20435 21.6839 5.44129 21.1213 4.87868C20.5587 4.31607 19.7956 4 19 4ZM20 19C20 19.2652 19.8946 19.5196 19.7071 19.7071C19.5196 19.8946 19.2652 20 19 20H5C4.73478 20 4.48043 19.8946 4.29289 19.7071C4.10536 19.5196 4 19.2652 4 19V12H20V19ZM20 10H4V7C4 6.73478 4.10536 6.48043 4.29289 6.29289C4.48043 6.10536 4.73478 6 5 6H7V7C7 7.26522 7.10536 7.51957 7.29289 7.70711C7.48043 7.89464 7.73478 8 8 8C8.26522 8 8.51957 7.89464 8.70711 7.70711C8.89464 7.51957 9 7.26522 9 7V6H15V7C15 7.26522 15.1054 7.51957 15.2929 7.70711C15.4804 7.89464 15.7348 8 16 8C16.2652 8 16.5196 7.89464 16.7071 7.70711C16.8946 7.51957 17 7.26522 17 7V6H19C19.2652 6 19.5196 6.10536 19.7071 6.29289C19.8946 6.48043 20 6.73478 20 7V10Z"
-                      fill="black" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_659_15">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <span>2022</span><small>Year</small>
-              </div>
-            </div>
-            <div class="deal_price_row">
-              <div class="deal_price">NPR 9,500 <small>/ day</small></div>
-              <a href="#" class="button">Book Now
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="deal_panel" id="panel-swift">
-          <div class="deal_image">
-            <img src="Assets/range-4.jpg" alt="Suzuki Swift" />
-          </div>
-          <div class="deal_info">
-            <h3>Suzuki Swift</h3>
-            <p class="deal_tagline">Comfortable sedan — ideal for city &amp; highway</p>
-            <div class="deal_specs">
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7.5 5.5C7.01665 5.5 6.60835 5.33335 6.275 5C5.94165 4.66666 5.775 4.25834 5.775 3.775C5.775 3.29167 5.94165 2.875 6.275 2.525C6.60835 2.175 7.01665 2 7.5 2C7.98335 2 8.4 2.175 8.75 2.525C9.1 2.875 9.275 3.29167 9.275 3.775C9.275 4.25834 9.1 4.66666 8.75 5C8.4 5.33335 7.98335 5.5 7.5 5.5ZM13.925 19.5H6.9C6.46665 19.5 6.09585 19.3584 5.7875 19.075C5.47915 18.7917 5.28335 18.4333 5.2 18L2.875 6.375H4.45L6.625 18H13.925V19.5ZM19.925 22L16.975 16.875H9.125C8.69165 16.875 8.30415 16.75 7.9625 16.5C7.62085 16.25 7.40835 15.9166 7.325 15.5L6.15 9.3C6 8.53335 6.19165 7.85415 6.725 7.2625C7.25835 6.67085 7.925 6.375 8.725 6.375C9.30835 6.375 9.80835 6.5625 10.225 6.9375C10.6417 7.3125 10.9083 7.78335 11.025 8.35L12.175 14.35H16.325C16.6584 14.35 16.95 14.45 17.2 14.65C17.45 14.85 17.6584 15.0917 17.825 15.375L21.25 21.25L19.925 22Z"
-                    fill="black" />
-                </svg>
-
-                <span>5</span><small>Seats</small>
-              </div>
-              <div class="spec">
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3.5 80C1.5 80 -0.0833333 79.3056 -1.25 77.9167C-2.41667 76.5278 -3 74.8889 -3 73C-3 71.4333 -2.60267 70.0444 -1.808 68.8333C-1.01333 67.6222 0.0393333 66.8333 1.5 66.5V52.3333C0.0387 51.9444 -1.01467 51.1556 -1.809 49.9444C-2.60333 48.7333 -3.00067 47.3444 -3 45.7778C-3 43.8889 -2.41667 42.25 -1.25 40.8611C-0.0833333 39.4722 1.5 38.7778 3.5 38.7778C5.5 38.7778 7.08333 39.4722 8.25 40.8611C9.41667 42.25 10 43.8889 10 45.7778C10 47.3444 9.60333 48.7333 8.809 49.9444C8.01467 51.1556 6.96133 51.9444 5.5 52.3333V58.6667H18.5V52.3333C17.0387 51.9444 15.9853 51.1556 15.24 49.9444C14.4947 48.7333 14.1313 47.3444 14.5 45.7778C14.5 43.8889 15.0833 42.25 16.25 40.8611C17.4167 39.4722 19 38.7778 21 38.7778C23 38.7778 24.5833 39.4722 25.75 40.8611C26.9167 42.25 27.5 43.8889 27.5 45.7778C27.5 47.3444 27.1033 48.7333 26.309 49.9444C25.5147 51.1556 24.4613 51.9444 23 52.3333V58.6667H34.5C35.1667 58.6667 35.7167 58.4345 36.15 57.97C36.5833 57.5056 36.8333 56.9511 36.5 56.2222V52.3333C35.0387 51.9444 33.9853 51.1556 33.24 49.9444C32.4947 48.7333 32.1313 47.3444 32.5 45.7778C32.5 43.8889 33.0833 42.25 34.25 40.8611C35.4167 39.4722 37 38.7778 39 38.7778C41 38.7778 42.5833 39.4722 43.75 40.8611C44.9167 42.25 45.5 43.8889 45.5 45.7778C45.5 47.3444 45.1033 48.7333 44.309 49.9444C43.5147 51.1556 42.4613 51.9444 41 52.3333V56.2222C41 58.1111 40.4167 59.75 39.25 61.1389C38.0833 62.5278 36.5 63.2222 34.5 63.2222H23V66.5C24.4613 66.8889 25.5147 67.6778 26.309 68.8889C27.1033 70.1 27.5 71.4889 27.5 73C27.5 74.8889 26.9167 76.5278 25.75 77.9167C24.5833 79.3056 23 80 21 80C19 80 17.4167 79.3056 16.25 77.9167C15.0833 76.5278 14.5 74.8889 14.5 73C14.5 71.4333 14.8967 70.0444 15.691 68.8333C16.4853 67.6222 17.5387 66.8333 19 66.5V63.2222H5.5V66.5C6.96133 66.8889 8.01467 67.6778 8.809 68.8889C9.60333 70.1 10 71.4889 10 73C10 74.8889 9.41667 76.5278 8.25 77.9167C7.08333 79.3056 5.5 80 3.5 80Z"
-                    fill="black" />
-                </svg>
-
-                <span>Auto</span><small>Transmission</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M3 2H6C6.28 2 6.53 2.11 6.71 2.29L8.79 4.38L9.59 3.59C10 3.2 10.5 3 11 3H17C17.5 3 18 3.2 18.41 3.59L19.41 4.59C19.8 5 20 5.5 20 6V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H8C7.46957 21 6.96086 20.7893 6.58579 20.4142C6.21071 20.0391 6 19.5304 6 19V8C6 7.5 6.2 7 6.59 6.59L7.38 5.79L5.59 4H3V2ZM11 5V7H17V5H11ZM11.41 11L9.41 9H8V10.41L10 12.41V15.59L8 17.59V19H9.41L11.41 17H14.59L16.59 19H18V17.59L16 15.59V12.41L18 10.41V9H16.59L14.59 11H11.41ZM12 13H14V15H12V13Z"
-                    fill="black" />
-                </svg>
-                <span>Petrol</span><small>Fuel</small>
-              </div>
-              <div class="spec">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M9 20V15.85L5.75 19.05L4.35 17.65L9 13V11H7L2.35 15.65L0.95 14.25L4.15 11H0V9H4.15L0.95 5.75L2.35 4.35L7 9H9V7L4.35 2.35L5.75 0.95L9 4.15V0H11V4.15L14.25 0.95L15.65 2.35L11 7V9H13L17.65 4.35L19.05 5.75L15.85 9H20V11H15.85L19.05 14.25L17.65 15.65L13 11H11V13L15.65 17.65L14.25 19.05L11 15.85V20H9Z"
-                    fill="black" />
-                </svg>
-
-                <span>AC</span><small>Climate</small>
-              </div>
-              <div class="spec">
-                <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <rect width="27" height="27" fill="url(#pattern0_659_11)" />
-                  <defs>
-                    <pattern id="pattern0_659_11" patternContentUnits="objectBoundingBox" width="1" height="1">
-                      <use xlink:href="#image0_659_11" transform="scale(0.0208333)" />
-                    </pattern>
-                    <image id="image0_659_11" width="48" height="48" preserveAspectRatio="none"
-                      xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADhUlEQVR4AeyZP+hOURjH32QwGCiDwUBRBgPFhDIYDEwYhLARg7IYmFAkUUgmhBCFWGTAYEIooigUZaAMikHx+b6ve3s97/O+9/zuOee6ya/v9557n3PO85zvveffe37jOsP/JpG1Cz6G3+DPSL6g/mE4DSbDMAGziaCG7yGdCyfAWMjndpxIyCrSJPAE6M3fxvt0mAMTcXoBLoHR8ATsxGvSz4w/i/EYLsOZMAqegLVRHsMrT6HoDagvQlIPVoC6j/f2V+N+RgQXUPcttNC40JfQF7F5Qc+eAK/iFYxqQF0+pP4K+BVaLMOwH9aCFVDLSWClZ5RbAz3swFhrZrICpuLIwntrtkzo800K7oYeTmEc86C2Arz5/jOOU2Ivzs5DCw3mqxiVkoTBCgirFV9qMy6eQos5GE7AYFgBXhf6HuwtvKC6pfq8UltrHQYJJKmGFeB1oY/VbmqVeE2t9dDDQYyaYklGwwoYXTp97jVcHoAWGgfablSuD1aAVkfrLPezdrz3nSDaRFauD1aAlFtf760h8fMP/KnffyG10Pqw1Br7n62A/rziXgGK+1ypVvgtQ5xrfdAWx80OEeBWzGC8iE9vfdDe7Ah5LtokQA3U9Kmvoft+buBhORxA2wRoXdg00MqeQQvcwBhtmwA19S6X49BCXWlgVhqDAOsv67N+FXpdaStRNb2S9GAFVC4cvWrZr6O6kg4GygZYAfpMZebvm4WkmsoK6mfgHWwFX3H/JoI6/Sh8KdUvNMXSwP2EX4uV/QYrwNu4aY++kUoFNRvoRKGg8nWCUZfqEoUvpdrkFbG8nYEGsmLSpE7HCsi1cesGS3gpe4oVkDBGM67+C2jmPQ+PEvMFtHt8h+uCH7hvHHUEaHeq5X4yre2feTSwZmF7AhtDHQEnad1p6EE/E4ed/Xjlo211BOiUbVTgl6MyU+dZASHrwKKKRsyvyE+abQV4K7ENqCV+G0bvBEONP0teY7ACQgJrw3eUgt6/nR5gDzoOoVwSWAHe5ilJoFxOrABtY3PFyuLXCsgSJKdTK0Cra854yX3/cwKSv6HcDu0XCFnIqtuUv0Q5W1oBWsge5Y8fFUHjtNyuWAHyfEyXFlObSe2Iu030BJwj5xZsI57TKP2PjaQHT4DU6WTgTK9Ia656qTq1+GOx9QSoxSqko415POyDl+C9v8DrxDwEF0P9Q7wcvDx38QsAAP//tMOe8AAAAAZJREFUAwAgErz1jFVUaQAAAABJRU5ErkJggg==" />
-                  </defs>
-                </svg>
-
-                <span>4 Doors</span><small>Body</small>
-              </div>
-              <div class="spec">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_659_15)">
-                    <path
-                      d="M19 4H17V3C17 2.73478 16.8946 2.48043 16.7071 2.29289C16.5196 2.10536 16.2652 2 16 2C15.7348 2 15.4804 2.10536 15.2929 2.29289C15.1054 2.48043 15 2.73478 15 3V4H9V3C9 2.73478 8.89464 2.48043 8.70711 2.29289C8.51957 2.10536 8.26522 2 8 2C7.73478 2 7.48043 2.10536 7.29289 2.29289C7.10536 2.48043 7 2.73478 7 3V4H5C4.20435 4 3.44129 4.31607 2.87868 4.87868C2.31607 5.44129 2 6.20435 2 7V19C2 19.7956 2.31607 20.5587 2.87868 21.1213C3.44129 21.6839 4.20435 22 5 22H19C19.7956 22 20.5587 21.6839 21.1213 21.1213C21.6839 20.5587 22 19.7956 22 19V7C22 6.20435 21.6839 5.44129 21.1213 4.87868C20.5587 4.31607 19.7956 4 19 4ZM20 19C20 19.2652 19.8946 19.5196 19.7071 19.7071C19.5196 19.8946 19.2652 20 19 20H5C4.73478 20 4.48043 19.8946 4.29289 19.7071C4.10536 19.5196 4 19.2652 4 19V12H20V19ZM20 10H4V7C4 6.73478 4.10536 6.48043 4.29289 6.29289C4.48043 6.10536 4.73478 6 5 6H7V7C7 7.26522 7.10536 7.51957 7.29289 7.70711C7.48043 7.89464 7.73478 8 8 8C8.26522 8 8.51957 7.89464 8.70711 7.70711C8.89464 7.51957 9 7.26522 9 7V6H15V7C15 7.26522 15.1054 7.51957 15.2929 7.70711C15.4804 7.89464 15.7348 8 16 8C16.2652 8 16.5196 7.89464 16.7071 7.70711C16.8946 7.51957 17 7.26522 17 7V6H19C19.2652 6 19.5196 6.10536 19.7071 6.29289C19.8946 6.48043 20 6.73478 20 7V10Z"
-                      fill="black" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_659_15">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <span>2022</span><small>Year</small>
-              </div>
-            </div>
-            <div class="deal_price_row">
-              <div class="deal_price">NPR 3,500 <small>/ day</small></div>
-              <a href="#" class="button">Book Now
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
 
   <section class="choose_container" id="choose">
