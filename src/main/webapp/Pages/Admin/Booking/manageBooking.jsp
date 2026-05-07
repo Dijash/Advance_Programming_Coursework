@@ -7,8 +7,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentAll | Bookings</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Admin/Dashboard/Admin.css">
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Booking/ManageBooking.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Booking/ManageBooking.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -54,17 +54,17 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li><a href="<%= request.getContextPath() %>/admin"><span>Dashboard</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageBooking" class="active"><span>Bookings</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageVehicles"><span>Manage Vehicles</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageCustomers"><span>Customers</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageNotification"><span>Notifications</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/report"><span>Reports</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageBooking" class="active"><span>Bookings</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
 
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
@@ -106,11 +106,11 @@
 
                   <td>
                     <div class="action-buttons">
-                        <a href="<%= request.getContextPath() %>/viewBooking?id=${booking.bookingId}" class="action-btn action-btn-view">View</a>
+                        <a href="${pageContext.request.contextPath}/viewBooking?id=${booking.bookingId}" class="action-btn action-btn-view">View</a>
 
-                        <a href="<%= request.getContextPath() %>/editBooking?id=${booking.bookingId}" class="action-btn action-btn-edit">Edit</a>
+                        <a href="${pageContext.request.contextPath}/editBooking?id=${booking.bookingId}" class="action-btn action-btn-edit">Edit</a>
 
-                        <form action="<%= request.getContextPath() %>/deleteBooking" method="POST" style="display: contents;">
+                        <form action="${pageContext.request.contextPath}/deleteBooking" method="POST" style="display: contents;">
                             <input type="hidden" name="booking_id" value="${booking.bookingId}">
                             <button type="submit" class="action-btn action-btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</button>
                         </form>

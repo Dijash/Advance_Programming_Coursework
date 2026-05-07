@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Auth/LoginStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Auth/LoginStyle.css">
     <title>Login</title>
   </head>
 
@@ -16,7 +16,7 @@
     </script>
   </c:if>
 
-  <body style="background-image: url('<%= request.getContextPath() %>/Assets/Background.jpg'); background-size: cover; background-position: center;">
+  <body style="background-image: url('${pageContext.request.contextPath}/Assets/Background.jpg'); background-size: cover; background-position: center;">
     <div class="main">
       <div class="form-head">
         <h1>Sign in</h1>
@@ -43,7 +43,7 @@
 
       <div class="or-divider">or</div>
 
-      <form id="loginForm" action="<%= request.getContextPath() %>/login" method="post">
+      <form id="loginForm" action="${pageContext.request.contextPath}/login" method="post">
         <div class="field">
           <label>Email</label>
           <div class="field-inner">
@@ -87,14 +87,14 @@
 
         <div class="meta-row">
           <label><input type="checkbox" /> Remember Me</label>
-          <a href="<%= request.getContextPath() %>/resetPassword">Forgot Password?</a>
+          <a href="${pageContext.request.contextPath}/resetPassword">Forgot Password?</a>
         </div>
 
         <button type="submit" class="submit-btn">Sign In</button>
       </form>
 
       <div class="form-foot">
-        Don't have a account ? <a href="<%= request.getContextPath() %>/register">Create one</a>
+        Don't have a account ? <a href="${pageContext.request.contextPath}/register">Create one</a>
       </div>
     </div>
 

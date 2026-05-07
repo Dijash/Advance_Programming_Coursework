@@ -186,23 +186,23 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-            <li><a href="<%= request.getContextPath() %>/admin"><span>Dashboard</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageBooking" class="active"><span>Bookings</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageVehicles"><span>Manage Vehicles</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageCustomers"><span>Customers</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/report"><span>Reports</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageBooking" class="active"><span>Bookings</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
 
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
       <div class="page-container">
         <div class="page-header">
           <h2>Edit Booking</h2>
-          <a href="<%= request.getContextPath() %>/manageBooking" class="btn-back">Cancel</a>
+          <a href="${pageContext.request.contextPath}/manageBooking" class="btn-back">Cancel</a>
         </div>
 
         <div class="content-box">
@@ -212,7 +212,7 @@
             <p><strong>Vehicle:</strong> ${booking.vehicleDetails}</p>
           </div>
 
-          <form action="<%= request.getContextPath() %>/updateBooking" method="POST">
+          <form action="${pageContext.request.contextPath}/updateBooking" method="POST">
             <input type="hidden" name="booking_id" value="${booking.bookingId}">
 
             <div class="form-group">

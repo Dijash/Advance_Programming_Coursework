@@ -204,16 +204,16 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-            <li><a href="<%= request.getContextPath() %>/admin"><span>Dashboard</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageBooking"><span>Bookings</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageVehicles" class="active"><span>Manage Vehicles</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageCustomers"><span>Customers</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/report"><span>Reports</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageVehicles" class="active"><span>Manage Vehicles</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
 
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
@@ -221,13 +221,13 @@
         <div class="page-header">
           <h2>Vehicle Profile</h2>
           <div class="btn-group">
-              <a href="<%= request.getContextPath() %>/manageVehicles" class="btn btn-secondary">Back to Fleet</a>
-              <a href="<%= request.getContextPath() %>/editVehicle?id=${vehicle.vehicle_id}" class="btn btn-primary">Edit Details</a>
+              <a href="${pageContext.request.contextPath}/manageVehicles" class="btn btn-secondary">Back to Fleet</a>
+              <a href="${pageContext.request.contextPath}/editVehicle?id=${vehicle.vehicle_id}" class="btn btn-primary">Edit Details</a>
           </div>
         </div>
 
         <div class="content-box">
-          <div class="vehicle-hero" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('<%= request.getContextPath() %>/Assets/${vehicle.vehicle_image}');">
+          <div class="vehicle-hero" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('${pageContext.request.contextPath}/Assets/${vehicle.vehicle_image}');">
              <span class="status-badge">
                 <c:out value="${vehicle.vehicle_status}" default="Unknown Status" />
              </span>

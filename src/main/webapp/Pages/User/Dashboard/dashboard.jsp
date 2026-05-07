@@ -376,13 +376,13 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li><a href="<%= request.getContextPath() %>/userDashboard" class="active">Dashboard</a></li>
-          <li><a href="<%= request.getContextPath() %>/myBookings">My Bookings</a></li>
-          <li><a href="<%= request.getContextPath() %>/myFavorites" >My Favorites</a></li>
-          <li><a href="<%= request.getContextPath() %>/settings">Settings</a></li>
+          <li><a href="${pageContext.request.contextPath}/userDashboard" class="active">Dashboard</a></li>
+          <li><a href="${pageContext.request.contextPath}/myBookings">My Bookings</a></li>
+          <li><a href="${pageContext.request.contextPath}/myFavorites" >My Favorites</a></li>
+          <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout">Logout</a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
     </aside>
 
     <main>
@@ -395,7 +395,7 @@
         </div>
 
         <div class="user-actions">
-          <a href="<%= request.getContextPath() %>/home" class="btn-home">Return to Home</a>
+          <a href="${pageContext.request.contextPath}/home" class="btn-home">Return to Home</a>
 
           <div class="dropdown-wrapper">
             <button class="btn-notif" id="notifBtn">
@@ -429,7 +429,7 @@
             <c:choose>
                 <%-- If user has an image saved in the DB, point to the Assets/Profiles folder --%>
                 <c:when test="${not empty sessionScope.user.customer_image}">
-                    <img src="<%= request.getContextPath() %>/Assets/Profiles/${sessionScope.user.customer_image}" alt="Profile Photo" class="profile-avatar" />
+                    <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}" alt="Profile Photo" class="profile-avatar" />
                 </c:when>
 
                 <%-- Fallback generic vector icon --%>
@@ -472,7 +472,7 @@
         <section class="content-box">
           <h3>
             Recent Bookings
-            <a href="<%= request.getContextPath() %>/myBookings" class="view-all-link">View All</a>
+            <a href="${pageContext.request.contextPath}/myBookings" class="view-all-link">View All</a>
           </h3>
           <div class="table-responsive">
             <table>
@@ -509,11 +509,11 @@
                     </td>
                     <td>
                       <div style="display: flex; gap: 8px; align-items: center;">
-                        <a href="<%= request.getContextPath() %>/viewUserBooking?id=${booking.bookingId}" class="btn-action">Details</a>
+                        <a href="${pageContext.request.contextPath}/viewUserBooking?id=${booking.bookingId}" class="btn-action">Details</a>
 
                         <%-- ONLY show cancel button if status is Pending --%>
                         <c:if test="${booking.status == 'Pending'}">
-                          <form action="<%= request.getContextPath() %>/cancelBooking" method="POST" style="margin: 0;" onsubmit="return confirm('Cancel this booking?')">
+                          <form action="${pageContext.request.contextPath}/cancelBooking" method="POST" style="margin: 0;" onsubmit="return confirm('Cancel this booking?')">
                             <input type="hidden" name="bookingId" value="${booking.bookingId}">
                             <button type="submit" class="btn-action" style="color: var(--danger); border-color: #fca5a5; background: #fff1f1; cursor: pointer;">
                               Cancel

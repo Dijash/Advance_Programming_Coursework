@@ -7,11 +7,11 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Auth/RegisterStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Auth/RegisterStyle.css">
 
   </head>
 
-  <body style="background-image: url('<%= request.getContextPath() %>/Assets/Background.jpg'); background-size: cover; background-position: center;">
+  <body style="background-image: url('${pageContext.request.contextPath}/Assets/Background.jpg'); background-size: cover; background-position: center;">
     <div class="main">
       <div class="top-bar">
         <div class="form-head">
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <form id="registerForm" method="post" action="<%= request.getContextPath() %>/register" enctype="multipart/form-data">
+      <form id="registerForm" method="post" action="${pageContext.request.contextPath}/register" enctype="multipart/form-data">
         <div class="form-body">
           <div class="form-col">
             <div class="section-label">Personal Information</div>
@@ -227,7 +227,7 @@
 
         <div class="bottom-bar">
           <div class="form-foot">
-            Already have an account? <a href="<%= request.getContextPath() %>/login">Sign in</a>
+            Already have an account? <a href="${pageContext.request.contextPath}/login">Sign in</a>
           </div>
           <button type="submit" class="submit-btn">Create Account</button>
         </div>

@@ -212,17 +212,17 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-            <li><a href="<%= request.getContextPath() %>/admin"><span>Dashboard</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageBooking" class="active"><span>Bookings</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageVehicles"><span>Manage Vehicles</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageCustomers"><span>Customers</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/manageNotification"><span>Notifications</span></a></li>
-            <li><a href="<%= request.getContextPath() %>/report"><span>Reports</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageBooking" class="active"><span>Bookings</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
+            <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
 
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
@@ -230,8 +230,8 @@
         <div class="page-header">
           <h2>Booking Record</h2>
           <div style="display: flex; gap: 10px;">
-              <a href="<%= request.getContextPath() %>/manageBooking" class="btn-back">Back to List</a>
-              <a href="<%= request.getContextPath() %>/editBooking?id=${booking.bookingId}" class="btn-back" style="background: var(--primary); color: white;">Edit Status</a>
+              <a href="${pageContext.request.contextPath}/manageBooking" class="btn-back">Back to List</a>
+              <a href="${pageContext.request.contextPath}/editBooking?id=${booking.bookingId}" class="btn-back" style="background: var(--primary); color: white;">Edit Status</a>
           </div>
         </div>
 

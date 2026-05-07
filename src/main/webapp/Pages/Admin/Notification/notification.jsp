@@ -7,7 +7,7 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
   <head>
     <meta charset="UTF-8" />
     <title>RentAll | Manage Notifications</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Admin/Dashboard/Admin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -92,45 +92,45 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
       <nav>
         <ul>
           <li>
-            <a href="<%= request.getContextPath() %>/admin"
+            <a href="${pageContext.request.contextPath}/admin"
               ><span>Dashboard</span></a
             >
           </li>
           <li>
-            <a href="<%= request.getContextPath() %>/manageBooking"
+            <a href="${pageContext.request.contextPath}/manageBooking"
               ><span>Bookings</span></a
             >
           </li>
           <li>
-            <a href="<%= request.getContextPath() %>/manageVehicles"
+            <a href="${pageContext.request.contextPath}/manageVehicles"
               ><span>Manage Vehicles</span></a
             >
           </li>
           <li>
-            <a href="<%= request.getContextPath() %>/manageCustomers"
+            <a href="${pageContext.request.contextPath}/manageCustomers"
               ><span>Customers</span></a
             >
           </li>
           <li>
-            <a href="<%= request.getContextPath() %>/manageReviews"
+            <a href="${pageContext.request.contextPath}/manageReviews"
               ><span>Reviews</span></a
             >
           </li>
           <li>
             <a
-              href="<%= request.getContextPath() %>/manageNotification"
+              href="${pageContext.request.contextPath}/manageNotification"
               class="active"
               ><span>Notifications</span></a
             >
           </li>
           <li>
-            <a href="<%= request.getContextPath() %>/report"
+            <a href="${pageContext.request.contextPath}/report"
               ><span>Reports</span></a
             >
           </li>
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"
+      <a href="${pageContext.request.contextPath}/logout" class="logout"
         ><span>Logout</span></a
       >
     </aside>
@@ -142,7 +142,7 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
 
       <div class="send-box">
         <form
-          action="<%= request.getContextPath() %>/sendNotification"
+          action="${pageContext.request.contextPath}/sendNotification"
           method="POST"
         >
           <div class="form-group">
@@ -226,7 +226,7 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
                   <td style="padding: 15px; text-align: center">
                     <%-- Use row.id to match your Java model property --%>
                     <a
-                      href="<%= request.getContextPath() %>/deleteNotification?id=${row.id}"
+                      href="${pageContext.request.contextPath}/deleteNotification?id=${row.id}"
                       class="btn-delete"
                       onclick="return confirm('Are you sure you want to delete this notification?');"
                     >

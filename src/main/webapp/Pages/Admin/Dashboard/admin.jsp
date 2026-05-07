@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentAll | Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Admin/Dashboard/Admin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
   </head>
   <body>
     <input type="checkbox" id="menu-toggle" style="display:none;" />
@@ -18,16 +18,16 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li><a href="<%= request.getContextPath() %>/admin" class="active"><span>Dashboard</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageBooking"><span>Bookings</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageVehicles"><span>Manage Vehicles</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageCustomers"><span>Customers</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageNotification"><span>Notifications</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/report"><span>Reports</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/admin" class="active"><span>Dashboard</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
@@ -120,7 +120,7 @@
             <h3>Vehicle of the Month</h3>
             <c:choose>
                 <c:when test="${not empty topVehicle}">
-                    <img src="<%= request.getContextPath() %>/Assets/${topVehicle.image}" alt="Top Vehicle" />
+                    <img src="${pageContext.request.contextPath}/Assets/${topVehicle.image}" alt="Top Vehicle" />
                     <div class="car-info">
                       <span class="badge">Most Requested</span>
                       <strong><c:out value="${topVehicle.brand} ${topVehicle.type}"/></strong>

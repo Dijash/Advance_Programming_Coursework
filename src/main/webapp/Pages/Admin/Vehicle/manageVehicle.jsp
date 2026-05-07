@@ -199,22 +199,22 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li><a href="<%= request.getContextPath() %>/admin"><span>Dashboard</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageBooking"><span>Bookings</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageVehicles" class="active"><span>Manage Vehicles</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageCustomers"><span>Customers</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageNotification"><span>Notifications</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/report"><span>Reports</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageVehicles" class="active"><span>Manage Vehicles</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
       <div class="page-header">
         <h2>Fleet Management</h2>
-       <a href="<%= request.getContextPath() %>/addVehicle" class="btn-primary">+ Add Vehicle</a>
+       <a href="${pageContext.request.contextPath}/addVehicle" class="btn-primary">+ Add Vehicle</a>
       </div>
 
       <div class="content-box">
@@ -252,7 +252,7 @@
               <c:forEach var="car" items="${vehicles}">
                 <tr>
                   <td>
-                    <div class="vehicle-thumb" style="background-image: url('<%= request.getContextPath() %>/Assets/${car.vehicle_image}')"></div>
+                    <div class="vehicle-thumb" style="background-image: url('${pageContext.request.contextPath}/Assets/${car.vehicle_image}')"></div>
                   </td>
                   <td><strong><c:out value="${car.vehicle_brand}" /></strong></td>
                   <td><c:out value="${car.vehicle_type}" /></td>
@@ -271,9 +271,9 @@
 
                   <td>
                     <div class="action-buttons">
-                        <a href="<%= request.getContextPath() %>/viewVehicle?id=${car.vehicle_id}" class="action-btn action-btn-view">View</a>
-                        <a href="<%= request.getContextPath() %>/editVehicle?id=${car.vehicle_id}" class="action-btn action-btn-edit">Edit</a>
-                        <form action="<%= request.getContextPath() %>/deleteVehicle" method="POST" style="display: contents;">
+                        <a href="${pageContext.request.contextPath}/viewVehicle?id=${car.vehicle_id}" class="action-btn action-btn-view">View</a>
+                        <a href="${pageContext.request.contextPath}/editVehicle?id=${car.vehicle_id}" class="action-btn action-btn-edit">Edit</a>
+                        <form action="${pageContext.request.contextPath}/deleteVehicle" method="POST" style="display: contents;">
                             <input type="hidden" name="vehicle_id" value="${car.vehicle_id}">
                             <button type="submit" class="action-btn action-btn-delete" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</button>
                         </form>

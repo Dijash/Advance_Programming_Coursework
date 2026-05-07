@@ -128,7 +128,7 @@
 </head>
 <body>
   <div class="error-container">
-    <a href="<%= request.getContextPath() %>/home" class="logo">Rent<span>All</span></a>
+    <a href="${pageContext.request.contextPath}/home" class="logo">Rent<span>All</span></a>
 
     <div class="error-code">
       5<span class="smoke">0</span>0
@@ -140,7 +140,7 @@
       Whoops! Something went wrong under the hood on our end. Our mechanics have been notified and are working on it right now.
     </div>
 
-    <a href="<%= request.getContextPath() %>/home" class="btn-home">
+    <a href="${pageContext.request.contextPath}/home" class="btn-home">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>

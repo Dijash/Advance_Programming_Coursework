@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentAll | System Reports</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/CSS/Admin/Dashboard/Admin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <style>
       /* Minor inline styles for report specific buttons */
       .btn-invoice {
@@ -34,17 +34,17 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li><a href="<%= request.getContextPath() %>/admin"><span>Dashboard</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageBooking"><span>Bookings</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageVehicles"><span>Manage Vehicles</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageCustomers"><span>Customers</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageReviews"><span>Reviews</span></a></li>
-          <li><a href="<%= request.getContextPath() %>/manageNotification"><span>Notifications</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
           <!-- Active class moved to Reports -->
-          <li><a href="<%= request.getContextPath() %>/report" class="active"><span>Reports</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/report" class="active"><span>Reports</span></a></li>
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
@@ -112,7 +112,7 @@
                         </span>
                       </td>
                       <td>
-                        <a href="<%= request.getContextPath() %>/invoice?id=${b.bookingId}" target="_blank" class="btn-invoice">View / PDF</a>
+                        <a href="${pageContext.request.contextPath}/invoice?id=${b.bookingId}" target="_blank" class="btn-invoice">View / PDF</a>
                       </td>
                     </tr>
                   </c:forEach>

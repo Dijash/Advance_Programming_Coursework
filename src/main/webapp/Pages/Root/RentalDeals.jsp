@@ -711,9 +711,9 @@
         </div>
 
         <ul class="nav_links" id="nav-links">
-            <li><a href="<%= request.getContextPath() %>/rentalDeals">Rental Deals</a></li>
-            <li><a href="<%= request.getContextPath() %>/about">About</a></li>
-            <li><a href="<%= request.getContextPath() %>/contact">Contact Us</a></li>
+            <li><a href="${pageContext.request.contextPath}/rentalDeals">Rental Deals</a></li>
+            <li><a href="${pageContext.request.contextPath}/about">About</a></li>
+            <li><a href="${pageContext.request.contextPath}/contact">Contact Us</a></li>
         </ul>
 
         <div class="nav_buttons">
@@ -724,7 +724,7 @@
                         <div class="user_avatar">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.user.customer_image}">
-                                    <img src="<%= request.getContextPath() %>/Assets/Profiles/${sessionScope.user.customer_image}" alt="${sessionScope.user.customer_username}" />
+                                    <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}" alt="${sessionScope.user.customer_username}" />
                                 </c:when>
                                 <c:otherwise>
                                     <!-- Fallback SVG if no profile image exists -->
@@ -744,19 +744,19 @@
                                 <p>${not empty sessionScope.user.first_name ? sessionScope.user.first_name : 'User'} ${sessionScope.user.last_name}</p>
                                 <span>${sessionScope.user.customer_email}</span>
                             </div>
-                            <a href="<%= request.getContextPath() %>/userDashboard" class="dropdown_item">
+                            <a href="${pageContext.request.contextPath}/userDashboard" class="dropdown_item">
                                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                                 Dashboard
                             </a>
-                            <a href="<%= request.getContextPath() %>/settings" class="dropdown_item">
+                            <a href="${pageContext.request.contextPath}/settings" class="dropdown_item">
                                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                                 My Profile
                             </a>
-                            <a href="<%= request.getContextPath() %>/myBookings" class="dropdown_item">
+                            <a href="${pageContext.request.contextPath}/myBookings" class="dropdown_item">
                                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                                 My Bookings
                             </a>
-                            <a href="<%= request.getContextPath() %>/logout" class="dropdown_item danger">
+                            <a href="${pageContext.request.contextPath}/logout" class="dropdown_item danger">
                                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                                 Log Out
                             </a>
@@ -765,8 +765,8 @@
                 </c:when>
                 <c:otherwise>
                     <!-- Guest User Logic -->
-                    <a href="<%= request.getContextPath() %>/login" class="button button_outline">Login</a>
-                    <a href="<%= request.getContextPath() %>/register" class="button">Register</a>
+                    <a href="${pageContext.request.contextPath}/login" class="button button_outline">Login</a>
+                    <a href="${pageContext.request.contextPath}/register" class="button">Register</a>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -780,7 +780,7 @@
       <!-- LEFT: Filter Sidebar -->
       <aside class="filter_sidebar">
         <h3>Filter Options</h3>
-        <form action="<%= request.getContextPath() %>/rentalDeals" method="GET">
+        <form action="${pageContext.request.contextPath}/rentalDeals" method="GET">
 
           <div class="filter_group">
             <label for="searchParam">Search Model</label>
@@ -818,7 +818,7 @@
 
           <div class="filter_btn_group">
             <button type="submit" class="button" style="width: 100%;">Apply Filters</button>
-            <a href="<%= request.getContextPath() %>/rentalDeals" class="button button_outline" style="padding: 0.7rem; display: flex; align-items: center; justify-content: center;" title="Reset Filters">
+            <a href="${pageContext.request.contextPath}/rentalDeals" class="button button_outline" style="padding: 0.7rem; display: flex; align-items: center; justify-content: center;" title="Reset Filters">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
             </a>
           </div>
@@ -849,7 +849,7 @@
                       ${v.vehicle_status}
                     </span>
                     <!-- Dynamic Image fetching from database -->
-                    <img src="<%= request.getContextPath() %>/Assets/${v.vehicle_image}" alt="${v.vehicle_brand}" onerror="this.src='https://placehold.co/600x400/f1f5f9/94a3b8?text=Vehicle+Image'" />
+                    <img src="${pageContext.request.contextPath}/Assets/${v.vehicle_image}" alt="${v.vehicle_brand}" onerror="this.src='https://placehold.co/600x400/f1f5f9/94a3b8?text=Vehicle+Image'" />
                   </div>
 
                   <!-- Content Area -->
@@ -859,7 +859,7 @@
                     <c:choose>
                         <c:when test="${empty sessionScope.user}">
                             <!-- Guest: Redirect to login immediately -->
-                            <button class="fav_btn" onclick="window.location.href='<%= request.getContextPath() %>/login'" aria-label="Add to favorites">
+                            <button class="fav_btn" onclick="window.location.href='${pageContext.request.contextPath}/login'" aria-label="Add to favorites">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                                 </svg>
@@ -867,7 +867,7 @@
                         </c:when>
                         <c:otherwise>
                             <!-- Logged In: Standard HTML Form Post -->
-                            <form action="<%= request.getContextPath() %>/toggleFavorite" method="POST" style="margin:0; padding:0; position:absolute; top:2rem; right:2rem;">
+                            <form action="${pageContext.request.contextPath}/toggleFavorite" method="POST" style="margin:0; padding:0; position:absolute; top:2rem; right:2rem;">
                                 <input type="hidden" name="vehicleId" value="${v.vehicle_id}">
                                 <button type="submit" class="fav_btn <c:forEach var='fId' items='${favoriteIds}'><c:if test='${fId == v.vehicle_id}'>active</c:if></c:forEach>" style="position:static; top:auto; right:auto;" aria-label="Add to favorites">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -920,7 +920,7 @@
 
                     <div class="hc_footer">
                       <div class="hc_price">NPR 4,500 <span>/ day</span></div>
-                      <a href="<%= request.getContextPath() %>/viewVehicleDetails?id=${v.vehicle_id}" class="button" ${v.vehicle_status != 'Available' ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>
+                      <a href="${pageContext.request.contextPath}/viewVehicleDetails?id=${v.vehicle_id}" class="button" ${v.vehicle_status != 'Available' ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>
                         Book Now
                       </a>
                     </div>
@@ -935,7 +935,7 @@
               <div class="no_results">
                  <h2>No Vehicles Found</h2>
                  <p>It looks like we don't have any vehicles matching your criteria right now.</p>
-                 <a href="<%= request.getContextPath() %>/rentalDeals" class="button" style="margin-top: 1rem;">View All Vehicles</a>
+                 <a href="${pageContext.request.contextPath}/rentalDeals" class="button" style="margin-top: 1rem;">View All Vehicles</a>
               </div>
             </c:otherwise>
           </c:choose>
@@ -973,16 +973,16 @@
       <div class="footer_col">
         <h4>Our Services</h4>
         <ul class="footer_links">
-          <li><a href="<%= request.getContextPath() %>/">Home</a></li>
-          <li><a href="<%= request.getContextPath() %>/about">About</a></li>
+          <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+          <li><a href="${pageContext.request.contextPath}/about">About</a></li>
           <li>
-            <a href="<%= request.getContextPath() %>/#deals">Rental Deals</a>
+            <a href="${pageContext.request.contextPath}/#deals">Rental Deals</a>
           </li>
           <li>
-            <a href="<%= request.getContextPath() %>/#choose">Why Choose Us</a>
+            <a href="${pageContext.request.contextPath}/#choose">Why Choose Us</a>
           </li>
           <li>
-            <a href="<%= request.getContextPath() %>/#client">Testimonials</a>
+            <a href="${pageContext.request.contextPath}/#client">Testimonials</a>
           </li>
         </ul>
       </div>

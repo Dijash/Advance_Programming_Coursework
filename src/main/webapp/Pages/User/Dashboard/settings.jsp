@@ -423,12 +423,12 @@
       <aside class="sidebar">
         <h2>RentAll</h2>
         <nav>
-          <a href="<%= request.getContextPath() %>/userDashboard">Dashboard</a>
-          <a href="<%= request.getContextPath() %>/myBookings">My Bookings</a>
-          <a href="<%= request.getContextPath() %>/myFavorites" >My Favorites</a>
-          <a href="<%= request.getContextPath() %>/settings" class="active">Settings</a>
+          <a href="${pageContext.request.contextPath}/userDashboard">Dashboard</a>
+          <a href="${pageContext.request.contextPath}/myBookings">My Bookings</a>
+          <a href="${pageContext.request.contextPath}/myFavorites" >My Favorites</a>
+          <a href="${pageContext.request.contextPath}/settings" class="active">Settings</a>
         </nav>
-        <a href="<%= request.getContextPath() %>/logout" class="logout">Logout</a>
+        <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
       </aside>
 
       <main>
@@ -438,7 +438,7 @@
             <p>Manage your personal information.</p>
           </div>
           <div class="user-actions" style="display:flex; gap:1rem; align-items:center;">
-            <a href="<%= request.getContextPath() %>/home"
+            <a href="${pageContext.request.contextPath}/home"
               style="text-decoration:none; color:var(--text-main); font-weight:600; font-size:0.9rem;">Return to
               Home</a>
             <div class="dropdown-wrapper">
@@ -471,7 +471,7 @@
             </div>
           </c:if>
 
-          <form action="<%= request.getContextPath() %>/updateProfile" method="POST" class="profile-card"
+          <form action="${pageContext.request.contextPath}/updateProfile" method="POST" class="profile-card"
             enctype="multipart/form-data">
             <div class="profile-header">
               <h2>Profile Overview & Settings</h2>
@@ -484,7 +484,7 @@
                 <div class="summary-avatar-wrap" id="openModalBtn" title="Click to view full image">
                   <c:choose>
                     <c:when test="${not empty sessionScope.user.customer_image}">
-                      <img src="<%= request.getContextPath() %>/Assets/Profiles/${sessionScope.user.customer_image}"
+                      <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}"
                         alt="Avatar" class="summary-avatar" />
                     </c:when>
                     <c:otherwise>
@@ -571,7 +571,7 @@
 
           <c:choose>
             <c:when test="${not empty sessionScope.user.customer_image}">
-              <img src="<%= request.getContextPath() %>/Assets/Profiles/${sessionScope.user.customer_image}"
+              <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}"
                 alt="Full Size Profile Image" class="modal-large-avatar" />
             </c:when>
             <c:otherwise>

@@ -229,23 +229,23 @@
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li><a href="<%= request.getContextPath() %>/admin">Dashboard</a></li>
-          <li><a href="<%= request.getContextPath() %>/manageBooking">Bookings</a></li>
-          <li><a href="<%= request.getContextPath() %>/manageVehicles">Manage Vehicles</a></li>
-          <li><a href="<%= request.getContextPath() %>/manageCustomers" class="active">Customers</a></li>
-          <li><a href="<%= request.getContextPath() %>/manageReviews">Reviews</a></li>
-          <li><a href="<%= request.getContextPath() %>/report">Reports</a></li>
-          <li><a href="<%= request.getContextPath() %>/settings">Settings</a></li>
+          <li><a href="${pageContext.request.contextPath}/admin">Dashboard</a></li>
+          <li><a href="${pageContext.request.contextPath}/manageBooking">Bookings</a></li>
+          <li><a href="${pageContext.request.contextPath}/manageVehicles">Manage Vehicles</a></li>
+          <li><a href="${pageContext.request.contextPath}/manageCustomers" class="active">Customers</a></li>
+          <li><a href="${pageContext.request.contextPath}/manageReviews">Reviews</a></li>
+          <li><a href="${pageContext.request.contextPath}/report">Reports</a></li>
+          <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
         </ul>
       </nav>
-      <a href="<%= request.getContextPath() %>/logout" class="logout">Logout</a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
     </aside>
 
     <main>
       <div class="page-container">
         <div class="page-header">
           <h2>Customer Details</h2>
-          <a href="<%= request.getContextPath() %>/manageCustomers" class="btn-back">Back to Database</a>
+          <a href="${pageContext.request.contextPath}/manageCustomers" class="btn-back">Back to Database</a>
         </div>
 
         <div class="content-box">
@@ -258,7 +258,7 @@
               <p>User ID: <strong>#${customer.customer_id}</strong> | <span class="username-badge">@${customer.customer_username}</span></p>
             </div>
 
-            <form action="<%= request.getContextPath() %>/deleteCustomer" method="POST" onsubmit="return confirm('This will permanently delete this customer. Proceed?');">
+            <form action="${pageContext.request.contextPath}/deleteCustomer" method="POST" onsubmit="return confirm('This will permanently delete this customer. Proceed?');">
               <input type="hidden" name="customer_id" value="${customer.customer_id}">
               <button type="submit" class="delete-btn">Delete Account</button>
             </form>
