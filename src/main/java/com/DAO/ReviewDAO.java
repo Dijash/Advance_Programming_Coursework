@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDAO {
+
     public List<Review> getAllReviews() {
         List<Review> reviews = new ArrayList<>();
         String sql = "SELECT r.review_id, r.customer_id, CONCAT(c.first_name, ' ', c.last_name) as customer_name, " +
@@ -28,9 +29,12 @@ public class ReviewDAO {
                         rs.getTimestamp("review_date")
                 ));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return reviews;
     }
+
     public boolean deleteReview(int reviewId) {
         String sql = "DELETE FROM review WHERE review_id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -41,5 +45,28 @@ public class ReviewDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    public boolean addReview(int customerId, String description) {
+        boolean isAdded = false;
+
+        String sql = "INSERT INTO review (customer_id, review_description, review_date) VALUES (?, ?, CURDATE())";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, customerId);
+            stmt.setString(2, description);
+
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                isAdded = true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error saving review: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return isAdded;
     }
 }

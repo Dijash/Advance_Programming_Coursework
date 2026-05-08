@@ -150,7 +150,7 @@
         </div>
 
         <div class="team_card">
-          <img src="https://placehold.co/150x150/eff6ff/2563eb?text=M2" alt="Member 2" class="team_avatar" />
+          <img src="${pageContext.request.contextPath}/Assets/Team/team-2.jpg" alt="Member 2" class="team_avatar" />
           <h4>Yubraj Sah</h4>
           <span class="team_role">Full Stack</span>
           <p>Focused on creating intuitive user interfaces and ensuring a responsive experience on all devices.</p>
@@ -183,7 +183,7 @@
         </div>
 
         <div class="team_card">
-          <img src="https://placehold.co/150x150/eff6ff/2563eb?text=M5" alt="Member 5" class="team_avatar" />
+          <img src="${pageContext.request.contextPath}/Assets/Team/team-5.jpg" alt="Member 5" class="team_avatar" />
           <h4>Kushal Khanal</h4>
           <span class="team_role">UI/UX Designer</span>
           <p>Bringing creativity to the table to ensure RentAll is both beautiful and easy to use.</p>

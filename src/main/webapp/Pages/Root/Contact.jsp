@@ -48,7 +48,6 @@
                                     <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}" alt="${sessionScope.user.customer_username}" />
                                 </c:when>
                                 <c:otherwise>
-                                    <!-- Fallback SVG if no profile image exists -->
                                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: white; width: 20px; height: 20px;">
                                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                     </svg>
@@ -154,39 +153,50 @@
     </div>
 
     <div class="contact_form_container">
-      <h3>Send us a Message</h3>
-      <form action="${pageContext.request.contextPath}/submitContact" method="POST">
-        <div class="form_row">
-          <div class="form_group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="John" required />
-          </div>
-          <div class="form_group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Doe" required />
-          </div>
-        </div>
+        <c:if test="${param.status == 'success'}">
+            <div style="background: #d1fae5; color: #065f46; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #34d399; font-weight: 500;">
+                Thank you! Your message has been sent successfully.
+            </div>
+        </c:if>
+        <c:if test="${param.status == 'error'}">
+            <div style="background: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #fca5a5; font-weight: 500;">
+                Oops! Something went wrong. Please try again.
+            </div>
+        </c:if>
 
-        <div class="form_group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="john@example.com" required />
-        </div>
+        <h3>Send us a Message</h3>
 
-        <div class="form_group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" placeholder="How can we help you?" required />
-        </div>
+        <form action="${pageContext.request.contextPath}/submitContact" method="POST">
 
-        <div class="form_group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
-        </div>
+            <div class="form_row">
+                <div class="form_group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="John" required />
+                </div>
+                <div class="form_group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Doe" required />
+                </div>
+            </div>
 
-        <button type="submit" class="button" style="width: 100%">
-          Send Message
-        </button>
-      </form>
-    </div>
+            <div class="form_group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required />
+            </div>
+
+            <div class="form_group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="How can we help you?" required />
+            </div>
+
+            <div class="form_group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+            </div>
+
+            <button type="submit" class="button" style="width: 100%">Send Message</button>
+        </form>
+        </div>
   </section>
 
   <footer class="footer">

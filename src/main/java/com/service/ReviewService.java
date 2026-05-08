@@ -11,8 +11,10 @@ public class ReviewService {
         return reviewDAO.getAllReviews();
     }
 
-    // Add this method
     public boolean deleteReview(int reviewId) {
         return reviewDAO.deleteReview(reviewId);
+    }
+    public boolean addReview(int customerId, String description) {
+        return reviewDAO.addReview(customerId, description);
     }
 }

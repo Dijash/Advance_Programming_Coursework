@@ -26,14 +26,17 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(30 * 60);
 
-
         if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
             session.setAttribute("email", email);
             session.setAttribute("role", "admin");
 
+            // Clear any lingering error messages
+            session.removeAttribute("errorMsg");
+
             response.sendRedirect(request.getContextPath() + "/admin");
             return;
         }
+
         UserDAO dao = new UserDAO();
         String result = dao.checkLogin(email, password);
 
@@ -43,6 +46,9 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", loggedInCustomer);
             session.setAttribute("email", email);
             session.setAttribute("role", "customer");
+
+            // FIX: Clear any lingering error messages from the session!
+            session.removeAttribute("errorMsg");
 
             response.sendRedirect(request.getContextPath() + "/home");
 
