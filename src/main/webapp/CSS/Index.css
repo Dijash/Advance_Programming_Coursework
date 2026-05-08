@@ -69,7 +69,16 @@ body {
     border-radius: 8px;
     align-self: flex-end;
 }
+ .button_outline {
+      background-color: transparent;
+      color: #2563eb;
+      border: 2px solid #2563eb;
+    }
 
+    .button_outline:hover {
+      background-color: #2563eb;
+      color: white;
+    }
 .icon {
     width: 1em;
     height: 1em;

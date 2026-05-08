@@ -37,7 +37,7 @@
             <div class="nav_actions">
 
               <div class="nav_buttons">
-                <a href="${pageContext.request.contextPath}/login" class="button ">Login</a>
+                <a href="${pageContext.request.contextPath}/login" class="button button_outline">Login</a>
                 <a href="${pageContext.request.contextPath}/register" class="button">Register</a>
               </div>
 
