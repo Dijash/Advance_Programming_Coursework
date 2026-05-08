@@ -369,11 +369,17 @@
         border: 1px solid var(--border);
         cursor: pointer;
       }
+      .main-thing
+      {
+        text-decoration: none;
+        cursor: pointer;
+        color: white;
+      }
     </style>
   </head>
   <body>
     <aside class="sidebar">
-      <h2>RentAll</h2>
+      <h2><a href="${pageContext.request.contextPath}/home" class= "main-thing">RentAll</a></h2>
       <nav>
         <ul>
           <li><a href="${pageContext.request.contextPath}/userDashboard" class="active">Dashboard</a></li>

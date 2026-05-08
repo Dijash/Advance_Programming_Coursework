@@ -603,14 +603,13 @@
 
         <ul class="nav_links" id="nav-links">
             <li><a href="${pageContext.request.contextPath}/rentalDeals">Rental Deals</a></li>
-            <li><a href="${pageContext.request.contextPath}/about">About</a></li>
+            <li><a href="${pageContext.request.contextPath}/about" class="active">About</a></li>
             <li><a href="${pageContext.request.contextPath}/contact">Contact Us</a></li>
         </ul>
 
         <div class="nav_buttons">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <!-- Authenticated User Dropdown -->
                     <div class="user_avatar_wrap" id="userAvatarWrap">
                         <div class="user_avatar">
                             <c:choose>
@@ -618,7 +617,6 @@
                                     <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}" alt="${sessionScope.user.customer_username}" />
                                 </c:when>
                                 <c:otherwise>
-                                    <!-- Fallback SVG if no profile image exists -->
                                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: white; width: 20px; height: 20px;">
                                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                     </svg>
@@ -655,7 +653,6 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <!-- Guest User Logic -->
                     <a href="${pageContext.request.contextPath}/login" class="button button_outline">Login</a>
                     <a href="${pageContext.request.contextPath}/register" class="button">Register</a>
                 </c:otherwise>
@@ -671,7 +668,6 @@
     </p>
   </section>
 
-  <!-- Our Story Section -->
   <section class="section_container">
     <div class="story_wrapper">
       <div class="story_content">
@@ -685,27 +681,25 @@
 
         <div class="story_stats">
           <div class="stat_item">
-            <h4>10+</h4>
-            <span>Vehicle Types</span>
+            <h4>${not empty totalVehicles ? totalVehicles : '0'}+</h4>
+            <span>Vehicles Available</span>
           </div>
           <div class="stat_item">
             <h4>24/7</h4>
             <span>Customer Support</span>
           </div>
           <div class="stat_item">
-            <h4>5k+</h4>
+            <h4>${not empty totalCustomers ? totalCustomers : '0'}+</h4>
             <span>Happy Clients</span>
           </div>
         </div>
       </div>
       <div class="story_image">
-        <!-- You can replace this placeholder with a real image of your fleet or office -->
         <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800&h=600" alt="RentAll Fleet" />
       </div>
     </div>
   </section>
 
-  <!-- Team Section -->
   <section class="team_section">
     <div class="section_container" style="padding-top: 0; padding-bottom: 0;">
       <h2 class="section_header">Meet Our Team</h2>
@@ -714,23 +708,21 @@
       </p>
 
       <div class="team_grid">
-        <!-- Team Member 1 -->
         <div class="team_card">
-          <img src="https://placehold.co/150x150/eff6ff/2563eb?text=M1" alt="Member 1" class="team_avatar" />
-          <h4>Your Name</h4>
-          <span class="team_role">Project Lead / Developer</span>
+          <img src="${pageContext.request.contextPath}/Assets/Team/team-1.jpeg" alt="Member 1" class="team_avatar" />
+          <h4>Aarav Bhattarai</h4>
+          <span class="team_role">Project Lead</span>
           <p>Passionate about backend architecture and ensuring seamless integrations across the application.</p>
           <div class="team_socials">
-            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+            <a href="https://github.com/Dijash"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
             <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
           </div>
         </div>
 
-        <!-- Team Member 2 -->
         <div class="team_card">
           <img src="https://placehold.co/150x150/eff6ff/2563eb?text=M2" alt="Member 2" class="team_avatar" />
-          <h4>Member Name</h4>
-          <span class="team_role">Frontend Developer</span>
+          <h4>Yubraj Sah</h4>
+          <span class="team_role">Full Stack</span>
           <p>Focused on creating intuitive user interfaces and ensuring a responsive experience on all devices.</p>
           <div class="team_socials">
             <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
@@ -738,10 +730,9 @@
           </div>
         </div>
 
-        <!-- Team Member 3 -->
         <div class="team_card">
-          <img src="https://placehold.co/150x150/eff6ff/2563eb?text=M3" alt="Member 3" class="team_avatar" />
-          <h4>Member Name</h4>
+          <img src="${pageContext.request.contextPath}/Assets/Team/team-3.jpg" alt="Member 3" class="team_avatar" />
+          <h4>Rojal Shrestha</h4>
           <span class="team_role">Database Administrator</span>
           <p>Handles the intricate details of our database design, queries, and keeping our data secure.</p>
           <div class="team_socials">
@@ -750,10 +741,9 @@
           </div>
         </div>
 
-        <!-- Team Member 4 -->
         <div class="team_card">
-          <img src="https://placehold.co/150x150/eff6ff/2563eb?text=M4" alt="Member 4" class="team_avatar" />
-          <h4>Member Name</h4>
+          <img src="${pageContext.request.contextPath}/Assets/Team/team-4.jpg" alt="Member 4" class="team_avatar" />
+          <h4>Rehan Basnet</h4>
           <span class="team_role">QA Engineer</span>
           <p>Dedicated to testing every feature and ensuring the platform is bug-free before launch.</p>
           <div class="team_socials">
@@ -762,10 +752,9 @@
           </div>
         </div>
 
-        <!-- Team Member 5 -->
         <div class="team_card">
           <img src="https://placehold.co/150x150/eff6ff/2563eb?text=M5" alt="Member 5" class="team_avatar" />
-          <h4>Member Name</h4>
+          <h4>Kushal Khanal</h4>
           <span class="team_role">UI/UX Designer</span>
           <p>Bringing creativity to the table to ensure RentAll is both beautiful and easy to use.</p>
           <div class="team_socials">
@@ -866,3 +855,4 @@
   </script>
 </body>
 </html>
+what java servlet code do i need for this in order to show the totalVehicle count and Customer count in here

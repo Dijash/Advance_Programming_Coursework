@@ -8,7 +8,6 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-// REMOVED "/report" from here to prevent URL collision with ReportServlet
 @WebServlet({
         "/admin",
         "/manageBooking", "/viewBooking", "/editBooking", "/updateBooking", "/deleteBooking",

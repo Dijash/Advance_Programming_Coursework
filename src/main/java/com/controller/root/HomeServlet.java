@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet({"/home", "/contact", "/about", "/rentalDeals", "/viewVehicleDetails"})
+@WebServlet({"/home", "/contact", "/rentalDeals", "/viewVehicleDetails"})
 public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,16 +29,12 @@ public class HomeServlet extends HttpServlet {
         } else if (path.equals("/contact")) {
             request.getRequestDispatcher("/Pages/Root/Contact.jsp").forward(request, response);
 
-        } else if (path.equals("/about")) {
-            request.getRequestDispatcher("/Pages/Root/About.jsp").forward(request, response);
-
-        } else if (path.equals("/rentalDeals")) {
-            //reading the filters parameters
-            String searchParam = request.getParameter("searchParam");   // brand keyword
-            String type        = request.getParameter("type");           // SUV, Sedan, etc.
-            String color       = request.getParameter("color");          // Black, White, etc.
-            String status      = request.getParameter("status");         // Available / All
-            String condition   = request.getParameter("condition");      // Excellent / Good / Fair / All
+        }else if (path.equals("/rentalDeals")) {
+            String searchParam = request.getParameter("searchParam");
+            String type        = request.getParameter("type");
+            String color       = request.getParameter("color");
+            String status      = request.getParameter("status");
+            String condition   = request.getParameter("condition");
 
             // Default status to "Available" on first
             boolean hasFilters = (searchParam != null || type != null || color != null

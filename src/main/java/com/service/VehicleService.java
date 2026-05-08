@@ -16,4 +16,8 @@ public class VehicleService {
     }
     public Vehicle getVehicleById(int id) { return vehicleDAO.getVehicleById(id); }
     public List<Vehicle> getAllVehicles() { return vehicleDAO.getAllVehicles(); }
+
+    public int getTotalVehicleCount() {
+        return vehicleDAO.getTotalVehicleCount();
+    }
 }

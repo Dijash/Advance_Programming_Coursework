@@ -10,4 +10,7 @@ public class CustomerService {
     public List<Customer> getAllCustomers() { return customerDAO.getAllCustomers(); }
     public Customer getCustomerById(int id) { return customerDAO.getCustomerById(id); }
     public boolean deleteCustomer(int id) { return customerDAO.deleteCustomer(id); }
+    public int getTotalCustomerCount() {
+        return customerDAO.getTotalCustomerCount();
+    }
 }
