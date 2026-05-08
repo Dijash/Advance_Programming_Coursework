@@ -61,56 +61,95 @@
         </div>
       </section>
 
-      <!-- Bookings Report Table -->
-      <div class="dashboard-grid" style="grid-template-columns: 1fr;">
-        <section class="left-col">
-          <div class="content-box">
-            <h3>Full Bookings Report</h3>
-            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">View all historical and active bookings. Generate invoices for record-keeping.</p>
+      <div class="dashboard-grid" style="grid-template-columns: 1fr; gap: 2rem;">
 
-            <div class="table-responsive">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Booking ID</th>
-                    <th>Customer Name</th>
-                    <th>Vehicle Details</th>
-                    <th>Date Range</th>
-                    <th>Total Amount</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <c:forEach var="b" items="${allBookingsList}">
-                    <tr>
-                      <!-- These now perfectly match your Booking.java getters -->
-                      <td><strong>#<c:out value="${b.bookingId}" /></strong></td>
-                      <td><c:out value="${b.customerName}" /></td>
-                      <td><c:out value="${b.vehicleDetails}" /></td>
-                      <td><c:out value="${b.startDate} to ${b.endDate}" /></td>
-                      <td>NPR <c:out value="${b.totalPrice}" /></td>
-                      <td>
-                        <!-- UPDATED NESTED TERNARY OPERATOR FOR COLORS -->
-                        <span style="font-weight: 600; color: ${b.status == 'Completed' ? '#22c55e' : (b.status == 'On Track' ? '#3b82f6' : (b.status == 'Cancelled' ? '#ef4444' : '#64748b'))};">
-                          <c:out value="${b.status}" />
-                        </span>
-                      </td>
-                      <td>
-                        <a href="${pageContext.request.contextPath}/invoice?id=${b.bookingId}" target="_blank" class="btn-invoice">View / PDF</a>
-                      </td>
-                    </tr>
-                  </c:forEach>
+              <section class="left-col">
+                <div class="content-box">
+                  <h3>Full Bookings Report</h3>
+                  <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">View all historical and active bookings. Generate invoices for record-keeping.</p>
 
-                  <c:if test="${empty allBookingsList}">
-                     <tr>
-                        <td colspan="7" style="text-align: center; color: #7f8c8d; padding: 2rem;">No bookings recorded in the system yet.</td>
-                     </tr>
-                  </c:if>
-                </tbody>
-              </table>
+                  <div class="table-responsive">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Booking ID</th>
+                          <th>Customer Name</th>
+                          <th>Vehicle Details</th>
+                          <th>Date Range</th>
+                          <th>Total Amount</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach var="b" items="${allBookingsList}">
+                          <tr>
+                            <td><strong>#<c:out value="${b.bookingId}" /></strong></td>
+                            <td><c:out value="${b.customerName}" /></td>
+                            <td><c:out value="${b.vehicleDetails}" /></td>
+                            <td><c:out value="${b.startDate} to ${b.endDate}" /></td>
+                            <td>NPR <c:out value="${b.totalPrice}" /></td>
+                            <td>
+                              <span style="font-weight: 600; color: ${b.status == 'Completed' ? '#22c55e' : (b.status == 'On Track' ? '#3b82f6' : (b.status == 'Cancelled' ? '#ef4444' : '#64748b'))};">
+                                <c:out value="${b.status}" />
+                              </span>
+                            </td>
+                            <td>
+                              <a href="${pageContext.request.contextPath}/invoice?id=${b.bookingId}" target="_blank" class="btn-invoice">View / PDF</a>
+                            </td>
+                          </tr>
+                        </c:forEach>
+                        <c:if test="${empty allBookingsList}">
+                           <tr><td colspan="7" style="text-align: center; color: #7f8c8d; padding: 2rem;">No bookings recorded.</td></tr>
+                        </c:if>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+
+              <section class="left-col">
+                <div class="content-box">
+                  <h3>User Contact Messages</h3>
+                  <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">Direct inquiries and feedback sent by users via the contact form.</p>
+
+                  <div class="table-responsive">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>User Name</th>
+                          <th>Email</th>
+                          <th>Subject</th>
+                          <th>Message Snippet</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach var="msg" items="${contactMessagesList}">
+                          <tr>
+                            <td style="font-size: 0.8rem; color: #64748b; min-width: 100px;">
+                              <c:out value="${msg.submittedAt}" />
+                            </td>
+                            <td><strong><c:out value="${msg.firstName} ${msg.lastName}" /></strong></td>
+                            <td><c:out value="${msg.email}" /></td>
+                            <td><c:out value="${msg.subject}" /></td>
+                            <td style="max-width: 300px; white-space: normal; font-size: 0.85rem; line-height: 1.4;">
+                              <c:out value="${msg.message}" />
+                            </td>
+                          </tr>
+                        </c:forEach>
+
+                        <c:if test="${empty contactMessagesList}">
+                           <tr>
+                              <td colspan="5" style="text-align: center; color: #7f8c8d; padding: 2rem;">No messages received from users yet.</td>
+                           </tr>
+                        </c:if>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
             </div>
-          </div>
         </section>
       </div>
     </main>

@@ -3,11 +3,14 @@ package com.controller.admin;
 import com.DAO.VehicleDAO;
 import com.DAO.CustomerDAO;
 import com.DAO.BookingDAO;
+import com.DAO.ContactDAO; // Import the ContactDAO
+import com.model.ContactMessage;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/report")
 public class ReportServlet extends HttpServlet {
@@ -18,6 +21,7 @@ public class ReportServlet extends HttpServlet {
         VehicleDAO vehicleDAO = new VehicleDAO();
         CustomerDAO customerDAO = new CustomerDAO();
         BookingDAO bookingDAO = new BookingDAO();
+        ContactDAO contactDAO = new ContactDAO();
 
         int totalVehicles = vehicleDAO.getTotalVehicleCount();
         int rentedVehicles = vehicleDAO.getVehicleCountByStatus("Rented");
@@ -26,6 +30,8 @@ public class ReportServlet extends HttpServlet {
         int totalBookings = bookingDAO.getTotalBookingCount();
 
         request.setAttribute("allBookingsList", bookingDAO.getAllBookings());
+        List<ContactMessage> contactMessagesList = contactDAO.getAllMessages();
+        request.setAttribute("contactMessagesList", contactMessagesList);
 
         request.setAttribute("totalVehicles", totalVehicles);
         request.setAttribute("rentedVehicles", rentedVehicles);
