@@ -6,6 +6,7 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Notification/Notification.css">
     <title>RentAll | Manage Notifications</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link

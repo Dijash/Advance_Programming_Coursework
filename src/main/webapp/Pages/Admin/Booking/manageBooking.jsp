@@ -6,6 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Booking/ManageBooking.css">
     <title>RentAll | Bookings</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Booking/ManageBooking.css">
