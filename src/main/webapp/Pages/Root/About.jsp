@@ -285,4 +285,3 @@
   </script>
 </body>
 </html>
-what java servlet code do i need for this in order to show the totalVehicle count and Customer count in here
