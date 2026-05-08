@@ -7,6 +7,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Report/Report.css">
+
     <title>RentAll | System Reports</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
 
