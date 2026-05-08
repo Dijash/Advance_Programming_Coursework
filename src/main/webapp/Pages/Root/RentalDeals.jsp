@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c"  uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ page import="com.model.Customer" %>
 <%@ page isELIgnored="false" %>
 <!doctype html>
@@ -782,55 +783,98 @@
         <h3>Filter Options</h3>
         <form action="${pageContext.request.contextPath}/rentalDeals" method="GET">
 
+          <%-- Search by brand/model name --%>
           <div class="filter_group">
-            <label for="searchParam">Search Model</label>
-            <input type="text" id="searchParam" name="searchParam" placeholder="e.g. Alto, Toyota...">
+            <label for="searchParam">Search Model / Brand</label>
+            <input type="text" id="searchParam" name="searchParam"
+                   placeholder="e.g. Toyota, Tesla..."
+                   value="${searchParam}">
           </div>
 
+          <%-- Vehicle Type filter --%>
           <div class="filter_group">
             <label for="type">Vehicle Type</label>
             <select name="type" id="type">
-              <option value="All">All Types</option>
-              <option value="SUV">SUV</option>
-              <option value="Sedan">Sedan</option>
-              <option value="Hatchback">Hatchback</option>
+              <option value="All"       ${filterType == 'All'       ? 'selected' : ''}>All Types</option>
+              <option value="SUV"       ${filterType == 'SUV'       ? 'selected' : ''}>SUV</option>
+              <option value="Sedan"     ${filterType == 'Sedan'     ? 'selected' : ''}>Sedan</option>
+              <option value="Hatchback" ${filterType == 'Hatchback' ? 'selected' : ''}>Hatchback</option>
             </select>
           </div>
 
+          <%-- Color filter --%>
           <div class="filter_group">
             <label for="color">Color</label>
             <select name="color" id="color">
-              <option value="All">All Colors</option>
-              <option value="Black">Black</option>
-              <option value="Slate Grey">Slate Grey</option>
-              <option value="White">White</option>
-              <option value="Silver">Silver</option>
+              <option value="All"        ${filterColor == 'All'        ? 'selected' : ''}>All Colors</option>
+              <option value="Black"      ${filterColor == 'Black'      ? 'selected' : ''}>Black</option>
+              <option value="White"      ${filterColor == 'White'      ? 'selected' : ''}>White</option>
+              <option value="Silver"     ${filterColor == 'Silver'     ? 'selected' : ''}>Silver</option>
+              <option value="Red"        ${filterColor == 'Red'        ? 'selected' : ''}>Red</option>
+              <option value="Blue"       ${filterColor == 'Blue'       ? 'selected' : ''}>Blue</option>
+              <option value="blue"       ${filterColor == 'blue'       ? 'selected' : ''}>Blue (lowercase)</option>
+              <option value="Slate Grey" ${filterColor == 'Slate Grey' ? 'selected' : ''}>Slate Grey</option>
+              <option value="Orange"     ${filterColor == 'Orange'     ? 'selected' : ''}>Orange</option>
             </select>
           </div>
 
+          <%-- Condition filter --%>
+          <div class="filter_group">
+            <label for="condition">Condition</label>
+            <select name="condition" id="condition">
+              <option value="All"       ${filterCondition == 'All'       ? 'selected' : ''}>All Conditions</option>
+              <option value="Excellent" ${filterCondition == 'Excellent' ? 'selected' : ''}>Excellent</option>
+              <option value="Good"      ${filterCondition == 'Good'      ? 'selected' : ''}>Good</option>
+              <option value="Fair"      ${filterCondition == 'Fair'      ? 'selected' : ''}>Fair</option>
+            </select>
+          </div>
+
+          <%-- Availability filter --%>
           <div class="filter_group">
             <label for="status">Availability</label>
             <select name="status" id="status">
-              <option value="Available">Available Only</option>
-              <option value="All">Show All</option>
+              <option value="Available" ${filterStatus == 'Available' ? 'selected' : ''}>Available Only</option>
+              <option value="All"       ${filterStatus == 'All'       ? 'selected' : ''}>Show All</option>
             </select>
           </div>
 
           <div class="filter_btn_group">
             <button type="submit" class="button" style="width: 100%;">Apply Filters</button>
-            <a href="${pageContext.request.contextPath}/rentalDeals" class="button button_outline" style="padding: 0.7rem; display: flex; align-items: center; justify-content: center;" title="Reset Filters">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+            <a href="${pageContext.request.contextPath}/rentalDeals"
+               class="button button_outline"
+               style="padding: 0.7rem; display: flex; align-items: center; justify-content: center;"
+               title="Reset Filters">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <polyline points="3 3 3 8 8 8"></polyline>
+              </svg>
             </a>
           </div>
         </form>
       </aside>
 
+
       <!-- RIGHT: Vehicle Grid -->
       <div class="vehicle_content">
         <div class="vehicle_header">
           <div>
-             <h1>Vehicle Catalog</h1>
-             <p>Browse and filter our complete fleet.</p>
+            <h1>Vehicle Catalog</h1>
+            <p>
+              <c:choose>
+                <c:when test="${not empty vehicleList}">
+                  Showing <strong>${fn:length(vehicleList)}</strong> vehicle(s)
+                  <c:if test="${not empty searchParam or filterType != 'All' or filterColor != 'All' or filterCondition != 'All' or filterStatus != 'All'}">
+                    &mdash; filtered results
+                    <a href="${pageContext.request.contextPath}/rentalDeals" style="font-size:0.85rem; margin-left:0.4rem;">Clear filters</a>
+                  </c:if>
+                </c:when>
+                <c:otherwise>
+                  Browse and filter our complete fleet.
+                </c:otherwise>
+              </c:choose>
+            </p>
           </div>
         </div>
 

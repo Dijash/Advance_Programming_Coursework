@@ -33,9 +33,31 @@ public class HomeServlet extends HttpServlet {
             request.getRequestDispatcher("/Pages/Root/About.jsp").forward(request, response);
 
         } else if (path.equals("/rentalDeals")) {
-            // Fetch Vehicles
+            //reading the filters parameters
+            String searchParam = request.getParameter("searchParam");   // brand keyword
+            String type        = request.getParameter("type");           // SUV, Sedan, etc.
+            String color       = request.getParameter("color");          // Black, White, etc.
+            String status      = request.getParameter("status");         // Available / All
+            String condition   = request.getParameter("condition");      // Excellent / Good / Fair / All
+
+            // Default status to "Available" on first
+            boolean hasFilters = (searchParam != null || type != null || color != null
+                    || status != null || condition != null);
+            if (!hasFilters) {
+                status = "Available";
+            }
+
+            //  Fetch filtered vehicles
             VehicleDAO vehicleDAO = new VehicleDAO();
-            request.setAttribute("vehicleList", vehicleDAO.getAllVehicles());
+            List<Vehicle> vehicleList = vehicleDAO.getFilteredVehicles(searchParam, type, color, status, condition);
+            request.setAttribute("vehicleList", vehicleList);
+
+            // Pass filter values back to JSP so the form stays filled after submit
+            request.setAttribute("searchParam", searchParam != null ? searchParam : "");
+            request.setAttribute("filterType",      type      != null ? type      : "All");
+            request.setAttribute("filterColor",     color     != null ? color     : "All");
+            request.setAttribute("filterStatus",    status    != null ? status    : "Available");
+            request.setAttribute("filterCondition", condition != null ? condition : "All");
 
             // Fetch Favorites using the "user" object
             if (session != null && session.getAttribute("user") != null) {

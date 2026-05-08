@@ -160,6 +160,30 @@ public class VehicleDAO {
         }
         return list;
     }
+    public List<Vehicle> getFilteredVehicles(String searchParam, String type, String color, String status, String condition) {
+        List<Vehicle> filtered = new ArrayList<>();
+
+        for (Vehicle v : getAllVehicles()) {
+            if (searchParam != null && !searchParam.trim().isEmpty())
+                if (!v.getVehicle_brand().toLowerCase().contains(searchParam.toLowerCase())) continue;
+
+            if (type != null && !type.equalsIgnoreCase("All") && !type.trim().isEmpty())
+                if (!v.getVehicle_type().equalsIgnoreCase(type)) continue;
+
+            if (color != null && !color.equalsIgnoreCase("All") && !color.trim().isEmpty())
+                if (!v.getVehicle_color().equalsIgnoreCase(color)) continue;
+
+            if (status != null && !status.equalsIgnoreCase("All") && !status.trim().isEmpty())
+                if (!v.getVehicle_status().equalsIgnoreCase(status)) continue;
+
+            if (condition != null && !condition.equalsIgnoreCase("All") && !condition.trim().isEmpty())
+                if (!v.getVehicle_condition().equalsIgnoreCase(condition)) continue;
+
+            filtered.add(v);
+        }
+
+        return filtered;
+    }
     public List<Vehicle> getTopVehicles(int limit) {
         List<Vehicle> list = new ArrayList<>();
         String sql = "SELECT * FROM vehicle ORDER BY vehicle_id ASC LIMIT ?";
