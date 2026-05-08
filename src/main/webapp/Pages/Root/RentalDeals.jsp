@@ -782,15 +782,6 @@
       <aside class="filter_sidebar">
         <h3>Filter Options</h3>
         <form action="${pageContext.request.contextPath}/rentalDeals" method="GET">
-
-          <%-- Search by brand/model name --%>
-          <div class="filter_group">
-            <label for="searchParam">Search Model / Brand</label>
-            <input type="text" id="searchParam" name="searchParam"
-                   placeholder="e.g. Toyota, Tesla..."
-                   value="${searchParam}">
-          </div>
-
           <%-- Vehicle Type filter --%>
           <div class="filter_group">
             <label for="type">Vehicle Type</label>

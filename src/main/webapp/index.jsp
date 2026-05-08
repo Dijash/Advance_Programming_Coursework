@@ -69,29 +69,33 @@
         <section class="header_form">
            <form action="#">
              <div class="input_group">
-               <label for="location">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-       <path d="M12.0007 5.00003C13.6097 5.00003 15.1207 5.61403 16.2547 6.73003C17.3807 7.83703 18.0007 9.30903 18.0007 10.87C18.0007 12.431 17.3807 13.9 16.2557 15.009L12.0007 19.193L7.74668 15.007C6.62168 13.9 6.00168 12.431 6.00168 10.868C6.00168 9.30503 6.62168 7.83603 7.74668 6.72703C8.88208 5.61386 10.4106 4.99331 12.0007 5.00003ZM12.0007 3.00003C9.8852 2.99421 7.85266 3.82238 6.34368 5.30503C5.60181 6.02968 5.0123 6.89534 4.60982 7.85111C4.20734 8.80688 4 9.83347 4 10.8705C4 11.9076 4.20734 12.9342 4.60982 13.89C5.0123 14.8457 5.60181 15.7114 6.34368 16.436L12.0007 21.999L17.6577 16.434C18.3992 15.7094 18.9885 14.8439 19.3908 13.8883C19.7931 12.9327 20.0003 11.9063 20.0003 10.8695C20.0003 9.83271 19.7931 8.80635 19.3908 7.85077C18.9885 6.89518 18.3992 6.02965 17.6577 5.30503C16.1487 3.82238 14.1162 2.99421 12.0007 3.00003ZM12.0007 8.49903C12.6687 8.49903 13.2967 8.75903 13.7687 9.23003C14.001 9.4622 14.1854 9.73789 14.3111 10.0413C14.4369 10.3448 14.5016 10.6701 14.5016 10.9985C14.5016 11.327 14.4369 11.6523 14.3111 11.9557C14.1854 12.2592 14.001 12.5349 13.7687 12.767C13.2957 13.239 12.6687 13.498 12.0007 13.498C11.3327 13.498 10.7057 13.238 10.2327 12.767C10.0003 12.5349 9.81598 12.2592 9.69021 11.9557C9.56444 11.6523 9.49971 11.327 9.49971 10.9985C9.49971 10.6701 9.56444 10.3448 9.69021 10.0413C9.81598 9.73789 10.0003 9.4622 10.2327 9.23003C10.7018 8.76158 11.3377 8.49864 12.0007 8.49903ZM12.0007 7.49903C11.4247 7.49868 10.8576 7.64041 10.3496 7.91166C9.84153 8.18292 9.40825 8.57533 9.08813 9.0541C8.76802 9.53287 8.57096 10.0832 8.51443 10.6564C8.45789 11.2295 8.54362 11.8078 8.76403 12.3398C8.98443 12.8719 9.3327 13.3414 9.77796 13.7067C10.2232 14.072 10.7517 14.3218 11.3166 14.434C11.8815 14.5462 12.4654 14.5172 13.0164 14.3498C13.5675 14.1823 14.0687 13.8815 14.4757 13.474C15.1317 12.8172 15.5002 11.9269 15.5002 10.9985C15.5002 10.0702 15.1317 9.17985 14.4757 8.52303C13.8191 7.86704 12.9288 7.4987 12.0007 7.49903Z" fill="black"/>
-       </svg> Pick up & Return location
-               </label>
-
-               <div class="input_icon">
-                 <select id="location">
-                   <option value="">Select a location</option>
-                   <option value="Kathmandu">Kathmandu</option>
-                   <option value="Lalitpur">Lalitpur</option>
-                   <option value="Bhaktapur">Bhaktapur</option>
-                   <option value="Pokhara">Pokhara</option>
-                   <option value="Chitwan">Chitwan</option>
-                 </select>
-                          <span class="input_arrow">
-                         <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                           <polyline points="6 9 12 15 18 9" />
-                         </svg>
-                       </span>
-               </div>
-             </div>
+              <label for="type">
+                          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                               fill="none" stroke="currentColor" stroke-width="2"
+                               stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                          </svg>
+                          Vehicle Type
+                        </label>
+                        <div class="input_icon">
+                                    <select id="type" name="type">
+                                      <option value="All">All Types</option>
+                                      <option value="SUV">SUV</option>
+                                      <option value="Sedan">Sedan</option>
+                                      <option value="Hatchback">Hatchback</option>
+                                    </select>
+                                    <span class="input_arrow">
+                                      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                           fill="none" stroke="currentColor" stroke-width="2"
+                                           stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"/>
+                                      </svg>
+                                    </span>
+                                  </div>
+                        </div>
 
              <div class="input_group date-group">
                <label for="start">
