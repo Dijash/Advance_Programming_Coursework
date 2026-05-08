@@ -3,7 +3,6 @@
         --primary: #0f1011;
         --primary-hover: #273f4b;
         --accent: #ef4444;
-        --success: #10b981;
         --bg-light: #f4f7f9;
         --text-dark: #1e293b;
         --text-muted: #64748b;
@@ -57,6 +56,7 @@
         background: rgba(255, 255, 255, 0.1);
         transform: translateX(5px);
       }
+
       .sidebar a.active { background: var(--primary-hover); }
 
       .logout {
@@ -78,7 +78,7 @@
 
       .page-container {
         width: 100%;
-        max-width: 600px;
+        max-width: 900px;
       }
 
       .page-header {
@@ -90,20 +90,27 @@
 
       .page-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
 
-      .btn-back {
-        text-decoration: none;
-        color: var(--text-muted);
-        font-weight: 500;
-        font-size: 0.9rem;
-        padding: 10px 20px;
-        background: white;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        transition: 0.2s;
-      }
-      .btn-back:hover { background: #f8fafc; color: var(--primary); }
+      .btn-group { display: flex; gap: 12px; }
 
-      /* Form Card */
+      .btn {
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: 0.2s;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .btn-secondary { background: white; color: var(--text-muted); border-color: var(--border); }
+      .btn-secondary:hover { background: #f8fafc; color: var(--primary); }
+
+      .btn-primary { background: var(--primary); color: white; }
+      .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+      /* Vehicle Card */
       .content-box {
         background: var(--white);
         padding: 40px;
@@ -112,61 +119,72 @@
         border: 1px solid var(--border);
       }
 
-      .form-group { margin-bottom: 25px; }
+      .vehicle-hero {
+        width: 100%;
+        height: 320px;
+        border-radius: var(--radius-md);
+        margin-bottom: 35px;
+        background-color: #f1f5f9;
+        background-size: cover;
+        background-position: center;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: flex-end;
+        padding: 25px;
+      }
 
-      .form-label {
+      .status-badge {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        color: var(--primary);
+        text-transform: uppercase;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+
+      /* Details Grid */
+      .detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+      }
+
+      .detail-card {
+        background: var(--bg-light);
+        padding: 20px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        transition: 0.2s;
+      }
+
+      .detail-card:hover {
+        background: white;
+        border-color: #cbd5e1;
+        transform: translateY(-2px);
+      }
+
+      .label {
         font-size: 0.75rem;
         color: var(--text-muted);
         text-transform: uppercase;
         font-weight: 700;
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         letter-spacing: 0.5px;
       }
 
-      .booking-summary {
-        background: var(--bg-light);
-        padding: 15px;
-        border-radius: var(--radius-md);
-        margin-bottom: 25px;
-        border-left: 4px solid var(--primary-hover);
-      }
-
-      .booking-summary p { font-size: 0.9rem; margin-bottom: 5px; }
-
-      select {
-        width: 100%;
-        padding: 14px;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--border);
-        font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
+      .value {
+        font-weight: 500;
+        font-size: 1.05rem;
         color: var(--text-dark);
-        background: #f8fafc;
-        outline: none;
-        cursor: pointer;
-        transition: 0.2s;
       }
-
-      select:focus { border-color: var(--primary-hover); box-shadow: 0 0 0 3px rgba(39, 63, 75, 0.1); }
-
-      .save-btn {
-        width: 100%;
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 16px;
-        border-radius: var(--radius-md);
-        font-weight: 600;
-        font-size: 1rem;
-        font-family: 'Poppins', sans-serif;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .save-btn:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
       @media (max-width: 768px) {
+        .detail-grid { grid-template-columns: 1fr; }
         .sidebar { display: none; }
         main { margin-left: 0; }
+        .vehicle-hero { height: 200px; }
       }

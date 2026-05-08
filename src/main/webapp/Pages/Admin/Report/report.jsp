@@ -9,22 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentAll | System Reports</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
-    <style>
-      /* Minor inline styles for report specific buttons */
-      .btn-invoice {
-        background-color: #3b82f6;
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 0.85rem;
-        font-weight: 600;
-        transition: background-color 0.2s;
-      }
-      .btn-invoice:hover {
-        background-color: #2563eb;
-      }
-    </style>
+
   </head>
   <body>
     <input type="checkbox" id="menu-toggle" style="display:none;" />

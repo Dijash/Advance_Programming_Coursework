@@ -12,47 +12,7 @@
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
               rel="stylesheet">
-            <style>
-              /* Page Specific Overrides to ensure table looks good with Poppins */
-              body {
-                font-family: "Poppins", sans-serif;
-              }
 
-              .review-desc {
-                line-height: 1.6;
-                color: #475569;
-                max-width: 500px;
-              }
-
-              .customer-name {
-                font-weight: 600;
-                color: #0f1011;
-                display: block;
-              }
-
-              .review-date {
-                font-size: 12px;
-                color: #64748b;
-              }
-
-              .btn-delete {
-                color: #ef4444;
-                background: #fef2f2;
-                border: 1px solid #fee2e2;
-                padding: 6px 12px;
-                border-radius: 6px;
-                cursor: pointer;
-                font-family: "Poppins", sans-serif;
-                font-weight: 600;
-                font-size: 12px;
-                transition: 0.2s;
-              }
-
-              .btn-delete:hover {
-                background: #ef4444;
-                color: white;
-              }
-            </style>
           </head>
 
           <body>

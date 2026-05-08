@@ -12,79 +12,7 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: "Poppins", sans-serif;
-      }
 
-      /* Form Styling */
-      .send-box {
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        margin-bottom: 30px;
-        border: 1px solid #e2e8f0;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-group label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-        color: #1e293b;
-      }
-      .form-control {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        font-family: inherit;
-        outline: none;
-      }
-      .form-control:focus {
-        border-color: #3b82f6;
-      }
-      .btn-send {
-        background: #0f172a;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.2s;
-      }
-      .btn-send:hover {
-        background: #334155;
-      }
-
-      /* Table Specifics */
-      .notif-msg {
-        color: #64748b;
-        font-size: 0.85rem;
-        max-width: 400px;
-      }
-
-      /* Delete Button Styling */
-      .btn-delete {
-        background: #ef4444;
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 0.8rem;
-        font-weight: 600;
-        transition: 0.2s;
-        display: inline-block;
-      }
-      .btn-delete:hover {
-        background: #dc2626;
-        transform: translateY(-1px);
-      }
-    </style>
   </head>
   <body>
     <aside class="sidebar">

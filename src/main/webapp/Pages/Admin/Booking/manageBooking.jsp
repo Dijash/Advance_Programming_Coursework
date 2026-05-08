@@ -10,44 +10,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Booking/ManageBooking.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            background-color: #f4f7f9;
-        }
-        main {
-            flex: 1;
-            margin-left: 260px;
-            padding: 40px;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .action-btn {
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-        .action-btn:active { transform: scale(0.95); }
-        .action-btn-view { background: #e1f0fa; color: #2980b9; }
-        .action-btn-view:hover { background: #3498db; color: white; }
-        .action-btn-edit { background: #fef9e7; color: #f39c12; }
-        .action-btn-edit:hover { background: #f1c40f; color: white; }
-        .action-btn-delete { background: #fceceb; color: #c0392b; }
-        .action-btn-delete:hover { background: #e74c3c; color: white; }
-    </style>
+
   </head>
   <body>
     <aside class="sidebar">
@@ -61,6 +24,7 @@
           <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
           <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
           <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
+          <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Booking/ManageBooking.css">
 
         </ul>
       </nav>
