@@ -18,7 +18,7 @@
                  <nav>
                    <div class="nav_header">
                      <div class="nav_logo">
-                       <a href="${pageContext.request.contextPath}/Home" class="logo"><span>RentAll</span></a>
+                       <a href="${pageContext.request.contextPath}/" class="logo"><span>RentAll</span></a>
                      </div>
                    </div>
 
