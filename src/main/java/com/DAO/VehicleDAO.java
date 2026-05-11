@@ -11,11 +11,11 @@ import java.util.List;
 
 public class VehicleDAO {
 
-    public boolean addVehicle(int adminId, String brand, String type, String color, String numberPlate, String condition, String status, String image) {
+    public boolean addVehicle(int adminId, String brand, String type, String color, String numberPlate, String condition, String status, String image, double price) {
         boolean isAdded = false;
 
-        String sql = "INSERT INTO vehicle (admin_id, customer_id, vehicle_brand, vehicle_type, vehicle_color, vehicle_numberPlate, vehicle_condition, vehicle_status, vehicle_image) " +
-                "VALUES (?, NULL, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vehicle (admin_id, customer_id, vehicle_brand, vehicle_type, vehicle_color, vehicle_numberPlate, vehicle_condition, vehicle_status, vehicle_image, vehicle_price) " +
+                "VALUES (?, NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -28,6 +28,7 @@ public class VehicleDAO {
             statement.setString(6, condition);
             statement.setString(7, status);
             statement.setString(8, image);
+            statement.setDouble(9, price);
 
             int rowsAffected = statement.executeUpdate();
 
@@ -74,11 +75,12 @@ public class VehicleDAO {
 
         return isDeleted;
     }
-    public boolean updateVehicle(int vehicleId, String brand, String type, String color, String numberPlate, String condition, String status, String image) {
+
+    public boolean updateVehicle(int vehicleId, String brand, String type, String color, String numberPlate, String condition, String status, String image, double price) {
         boolean isUpdated = false;
 
         String sql = "UPDATE vehicle SET vehicle_brand = ?, vehicle_type = ?, vehicle_color = ?, " +
-                "vehicle_numberPlate = ?, vehicle_condition = ?, vehicle_status = ?, vehicle_image = ? " +
+                "vehicle_numberPlate = ?, vehicle_condition = ?, vehicle_status = ?, vehicle_image = ?, vehicle_price = ? " +
                 "WHERE vehicle_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -91,7 +93,8 @@ public class VehicleDAO {
             statement.setString(5, condition);
             statement.setString(6, status);
             statement.setString(7, image);
-            statement.setInt(8, vehicleId);
+            statement.setDouble(8, price);
+            statement.setInt(9, vehicleId);
 
             int rowsAffected = statement.executeUpdate();
 
@@ -126,7 +129,8 @@ public class VehicleDAO {
                         resultSet.getString("vehicle_numberPlate"),
                         resultSet.getString("vehicle_condition"),
                         resultSet.getString("vehicle_status"),
-                        resultSet.getString("vehicle_image")
+                        resultSet.getString("vehicle_image"),
+                        resultSet.getDouble("vehicle_price")
                 );
             }
         } catch (SQLException e) {
@@ -152,7 +156,8 @@ public class VehicleDAO {
                         resultSet.getString("vehicle_numberPlate"),
                         resultSet.getString("vehicle_condition"),
                         resultSet.getString("vehicle_status"),
-                        resultSet.getString("vehicle_image")
+                        resultSet.getString("vehicle_image"),
+                        resultSet.getDouble("vehicle_price")
                 ));
             }
         } catch (SQLException e) {
@@ -160,6 +165,7 @@ public class VehicleDAO {
         }
         return list;
     }
+
     public List<Vehicle> getFilteredVehicles(String searchParam, String type, String color, String status, String condition) {
         List<Vehicle> filtered = new ArrayList<>();
 
@@ -184,6 +190,7 @@ public class VehicleDAO {
 
         return filtered;
     }
+
     public List<Vehicle> getTopVehicles(int limit) {
         List<Vehicle> list = new ArrayList<>();
         String sql = "SELECT * FROM vehicle ORDER BY vehicle_id ASC LIMIT ?";
@@ -203,7 +210,8 @@ public class VehicleDAO {
                         rs.getString("vehicle_numberPlate"),
                         rs.getString("vehicle_condition"),
                         rs.getString("vehicle_status"),
-                        rs.getString("vehicle_image")
+                        rs.getString("vehicle_image"),
+                        rs.getDouble("vehicle_price")
                 ));
             }
 
@@ -214,7 +222,6 @@ public class VehicleDAO {
         return list;
     }
 
-    // Gets the total count of all vehicles for the Admin Report Dashboard
     public int getTotalVehicleCount() {
         int count = 0;
         String sql = "SELECT COUNT(*) FROM vehicle";
@@ -250,5 +257,4 @@ public class VehicleDAO {
         }
         return count;
     }
-
 }

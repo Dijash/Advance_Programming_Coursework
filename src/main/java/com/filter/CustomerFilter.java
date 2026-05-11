@@ -25,7 +25,8 @@ import java.io.IOException;
 public class CustomerFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -40,20 +41,12 @@ public class CustomerFilter implements Filter {
         httpResponse.setDateHeader("Expires", 0);
 
         HttpSession session = httpRequest.getSession(false);
-
-        // Check if there is a "user" object in the session (meaning a customer is logged in)
         boolean isLoggedAsCustomer = (session != null && session.getAttribute("user") != null);
 
         if (isLoggedAsCustomer) {
-            // Authorized -> proceed
             chain.doFilter(request, response);
         } else {
-            // Unauthorized -> Not logged in at all
             session = httpRequest.getSession(true);
-
-            // NOTE: For AJAX requests (like toggleFavorite), returning a redirect can cause issues.
-            // If it's an AJAX request, you might want to return a 401 status instead, but for standard
-            // page navigation, this redirect is perfect.
             String uri = httpRequest.getRequestURI();
             if (uri.endsWith("/toggleFavorite")) {
                 httpResponse.setContentType("application/json");
@@ -67,5 +60,6 @@ public class CustomerFilter implements Filter {
     }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 }

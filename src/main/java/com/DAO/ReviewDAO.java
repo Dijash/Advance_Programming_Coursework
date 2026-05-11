@@ -26,8 +26,7 @@ public class ReviewDAO {
                         rs.getInt("customer_id"),
                         rs.getString("customer_name"),
                         rs.getString("review_description"),
-                        rs.getTimestamp("review_date")
-                ));
+                        rs.getTimestamp("review_date")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,6 +45,7 @@ public class ReviewDAO {
             return false;
         }
     }
+
     public boolean addReview(int customerId, String description) {
         boolean isAdded = false;
 

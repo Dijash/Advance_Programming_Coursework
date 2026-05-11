@@ -11,7 +11,15 @@ public class TopVehicle {
         this.image = image;
     }
 
-    public String getBrand() { return brand; }
-    public String getType() { return type; }
-    public String getImage() { return image; }
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getImage() {
+        return image;
+    }
 }

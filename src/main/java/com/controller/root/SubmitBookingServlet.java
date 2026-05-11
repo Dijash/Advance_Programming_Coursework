@@ -54,18 +54,17 @@ public class SubmitBookingServlet extends HttpServlet {
 
             long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
             int totalDays = (int) daysBetween;
-            if (totalDays <= 0) totalDays = 1;
+            if (totalDays <= 0)
+                totalDays = 1;
 
             double dailyRate = 4500.0;
             double totalPrice = totalDays * dailyRate;
 
-            // 3. Save to Database
             BookingDAO bookingDAO = new BookingDAO();
             boolean isSuccess = bookingDAO.createBooking(customerId, vehicleId, startDateStr, endDateStr, totalPrice);
 
             if (isSuccess) {
                 session.setAttribute("successMsg", "Your booking was successful!");
-                // Redirecting to myBookings page upon success
                 response.sendRedirect(request.getContextPath() + "/myBookings");
             } else {
                 session.setAttribute("errorMsg", "Database error occurred. Please try again.");

@@ -21,7 +21,6 @@
 </c:if>
 
 <body>
-  <!-- Header -->
   <header style="background: white; border-bottom: 1px solid #e2e8f0;">
     <nav>
         <div class="nav_header">
@@ -48,7 +47,6 @@
         <div class="nav_buttons">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <!-- Authenticated User Dropdown -->
                     <div class="user_avatar_wrap" id="userAvatarWrap">
                         <div class="user_avatar">
                             <c:choose>
@@ -102,15 +100,11 @@
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main class="section_container">
     <div class="catalog_wrapper">
-
-      <!-- LEFT: Filter Sidebar -->
       <aside class="filter_sidebar">
         <h3>Filter Options</h3>
         <form action="${pageContext.request.contextPath}/rentalDeals" method="GET">
-          <%-- Vehicle Type filter --%>
           <div class="filter_group">
             <label for="type">Vehicle Type</label>
             <select name="type" id="type">
@@ -202,26 +196,16 @@
           <c:choose>
             <c:when test="${not empty vehicleList}">
               <c:forEach var="v" items="${vehicleList}">
-
-                <!-- Main Card container with ID based on Database -->
                 <div class="horizontal_card" id="vehicle-card-${v.vehicle_id}">
-                  <!-- Image Area -->
                   <div class="hc_image_wrapper">
-                    <!-- Dynamic Status Badge -->
                     <span class="hc_badge ${v.vehicle_status != 'Available' ? 'unavailable' : ''}">
                       ${v.vehicle_status}
                     </span>
-                    <!-- Dynamic Image fetching from database -->
                     <img src="${pageContext.request.contextPath}/Assets/${v.vehicle_image}" alt="${v.vehicle_brand}" onerror="this.src='https://placehold.co/600x400/f1f5f9/94a3b8?text=Vehicle+Image'" />
                   </div>
-
-                  <!-- Content Area -->
                   <div class="hc_content">
-
-                    <!-- Floating Heart Button (No AJAX) -->
                     <c:choose>
                         <c:when test="${empty sessionScope.user}">
-                            <!-- Guest: Redirect to login immediately -->
                             <button class="fav_btn" onclick="window.location.href='${pageContext.request.contextPath}/login'" aria-label="Add to favorites">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -282,7 +266,7 @@
                     </div>
 
                     <div class="hc_footer">
-                      <div class="hc_price">NPR 4,500 <span>/ day</span></div>
+                      <div class="hc_price">NPR ${v.vehicle_price} <span>/ day</span></div>
                       <a href="${pageContext.request.contextPath}/viewVehicleDetails?id=${v.vehicle_id}" class="button" ${v.vehicle_status != 'Available' ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>
                         Book Now
                       </a>

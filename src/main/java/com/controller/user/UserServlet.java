@@ -1,4 +1,4 @@
-package com.controller.user; // Ensure this matches your package structure!
+package com.controller.user;
 
 import com.DAO.UserDashboardDAO;
 import com.DAO.NotificationDAO;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/userDashboard", "/myBookings", "/settings", "/viewUserBooking", "/myFavorites"})
+@WebServlet({ "/userDashboard", "/myBookings", "/settings", "/viewUserBooking", "/myFavorites" })
 public class UserServlet extends HttpServlet {
 
     private UserDashboardDAO userDAO;
@@ -80,7 +80,8 @@ public class UserServlet extends HttpServlet {
 
                         if (singleBooking != null) {
                             request.setAttribute("bookingDetails", singleBooking);
-                            request.getRequestDispatcher("/Pages/User/Booking/bookingDetails.jsp").forward(request, response);
+                            request.getRequestDispatcher("/Pages/User/Booking/bookingDetails.jsp").forward(request,
+                                    response);
                         } else {
                             response.sendRedirect(request.getContextPath() + "/myBookings");
                         }

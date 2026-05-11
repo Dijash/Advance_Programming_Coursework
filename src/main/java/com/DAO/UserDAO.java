@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.model.Customer;
 import com.util.DBConnection;
 import com.util.PasswordUtil;
@@ -70,8 +69,7 @@ public class UserDAO {
                         rs.getString("referral_code"),
                         rs.getString("password"),
                         rs.getString("customer_image"),
-                        rs.getTimestamp("created_at")
-                );
+                        rs.getTimestamp("created_at"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,7 +78,8 @@ public class UserDAO {
         return null;
     }
 
-    public boolean updateCustomerProfile(int id, String user, String phone, String license, String addr, String pass, String image) {
+    public boolean updateCustomerProfile(int id, String user, String phone, String license, String addr, String pass,
+                                         String image) {
         String sql = "UPDATE customer SET customer_username=?, customer_phoneNo=?, customer_license=?, customer_address=?, password=?, customer_image=? WHERE customer_id=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

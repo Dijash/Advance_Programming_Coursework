@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Review {
     private int reviewId;
     private int customerId;
-    private String customerName; // From JOIN
+    private String customerName;
     private String reviewDescription;
     private Timestamp reviewDate;
 

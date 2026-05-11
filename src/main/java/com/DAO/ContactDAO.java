@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ContactDAO {
 
-    // --- Method to save a new message ---
     public boolean saveContactMessage(Integer customerId, String firstName, String lastName, String email, String subject, String message) {
         String sql = "INSERT INTO contact_message (customer_id, first_name, last_name, email, subject, message) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -35,13 +34,11 @@ public class ContactDAO {
             return rows > 0;
 
         } catch (SQLException e) {
-            System.err.println("--- SQL ERROR IN ContactDAO (Save) ---");
             e.printStackTrace();
             return false;
         }
     }
 
-    // --- Method to retrieve all messages for the Admin Report ---
     public List<ContactMessage> getAllMessages() {
         List<ContactMessage> list = new ArrayList<>();
         String sql = "SELECT * FROM contact_message ORDER BY submitted_at DESC";
@@ -64,7 +61,6 @@ public class ContactDAO {
                 list.add(msg);
             }
         } catch (SQLException e) {
-            System.err.println("--- SQL ERROR IN ContactDAO (Retrieve) ---");
             e.printStackTrace();
         }
         return list;

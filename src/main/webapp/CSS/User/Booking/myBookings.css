@@ -1,42 +1,192 @@
+/* Root Variables */
+:root {
+  --primary: #0f172a;
+  --sidebar-active: #334155;
+  --accent: #3b82f6;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --bg-main: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
 
-        :root {
-            --primary: #0f172a;
-            --sidebar-active: #334155;
-            --accent: #3b82f6;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg-main: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius-lg: 12px;
-            --radius-md: 8px;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Poppins", sans-serif; background-color: var(--bg-main); display: flex; min-height: 100vh; }
+/* Body */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-main);
+  display: flex;
+  min-height: 100vh;
+}
 
-        .sidebar { width: 260px; background: var(--primary); color: white; padding: 2rem 1.5rem; position: fixed; height: 100vh; display: flex; flex-direction: column; }
-        .sidebar h2 { font-size: 1.5rem; margin-bottom: 2.5rem; }
-        .sidebar nav a { text-decoration: none; color: #94a3b8; padding: 0.8rem 1rem; display: block; border-radius: var(--radius-md); margin-bottom: 0.5rem; transition: 0.3s; }
-        .sidebar nav a:hover, .sidebar nav a.active { background: var(--sidebar-active); color: white; }
-        .logout { margin-top: auto; background: var(--danger); color: white !important; text-align: center; padding: 0.8rem 1rem; border-radius: var(--radius-md); text-decoration: none; }
+/* Sidebar Container */
+.sidebar {
+  width: 260px;
+  background: var(--primary);
+  color: white;
+  padding: 2rem 1.5rem;
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-        main { flex: 1; margin-left: 260px; }
-        .top-navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; border-bottom: 1px solid var(--border); }
+/* Sidebar Title */
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+}
 
-        .dashboard-content { padding: 2.5rem; }
-        .content-box { background: var(--card-bg); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border); box-shadow: var(--shadow); }
+/* Sidebar Navigation Link */
+.sidebar nav a {
+  text-decoration: none;
+  color: #94a3b8;
+  padding: 0.8rem 1rem;
+  display: block;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.5rem;
+  transition: 0.3s;
+}
 
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 1rem; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; border-bottom: 2px solid var(--bg-main); }
-        td { padding: 1.25rem 1rem; font-size: 0.9rem; border-bottom: 1px solid var(--bg-main); }
+/* Sidebar Navigation Link Active & Hover */
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: var(--sidebar-active);
+  color: white;
+}
 
-        .status-container { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+/* Logout Button */
+.logout {
+  margin-top: auto;
+  background: var(--danger);
+  color: white !important;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+}
 
-        .btn-action { text-decoration: none; background: var(--bg-main); color: var(--primary); padding: 8px 16px; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; }
-        .btn-action:hover { background: var(--primary); color: white; }
+/* Main Container */
+main {
+  flex: 1;
+  margin-left: 260px;
+}
+
+/* Top Navigation Bar */
+.top-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+}
+
+/* User Actions Container */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* User Profile Container */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+/* User Profile Avatar */
+.profile-avatar {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+  background-color: #f1f5f9;
+}
+
+/* Dashboard Content Wrapper */
+.dashboard-content {
+  padding: 2.5rem;
+}
+
+/* Content Box Container */
+.content-box {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* Data Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table Headers */
+th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--bg-main);
+}
+
+/* Table Cells */
+td {
+  padding: 1.25rem 1rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--bg-main);
+}
+
+/* Status Container */
+.status-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+/* Status Dot Indicator */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Action Button */
+.btn-action {
+  text-decoration: none;
+  background: var(--bg-main);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Action Button Hover */
+.btn-action:hover {
+  background: var(--primary);
+  color: white;
+}

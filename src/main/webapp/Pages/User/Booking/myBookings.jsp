@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="com.model.Customer" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,12 +27,31 @@
 
     <main>
         <header class="top-navbar">
-            <div class="welcome-text">
-                <h1>Booking History</h1>
-                <p>Review all your past and active reservations.</p>
-            </div>
-            <a href="${pageContext.request.contextPath}/home" class="btn-action">Return to Home</a>
-        </header>
+                <div class="welcome-text">
+                  <h1>
+                    Hello, <c:out value="${not empty sessionScope.user.first_name ? sessionScope.user.first_name : sessionScope.user.customer_username}" default="Driver" />
+                  </h1>
+                  <p>Vehicles you have saved for later.</p>
+                </div>
+
+                <div class="user-actions">
+                  <a href="${pageContext.request.contextPath}/rentalDeals" class="btn-home">Browse Fleet</a>
+
+                  <div class="user-profile">
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.user.customer_image}">
+                            <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}" alt="Profile Photo" class="profile-avatar" />
+                        </c:when>
+                        <c:otherwise>
+                            <div class="profile-avatar" style="background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; text-transform: uppercase;">
+                                <c:out value="${fn:substring(not empty sessionScope.user.first_name ? sessionScope.user.first_name : sessionScope.user.customer_username, 0, 1)}" default="U" />
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                    <span><c:out value="${sessionScope.user.customer_username}" /></span>
+                  </div>
+                </div>
+              </header>
 
         <div class="dashboard-content">
             <section class="content-box">

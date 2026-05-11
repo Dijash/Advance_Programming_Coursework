@@ -33,6 +33,7 @@ public class UpdateVehicleServlet extends HttpServlet {
             String numberPlate = request.getParameter("vehicle_numberPlate");
             String condition = request.getParameter("vehicle_condition");
             String status = request.getParameter("vehicle_status");
+            double price = Double.parseDouble(request.getParameter("vehicle_price"));
 
             String fileName = request.getParameter("existing_image");
             Part filePart = request.getPart("vehicle_image");
@@ -46,7 +47,7 @@ public class UpdateVehicleServlet extends HttpServlet {
             }
 
             VehicleService vehicleService = new VehicleService();
-            boolean isSuccess = vehicleService.updateVehicle(vehicleId, brand, type, color, numberPlate, condition, status, fileName);
+            boolean isSuccess = vehicleService.updateVehicle(vehicleId, brand, type, color, numberPlate, condition, status, fileName, price);
 
             if (isSuccess) {
                 session.setAttribute("successMsg", "Vehicle details updated successfully!");
@@ -57,7 +58,7 @@ public class UpdateVehicleServlet extends HttpServlet {
             }
 
         } catch (NumberFormatException e) {
-            session.setAttribute("errorMsg", "Invalid Vehicle ID.");
+            session.setAttribute("errorMsg", "Invalid Vehicle ID or Price format.");
             response.sendRedirect(request.getContextPath() + "/manageVehicles");
         }
     }

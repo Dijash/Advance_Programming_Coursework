@@ -1,51 +1,69 @@
+/* Body */
+body {
+  font-family: "Poppins", sans-serif;
+}
 
-      body { font-family: "Poppins", sans-serif; }
+/* Search Container */
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
 
-      .search-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-      }
+/* Search Bar */
+.search-bar {
+  padding: 12px 18px;
+  width: 320px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  outline: none;
+  font-family: inherit;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
 
-      .search-bar {
-        padding: 12px 18px;
-        width: 320px;
-        border-radius: 10px;
-        border: 1px solid #e2e8f0;
-        outline: none;
-        font-family: inherit;
-        background-color: #ffffff;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-      }
+/* User Details Name */
+.user-details strong {
+  display: block;
+  color: #1e293b;
+  font-weight: 600;
+}
 
-      .user-details strong { display: block; color: #1e293b; font-weight: 600; }
-      .user-details span { font-size: 13px; color: #64748b; }
+/* User Details Text */
+.user-details span {
+  font-size: 13px;
+  color: #64748b;
+}
 
-      .action-btn {
-        text-decoration: none;
-        background-color: #f1f5f9;
-        color: #0f172a;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        transition: 0.2s;
-        border: 1px solid #e2e8f0;
-      }
+/* Action Button */
+.action-btn {
+  text-decoration: none;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s;
+  border: 1px solid #e2e8f0;
+}
 
-      .action-btn:hover {
-        background-color: #0f172a;
-        color: #ffffff;
-      }
+/* Action Button Hover */
+.action-btn:hover {
+  background-color: #0f172a;
+  color: #ffffff;
+}
 
-      /* Custom status indicator for Country column */
-      .country-text {
-        font-weight: 500;
-        color: #334155;
-      }
-      .not-provided {
-        color: #94a3b8;
-        font-style: italic;
-        font-size: 0.85rem;
-      }
+/* Country Text */
+.country-text {
+  font-weight: 500;
+  color: #334155;
+}
+
+/* Not Provided Text */
+.not-provided {
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 0.85rem;
+}

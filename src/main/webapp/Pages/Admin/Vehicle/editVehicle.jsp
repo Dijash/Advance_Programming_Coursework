@@ -18,7 +18,8 @@
           <ul>
             <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
             <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
-            <li><a href="${pageContext.request.contextPath}/manageVehicles" class="active"><span>Manage Vehicles</span></a>
+            <li><a href="${pageContext.request.contextPath}/manageVehicles" class="active"><span>Manage
+                  Vehicles</span></a>
             </li>
             <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
             <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
@@ -95,6 +96,12 @@
                 </select>
               </div>
 
+              <div class="form-group">
+                <label for="vehicle_price">Rental Price / Day (NPR)</label>
+                <input type="number" id="vehicle_price" name="vehicle_price" class="form-control"
+                  value="<c:out value='${vehicle.vehicle_price}'/>" step="0.01" min="0" required>
+              </div>
+
               <div class="form-group full-width">
                 <label for="vehicle_image">Update Vehicle Photo (Optional)</label>
                 <input type="file" id="vehicle_image" name="vehicle_image" class="form-control"
@@ -113,4 +120,4 @@
       </main>
     </body>
 
-    </html>
+  </html>

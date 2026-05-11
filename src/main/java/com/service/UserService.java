@@ -11,7 +11,6 @@ public class UserService {
     }
 
     public boolean updateProfile(int id, String username, String phone, String license, String address, String password, String image) {
-        // Business logic and validation can be added here in the future
         return userDAO.updateCustomerProfile(id, username, phone, license, address, password, image);
     }
 

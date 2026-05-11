@@ -61,7 +61,8 @@ public class AdminServlet extends HttpServlet {
                 if (bIdStr != null) {
                     request.setAttribute("booking", bookingService.getBookingById(Integer.parseInt(bIdStr)));
                 }
-                String target = path.equals("/viewBooking") ? "/Pages/Admin/Booking/viewBooking.jsp" : "/Pages/Admin/Booking/editBooking.jsp";
+                String target = path.equals("/viewBooking") ? "/Pages/Admin/Booking/viewBooking.jsp"
+                        : "/Pages/Admin/Booking/editBooking.jsp";
                 request.getRequestDispatcher(target).forward(request, response);
                 break;
 
@@ -78,7 +79,8 @@ public class AdminServlet extends HttpServlet {
                     VehicleService vService = new VehicleService();
                     request.setAttribute("vehicle", vService.getVehicleById(Integer.parseInt(vehicleIdStr)));
                 }
-                String vTarget = path.equals("/editVehicle") ? "/Pages/Admin/Vehicle/editVehicle.jsp" : "/Pages/Admin/Vehicle/viewVehicle.jsp";
+                String vTarget = path.equals("/editVehicle") ? "/Pages/Admin/Vehicle/editVehicle.jsp"
+                        : "/Pages/Admin/Vehicle/viewVehicle.jsp";
                 request.getRequestDispatcher(vTarget).forward(request, response);
                 break;
 
@@ -108,7 +110,6 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("reviews", reviewService.getAllReviews());
                 request.getRequestDispatcher("/Pages/Admin/Review/reviews.jsp").forward(request, response);
                 break;
-
 
             default:
                 request.getRequestDispatcher("/index.jsp").forward(request, response);

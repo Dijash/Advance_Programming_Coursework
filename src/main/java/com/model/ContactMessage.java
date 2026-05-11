@@ -2,7 +2,7 @@ package com.model;
 
 public class ContactMessage {
     private int messageId;
-    private Integer customerId; // Use Integer to allow nulls for guest users
+    private Integer customerId;
     private String firstName;
     private String lastName;
     private String email;
@@ -10,10 +10,9 @@ public class ContactMessage {
     private String message;
     private String submittedAt;
 
-    // Empty Constructor
-    public ContactMessage() {}
+    public ContactMessage() {
+    }
 
-    // Getters and Setters
     public int getMessageId() {
         return messageId;
     }

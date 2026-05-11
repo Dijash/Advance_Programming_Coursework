@@ -11,11 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 @WebServlet("/updateProfile")
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 1,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 15
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 15)
 public class UpdateProfileServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +43,8 @@ public class UpdateProfileServlet extends HttpServlet {
             String originalFileName = filePart.getSubmittedFileName();
             String fileName = System.currentTimeMillis() + "_" + originalFileName;
 
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "Assets" + File.separator + "Profiles";
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "Assets" + File.separator
+                    + "Profiles";
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
@@ -65,8 +62,7 @@ public class UpdateProfileServlet extends HttpServlet {
                 newLicense,
                 newAddress,
                 passwordToSave,
-                imageToSave
-        );
+                imageToSave);
 
         if (success) {
             Customer updatedUser = userService.getCustomerByEmail(currentUser.getCustomer_email());

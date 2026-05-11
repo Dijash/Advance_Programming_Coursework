@@ -13,11 +13,7 @@ import com.util.DBConnection;
 import com.util.PasswordUtil;
 
 @WebServlet("/register")
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 1,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 15
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 15)
 public class RegisterServlet extends HttpServlet {
 
     @Override
@@ -31,7 +27,6 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            // 1. Get standard form text fields
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String dob = request.getParameter("dob");
@@ -53,7 +48,8 @@ public class RegisterServlet extends HttpServlet {
                 String originalFileName = filePart.getSubmittedFileName();
                 fileName = System.currentTimeMillis() + "_" + originalFileName;
 
-                String uploadPath = getServletContext().getRealPath("") + File.separator + "Assets" + File.separator + "Profiles";
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "Assets" + File.separator
+                        + "Profiles";
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();

@@ -45,7 +45,8 @@ public class DeleteVehicleServlet extends HttpServlet {
                 if (isDeleted) {
                     session.setAttribute("successMsg", "Vehicle deleted successfully!");
                 } else {
-                    session.setAttribute("errorMsg", "Could not delete vehicle. It is currently attached to a customer booking.");
+                    session.setAttribute("errorMsg",
+                            "Could not delete vehicle. It is currently attached to a customer booking.");
                 }
             } catch (NumberFormatException e) {
                 session.setAttribute("errorMsg", "Invalid vehicle ID format.");

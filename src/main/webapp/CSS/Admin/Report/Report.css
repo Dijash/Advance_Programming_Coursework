@@ -1,15 +1,16 @@
+/* Invoice Button */
+.btn-invoice {
+  background-color: #3b82f6;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
 
-      /* Minor inline styles for report specific buttons */
-      .btn-invoice {
-        background-color: #3b82f6;
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 0.85rem;
-        font-weight: 600;
-        transition: background-color 0.2s;
-      }
-      .btn-invoice:hover {
-        background-color: #2563eb;
-      }
+/* Invoice Button Hover */
+.btn-invoice:hover {
+  background-color: #2563eb;
+}

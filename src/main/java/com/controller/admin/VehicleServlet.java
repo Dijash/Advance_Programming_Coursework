@@ -16,34 +16,44 @@ public class VehicleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String brand = request.getParameter("vehicle_brand");
-        String type = request.getParameter("vehicle_type");
-        String color = request.getParameter("vehicle_color");
-        String numberPlate = request.getParameter("vehicle_numberPlate");
-        String condition = request.getParameter("vehicle_condition");
-        String status = request.getParameter("vehicle_status");
-        int adminId = 1;
-
-        String fileName = "default_car.jpg";
-        Part filePart = request.getPart("vehicle_image");
-
-        if (filePart != null && filePart.getSize() > 0) {
-            fileName = filePart.getSubmittedFileName();
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "Assets";
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdir();
-            filePart.write(uploadPath + File.separator + fileName);
-        }
-
-        VehicleService vehicleService = new VehicleService();
-        boolean isSuccess = vehicleService.addVehicle(adminId, brand, type, color, numberPlate, condition, status, fileName);
-
         HttpSession session = request.getSession();
-        if (isSuccess) {
-            session.setAttribute("successMsg", "Vehicle added successfully!");
-            response.sendRedirect(request.getContextPath() + "/manageVehicles");
-        } else {
-            session.setAttribute("errorMsg", "Database Error: Could not save vehicle.");
+
+        try {
+            String brand = request.getParameter("vehicle_brand");
+            String type = request.getParameter("vehicle_type");
+            String color = request.getParameter("vehicle_color");
+            String numberPlate = request.getParameter("vehicle_numberPlate");
+            String condition = request.getParameter("vehicle_condition");
+            String status = request.getParameter("vehicle_status");
+            double price = Double.parseDouble(request.getParameter("vehicle_price"));
+
+            int adminId = 1;
+
+            String fileName = "default_car.jpg";
+            Part filePart = request.getPart("vehicle_image");
+
+            if (filePart != null && filePart.getSize() > 0) {
+                fileName = filePart.getSubmittedFileName();
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "Assets";
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists())
+                    uploadDir.mkdir();
+                filePart.write(uploadPath + File.separator + fileName);
+            }
+
+            VehicleService vehicleService = new VehicleService();
+            boolean isSuccess = vehicleService.addVehicle(adminId, brand, type, color, numberPlate, condition, status, fileName, price);
+
+            if (isSuccess) {
+                session.setAttribute("successMsg", "Vehicle added successfully!");
+                response.sendRedirect(request.getContextPath() + "/manageVehicles");
+            } else {
+                session.setAttribute("errorMsg", "Database Error: Could not save vehicle.");
+                response.sendRedirect(request.getContextPath() + "/addVehicle");
+            }
+
+        } catch (NumberFormatException e) {
+            session.setAttribute("errorMsg", "Invalid input: Please enter a valid number for the price.");
             response.sendRedirect(request.getContextPath() + "/addVehicle");
         }
     }

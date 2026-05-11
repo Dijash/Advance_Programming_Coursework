@@ -17,8 +17,11 @@ public class AdminDashboardDAO {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement("SELECT COUNT(*) FROM booking");
              ResultSet rs = statement.executeQuery()) {
-            if (rs.next()) count = rs.getInt(1);
-        } catch (SQLException e) { e.printStackTrace(); }
+            if (rs.next())
+                count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return count;
     }
 
@@ -27,34 +30,46 @@ public class AdminDashboardDAO {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement("SELECT COUNT(*) FROM vehicle");
              ResultSet rs = statement.executeQuery()) {
-            if (rs.next()) count = rs.getInt(1);
-        } catch (SQLException e) { e.printStackTrace(); }
+            if (rs.next())
+                count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return count;
     }
 
     public double getTotalRevenue() {
         double total = 0;
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement("SELECT IFNULL(SUM(payment_amount), 0) FROM payment");
+             PreparedStatement statement = conn
+                     .prepareStatement("SELECT IFNULL(SUM(payment_amount), 0) FROM payment");
              ResultSet rs = statement.executeQuery()) {
-            if (rs.next()) total = rs.getDouble(1);
-        } catch (SQLException e) { e.printStackTrace(); }
+            if (rs.next())
+                total = rs.getDouble(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return total;
     }
 
     public int getActiveRentalsCount() {
         int count = 0;
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement("SELECT COUNT(*) FROM booking WHERE booking_status = 'On Track'");
+             PreparedStatement statement = conn
+                     .prepareStatement("SELECT COUNT(*) FROM booking WHERE booking_status = 'On Track'");
              ResultSet rs = statement.executeQuery()) {
-            if (rs.next()) count = rs.getInt(1);
-        } catch (SQLException e) { e.printStackTrace(); }
+            if (rs.next())
+                count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return count;
     }
 
     public List<UpcomingReturn> getUpcomingReturns() {
         List<UpcomingReturn> list = new ArrayList<>();
-        String sql = "SELECT c.first_name, c.last_name, v.vehicle_brand, v.vehicle_type, b.booking_endDate, b.booking_status " +
+        String sql = "SELECT c.first_name, c.last_name, v.vehicle_brand, v.vehicle_type, b.booking_endDate, b.booking_status "
+                +
                 "FROM booking b JOIN customer c ON b.customer_id = c.customer_id " +
                 "JOIN vehicle v ON b.vehicle_id = v.vehicle_id " +
                 "WHERE b.booking_status IN ('On Track', 'Extended') " +
@@ -65,9 +80,12 @@ public class AdminDashboardDAO {
             while (rs.next()) {
                 String customerName = rs.getString("first_name") + " " + rs.getString("last_name");
                 String vehicleDetails = rs.getString("vehicle_brand") + " " + rs.getString("vehicle_type");
-                list.add(new UpcomingReturn(customerName, vehicleDetails, rs.getString("booking_endDate"), rs.getString("booking_status")));
+                list.add(new UpcomingReturn(customerName, vehicleDetails, rs.getString("booking_endDate"),
+                        rs.getString("booking_status")));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 
@@ -79,9 +97,12 @@ public class AdminDashboardDAO {
              PreparedStatement statement = conn.prepareStatement(sql);
              ResultSet rs = statement.executeQuery()) {
             if (rs.next()) {
-                return new TopVehicle(rs.getString("vehicle_brand"), rs.getString("vehicle_type"), rs.getString("vehicle_image"));
+                return new TopVehicle(rs.getString("vehicle_brand"), rs.getString("vehicle_type"),
+                        rs.getString("vehicle_image"));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

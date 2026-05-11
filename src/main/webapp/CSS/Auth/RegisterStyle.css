@@ -1,3 +1,4 @@
+/* Root Variables */
 :root {
   --primary: #2563eb;
   --secondary: #1e293b;
@@ -8,6 +9,7 @@
   --border: #e2e8f0;
 }
 
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -15,6 +17,7 @@
   font-family: "Poppins", sans-serif;
 }
 
+/* Body */
 body {
   min-height: 100vh;
   display: flex;
@@ -23,7 +26,7 @@ body {
   padding: 24px 16px;
 }
 
-/* ── Outer wrapper ── */
+/* Main Container */
 .main {
   width: 100%;
   max-width: 960px;
@@ -35,7 +38,7 @@ body {
   overflow: hidden;
 }
 
-/* ── Top bar: header + social ── */
+/* Top Bar */
 .top-bar {
   padding: 28px 32px 20px;
   border-bottom: 1px solid var(--border);
@@ -46,23 +49,27 @@ body {
   flex-wrap: wrap;
 }
 
+/* Form Head Title */
 .form-head h1 {
   font-size: 22px;
   color: var(--text);
   margin-bottom: 3px;
 }
 
+/* Form Head Description */
 .form-head p {
   font-size: 13px;
   color: var(--muted);
 }
 
+/* Social Row */
 .social-row {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
+/* Social Button */
 .social-btn {
   display: flex;
   align-items: center;
@@ -78,28 +85,31 @@ body {
   white-space: nowrap;
 }
 
+/* Social Button Hover */
 .social-btn:hover {
   border-color: var(--primary);
   transform: translateY(-1px);
 }
 
-/* ── Three-column form body ── */
+/* Form Body */
 .form-body {
   display: grid;
   grid-template-columns: 1fr 1px 1fr 1px 1fr;
   padding: 0;
 }
 
+/* Column Divider */
 .col-divider {
   background: var(--border);
   margin: 24px 0;
 }
 
+/* Form Column */
 .form-col {
   padding: 24px 28px;
 }
 
-/* ── Section label ── */
+/* Section Label */
 .section-label {
   font-size: 10px;
   font-weight: 700;
@@ -111,11 +121,12 @@ body {
   border-bottom: 2px solid rgba(34, 37, 43, 0.15);
 }
 
-/* ── Fields ── */
+/* Field Group */
 .field {
   margin-bottom: 14px;
 }
 
+/* Field Label */
 .field label {
   font-size: 12px;
   font-weight: 500;
@@ -124,10 +135,12 @@ body {
   display: block;
 }
 
+/* Field Inner Container */
 .field-inner {
   position: relative;
 }
 
+/* Field Inputs */
 .field input,
 .field select {
   width: 100%;
@@ -144,6 +157,7 @@ body {
   -webkit-appearance: none;
 }
 
+/* Field Input Focus */
 .field input:focus,
 .field select:focus {
   border-color: var(--primary);
@@ -151,6 +165,7 @@ body {
   outline: none;
 }
 
+/* Select Input Specifics */
 .field select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -159,7 +174,7 @@ body {
   cursor: pointer;
 }
 
-/* Eye button */
+/* Eye Icon Button */
 .eye {
   position: absolute;
   right: 9px;
@@ -173,7 +188,7 @@ body {
   align-items: center;
 }
 
-/* ── Bottom bar: submit + footer ── */
+/* Bottom Bar */
 .bottom-bar {
   padding: 20px 32px 24px;
   border-top: 1px solid var(--border);
@@ -184,21 +199,25 @@ body {
   flex-wrap: wrap;
 }
 
+/* Form Footer Text */
 .form-foot {
   font-size: 13px;
   color: var(--muted);
 }
 
+/* Form Footer Link */
 .form-foot a {
   color: var(--accent);
   text-decoration: none;
   font-weight: 500;
 }
 
+/* Form Footer Link Hover */
 .form-foot a:hover {
   text-decoration: underline;
 }
 
+/* Submit Button */
 .submit-btn {
   height: 42px;
   padding: 0 32px;
@@ -214,13 +233,14 @@ body {
   white-space: nowrap;
 }
 
+/* Submit Button Hover */
 .submit-btn:hover {
   background: #1d4ed8;
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
-/* ── Toast ── */
+/* Toast Notification */
 .toast {
   position: fixed;
   bottom: 20px;
@@ -237,33 +257,37 @@ body {
   white-space: nowrap;
   z-index: 999;
 }
+
+/* Toast Notification Show State */
 .toast.show {
   opacity: 1;
 }
 
-/* ── Responsive: tablet (2 columns) ── */
+/* Tablet Media Query */
 @media (max-width: 860px) {
+  /* Body Adjusted */
   body {
     padding: 16px 12px;
     align-items: flex-start;
   }
 
+  /* Form Body Grid Adjust */
   .form-body {
     grid-template-columns: 1fr 1px 1fr;
     grid-template-rows: auto 1px auto;
   }
 
-  /* Hide the vertical dividers on mobile */
+  /* Hide First Column Divider */
   .col-divider:first-of-type {
-    display: none; /* hide first vertical divider */
+    display: none;
   }
 
-  /* The third column goes full width below */
+  /* Last Form Column Span */
   .form-col:last-child {
     grid-column: 1 / -1;
   }
 
-  /* Turn second col-divider into horizontal */
+  /* Last Column Divider Adjust */
   .col-divider:last-of-type {
     grid-column: 1 / -1;
     height: 1px;
@@ -272,18 +296,21 @@ body {
     background: var(--border);
   }
 
+  /* Form Column Padding Adjust */
   .form-col {
     padding: 20px 20px;
   }
 }
 
-/* ── Responsive: mobile (1 column) ── */
+/* Mobile Media Query */
 @media (max-width: 560px) {
+  /* Single Column Layout */
   .form-body {
     grid-template-columns: 1fr;
     grid-template-rows: unset;
   }
 
+  /* Visible Column Dividers */
   .col-divider {
     display: block !important;
     grid-column: 1 / -1;
@@ -292,14 +319,17 @@ body {
     margin: 0 20px;
   }
 
+  /* Mobile Form Column */
   .form-col {
     padding: 20px 20px;
   }
 
+  /* Mobile Form Column Auto Span */
   .form-col:last-child {
     grid-column: auto;
   }
 
+  /* Mobile Top Bar Stacked */
   .top-bar {
     padding: 20px 20px 16px;
     flex-direction: column;
@@ -307,45 +337,54 @@ body {
     gap: 12px;
   }
 
+  /* Mobile Social Row Full Width */
   .social-row {
     width: 100%;
   }
 
+  /* Mobile Social Button Full Width */
   .social-btn {
     flex: 1;
     justify-content: center;
   }
 
+  /* Mobile Bottom Bar Reverse Stacked */
   .bottom-bar {
     padding: 16px 20px 20px;
     flex-direction: column-reverse;
     align-items: stretch;
   }
 
+  /* Mobile Submit Button Full Width */
   .submit-btn {
     width: 100%;
     justify-content: center;
   }
 
+  /* Mobile Form Foot Align Center */
   .form-foot {
     text-align: center;
   }
 
+  /* Mobile Form Head Scale */
   .form-head h1 {
     font-size: 20px;
   }
 }
 
-/* ── Very small screens ── */
+/* Small Device Media Query */
 @media (max-width: 360px) {
+  /* Small Device Body Padding */
   body {
     padding: 12px 8px;
   }
 
+  /* Small Device Main Box Radius */
   .main {
     border-radius: 12px;
   }
 
+  /* Small Device Input Font Scale */
   .field input,
   .field select {
     font-size: 12px;

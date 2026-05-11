@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+  <!doctype html>
+  <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
     <title>RentAll | Add Vehicle</title>
 
   </head>
+
   <body>
     <aside class="sidebar">
       <h2>RentAll</h2>
@@ -15,7 +17,8 @@
         <ul>
           <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
           <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageVehicles" class="active"><span>Manage Vehicles</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageVehicles" class="active"><span>Manage
+                Vehicles</span></a></li>
           <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
           <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
           <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
@@ -38,7 +41,8 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="vehicle_brand">Vehicle Brand & Model</label>
-              <input type="text" id="vehicle_brand" name="vehicle_brand" class="form-control" placeholder="e.g. Alto 800" required>
+              <input type="text" id="vehicle_brand" name="vehicle_brand" class="form-control"
+                placeholder="e.g. Alto 800" required>
             </div>
 
             <div class="form-group">
@@ -56,12 +60,14 @@
 
             <div class="form-group">
               <label for="vehicle_color">Vehicle Color</label>
-              <input type="text" id="vehicle_color" name="vehicle_color" class="form-control" placeholder="e.g. Matte Black" required>
+              <input type="text" id="vehicle_color" name="vehicle_color" class="form-control"
+                placeholder="e.g. Matte Black" required>
             </div>
 
             <div class="form-group">
               <label for="vehicle_numberPlate">Number Plate</label>
-              <input type="text" id="vehicle_numberPlate" name="vehicle_numberPlate" class="form-control" placeholder=" Bagmati 01-001-Pa 1234" required>
+              <input type="text" id="vehicle_numberPlate" name="vehicle_numberPlate" class="form-control"
+                placeholder="Bagmati 01-001-Pa 1234" required>
             </div>
 
             <div class="form-group">
@@ -82,10 +88,18 @@
               </select>
             </div>
 
+            <div class="form-group">
+              <label for="vehicle_price">Rental Price / Day (NPR)</label>
+              <input type="number" id="vehicle_price" name="vehicle_price" class="form-control" placeholder="e.g. 4500"
+                step="0.01" min="0" required>
+            </div>
+
             <div class="form-group full-width">
               <label for="vehicle_image">Vehicle Photo</label>
-              <input type="file" id="vehicle_image" name="vehicle_image" class="form-control" accept="image/png, image/jpeg, image/jpg" style="padding: 10px 16px; cursor: pointer;">
-              <small style="color: var(--text-muted); display: block; margin-top: 6px;">Accepted formats: JPG, PNG. Max size: 10MB. (Optional: defaults to standard image if left blank).</small>
+              <input type="file" id="vehicle_image" name="vehicle_image" class="form-control"
+                accept="image/png, image/jpeg, image/jpg" style="padding: 10px 16px; cursor: pointer;">
+              <small style="color: var(--text-muted); display: block; margin-top: 6px;">Accepted formats: JPG, PNG. Max
+                size: 10MB. (Optional: defaults to standard image if left blank).</small>
             </div>
           </div>
 

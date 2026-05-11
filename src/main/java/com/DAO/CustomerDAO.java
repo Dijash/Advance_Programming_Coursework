@@ -16,7 +16,9 @@ public class CustomerDAO {
             while (rs.next()) {
                 customers.add(extractCustomerFromResultSet(rs));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return customers;
     }
 
@@ -26,9 +28,12 @@ public class CustomerDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return extractCustomerFromResultSet(rs);
+                if (rs.next())
+                    return extractCustomerFromResultSet(rs);
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -60,8 +65,7 @@ public class CustomerDAO {
                 rs.getString("referral_code"),
                 rs.getString("password"),
                 rs.getString("customer_image"),
-                rs.getTimestamp("created_at")
-        );
+                rs.getTimestamp("created_at"));
     }
 
     public int getTotalCustomerCount() {

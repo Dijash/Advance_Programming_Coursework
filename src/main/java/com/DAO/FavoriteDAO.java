@@ -46,6 +46,7 @@ public class FavoriteDAO {
         }
         return isNowFavorited;
     }
+
     public List<Integer> getUserFavoriteVehicleIds(int customerId) {
         List<Integer> favoriteIds = new ArrayList<>();
         String sql = "SELECT vehicle_id FROM favorites WHERE customer_id = ?";
@@ -83,13 +84,13 @@ public class FavoriteDAO {
                             rs.getString("vehicle_numberPlate"),
                             rs.getString("vehicle_condition"),
                             rs.getString("vehicle_status"),
-                            rs.getString("vehicle_image")
-                    ));
+                            rs.getString("vehicle_image"),
+                            rs.getDouble("vehicle_price")));
                 }
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return favVehicles;
     }
-    // Inside FavoriteDAO.java
-    String sql = "SELECT vehicle_id FROM favorites WHERE customer_id = ?";
 }

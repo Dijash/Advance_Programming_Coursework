@@ -3,7 +3,7 @@ package com.controller.admin;
 import com.DAO.VehicleDAO;
 import com.DAO.CustomerDAO;
 import com.DAO.BookingDAO;
-import com.DAO.ContactDAO; // Import the ContactDAO
+import com.DAO.ContactDAO;
 import com.model.ContactMessage;
 
 import jakarta.servlet.ServletException;

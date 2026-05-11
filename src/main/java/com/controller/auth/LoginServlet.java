@@ -29,8 +29,6 @@ public class LoginServlet extends HttpServlet {
         if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
             session.setAttribute("email", email);
             session.setAttribute("role", "admin");
-
-            // Clear any lingering error messages
             session.removeAttribute("errorMsg");
 
             response.sendRedirect(request.getContextPath() + "/admin");
@@ -46,8 +44,6 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", loggedInCustomer);
             session.setAttribute("email", email);
             session.setAttribute("role", "customer");
-
-            // FIX: Clear any lingering error messages from the session!
             session.removeAttribute("errorMsg");
 
             response.sendRedirect(request.getContextPath() + "/home");
