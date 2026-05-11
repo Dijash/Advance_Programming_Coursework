@@ -14,7 +14,7 @@
     <a href="${pageContext.request.contextPath}/home" class="logo">Rent<span>All</span></a>
 
     <div class="error-code">
-      5<span class="smoke">0</span>0
+      6<span class="smoke">0</span>0
     </div>
 
     <div class="error-title">Engine Overheated!</div>
