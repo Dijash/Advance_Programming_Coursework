@@ -388,13 +388,10 @@
 
           <!-- JS for Calculator and Mobile Menu -->
           <script>
-            // Calendar Restrictions
             document.addEventListener("DOMContentLoaded", () => {
               const today = new Date().toISOString().split('T')[0];
               document.getElementById("pickupDate").min = today;
               document.getElementById("returnDate").min = today;
-
-              // Mobile menu toggle
               const menuBtn = document.querySelector('.nav_menu_button');
               const navLinks = document.querySelector('.nav_links');
               if (menuBtn) {
@@ -402,8 +399,6 @@
                   navLinks.classList.toggle('active');
                 });
               }
-
-              // User dropdown toggle
               const avatarWrap = document.getElementById('userAvatarWrap');
               const dropdown = document.getElementById('userDropdown');
               if (avatarWrap && dropdown) {
