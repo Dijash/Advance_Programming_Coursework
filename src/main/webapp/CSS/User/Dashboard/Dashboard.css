@@ -208,8 +208,26 @@ main {
   overflow: hidden;
 }
 
-/* Notification Dropdown Show State */
-.notif-dropdown.show {
+.notif-toggle-input {
+  display: none;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 340px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: none;
+  flex-direction: column;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.notif-toggle-input:checked ~ .notif-dropdown {
   display: flex;
 }
 

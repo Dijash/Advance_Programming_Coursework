@@ -38,10 +38,11 @@
               Home</a>
             <div class="dropdown-wrapper">
 
-              <button class="btn-notif" id="notifBtn">Notifications <span
-                  class="notif-badge">${totalNotifCount}</span></button>
+              <input type="checkbox" id="notifToggle" class="notif-toggle-input">
+              <label for="notifToggle" class="btn-notif">Notifications <span
+                  class="notif-badge">${totalNotifCount}</span></label>
 
-              <div class="notif-dropdown" id="notifMenu">
+              <div class="notif-dropdown">
                 <c:forEach var="n" items="${recentNotifs}">
                   <div class="notif-item">
                     <strong>${n.type}</strong><br>${n.description}
@@ -183,12 +184,7 @@
         </div>
       </div>
 
-      <script>
-        const btn = document.getElementById('notifBtn');
-        const menu = document.getElementById('notifMenu');
-        btn.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('show'); });
-        window.addEventListener('click', () => menu.classList.remove('show'));
-      </script>
+      
     </body>
 
     </html>

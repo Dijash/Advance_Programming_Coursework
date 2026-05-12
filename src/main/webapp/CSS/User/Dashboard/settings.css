@@ -396,7 +396,10 @@ label {
   font-size: 0.75rem;
 }
 
-/* Notification Dropdown Menu */
+.notif-toggle-input {
+  display: none;
+}
+
 .notif-dropdown {
   position: absolute;
   top: 110%;
@@ -410,8 +413,7 @@ label {
   border-radius: var(--radius-md);
 }
 
-/* Notification Dropdown Show State */
-.notif-dropdown.show {
+.notif-toggle-input:checked ~ .notif-dropdown {
   display: block;
 }
 

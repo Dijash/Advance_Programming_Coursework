@@ -38,10 +38,11 @@
         <a href="${pageContext.request.contextPath}/home" class="btn-home">Return to Home</a>
 
         <div class="dropdown-wrapper">
-          <button class="btn-notif" id="notifBtn">
+          <input type="checkbox" id="notifToggle" class="notif-toggle-input">
+          <label for="notifToggle" class="btn-notif">
             Notifications <span class="notif-badge"><c:out value="${totalNotifCount}" default="0" /></span>
-          </button>
-          <div class="notif-dropdown" id="notifMenu">
+          </label>
+          <div class="notif-dropdown">
             <div class="notif-header">Recent Broadcasts</div>
             <div class="notif-list">
               <c:forEach var="n" items="${recentNotifs}">
@@ -177,26 +178,6 @@
     </div>
   </main>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const notifBtn = document.getElementById("notifBtn");
-      const notifMenu = document.getElementById("notifMenu");
-
-      notifBtn.addEventListener("click", function (event) {
-        event.stopPropagation();
-        notifMenu.classList.toggle("show");
-      });
-
-      window.addEventListener("click", function () {
-        if (notifMenu.classList.contains("show")) {
-          notifMenu.classList.remove("show");
-        }
-      });
-
-      notifMenu.addEventListener("click", function (event) {
-        event.stopPropagation();
-      });
-    });
-  </script>
+  
 </body>
 </html>

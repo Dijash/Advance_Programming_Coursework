@@ -44,7 +44,10 @@
                 <c:choose>
                   <c:when test="${not empty sessionScope.user}">
                     <!-- Authenticated User Dropdown -->
-                    <div class="user_avatar_wrap" id="userAvatarWrap">
+                    <input type="checkbox" id="userDropdownToggle" class="user-dropdown-toggle">
+                    <!-- Authenticated User Dropdown -->
+                    <div class="user_avatar_wrap">
+                      <label for="userDropdownToggle" style="cursor: pointer; display: flex; align-items: center; gap: 0.6rem;">
                       <div class="user_avatar">
                         <c:choose>
                           <c:when test="${not empty sessionScope.user.customer_image}">
@@ -70,8 +73,9 @@
                         style="width: 16px; height: 16px;">
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
+                      </label>
 
-                      <div class="user_dropdown" id="userDropdown">
+                      <div class="user_dropdown">
                         <div class="dropdown_header">
                           <p>${not empty sessionScope.user.first_name ? sessionScope.user.first_name : 'User'}
                             ${sessionScope.user.last_name}</p>
@@ -397,17 +401,6 @@
               if (menuBtn) {
                 menuBtn.addEventListener('click', () => {
                   navLinks.classList.toggle('active');
-                });
-              }
-              const avatarWrap = document.getElementById('userAvatarWrap');
-              const dropdown = document.getElementById('userDropdown');
-              if (avatarWrap && dropdown) {
-                avatarWrap.addEventListener('click', function (e) {
-                  e.stopPropagation();
-                  dropdown.classList.toggle('open');
-                });
-                document.addEventListener('click', function () {
-                  dropdown.classList.remove('open');
                 });
               }
             });

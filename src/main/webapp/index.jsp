@@ -508,18 +508,6 @@
         if (menuBtn && navLinks) {
           menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
         }
-        const avatarWrap = document.getElementById('userAvatarWrap');
-        const dropdown   = document.getElementById('userDropdown');
-        if (avatarWrap && dropdown) {
-          avatarWrap.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdown.classList.toggle('open');
-          });
-          document.addEventListener('click', function() {
-            dropdown.classList.remove('open');
-          });
-        }
-
 
         document.addEventListener("DOMContentLoaded", () => {
           const menuBtn = document.getElementById('menu-btn');

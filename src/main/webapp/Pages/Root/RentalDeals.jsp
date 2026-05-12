@@ -47,7 +47,9 @@
         <div class="nav_buttons">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <div class="user_avatar_wrap" id="userAvatarWrap">
+                    <input type="checkbox" id="userDropdownToggle" class="user-dropdown-toggle">
+                    <div class="user_avatar_wrap">
+                        <label for="userDropdownToggle" style="cursor: pointer; display: flex; align-items: center; gap: 0.6rem;">
                         <div class="user_avatar">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.user.customer_image}">
@@ -65,8 +67,9 @@
                             ${not empty sessionScope.user.customer_username ? sessionScope.user.customer_username : 'User'}
                         </span>
                         <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><polyline points="6 9 12 15 18 9"/></svg>
+                        </label>
 
-                        <div class="user_dropdown" id="userDropdown">
+                        <div class="user_dropdown">
                             <div class="dropdown_header">
                                 <p>${not empty sessionScope.user.first_name ? sessionScope.user.first_name : 'User'} ${sessionScope.user.last_name}</p>
                                 <span>${sessionScope.user.customer_email}</span>
@@ -371,17 +374,6 @@
       const navLinks = document.getElementById('nav-links');
       if (menuBtn && navLinks) {
         menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-      }
-      const avatarWrap = document.getElementById('userAvatarWrap');
-      const dropdown   = document.getElementById('userDropdown');
-      if (avatarWrap && dropdown) {
-        avatarWrap.addEventListener('click', function(e) {
-          e.stopPropagation();
-          dropdown.classList.toggle('open');
-        });
-        document.addEventListener('click', function() {
-          dropdown.classList.remove('open');
-        });
       }
   </script>
 </body>

@@ -174,12 +174,14 @@ nav {
   line-height: 1;
 }
 
-/* User Avatar Wrapper */
+.user-dropdown-toggle {
+  display: none;
+}
+
 .user_avatar_wrap {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
   cursor: pointer;
   user-select: none;
 }
@@ -232,8 +234,8 @@ nav {
   overflow: hidden;
 }
 
-/* User Dropdown Open State */
-.user_dropdown.open {
+.user-dropdown-toggle:checked ~ .user_avatar_wrap .user_dropdown,
+.user-dropdown-toggle:checked ~ .user_dropdown {
   display: block;
   animation: dropdownFade 0.15s ease;
 }
