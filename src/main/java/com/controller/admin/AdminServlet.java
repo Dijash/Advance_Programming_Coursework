@@ -9,7 +9,14 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-/* Admin Servlet Routes */
+/**
+ * AdminServlet
+ * <p>
+ * This servlet acts as the central controller for the administration panel.
+ * It handles routing for all administrative tasks including dashboard metrics,
+ * vehicle management, booking administration, customer data viewing,
+ * review moderation, and system notifications.
+ */
 @WebServlet({
         "/admin",
         "/manageBooking", "/viewBooking", "/editBooking", "/updateBooking", "/deleteBooking",
@@ -20,18 +27,38 @@ import java.util.List;
 })
 public class AdminServlet extends HttpServlet {
 
-    /* Handle GET Requests */
+    /**
+     * Handles HTTP GET requests.
+     * <p>
+     * This method is responsible for routing the user to the appropriate
+     * JSP pages based on the requested URL path. It initializes necessary
+     * services, retrieves required data from the database, and sets them
+     * as request attributes before forwarding the request to the view layer.
+     *
+     * @param request  the HttpServletRequest object
+     * @param response the HttpServletResponse object
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String path = request.getServletPath();
 
-        /* Booking Service */
+        /*
+         * Initialize BookingService to be used across multiple cases
+         * for fetching booking-related information.
+         */
         BookingService bookingService = new BookingService();
 
         switch (path) {
 
-            /* Admin Dashboard */
+            /**
+             * Admin Dashboard Route
+             * Aggregates general statistics (bookings, revenue, vehicles, notifications)
+             * and forwards to the main dashboard view.
+             */
             case "/admin":
 
                 AdminDashboardService dashboardService = new AdminDashboardService();
@@ -44,7 +71,7 @@ public class AdminServlet extends HttpServlet {
 
                 request.setAttribute("totalNotifCount", notifService.getTotalNotificationCount());
 
-                /* Recent Notifications */
+                /* Fetch and set the most recent notification to display as an alert/badge */
                 List<Notification> recentNotifs = notifService.getRecentNotifications();
 
                 if (!recentNotifs.isEmpty()) {
@@ -59,14 +86,20 @@ public class AdminServlet extends HttpServlet {
                         .forward(request, response);
                 break;
 
-            /* Add Vehicle Page */
+            /**
+             * Add Vehicle Route
+             * Forwards the administrator to the form for adding a new vehicle.
+             */
             case "/addVehicle":
 
                 request.getRequestDispatcher("/Pages/Admin/Vehicle/addVehicle.jsp")
                         .forward(request, response);
                 break;
 
-            /* Manage Booking Page */
+            /**
+             * Manage Booking Route
+             * Retrieves all current bookings and forwards to the booking management table.
+             */
             case "/manageBooking":
 
                 request.setAttribute("bookings", bookingService.getAllBookings());
@@ -75,7 +108,11 @@ public class AdminServlet extends HttpServlet {
                         .forward(request, response);
                 break;
 
-            /* View Or Edit Booking */
+            /**
+             * View or Edit Booking Route
+             * Checks for an ID parameter, fetches the specific booking details,
+             * and routes to either the read-only view or the editable form.
+             */
             case "/viewBooking":
             case "/editBooking":
 
@@ -97,7 +134,10 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Manage Vehicles Page */
+            /**
+             * Manage Vehicles Route
+             * Retrieves the entire fleet inventory and forwards to the vehicle management view.
+             */
             case "/manageVehicles":
 
                 VehicleService vServiceList = new VehicleService();
@@ -109,7 +149,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* View Or Edit Vehicle */
+            /**
+             * View or Edit Vehicle Route
+             * Fetches details for a specific vehicle by ID and directs the request
+             * to the corresponding view or edit JSP page.
+             */
             case "/viewVehicle":
             case "/editVehicle":
 
@@ -134,7 +178,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Manage Customers Page */
+            /**
+             * Manage Customers Route
+             * Loads all registered customer profiles into the request attribute
+             * before forwarding to the customer list page.
+             */
             case "/manageCustomers":
 
                 CustomerService customerService = new CustomerService();
@@ -146,7 +194,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* View Customer Page */
+            /**
+             * View Customer Route
+             * Extracts the customer ID, retrieves the associated user profile,
+             * and displays the detailed customer view.
+             */
             case "/viewCustomer":
 
                 String cIdParam = request.getParameter("id");
@@ -166,7 +218,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Manage Notification Page */
+            /**
+             * Manage Notifications Route
+             * Fetches the history of all broadcasted notifications to be
+             * displayed on the notification management page.
+             */
             case "/manageNotification":
 
                 NotificationService notifListService = new NotificationService();
@@ -181,7 +237,10 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Manage Reviews Page */
+            /**
+             * Manage Reviews Route
+             * Retrieves all user submitted reviews and feedback for moderation.
+             */
             case "/manageReviews":
 
                 ReviewService reviewService = new ReviewService();
@@ -193,7 +252,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Default Route */
+            /**
+             * Default Route
+             * Fallback mechanism that returns the user to the main index page
+             * if an unrecognized GET request hits the servlet.
+             */
             default:
 
                 request.getRequestDispatcher("/index.jsp")
@@ -203,21 +266,38 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    /* Handle POST Requests */
+    /**
+     * Handles HTTP POST requests.
+     * <p>
+     * This method processes form submissions and state-changing actions from the
+     * admin panel. This includes creating/sending notifications, updating statuses,
+     * and deleting entities (reviews, bookings, customers). Upon completion,
+     * it redirects the user back to the appropriate management page to prevent
+     * duplicate form submissions.
+     *
+     * @param request  the HttpServletRequest object
+     * @param response the HttpServletResponse object
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String path = request.getServletPath();
 
-        /* Service Objects */
+        /* Service Objects initialized for processing POST data */
         BookingService bookingService = new BookingService();
         CustomerService customerService = new CustomerService();
         NotificationService notificationService = new NotificationService();
 
         switch (path) {
 
-            /* Send Notification */
+            /**
+             * Send Notification Action
+             * Captures notification subject and message from the request body
+             * and broadcasts it through the notification service.
+             */
             case "/sendNotification":
 
                 String type = request.getParameter("subject");
@@ -233,7 +313,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Delete Review */
+            /**
+             * Delete Review Action
+             * Parses the review ID and removes the associated review record
+             * from the database.
+             */
             case "/deleteReview":
 
                 String idParam = request.getParameter("reviewId");
@@ -253,7 +337,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Update Booking */
+            /**
+             * Update Booking Action
+             * Modifies the status of an existing booking (e.g., pending, approved,
+             * completed) based on admin input.
+             */
             case "/updateBooking":
 
                 int updateId = Integer.parseInt(
@@ -270,7 +358,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Delete Booking */
+            /**
+             * Delete Booking Action
+             * Permanently removes a specific booking record from the system
+             * based on the provided booking ID.
+             */
             case "/deleteBooking":
 
                 int delBId = Integer.parseInt(
@@ -285,7 +377,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Delete Customer */
+            /**
+             * Delete Customer Action
+             * Removes a customer account and their associated profile details
+             * from the application database.
+             */
             case "/deleteCustomer":
 
                 String cIdStr = request.getParameter("customer_id");
@@ -303,7 +399,11 @@ public class AdminServlet extends HttpServlet {
 
                 break;
 
-            /* Default Redirect */
+            /**
+             * Default Redirect
+             * Acts as a catch-all for unrecognized POST paths, sending the user
+             * back to the main admin dashboard view safely.
+             */
             default:
 
                 response.sendRedirect(
