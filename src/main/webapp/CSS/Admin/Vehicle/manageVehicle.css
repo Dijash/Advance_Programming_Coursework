@@ -286,9 +286,119 @@ table td:last-child {
   color: #c0392b;
 }
 
-/* Delete Action Button Hover */
+/* Delete Button Hover */
 .action-btn-delete:hover {
-  background-color: #e74c3c;
+    background: #e74c3c;
+    color: white;
+}
+#deleteModal.modal-overlay {
+  display: none;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(15, 23, 42, 0.6) !important;
+  z-index: 999999 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  backdrop-filter: blur(4px);
+  margin: 0 !important;
+}
+
+/* Delete Modal Content */
+#deleteModal .modal-content {
+  background: #ffffff !important;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  animation: modalFadeIn 0.2s ease-out;
+  overflow: hidden;
+  position: relative !important;
+  margin: auto !important;
+  display: block !important;
+}
+
+/* Modal Fade Animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header */
+#deleteModal .modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Modal Header Title */
+#deleteModal .modal-header h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Modal Body */
+#deleteModal .modal-body {
+  padding: 20px;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Modal Footer */
+#deleteModal .modal-footer {
+  padding: 15px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Cancel Button */
+.btn-cancel {
+  background: white;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: inherit;
+}
+
+/* Cancel Button Hover */
+.btn-cancel:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Delete Confirm Button */
+.btn-delete-confirm {
+  background: #ef4444;
   color: white;
-  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-block;
+  transition: 0.2s;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Delete Confirm Button Hover */
+.btn-delete-confirm:hover {
+  background: #dc2626;
 }
