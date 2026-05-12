@@ -150,6 +150,8 @@
             <label for="status">Availability</label>
             <select name="status" id="status">
               <option value="Available" ${filterStatus == 'Available' ? 'selected' : ''}>Available Only</option>
+              <option value="Rented"       ${filterStatus == 'Rented'       ? 'selected' : ''}>Rented</option>
+              <option value="Maintenance"       ${filterStatus == 'Maintenance'       ? 'selected' : ''}>Maintenance</option>
               <option value="All"       ${filterStatus == 'All'       ? 'selected' : ''}>Show All</option>
             </select>
           </div>

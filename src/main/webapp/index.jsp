@@ -127,7 +127,7 @@
           </div>
 
           <button type="submit" class="button button_search">
-            Search
+             <a href="${pageContext.request.contextPath}/login" class="button">Search</a>
           </button>
         </form>
       </section>
