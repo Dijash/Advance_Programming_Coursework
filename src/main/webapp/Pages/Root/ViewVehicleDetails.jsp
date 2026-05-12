@@ -416,14 +416,9 @@
                 });
               }
             });
-
-            // Price Calculator
-            // Price Calculator
             function calcTotal() {
               const start = document.getElementById('pickupDate').value;
               const end = document.getElementById('returnDate').value;
-
-              // FIXED: Dynamically grab the price from the backend
               const dailyRate = parseFloat("${vehicle.vehicle_price}");
 
               if (start && end) {
@@ -437,8 +432,6 @@
                 } else {
                   if (diff === 0) diff = 1; // Same day counts as 1 day
                   document.getElementById('daysCount').innerText = diff;
-
-                  // Added .toFixed(2) to make sure it formats like money (e.g., 4500.00)
                   document.getElementById('totalPrice').innerText = "NPR " + (diff * dailyRate).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
               }

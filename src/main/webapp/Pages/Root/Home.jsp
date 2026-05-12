@@ -538,7 +538,6 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-          // Mobile menu toggle
           const menuBtn = document.getElementById('menu-btn');
           const navLinks = document.getElementById('nav-links');
 
@@ -547,8 +546,6 @@
                   navLinks.classList.toggle('active');
               });
           }
-
-          // User dropdown toggle
           const avatarWrap = document.getElementById('userAvatarWrap');
           const dropdown = document.getElementById('userDropdown');
 

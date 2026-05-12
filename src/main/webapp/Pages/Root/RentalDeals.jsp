@@ -367,14 +367,11 @@
   </footer>
 
   <script>
-      // ── Hamburger menu toggle ──
       const menuBtn = document.querySelector('.nav_menu_button');
       const navLinks = document.getElementById('nav-links');
       if (menuBtn && navLinks) {
         menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
       }
-
-      // ── User dropdown toggle ──
       const avatarWrap = document.getElementById('userAvatarWrap');
       const dropdown   = document.getElementById('userDropdown');
       if (avatarWrap && dropdown) {
@@ -382,7 +379,6 @@
           e.stopPropagation();
           dropdown.classList.toggle('open');
         });
-        // Close when clicking outside
         document.addEventListener('click', function() {
           dropdown.classList.remove('open');
         });
