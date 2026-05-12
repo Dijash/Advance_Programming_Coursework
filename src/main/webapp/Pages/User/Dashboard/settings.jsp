@@ -76,7 +76,7 @@
             <div class="profile-body">
 
               <div class="profile-hero">
-                <div class="summary-avatar-wrap" id="openModalBtn" title="Click to view full image">
+                <a href="#avatarModal" class="summary-avatar-wrap" id="openModalBtn" title="Click to view full image">
                   <c:choose>
                     <c:when test="${not empty sessionScope.user.customer_image}">
                       <img src="${pageContext.request.contextPath}/Assets/Profiles/${sessionScope.user.customer_image}"
@@ -94,7 +94,7 @@
                     </c:otherwise>
                   </c:choose>
                   <div class="avatar-overlay">Expand</div>
-                </div>
+                </a>
 
                 <div class="hero-details" style="flex: 1;">
                   <h3>${sessionScope.user.first_name} ${sessionScope.user.last_name}</h3>
@@ -156,13 +156,13 @@
 
       <div class="modal-overlay" id="avatarModal">
         <div class="modal-content">
-          <button class="modal-close" id="closeModalBtn" title="Close modal">
+          <a href="#" class="modal-close" id="closeModalBtn" title="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
-          </button>
+          </a>
 
           <c:choose>
             <c:when test="${not empty sessionScope.user.customer_image}">
@@ -188,14 +188,6 @@
         const menu = document.getElementById('notifMenu');
         btn.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('show'); });
         window.addEventListener('click', () => menu.classList.remove('show'));
-
-        const modal = document.getElementById('avatarModal');
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-
-        openModalBtn.addEventListener('click', () => { modal.classList.add('show'); });
-        closeModalBtn.addEventListener('click', () => { modal.classList.remove('show'); });
-        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
       </script>
     </body>
 

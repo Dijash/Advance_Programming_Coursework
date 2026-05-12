@@ -76,9 +76,24 @@
                     <c:out value="${row.date}" />
                   </td>
                   <td style="padding: 15px; text-align: center">
-                    <button type="button" class="btn-delete" onclick="openModal('${row.id}')">
+                    <a href="#deleteModal-${row.id}" class="btn-delete" style="text-decoration: none;">
                       Delete
-                    </button>
+                    </a>
+
+                    <div id="deleteModal-${row.id}" class="modal-overlay">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3>Delete Notification</h3>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to delete this broadcast? This action cannot be undone and will remove it from all user dashboards.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <a href="#" class="btn-cancel" style="text-decoration: none;">Cancel</a>
+                          <a href="${pageContext.request.contextPath}/deleteNotification?id=${row.id}" class="btn-delete-confirm" style="text-decoration: none;">Yes, Delete</a>
+                        </div>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               </c:forEach>
@@ -96,40 +111,6 @@
       </div>
     </main>
 
-    <div id="deleteModal" class="modal-overlay">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Delete Notification</h3>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this broadcast? This action cannot be undone and will remove it from all user dashboards.</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-          <a href="#" id="confirmDeleteBtn" class="btn-delete-confirm">Yes, Delete</a>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const modal = document.getElementById('deleteModal');
-      const confirmBtn = document.getElementById('confirmDeleteBtn');
-
-      function openModal(notificationId) {
-        confirmBtn.href = '${pageContext.request.contextPath}/deleteNotification?id=' + notificationId;
-        modal.style.display = 'flex';
-      }
-
-      function closeModal() {
-        modal.style.display = 'none';
-        confirmBtn.href = '#';
-      }
-
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          closeModal();
-        }
-      }
-    </script>
+    
   </body>
 </html>

@@ -312,14 +312,10 @@ label {
   z-index: 1000;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
-/* Modal Overlay Show State */
-.modal-overlay.show {
+.modal-overlay:target {
   display: flex;
-  opacity: 1;
 }
 
 /* Modal Content Container */
@@ -330,13 +326,6 @@ label {
   align-items: center;
   max-width: 90vw;
   max-height: 90vh;
-  transform: scale(0.95);
-  transition: transform 0.3s ease;
-}
-
-/* Modal Overlay Show Content */
-.modal-overlay.show .modal-content {
-  transform: scale(1);
 }
 
 /* Modal Large Avatar Image */
@@ -372,6 +361,7 @@ label {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   z-index: 10;
   padding: 0;
+  text-decoration: none;
 }
 
 /* Modal Close Button Hover */

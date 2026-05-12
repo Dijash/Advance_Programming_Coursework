@@ -6,13 +6,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Booking/ManageBooking.css">
     <title>RentAll | Bookings</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Booking/ManageBooking.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Booking/ManageBooking.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    </head>
+  </head>
   <body>
     <aside class="sidebar">
       <h2>RentAll</h2>
@@ -72,7 +70,27 @@
                         <a href="${pageContext.request.contextPath}/viewBooking?id=${booking.bookingId}" class="action-btn action-btn-view">View</a>
                         <a href="${pageContext.request.contextPath}/editBooking?id=${booking.bookingId}" class="action-btn action-btn-edit">Edit</a>
 
-                        <button type="button" class="action-btn action-btn-delete" onclick="openModal('${booking.bookingId}')">Delete</button>
+                        <a href="#deleteModal-${booking.bookingId}" class="action-btn action-btn-delete">Delete</a>
+
+                        <div id="deleteModal-${booking.bookingId}" class="modal-overlay">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h3>Delete Booking</h3>
+                            </div>
+                            <div class="modal-body">
+                              <p>Are you sure you want to delete booking <strong>#${booking.bookingId}</strong>? This action cannot be undone.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <a href="#" class="btn-cancel" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Cancel</a>
+
+                              <form action="${pageContext.request.contextPath}/deleteBooking" method="POST" style="margin: 0; display: inline-block;">
+                                <input type="hidden" name="booking_id" value="${booking.bookingId}">
+                                <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
                     </div>
                   </td>
                 </tr>
@@ -88,49 +106,5 @@
         </div>
       </div>
     </main>
-
-    <div id="deleteModal" class="modal-overlay" style="display: none;">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Delete Booking</h3>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this booking? This action cannot be undone.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
-
-          <form id="deleteForm" action="${pageContext.request.contextPath}/deleteBooking" method="POST" style="margin: 0; display: inline-block;">
-            <input type="hidden" name="booking_id" id="modalBookingId" value="">
-            <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
-          </form>
-
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const modal = document.getElementById('deleteModal');
-      const bookingIdInput = document.getElementById('modalBookingId');
-
-      function openModal(bookingId) {
-        // Set the hidden input value to the specific booking's ID
-        bookingIdInput.value = bookingId;
-        modal.style.display = 'flex';
-      }
-
-      function closeModal() {
-        modal.style.display = 'none';
-        // Clear the input value just in case
-        bookingIdInput.value = '';
-      }
-
-      // Close modal if user clicks outside of the modal content
-      window.onclick = function(event) {
-        if (event.target === modal) {
-          closeModal();
-        }
-      }
-    </script>
   </body>
 </html>

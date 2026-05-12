@@ -2,6 +2,7 @@ package com.DAO;
 
 import com.model.Booking;
 import com.util.DBConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,6 @@ public class BookingDAO {
         return isSuccess;
     }
 
-    // --- Helper to lock the vehicle ---
     private void updateVehicleStatusForBooking(int vehicleId, String status, Connection conn) throws SQLException {
         String sql = "UPDATE vehicle SET vehicle_status = ? WHERE vehicle_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -42,7 +42,6 @@ public class BookingDAO {
         }
     }
 
-    // --- Existing Methods (Updated to free up vehicles) ---
     public List<Booking> getAllBookings() {
         List<Booking> bookings = new ArrayList<>();
         String sql = "SELECT b.booking_id, CONCAT(c.first_name, ' ', c.last_name) as customer_name, " +
@@ -56,7 +55,9 @@ public class BookingDAO {
             while (rs.next()) {
                 bookings.add(new Booking(rs.getInt("booking_id"), rs.getString("customer_name"), rs.getString("vehicle_info"), rs.getString("booking_status"), rs.getDate("booking_startDate"), rs.getDate("booking_endDate"), rs.getString("total_price"), rs.getString("vehicle_numberPlate")));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return bookings;
     }
 
@@ -65,9 +66,12 @@ public class BookingDAO {
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return new Booking(rs.getInt("booking_id"), rs.getString("customer_name"), rs.getString("vehicle_info"), rs.getString("booking_status"), rs.getDate("booking_startDate"), rs.getDate("booking_endDate"), rs.getString("total_price"), rs.getString("vehicle_numberPlate"));
+                if (rs.next())
+                    return new Booking(rs.getInt("booking_id"), rs.getString("customer_name"), rs.getString("vehicle_info"), rs.getString("booking_status"), rs.getDate("booking_startDate"), rs.getDate("booking_endDate"), rs.getString("total_price"), rs.getString("vehicle_numberPlate"));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -81,25 +85,61 @@ public class BookingDAO {
                 freeUpVehicleByBookingId(id, conn);
             }
             return updated;
-        } catch (SQLException e) { e.printStackTrace(); return false; }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public boolean deleteBooking(int id) {
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement payStmt = conn.prepareStatement("DELETE FROM payment WHERE booking_id = ?");
-             PreparedStatement bookStmt = conn.prepareStatement("DELETE FROM booking WHERE booking_id = ?")) {
-            freeUpVehicleByBookingId(id, conn);
-            payStmt.setInt(1, id); payStmt.executeUpdate();
-            bookStmt.setInt(1, id); return bookStmt.executeUpdate() > 0;
-        } catch (SQLException e) { e.printStackTrace(); return false; }
+    public boolean deleteBooking(int bookingId) {
+        boolean isDeleted = false;
+
+        try (Connection conn = DBConnection.getConnection()) {
+            conn.setAutoCommit(false);
+
+            try {
+                freeUpVehicleByBookingId(bookingId, conn);
+                String deletePayment = "DELETE FROM payment WHERE booking_id = ?";
+                try (PreparedStatement ps1 = conn.prepareStatement(deletePayment)) {
+                    ps1.setInt(1, bookingId);
+                    ps1.executeUpdate();
+                }
+
+                String deleteBooking = "DELETE FROM booking WHERE booking_id = ?";
+                try (PreparedStatement ps2 = conn.prepareStatement(deleteBooking)) {
+                    ps2.setInt(1, bookingId);
+                    if (ps2.executeUpdate() > 0) {
+                        isDeleted = true;
+                    }
+                }
+
+                conn.commit();
+
+            } catch (SQLException e) {
+                conn.rollback();
+                System.out.println("SQL ERROR IN DELETE BOOKING: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                conn.setAutoCommit(true);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isDeleted;
     }
 
     private void freeUpVehicleByBookingId(int bookingId, Connection conn) {
         String sql = "UPDATE vehicle SET vehicle_status = 'Available' WHERE vehicle_id = (SELECT vehicle_id FROM booking WHERE booking_id = ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, bookingId); stmt.executeUpdate();
-        } catch (SQLException e) { e.printStackTrace(); }
+            stmt.setInt(1, bookingId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
     public int getTotalBookingCount() {
         int count = 0;
         String sql = "SELECT COUNT(*) FROM booking";

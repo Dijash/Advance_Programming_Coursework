@@ -94,7 +94,25 @@
                     <a href="${pageContext.request.contextPath}/viewVehicle?id=${car.vehicle_id}" class="action-btn action-btn-view">View</a>
                     <a href="${pageContext.request.contextPath}/editVehicle?id=${car.vehicle_id}" class="action-btn action-btn-edit">Edit</a>
 
-                    <button type="button" class="action-btn action-btn-delete" onclick="openModal('${car.vehicle_id}')">Delete</button>
+                    <a href="#deleteModal-${car.vehicle_id}" class="action-btn action-btn-delete" style="text-decoration: none;">Delete</a>
+
+                    <div id="deleteModal-${car.vehicle_id}" class="modal-overlay">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3>Delete Vehicle</h3>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to delete this vehicle? This action cannot be undone and will remove it from the fleet.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <a href="#" class="btn-cancel" style="text-decoration: none;">Cancel</a>
+                          <form action="${pageContext.request.contextPath}/deleteVehicle" method="POST" style="margin: 0; display: inline-block;">
+                            <input type="hidden" name="vehicle_id" value="${car.vehicle_id}">
+                            <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -111,48 +129,7 @@
     </div>
   </main>
 
-  <div id="deleteModal" class="modal-overlay" style="display: none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Delete Vehicle</h3>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this vehicle? This action cannot be undone and will remove it from the fleet.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
-
-        <form id="deleteForm" action="${pageContext.request.contextPath}/deleteVehicle" method="POST" style="margin: 0; display: inline-block;">
-          <input type="hidden" name="vehicle_id" id="modalVehicleId" value="">
-          <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const modal = document.getElementById('deleteModal');
-    const vehicleIdInput = document.getElementById('modalVehicleId');
-
-    function openModal(vehicleId) {
-      // Set the hidden input value to the specific vehicle's ID
-      vehicleIdInput.value = vehicleId;
-      modal.style.display = 'flex';
-    }
-
-    function closeModal() {
-      modal.style.display = 'none';
-      // Clear the input value
-      vehicleIdInput.value = '';
-    }
-
-    // Close modal if user clicks outside of the modal content
-    window.onclick = function(event) {
-      if (event.target === modal) {
-        closeModal();
-      }
-    }
-  </script>
+  
 </body>
 
 </html>

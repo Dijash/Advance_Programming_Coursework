@@ -318,31 +318,34 @@ button.btn-delete:hover {
 /* Delete Modal Overlay */
 #deleteModal.modal-overlay {
   display: none;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  background-color: rgba(15, 23, 42, 0.6) !important;
-  z-index: 999999 !important;
-  justify-content: center !important;
-  align-items: center !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.6);
+  z-index: 999999;
+  justify-content: center;
+  align-items: center;
   backdrop-filter: blur(4px);
-  margin: 0 !important;
+  margin: 0;
+}
+
+#deleteModal:target {
+  display: flex;
 }
 
 /* Delete Modal Content */
 #deleteModal .modal-content {
-  background: #ffffff !important;
+  background: #ffffff;
   border-radius: 12px;
   width: 90%;
   max-width: 420px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   animation: modalFadeIn 0.2s ease-out;
   overflow: hidden;
-  position: relative !important;
-  margin: auto !important;
-  display: block !important;
+  position: relative;
+  margin: auto;
 }
 
 /* Modal Fade Animation */

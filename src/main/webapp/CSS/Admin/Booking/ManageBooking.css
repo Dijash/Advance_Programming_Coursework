@@ -3,13 +3,58 @@ body {
     font-family: 'Poppins', sans-serif;
     display: flex;
     background-color: #f4f7f9;
+    margin: 0;
 }
 
 /* Main Content */
 main {
     flex: 1;
-    margin-left: 260px;
+    margin-left: 260px; /* Accounts for sidebar */
     padding: 40px;
+}
+
+.page-header h2 {
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.content-box {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead tr {
+    background: #f8fafc;
+    text-align: left;
+    color: #64748b;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+th {
+    padding: 15px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    vertical-align: middle;
+}
+
+tr:hover td {
+    background: #f8fafc;
 }
 
 /* Action Buttons Container */
@@ -19,7 +64,7 @@ main {
     align-items: center;
 }
 
-/* Action Button */
+/* Action Button Base */
 .action-btn {
     border: none;
     padding: 8px 16px;
@@ -35,48 +80,29 @@ main {
     transition: all 0.2s ease;
 }
 
-/* Action Button Active */
 .action-btn:active {
     transform: scale(0.95);
 }
 
 /* View Button */
-.action-btn-view {
-    background: #e1f0fa;
-    color: #2980b9;
-}
-
-/* View Button Hover */
-.action-btn-view:hover {
-    background: #3498db;
-    color: white;
-}
+.action-btn-view { background: #e1f0fa; color: #2980b9; }
+.action-btn-view:hover { background: #3498db; color: white; }
 
 /* Edit Button */
-.action-btn-edit {
-    background: #fef9e7;
-    color: #f39c12;
-}
-
-/* Edit Button Hover */
-.action-btn-edit:hover {
-    background: #f1c40f;
-    color: white;
-}
+.action-btn-edit { background: #fef9e7; color: #f39c12; }
+.action-btn-edit:hover { background: #f1c40f; color: white; }
 
 /* Delete Button */
-.action-btn-delete {
-    background: #fceceb;
-    color: #c0392b;
-}
+.action-btn-delete { background: #fceceb; color: #c0392b; }
+.action-btn-delete:hover { background: #e74c3c; color: white; }
 
-/* Delete Button Hover */
-.action-btn-delete:hover {
-    background: #e74c3c;
-    color: white;
-}
-#deleteModal.modal-overlay {
-  display: none;
+/* =========================================
+   PURE CSS DELETE MODAL (NO JS)
+   ========================================= */
+
+/* Base overlay hidden by default */
+.modal-overlay {
+  display: none !important;
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -90,8 +116,13 @@ main {
   margin: 0 !important;
 }
 
+/* THE MAGIC CSS: Show the modal ONLY when its ID is targeted in the URL */
+.modal-overlay:target {
+  display: flex !important;
+}
+
 /* Delete Modal Content */
-#deleteModal .modal-content {
+.modal-overlay .modal-content {
   background: #ffffff !important;
   border-radius: 12px;
   width: 90%;
@@ -102,28 +133,23 @@ main {
   position: relative !important;
   margin: auto !important;
   display: block !important;
+  text-align: left; /* Fixes text alignment if table cell affects it */
+  white-space: normal; /* Prevents text from staying on one huge line */
 }
 
 /* Modal Fade Animation */
 @keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Modal Header */
-#deleteModal .modal-header {
+.modal-overlay .modal-header {
   padding: 20px;
   border-bottom: 1px solid #f1f5f9;
 }
 
-/* Modal Header Title */
-#deleteModal .modal-header h3 {
+.modal-overlay .modal-header h3 {
   margin: 0;
   color: #0f172a;
   font-size: 1.25rem;
@@ -131,7 +157,7 @@ main {
 }
 
 /* Modal Body */
-#deleteModal .modal-body {
+.modal-overlay .modal-body {
   padding: 20px;
   color: #64748b;
   font-size: 0.95rem;
@@ -139,7 +165,7 @@ main {
 }
 
 /* Modal Footer */
-#deleteModal .modal-footer {
+.modal-overlay .modal-footer {
   padding: 15px 20px;
   background: #f8fafc;
   border-top: 1px solid #f1f5f9;
@@ -159,9 +185,9 @@ main {
   cursor: pointer;
   transition: 0.2s;
   font-family: inherit;
+  box-sizing: border-box;
 }
 
-/* Cancel Button Hover */
 .btn-cancel:hover {
   background: #f1f5f9;
   color: #0f172a;
@@ -180,9 +206,9 @@ main {
   border: none;
   font-family: inherit;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-/* Delete Confirm Button Hover */
 .btn-delete-confirm:hover {
   background: #dc2626;
 }

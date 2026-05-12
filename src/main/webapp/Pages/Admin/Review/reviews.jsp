@@ -75,9 +75,27 @@
                   <c:out value="${r.reviewDate}" />
                 </td>
                 <td>
-                  <button type="button" class="btn-delete" onclick="openModal('${r.reviewId}')">
+                  <a href="#deleteModal-${r.reviewId}" class="btn-delete" style="text-decoration: none;">
                     Delete
-                  </button>
+                  </a>
+
+                  <div id="deleteModal-${r.reviewId}" class="modal-overlay">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h3>Delete Review</h3>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete this customer review? This action cannot be undone.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#" class="btn-cancel" style="text-decoration: none;">Cancel</a>
+                        <form action="${pageContext.request.contextPath}/deleteReview" method="POST" style="margin: 0; display: inline-block;">
+                          <input type="hidden" name="reviewId" value="${r.reviewId}">
+                          <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </c:forEach>
@@ -95,48 +113,7 @@
     </div>
   </main>
 
-  <div id="deleteModal" class="modal-overlay" style="display: none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Delete Review</h3>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this customer review? This action cannot be undone.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
-
-        <form id="deleteForm" action="${pageContext.request.contextPath}/deleteReview" method="POST" style="margin: 0; display: inline-block;">
-          <input type="hidden" name="reviewId" id="modalReviewId" value="">
-          <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const modal = document.getElementById('deleteModal');
-    const reviewIdInput = document.getElementById('modalReviewId');
-
-    function openModal(reviewId) {
-      // Set the hidden input value to the specific review's ID
-      reviewIdInput.value = reviewId;
-      modal.style.display = 'flex';
-    }
-
-    function closeModal() {
-      modal.style.display = 'none';
-      // Clear the input value
-      reviewIdInput.value = '';
-    }
-
-    // Close modal if user clicks outside of the modal content
-    window.onclick = function(event) {
-      if (event.target === modal) {
-        closeModal();
-      }
-    }
-  </script>
+  
 </body>
 
 </html>

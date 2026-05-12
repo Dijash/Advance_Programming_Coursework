@@ -67,7 +67,7 @@ body {
 }
 
 /* Delete Button */
-button.btn-delete {
+.btn-delete {
   background: #ef4444;
   color: white;
   padding: 6px 12px;
@@ -83,39 +83,42 @@ button.btn-delete {
 }
 
 /* Delete Button Hover */
-button.btn-delete:hover {
+.btn-delete:hover {
   background: #dc2626;
   transform: translateY(-1px);
 }
 
 /* Delete Modal Overlay */
-#deleteModal.modal-overlay {
+.modal-overlay {
   display: none;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  background-color: rgba(15, 23, 42, 0.6) !important;
-  z-index: 999999 !important;
-  justify-content: center !important;
-  align-items: center !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.6);
+  z-index: 999999;
+  justify-content: center;
+  align-items: center;
   backdrop-filter: blur(4px);
-  margin: 0 !important;
+  margin: 0;
+}
+
+.modal-overlay:target {
+  display: flex;
 }
 
 /* Delete Modal Content */
-#deleteModal .modal-content {
-  background: #ffffff !important;
+.modal-overlay .modal-content {
+  background: #ffffff;
   border-radius: 12px;
   width: 90%;
   max-width: 420px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   animation: modalFadeIn 0.2s ease-out;
   overflow: hidden;
-  position: relative !important;
-  margin: auto !important;
-  display: block !important;
+  position: relative;
+  margin: auto;
 }
 
 /* Modal Fade Animation */
@@ -132,13 +135,13 @@ button.btn-delete:hover {
 }
 
 /* Modal Header */
-#deleteModal .modal-header {
+.modal-overlay .modal-header {
   padding: 20px;
   border-bottom: 1px solid #f1f5f9;
 }
 
 /* Modal Header Title */
-#deleteModal .modal-header h3 {
+.modal-overlay .modal-header h3 {
   margin: 0;
   color: #0f172a;
   font-size: 1.25rem;
@@ -146,7 +149,7 @@ button.btn-delete:hover {
 }
 
 /* Modal Body */
-#deleteModal .modal-body {
+.modal-overlay .modal-body {
   padding: 20px;
   color: #64748b;
   font-size: 0.95rem;
@@ -154,7 +157,7 @@ button.btn-delete:hover {
 }
 
 /* Modal Footer */
-#deleteModal .modal-footer {
+.modal-overlay .modal-footer {
   padding: 15px 20px;
   background: #f8fafc;
   border-top: 1px solid #f1f5f9;

@@ -43,7 +43,7 @@
               <p>User ID: <strong>#${customer.customer_id}</strong> | <span class="username-badge">@${customer.customer_username}</span></p>
             </div>
 
-            <button type="button" class="delete-btn" onclick="openModal('${customer.customer_id}')">Delete Account</button>
+            <a href="#deleteModal" class="delete-btn" style="text-decoration: none;">Delete Account</a>
           </div>
 
           <div class="detail-grid">
@@ -91,7 +91,7 @@
       </div>
     </main>
 
-    <div id="deleteModal" class="modal-overlay" style="display: none;">
+    <div id="deleteModal" class="modal-overlay">
       <div class="modal-content">
         <div class="modal-header">
           <h3>Delete Customer</h3>
@@ -100,38 +100,14 @@
           <p>Are you sure you want to permanently delete this customer? This action cannot be undone.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <a href="#" class="btn-cancel" style="text-decoration: none;">Cancel</a>
 
-          <form id="deleteForm" action="${pageContext.request.contextPath}/deleteCustomer" method="POST" style="margin: 0; display: inline-block;">
-            <input type="hidden" name="customer_id" id="modalCustomerId" value="">
+          <form action="${pageContext.request.contextPath}/deleteCustomer" method="POST" style="margin: 0; display: inline-block;">
+            <input type="hidden" name="customer_id" value="${customer.customer_id}">
             <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
           </form>
         </div>
       </div>
     </div>
-
-    <script>
-      const modal = document.getElementById('deleteModal');
-      const customerIdInput = document.getElementById('modalCustomerId');
-
-      function openModal(customerId) {
-        // Set the hidden input value to the specific customer's ID
-        customerIdInput.value = customerId;
-        modal.style.display = 'flex';
-      }
-
-      function closeModal() {
-        modal.style.display = 'none';
-        // Clear the input value
-        customerIdInput.value = '';
-      }
-
-      // Close modal if user clicks outside of the modal content
-      window.onclick = function(event) {
-        if (event.target === modal) {
-          closeModal();
-        }
-      }
-    </script>
   </body>
 </html>
