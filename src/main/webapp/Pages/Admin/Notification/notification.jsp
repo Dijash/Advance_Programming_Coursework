@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="jakarta.tags.core" %> <%@
-taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sql" uri="jakarta.tags.sql" %>
 
 <!doctype html>
 <html lang="en">
@@ -9,59 +9,23 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Notification/Notification.css">
     <title>RentAll | Manage Notifications</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <aside class="sidebar">
       <h2>RentAll</h2>
       <nav>
         <ul>
-          <li>
-            <a href="${pageContext.request.contextPath}/admin"
-              ><span>Dashboard</span></a
-            >
-          </li>
-          <li>
-            <a href="${pageContext.request.contextPath}/manageBooking"
-              ><span>Bookings</span></a
-            >
-          </li>
-          <li>
-            <a href="${pageContext.request.contextPath}/manageVehicles"
-              ><span>Manage Vehicles</span></a
-            >
-          </li>
-          <li>
-            <a href="${pageContext.request.contextPath}/manageCustomers"
-              ><span>Customers</span></a
-            >
-          </li>
-          <li>
-            <a href="${pageContext.request.contextPath}/manageReviews"
-              ><span>Reviews</span></a
-            >
-          </li>
-          <li>
-            <a
-              href="${pageContext.request.contextPath}/manageNotification"
-              class="active"
-              ><span>Notifications</span></a
-            >
-          </li>
-          <li>
-            <a href="${pageContext.request.contextPath}/report"
-              ><span>Reports</span></a
-            >
-          </li>
+          <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/manageNotification" class="active"><span>Notifications</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
         </ul>
       </nav>
-      <a href="${pageContext.request.contextPath}/logout" class="logout"
-        ><span>Logout</span></a
-      >
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
     </aside>
 
     <main>
@@ -70,65 +34,27 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
       </div>
 
       <div class="send-box">
-        <form
-          action="${pageContext.request.contextPath}/sendNotification"
-          method="POST"
-        >
+        <form action="${pageContext.request.contextPath}/sendNotification" method="POST">
           <div class="form-group">
             <label>Subject</label>
-            <input
-              type="text"
-              name="subject"
-              class="form-control"
-              placeholder="e.g., Weekend Discount!"
-              required
-            />
+            <input type="text" name="subject" class="form-control" placeholder="e.g., Weekend Discount!" required />
           </div>
           <div class="form-group">
             <label>Message Content</label>
-            <textarea
-              name="message"
-              class="form-control"
-              rows="3"
-              placeholder="Write your message to all users..."
-              required
-            ></textarea>
+            <textarea name="message" class="form-control" rows="3" placeholder="Write your message to all users..." required></textarea>
           </div>
           <button type="submit" class="btn-send">Send to All Users</button>
         </form>
       </div>
 
-      <div
-        class="content-box"
-        style="
-          background: white;
-          border-radius: 12px;
-          border: 1px solid #e2e8f0;
-          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        "
-      >
-        <h3
-          style="
-            padding: 20px;
-            font-size: 1.1rem;
-            border-bottom: 1px solid #f1f5f9;
-            color: #0f172a;
-          "
-        >
+      <div class="content-box" style="background: white; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);">
+        <h3 style="padding: 20px; font-size: 1.1rem; border-bottom: 1px solid #f1f5f9; color: #0f172a;">
           Sent History
         </h3>
         <div class="table-responsive">
           <table style="width: 100%; border-collapse: collapse">
             <thead>
-              <tr
-                style="
-                  background: #f8fafc;
-                  text-align: left;
-                  color: #64748b;
-                  font-size: 0.85rem;
-                  text-transform: uppercase;
-                "
-              >
+              <tr style="background: #f8fafc; text-align: left; color: #64748b; font-size: 0.85rem; text-transform: uppercase;">
                 <th style="padding: 15px">Subject</th>
                 <th style="padding: 15px">Message</th>
                 <th style="padding: 15px">Date Sent</th>
@@ -136,11 +62,9 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
               </tr>
             </thead>
             <tbody>
-              <%-- Iterate over the list of objects sent from the Servlet --%>
               <c:forEach var="row" items="${notifHistory}">
                 <tr style="border-bottom: 1px solid #f1f5f9">
                   <td style="padding: 15px; color: #1e293b">
-                    <%-- Use the property names from your Notification model (Java class) --%>
                     <strong><c:out value="${row.type}" /></strong>
                   </td>
                   <td style="padding: 15px">
@@ -151,16 +75,10 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
                   <td style="padding: 15px; font-size: 0.8rem; color: #94a3b8">
                     <c:out value="${row.date}" />
                   </td>
-
                   <td style="padding: 15px; text-align: center">
-                    <%-- Use row.id to match your Java model property --%>
-                    <a
-                      href="${pageContext.request.contextPath}/deleteNotification?id=${row.id}"
-                      class="btn-delete"
-                      onclick="return confirm('Are you sure you want to delete this notification?');"
-                    >
+                    <button type="button" class="btn-delete" onclick="openModal('${row.id}')">
                       Delete
-                    </a>
+                    </button>
                   </td>
                 </tr>
               </c:forEach>
@@ -177,5 +95,41 @@ taglib prefix="sql" uri="jakarta.tags.sql" %> <%-- Database Connection --%>
         </div>
       </div>
     </main>
+
+    <div id="deleteModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Delete Notification</h3>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this broadcast? This action cannot be undone and will remove it from all user dashboards.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <a href="#" id="confirmDeleteBtn" class="btn-delete-confirm">Yes, Delete</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const modal = document.getElementById('deleteModal');
+      const confirmBtn = document.getElementById('confirmDeleteBtn');
+
+      function openModal(notificationId) {
+        confirmBtn.href = '${pageContext.request.contextPath}/deleteNotification?id=' + notificationId;
+        modal.style.display = 'flex';
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        confirmBtn.href = '#';
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          closeModal();
+        }
+      }
+    </script>
   </body>
 </html>
