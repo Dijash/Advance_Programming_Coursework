@@ -1,104 +1,142 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-  <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-    <%@ taglib prefix="sql" uri="jakarta.tags.sql" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sql" uri="jakarta.tags.sql" %>
 
-          <!doctype html>
-          <html lang="en">
+<!doctype html>
+<html lang="en">
 
-          <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Review/review.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Review/review.css">
 
-            <title>RentAll | Reviews</title>
-            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-              rel="stylesheet">
+  <title>RentAll | Reviews</title>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
 
-          </head>
+<body>
+  <input type="checkbox" id="menu-toggle" style="display:none;" />
+  <label for="menu-toggle" class="menu-btn" style="display:none;">MENU</label>
 
-          <body>
-            <input type="checkbox" id="menu-toggle" style="display:none;" />
-            <label for="menu-toggle" class="menu-btn" style="display:none;">MENU</label>
+  <%-- Consistent Sidebar --%>
+  <aside class="sidebar">
+    <h2>RentAll</h2>
+    <nav>
+      <ul>
+        <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
+        <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
+        <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
+        <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
+        <li><a href="${pageContext.request.contextPath}/manageReviews" class="active"><span>Reviews</span></a>
+        </li>
+        <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
+        <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
+      </ul>
+    </nav>
+    <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
+  </aside>
 
-            <%-- Consistent Sidebar --%>
-              <aside class="sidebar">
-                <h2>RentAll</h2>
-                <nav>
-                  <ul>
-                    <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/manageReviews" class="active"><span>Reviews</span></a>
-                    </li>
-                    <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
+  <main>
+    <div class="page-header">
+      <h2>Customer Feedback</h2>
+    </div>
 
-                  </ul>
-                </nav>
-                <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
-              </aside>
-
-              <main>
-                <div class="page-header">
-                  <h2>Customer Feedback</h2>
-                </div>
-
-                <div class="content-box">
-                  <div class="table-responsive">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Customer</th>
-                          <th>Comment</th>
-                          <th>Date Posted</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <c:forEach var="r" items="${reviews}">
-                          <tr>
-                            <td>
-                              <span class="customer-name">
-                                <%-- Matches getCustomerName() in your Review class --%>
-                                <c:out value="${r.customerName}" />
-                              </span>
-                              <span class="review-date">ID: #<c:out value="${r.reviewId}" /></span>
-                            </td>
-                            <td>
-                              <div class="review-desc">
-                                <%-- Matches getReviewDescription() --%>
-                                "<c:out value="${r.reviewDescription}" />"
-                              </div>
-                            </td>
-                            <td>
-                              <%-- Matches getReviewDate() --%>
-                              <c:out value="${r.reviewDate}" />
-                            </td>
-                            <td>
-                              <form action="${pageContext.request.contextPath}/deleteReview" method="POST" style="display:inline;">
-                                <input type="hidden" name="reviewId" value="${r.reviewId}">
-                                <button type="submit" class="btn-delete" onclick="return confirm('Delete this review?');">
-                                  Delete
-                                </button>
-                              </form>
-                            </td>
-                          </tr>
-                        </c:forEach>
-
-                        <c:if test="${empty reviews}">
-                          <tr>
-                            <td colspan="4" style="text-align: center; padding: 40px; color: #64748b;">
-                              No reviews found in the database.
-                            </td>
-                          </tr>
-                        </c:if>
-                      </tbody>
-                    </table>
+    <div class="content-box">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Comment</th>
+              <th>Date Posted</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <c:forEach var="r" items="${reviews}">
+              <tr>
+                <td>
+                  <span class="customer-name">
+                    <%-- Matches getCustomerName() in your Review class --%>
+                    <c:out value="${r.customerName}" />
+                  </span>
+                  <span class="review-date">ID: #<c:out value="${r.reviewId}" /></span>
+                </td>
+                <td>
+                  <div class="review-desc">
+                    <%-- Matches getReviewDescription() --%>
+                    "<c:out value="${r.reviewDescription}" />"
                   </div>
-                </div>
-              </main>
-          </body>
+                </td>
+                <td>
+                  <%-- Matches getReviewDate() --%>
+                  <c:out value="${r.reviewDate}" />
+                </td>
+                <td>
+                  <button type="button" class="btn-delete" onclick="openModal('${r.reviewId}')">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </c:forEach>
 
-          </html>
+            <c:if test="${empty reviews}">
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 40px; color: #64748b;">
+                  No reviews found in the database.
+                </td>
+              </tr>
+            </c:if>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <div id="deleteModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Delete Review</h3>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this customer review? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+
+        <form id="deleteForm" action="${pageContext.request.contextPath}/deleteReview" method="POST" style="margin: 0; display: inline-block;">
+          <input type="hidden" name="reviewId" id="modalReviewId" value="">
+          <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('deleteModal');
+    const reviewIdInput = document.getElementById('modalReviewId');
+
+    function openModal(reviewId) {
+      // Set the hidden input value to the specific review's ID
+      reviewIdInput.value = reviewId;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      // Clear the input value
+      reviewIdInput.value = '';
+    }
+
+    // Close modal if user clicks outside of the modal content
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+
+</html>
