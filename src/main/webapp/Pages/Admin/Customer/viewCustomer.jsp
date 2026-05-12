@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Customers/ViewCustomer.css">
     <title>RentAll | View Customer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
   </head>
   <body>
     <aside class="sidebar">
@@ -44,10 +43,7 @@
               <p>User ID: <strong>#${customer.customer_id}</strong> | <span class="username-badge">@${customer.customer_username}</span></p>
             </div>
 
-            <form action="${pageContext.request.contextPath}/deleteCustomer" method="POST" onsubmit="return confirm('This will permanently delete this customer. Proceed?');">
-              <input type="hidden" name="customer_id" value="${customer.customer_id}">
-              <button type="submit" class="delete-btn">Delete Account</button>
-            </form>
+            <button type="button" class="delete-btn" onclick="openModal('${customer.customer_id}')">Delete Account</button>
           </div>
 
           <div class="detail-grid">
@@ -94,5 +90,48 @@
         </div>
       </div>
     </main>
+
+    <div id="deleteModal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Delete Customer</h3>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to permanently delete this customer? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+
+          <form id="deleteForm" action="${pageContext.request.contextPath}/deleteCustomer" method="POST" style="margin: 0; display: inline-block;">
+            <input type="hidden" name="customer_id" id="modalCustomerId" value="">
+            <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const modal = document.getElementById('deleteModal');
+      const customerIdInput = document.getElementById('modalCustomerId');
+
+      function openModal(customerId) {
+        // Set the hidden input value to the specific customer's ID
+        customerIdInput.value = customerId;
+        modal.style.display = 'flex';
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        // Clear the input value
+        customerIdInput.value = '';
+      }
+
+      // Close modal if user clicks outside of the modal content
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          closeModal();
+        }
+      }
+    </script>
   </body>
 </html>
