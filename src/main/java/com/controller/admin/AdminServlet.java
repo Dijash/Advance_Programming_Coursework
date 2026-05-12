@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * AdminServlet
- * <p>
  * This servlet acts as the central controller for the administration panel.
  * It handles routing for all administrative tasks including dashboard metrics,
  * vehicle management, booking administration, customer data viewing,
