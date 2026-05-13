@@ -86,7 +86,7 @@ main {
   border-color: #fca5a5;
 }
 
-/* Content Box & Table (Inherits base styles from Admin.css, specific overrides below) */
+/* Content Box & Table */
 .content-box {
   background: #ffffff;
   border-radius: 12px;

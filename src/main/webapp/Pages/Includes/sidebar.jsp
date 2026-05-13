@@ -3,13 +3,6 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="com.model.Customer" %>
 
-<%
-    String activePage = (String) request.getAttribute("activePage");
-    if (activePage == null) {
-        activePage = "";
-    }
-%>
-
 <aside class="sidebar">
   <h2><a href="${pageContext.request.contextPath}/home" class="main-thing">RentAll</a></h2>
   <nav>

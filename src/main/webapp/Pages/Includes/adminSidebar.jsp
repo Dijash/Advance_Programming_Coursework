@@ -2,13 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<%
-    String activePage = (String) request.getAttribute("activePage");
-    if (activePage == null) {
-        activePage = "";
-    }
-%>
-
 <input type="checkbox" id="menu-toggle" style="display:none;" />
 <label for="menu-toggle" class="menu-btn" style="display:none;">MENU</label>
 
