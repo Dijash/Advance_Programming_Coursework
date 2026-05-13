@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="sql" uri="jakarta.tags.sql" />
+<%@ taglib prefix="sql" uri="jakarta.tags.sql" %>
 <c:set var="activePage" value="notifications" scope="request" />
 
 <!doctype html>

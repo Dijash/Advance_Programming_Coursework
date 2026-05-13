@@ -1,6 +1,15 @@
-/* Body */
+/* Base Styles */
 body {
   font-family: "Poppins", sans-serif;
+  background-color: #f4f7f9;
+  margin: 0;
+  display: flex;
+}
+
+main {
+  flex: 1;
+  margin-left: 260px; /* Accounts for sidebar */
+  padding: 40px;
 }
 
 /* Search Container */
@@ -11,32 +20,116 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Search Form Layout */
+.search-form {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 550px;
+  align-items: center;
+}
+
 /* Search Bar */
 .search-bar {
+  flex: 1;
   padding: 12px 18px;
-  width: 320px;
   border-radius: 10px;
   border: 1px solid #e2e8f0;
   outline: none;
   font-family: inherit;
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+  transition: border-color 0.2s;
 }
 
-/* User Details Name */
+.search-bar:focus {
+  border-color: #3b82f6;
+}
+
+/* Search Button */
+.btn-search {
+  padding: 12px 24px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.btn-search:hover {
+  background: #2563eb;
+}
+
+/* Clear Button */
+.btn-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 18px;
+  background: #ffffff;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-clear:hover {
+  background: #fee2e2;
+  color: #ef4444;
+  border-color: #fca5a5;
+}
+
+/* Content Box & Table (Inherits base styles from Admin.css, specific overrides below) */
+.content-box {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  background: #f8fafc;
+  text-align: left;
+  color: #64748b;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+th, td {
+  padding: 15px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+tr:hover td {
+  background: #f8fafc;
+}
+
+/* User Details Cell */
 .user-details strong {
   display: block;
   color: #1e293b;
   font-weight: 600;
 }
 
-/* User Details Text */
 .user-details span {
   font-size: 13px;
   color: #64748b;
 }
 
-/* Action Button */
+/* Action Button (View Profile) */
 .action-btn {
   text-decoration: none;
   background-color: #f1f5f9;
@@ -47,21 +140,20 @@ body {
   font-weight: 600;
   transition: 0.2s;
   border: 1px solid #e2e8f0;
+  display: inline-block;
 }
 
-/* Action Button Hover */
 .action-btn:hover {
   background-color: #0f172a;
   color: #ffffff;
 }
 
-/* Country Text */
+/* Typography Helpers */
 .country-text {
   font-weight: 500;
   color: #334155;
 }
 
-/* Not Provided Text */
 .not-provided {
   color: #94a3b8;
   font-style: italic;

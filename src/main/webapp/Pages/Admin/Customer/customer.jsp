@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" />
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <c:set var="activePage" value="customers" scope="request" />
 
 <!doctype html>
@@ -8,26 +8,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentAll | Customers</title>
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Customers/Customer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Customers/Customer.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/adminSidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-
   </head>
   <body>
     <jsp:include page="/Pages/Includes/adminSidebar.jsp" />
-    </aside>
 
     <main>
       <div class="search-container">
         <h2 style="font-weight: 700; color: #0f172a;">Customer Database</h2>
-        <form action="${pageContext.request.contextPath}/manageCustomers" method="GET" style="display: flex; gap: 10px; width: 100%; max-width: 500px; align-items: center;">
-          <input type="text" name="search" class="search-bar" placeholder="Search by name, email, username, phone..." 
-                 value="${searchQuery}" style="flex: 1;" />
-          <button type="submit" style="padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 500;">Search</button>
+
+        <form action="${pageContext.request.contextPath}/manageCustomers" method="GET" class="search-form">
+          <input type="text" name="search" class="search-bar" placeholder="Search by name, email, username, phone..." value="${searchQuery}" />
+          <button type="submit" class="btn-search">Search</button>
+
           <c:if test="${not empty searchQuery}">
-            <a href="${pageContext.request.contextPath}/manageCustomers" style="padding: 10px 16px; background: transparent; color: #64748b; border: 1px solid #cbd5e1; border-radius: 8px; text-decoration: none; font-weight: 500; transition: 0.2s;">✕ Clear</a>
+            <a href="${pageContext.request.contextPath}/manageCustomers" class="btn-clear">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              Clear
+            </a>
           </c:if>
         </form>
       </div>
@@ -66,8 +70,7 @@
                   </td>
                   <td style="color: #64748b;"><c:out value="${customer.created_at}" /></td>
                   <td>
-                    <a href="${pageContext.request.contextPath}/viewCustomer?id=${customer.customer_id}"
-                       class="action-btn">View Profile</a>
+                    <a href="${pageContext.request.contextPath}/viewCustomer?id=${customer.customer_id}" class="action-btn">View Profile</a>
                   </td>
                 </tr>
               </c:forEach>
