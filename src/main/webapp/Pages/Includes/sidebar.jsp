@@ -9,25 +9,25 @@
     <ul>
       <li>
         <a href="${pageContext.request.contextPath}/userDashboard" 
-           class="<%= activePage.equals("dashboard") ? "active" : "" %>">
+           class="${activePage == 'dashboard' ? 'active' : ''}">
            Dashboard
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/myBookings" 
-           class="<%= activePage.equals("myBookings") ? "active" : "" %>">
+           class="${activePage == 'myBookings' ? 'active' : ''}">
            My Bookings
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/myFavorites" 
-           class="<%= activePage.equals("myFavorites") ? "active" : "" %>">
+           class="${activePage == 'myFavorites' ? 'active' : ''}">
            My Favorites
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/settings" 
-           class="<%= activePage.equals("settings") ? "active" : "" %>">
+           class="${activePage == 'settings' ? 'active' : ''}">
            Settings
         </a>
       </li>

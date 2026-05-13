@@ -11,43 +11,43 @@
     <ul>
       <li>
         <a href="${pageContext.request.contextPath}/admin" 
-           class="<%= activePage.equals("dashboard") ? "active" : "" %>">
+           class="${activePage == 'dashboard' ? 'active' : ''}">
            <span>Dashboard</span>
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/manageBooking" 
-           class="<%= activePage.equals("bookings") ? "active" : "" %>">
+           class="${activePage == 'bookings' ? 'active' : ''}">
            <span>Bookings</span>
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/manageVehicles" 
-           class="<%= activePage.equals("vehicles") ? "active" : "" %>">
+           class="${activePage == 'vehicles' ? 'active' : ''}">
            <span>Manage Vehicles</span>
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/manageCustomers" 
-           class="<%= activePage.equals("customers") ? "active" : "" %>">
+           class="${activePage == 'customers' ? 'active' : ''}">
            <span>Customers</span>
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/manageReviews" 
-           class="<%= activePage.equals("reviews") ? "active" : "" %>">
+           class="${activePage == 'reviews' ? 'active' : ''}">
            <span>Reviews</span>
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/manageNotification" 
-           class="<%= activePage.equals("notifications") ? "active" : "" %>">
+           class="${activePage == 'notifications' ? 'active' : ''}">
            <span>Notifications</span>
         </a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/report" 
-           class="<%= activePage.equals("reports") ? "active" : "" %>">
+           class="${activePage == 'reports' ? 'active' : ''}">
            <span>Reports</span>
         </a>
       </li>
