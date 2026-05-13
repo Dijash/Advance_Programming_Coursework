@@ -78,10 +78,25 @@
                                     <div style="display: flex; gap: 8px; align-items: center;">
                                         <a href="${pageContext.request.contextPath}/viewUserBooking?id=${booking.bookingId}" class="btn-action">Details</a>
                                         <c:if test="${booking.status == 'Pending'}">
-                                            <form action="${pageContext.request.contextPath}/cancelBooking" method="POST" onsubmit="return confirm('Cancel this booking?')">
-                                                <input type="hidden" name="bookingId" value="${booking.bookingId}">
-                                                <button type="submit" class="btn-action" style="color: var(--danger); border-color: #fca5a5; background: #fff1f1;">Cancel</button>
-                                            </form>
+                                            <a href="#cancelModal-${booking.bookingId}" class="btn-action" style="color: var(--danger); border-color: #fca5a5; background: #fff1f1;">Cancel</a>
+                                            
+                                            <div id="cancelModal-${booking.bookingId}" class="modal-overlay">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3>Cancel Booking</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to cancel this booking? This action cannot be undone and you may be charged a cancellation fee.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="#" class="btn-cancel">Cancel</a>
+                                                        <form action="${pageContext.request.contextPath}/cancelBooking" method="POST" style="display: inline;">
+                                                            <input type="hidden" name="bookingId" value="${booking.bookingId}">
+                                                            <button type="submit" class="btn-cancel-confirm">Yes, Cancel</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </c:if>
                                     </div>
                                 </td>
