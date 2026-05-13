@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+  <c:set var="activePage" value="settings" scope="request" />
 
     <!doctype html>
     <html lang="en">
@@ -8,6 +9,7 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/User/Dashboard/settings.css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/User/sidebar.css">
       <title>RentAll | Profile Settings</title>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
@@ -15,16 +17,7 @@
     </head>
 
     <body>
-      <aside class="sidebar">
-        <h2>RentAll</h2>
-        <nav>
-          <a href="${pageContext.request.contextPath}/userDashboard">Dashboard</a>
-          <a href="${pageContext.request.contextPath}/myBookings">My Bookings</a>
-          <a href="${pageContext.request.contextPath}/myFavorites" >My Favorites</a>
-          <a href="${pageContext.request.contextPath}/settings" class="active">Settings</a>
-        </nav>
-        <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
-      </aside>
+      <jsp:include page="/Pages/Includes/sidebar.jsp" />
 
       <main>
         <header class="top-navbar">

@@ -23,4 +23,8 @@ public class CustomerService {
     public int getTotalCustomerCount() {
         return customerDAO.getTotalCustomerCount();
     }
+
+    public List<Customer> searchCustomers(String query) {
+        return customerDAO.searchCustomers(query);
+    }
 }

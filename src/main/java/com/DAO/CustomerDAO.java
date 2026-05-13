@@ -119,4 +119,35 @@ public class CustomerDAO {
         return count;
     }
 
+    public List<Customer> searchCustomers(String query) {
+        List<Customer> customers = new ArrayList<>();
+        String sql = "SELECT * FROM customer WHERE " +
+                     "first_name LIKE ? OR " +
+                     "last_name LIKE ? OR " +
+                     "customer_username LIKE ? OR " +
+                     "customer_email LIKE ? OR " +
+                     "customer_phoneNo LIKE ? " +
+                     "ORDER BY customer_id DESC";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            String searchPattern = "%" + query + "%";
+            stmt.setString(1, searchPattern);
+            stmt.setString(2, searchPattern);
+            stmt.setString(3, searchPattern);
+            stmt.setString(4, searchPattern);
+            stmt.setString(5, searchPattern);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    customers.add(extractCustomerFromResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
+
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" />
+<c:set var="activePage" value="customers" scope="request" />
 
 <!doctype html>
 <html lang="en">
@@ -9,31 +10,26 @@
     <title>RentAll | Customers</title>
      <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Customers/Customer.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/adminSidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
   </head>
   <body>
-    <aside class="sidebar">
-      <h2>RentAll</h2>
-      <nav>
-        <ul>
-          <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageCustomers" class="active"><span>Customers</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
-        </ul>
-      </nav>
-      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
+    <jsp:include page="/Pages/Includes/adminSidebar.jsp" />
     </aside>
 
     <main>
       <div class="search-container">
         <h2 style="font-weight: 700; color: #0f172a;">Customer Database</h2>
-        <input type="text" class="search-bar" placeholder="Search customers..." />
+        <form action="${pageContext.request.contextPath}/manageCustomers" method="GET" style="display: flex; gap: 10px; width: 100%; max-width: 500px; align-items: center;">
+          <input type="text" name="search" class="search-bar" placeholder="Search by name, email, username, phone..." 
+                 value="${searchQuery}" style="flex: 1;" />
+          <button type="submit" style="padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 500;">Search</button>
+          <c:if test="${not empty searchQuery}">
+            <a href="${pageContext.request.contextPath}/manageCustomers" style="padding: 10px 16px; background: transparent; color: #64748b; border: 1px solid #cbd5e1; border-radius: 8px; text-decoration: none; font-weight: 500; transition: 0.2s;">✕ Clear</a>
+          </c:if>
+        </form>
       </div>
 
       <div class="content-box">

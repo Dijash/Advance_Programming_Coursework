@@ -1,31 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" />
+<c:set var="activePage" value="myBookings" scope="request" />
 
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/User/Booking/bookingdetails.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/User/sidebar.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/User/Booking/bookingdetails.css">
   <title>RentAll | Booking Details</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
 </head>
 
 <body>
-  <aside class="sidebar">
-    <h2>RentAll</h2>
-    <nav>
-      <ul>
-        <li><a href="${pageContext.request.contextPath}/userDashboard">Dashboard</a></li>
-        <li><a href="${pageContext.request.contextPath}/myBookings" class="active">My Bookings</a></li>
-        <li><a href="${pageContext.request.contextPath}/myFavorites" >My Favorites</a></li>
-        <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
-      </ul>
-    </nav>
-    <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
-  </aside>
+  <jsp:include page="/Pages/Includes/sidebar.jsp" />
 
   <main>
     <header class="top-navbar">

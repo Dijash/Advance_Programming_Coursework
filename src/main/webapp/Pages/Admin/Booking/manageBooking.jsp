@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" />
+<c:set var="activePage" value="bookings" scope="request" />
 
 <!doctype html>
 <html lang="en">
@@ -9,24 +10,11 @@
     <title>RentAll | Bookings</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Booking/ManageBooking.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/adminSidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <aside class="sidebar">
-      <h2>RentAll</h2>
-      <nav>
-        <ul>
-          <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageBooking" class="active"><span>Bookings</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/report"><span>Reports</span></a></li>
-        </ul>
-      </nav>
-      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
-    </aside>
+    <jsp:include page="/Pages/Includes/adminSidebar.jsp" />
 
     <main>
       <div class="page-header">

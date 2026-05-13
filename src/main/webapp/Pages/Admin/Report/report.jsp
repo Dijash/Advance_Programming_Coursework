@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false" />
+<c:set var="activePage" value="reports" scope="request" />
 
 <!doctype html>
 <html lang="en">
@@ -8,31 +9,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Report/Report.css">
-
-    <title>RentAll | System Reports</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/adminSidebar.css">
 
   </head>
   <body>
-    <input type="checkbox" id="menu-toggle" style="display:none;" />
-    <label for="menu-toggle" class="menu-btn" style="display:none;">MENU</label>
-
-    <aside class="sidebar">
-      <h2>RentAll</h2>
-      <nav>
-        <ul>
-          <li><a href="${pageContext.request.contextPath}/admin"><span>Dashboard</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageBooking"><span>Bookings</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageVehicles"><span>Manage Vehicles</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageCustomers"><span>Customers</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageReviews"><span>Reviews</span></a></li>
-          <li><a href="${pageContext.request.contextPath}/manageNotification"><span>Notifications</span></a></li>
-          <!-- Active class moved to Reports -->
-          <li><a href="${pageContext.request.contextPath}/report" class="active"><span>Reports</span></a></li>
-        </ul>
-      </nav>
-      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
-    </aside>
+    <jsp:include page="/Pages/Includes/adminSidebar.jsp" />
 
     <main>
       <!-- Top Statistics Row -->

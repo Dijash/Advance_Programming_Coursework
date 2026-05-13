@@ -3,6 +3,7 @@
   --primary: #0f172a;
   --sidebar-active: #334155;
   --accent: #3b82f6;
+  --danger: #ef4444;
   --bg-main: #f8fafc;
   --card-bg: #ffffff;
   --text-main: #1e293b;
@@ -70,13 +71,16 @@ body {
 /* Logout Button */
 .logout {
   margin-top: auto;
-  background: #ef4444;
+  background: var(--danger);
   color: white !important;
-  text-align: center;
+  display: flex;
   justify-content: center;
-  padding: 0.8rem;
+  align-items: center;
+  padding: 0.8rem 1rem;
   border-radius: var(--radius-md);
   text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
 /* Main Container */

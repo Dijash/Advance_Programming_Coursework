@@ -185,8 +185,14 @@ public class AdminServlet extends HttpServlet {
             case "/manageCustomers":
 
                 CustomerService customerService = new CustomerService();
+                String searchQuery = request.getParameter("search");
 
-                request.setAttribute("customers", customerService.getAllCustomers());
+                if (searchQuery != null && !searchQuery.trim().isEmpty()) {
+                    request.setAttribute("customers", customerService.searchCustomers(searchQuery.trim()));
+                    request.setAttribute("searchQuery", searchQuery);
+                } else {
+                    request.setAttribute("customers", customerService.getAllCustomers());
+                }
 
                 request.getRequestDispatcher("/Pages/Admin/Customer/customer.jsp")
                         .forward(request, response);

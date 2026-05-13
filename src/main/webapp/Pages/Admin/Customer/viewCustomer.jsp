@@ -1,30 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" />
+<c:set var="activePage" value="customers" scope="request" />
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Customers/ViewCustomer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/adminSidebar.css">
     <title>RentAll | View Customer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <aside class="sidebar">
-      <h2>RentAll</h2>
-      <nav>
-        <ul>
-          <li><a href="${pageContext.request.contextPath}/admin">Dashboard</a></li>
-          <li><a href="${pageContext.request.contextPath}/manageBooking">Bookings</a></li>
-          <li><a href="${pageContext.request.contextPath}/manageVehicles">Manage Vehicles</a></li>
-          <li><a href="${pageContext.request.contextPath}/manageCustomers" class="active">Customers</a></li>
-          <li><a href="${pageContext.request.contextPath}/manageReviews">Reviews</a></li>
-          <li><a href="${pageContext.request.contextPath}/report">Reports</a></li>
-          <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
-        </ul>
-      </nav>
-      <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
-    </aside>
+    <jsp:include page="/Pages/Includes/adminSidebar.jsp" />
 
     <main>
       <div class="page-container">

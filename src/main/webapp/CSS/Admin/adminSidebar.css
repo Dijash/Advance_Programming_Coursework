@@ -1,0 +1,147 @@
+/* Unified Admin Sidebar Styles */
+
+:root {
+  --primary: #0f1011;
+  --primary-hover: #273f4b;
+  --accent: #c0392b;
+  --accent-hover: #e74c3c;
+  --bg-light: #f4f7f9;
+  --text-dark: #2c3e50;
+  --text-muted: #7f8c8d;
+  --white: #ffffff;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --radius: 16px;
+  --gap: 24px;
+  --sidebar-width: 260px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--primary);
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar h2 {
+  font-size: 1.6rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.sidebar h2 span {
+  color: #3498db;
+}
+
+.sidebar nav {
+  flex: 1;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 14px 18px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateX(5px);
+}
+
+.sidebar a.active {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logout {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 14px 18px;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background: var(--accent);
+  transition: all 0.2s ease;
+  justify-content: center;
+}
+
+.logout:hover {
+  background: var(--accent-hover);
+  transform: translateX(5px);
+}
+
+/* Mobile Menu Toggle */
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background: var(--primary);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#menu-toggle:checked + .menu-btn {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 20px 15px;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sidebar a {
+    padding: 12px 15px;
+    font-size: 0.85rem;
+  }
+  
+  .menu-btn {
+    display: block;
+  }
+}
