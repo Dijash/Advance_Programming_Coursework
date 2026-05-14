@@ -15,8 +15,7 @@ import java.util.List;
         "/manageVehicles", "/addVehicle", "/viewVehicle", "/editVehicle",
         "/manageCustomers", "/viewCustomer", "/deleteCustomer",
         "/manageReviews", "/deleteReview",
-        "/manageNotification", "/sendNotification",
-        "/report", "/invoice"
+        "/manageNotification", "/sendNotification"
 })
 public class AdminServlet extends HttpServlet {
 
