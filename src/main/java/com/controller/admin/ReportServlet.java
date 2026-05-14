@@ -1,11 +1,9 @@
 package com.controller.admin;
 
-import com.DAO.VehicleDAO;
-import com.DAO.CustomerDAO;
-import com.DAO.BookingDAO;
-import com.DAO.ContactDAO;
+import com.DAO.*;
 import com.model.ContactMessage;
 
+import com.model.Subscriber;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -47,7 +45,7 @@ public class ReportServlet extends HttpServlet {
         CustomerDAO customerDAO = new CustomerDAO();
         BookingDAO bookingDAO = new BookingDAO();
         ContactDAO contactDAO = new ContactDAO();
-
+        SubscriberDAO subscriberDAO = new SubscriberDAO();
         /*
          * Retrieve vehicle-related statistics.
          */
@@ -88,6 +86,13 @@ public class ReportServlet extends HttpServlet {
          * Store contact messages in request scope.
          */
         request.setAttribute("contactMessagesList", contactMessagesList);
+
+        /*
+         * Retrieve all newsletter subscribers and store in request scope.
+         */
+        List<Subscriber> subscribersList = subscriberDAO.getAllSubscribers();
+        request.setAttribute("subscribersList", subscribersList);
+        request.setAttribute("totalSubscribers", subscribersList.size());
 
         /*
          * Store dashboard statistics in request attributes.

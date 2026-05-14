@@ -364,22 +364,44 @@
           </div>
         </section>
 
-        <section class="subscribe_container">
-          <div class="subscribe_image">
-            <img src="Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
-          </div>
-          <div class="subscribe_content">
-            <h2 class="section_header">Subscribe for the latest car rental updates</h2>
-            <p class="section_description">
-              Stay in the know! Subscribe to receive the latest car rental deals,
-              exclusive offers, and updates right to your inbox.
-            </p>
-            <form action="/" class="subscribe_form">
-              <input type="email" placeholder="Enter your email address" required />
-              <button type="submit" class="button">Subscribe</button>
-            </form>
-          </div>
-        </section>
+       <section class="subscribe_container" id="subscribe">
+                    <div class="subscribe_image">
+                      <img src="Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
+                    </div>
+                    <div class="subscribe_content">
+                      <h2 class="section_header">Subscribe for the latest car rental updates</h2>
+                      <p class="section_description">
+                        Stay in the know! Subscribe to receive the latest car rental deals,
+                        exclusive offers, and updates right to your inbox.
+                      </p>
+
+                      <c:choose>
+                        <c:when test="${param.subscribeStatus == 'success'}">
+                          <p class="subscribe_flash subscribe_flash--success">
+                            You have  been subscribed successfully. Welcome aboard!
+                          </p>
+                        </c:when>
+                        <c:when test="${param.subscribeStatus == 'duplicate'}">
+                          <p class="subscribe_flash subscribe_flash--warning">
+                            &#9888; That email is already subscribed. No action needed.
+                          </p>
+                        </c:when>
+                        <c:when test="${param.subscribeStatus == 'error'}">
+                          <p class="subscribe_flash subscribe_flash--error">
+                            &#10007; Something went wrong. Please try again shortly.
+                          </p>
+                        </c:when>
+                      </c:choose>
+
+                      <form action="${pageContext.request.contextPath}/subscribe"
+                            method="post"
+                            class="subscribe_form">
+                        <input type="email" name="email"
+                               placeholder="Enter your email address" required />
+                        <button type="submit" class="button">Subscribe</button>
+                      </form>
+                    </div>
+                  </section>
 
 
         <section class="section_container client_container" id="client">

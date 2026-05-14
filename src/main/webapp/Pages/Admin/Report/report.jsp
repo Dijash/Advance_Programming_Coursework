@@ -137,6 +137,49 @@
         </section>
       </div>
     </section>
+     <section class="left-col">
+              <div class="content-box">
+                <h3>Newsletter Subscribers</h3>
+                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">All emails registered via the home-page subscription form.</p>
+
+                <div class="table-responsive">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Email</th>
+                        <th>Subscribed At</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach var="sub" items="${subscribersList}">
+                        <tr>
+                          <td><strong><c:out value="${sub.subscriberId}" /></strong></td>
+                          <td><c:out value="${sub.email}" /></td>
+                          <td style="font-size: 0.8rem; color: #64748b;">
+                            <c:out value="${sub.subscribedAt}" />
+                          </td>
+                          <td>
+                            <span style="font-weight: 600; color: ${sub.status == 'active' ? '#22c55e' : '#ef4444'};">
+                              <c:out value="${sub.status}" />
+                            </span>
+                          </td>
+                        </tr>
+                      </c:forEach>
+
+                      <c:if test="${empty subscribersList}">
+                        <tr>
+                          <td colspan="4" style="text-align: center; color: #7f8c8d; padding: 2rem;">No subscribers yet.</td>
+                        </tr>
+                      </c:if>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
   </div>
 </main>
 </body>
