@@ -52,8 +52,8 @@ public class DeleteVehicleServlet extends HttpServlet {
      * 1. Retrieve vehicle ID from request.
      * 2. Validate vehicle ID.
      * 3. Call VehicleService to delete the vehicle.
-     * 4. Store success/error messages in session.
-     * 5. Redirect back to vehicle management page.
+     * 4. Store success/error messages in the session.
+     * 5. Redirect back to the vehicle management page.
      */
     private void processDelete(HttpServletRequest request, HttpServletResponse response)
             throws IOException {

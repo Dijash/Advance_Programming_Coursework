@@ -24,10 +24,10 @@ public class DeleteNotificationServlet extends HttpServlet {
      *
      * Workflow:
      * 1. Get the current session.
-     * 2. Retrieve notification ID from request parameter.
+     * 2. Retrieve notification ID from the request parameter.
      * 3. Validate and convert the ID into integer format.
-     * 4. Call service layer to delete the notification.
-     * 5. Redirect user with success or error message.
+     * 4. Call the service layer to delete the notification.
+     * 5. Redirect the user with a success or error message.
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -112,8 +112,8 @@ public class DeleteNotificationServlet extends HttpServlet {
         } else {
 
             /*
-             * If ID parameter is missing,
-             * redirect back to notification management page.
+             * If the ID parameter is missing,
+             * redirect back to the notification management page.
              */
             response.sendRedirect(
                     request.getContextPath()
