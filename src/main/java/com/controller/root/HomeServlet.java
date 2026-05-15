@@ -28,14 +28,12 @@ public class HomeServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (path.equals("/home")) {
-            if (session == null || session.getAttribute("user") == null) {
-                response.sendRedirect(request.getContextPath() + "/login");
-                return;
+            // Allow public access - check if user is logged in for subscription status
+            Boolean isSubscribed = false;
+            if (session != null && session.getAttribute("user") != null) {
+                Customer user = (Customer) session.getAttribute("user");
+                isSubscribed = subscriberService.isSubscribed(user.getCustomer_email());
             }
-
-            // Check if the logged-in user is already subscribed
-            Customer user = (Customer) session.getAttribute("user");
-            boolean isSubscribed = subscriberService.isSubscribed(user.getCustomer_email());
             request.setAttribute("isSubscribed", isSubscribed);
 
             request.getRequestDispatcher("/Pages/Root/Home.jsp").forward(request, response);
