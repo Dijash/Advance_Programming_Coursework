@@ -2,116 +2,298 @@ package com.DAO;
 
 import com.model.Subscriber;
 import com.util.DBConnection;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * DAO class responsible for
+ * Subscriber-related database operations.
+ *
+ * Features:
+ * - Fetch all subscribers
+ * - Add new subscriber
+ * - Soft delete (mark inactive)
+ * - Reactivate subscriber
+ * - Check email existence
+ */
 public class SubscriberDAO {
 
-    /** Returns ALL subscribers (active + inactive) for admin reporting. */
+    /*
+     * Retrieves all subscribers (active + inactive)
+     * for admin reporting purposes.
+     *
+     * Returns:
+     *      List<Subscriber> - all subscriber records
+     */
     public List<Subscriber> getAllSubscribers() {
-        List<Subscriber> subscribers = new ArrayList<>();
-        String sql = "SELECT subscriber_id, email, subscribed_at, status " +
-                "FROM subscriber " +
-                "ORDER BY subscribed_at DESC";
+
+        List<Subscriber> subscribers =
+                new ArrayList<>();
+
+        /*
+         * SQL: Fetch all subscribers ordered by latest first.
+         */
+        String sql =
+                "SELECT subscriber_id, email, subscribed_at, status "
+                        + "FROM subscriber "
+                        + "ORDER BY subscribed_at DESC";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
+             PreparedStatement stmt =
+                     conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
+            /*
+             * Iterate through result set.
+             */
             while (rs.next()) {
-                subscribers.add(new Subscriber(
-                        rs.getInt("subscriber_id"),
-                        rs.getString("email"),
-                        rs.getTimestamp("subscribed_at"),
-                        rs.getString("status")));
+
+                subscribers.add(
+                        new Subscriber(
+                                rs.getInt("subscriber_id"),
+                                rs.getString("email"),
+                                rs.getTimestamp("subscribed_at"),
+                                rs.getString("status")
+                        )
+                );
             }
+
         } catch (SQLException e) {
+
+            /*
+             * Handle SQL errors.
+             */
             e.printStackTrace();
         }
+
         return subscribers;
     }
 
-    /** Sets a subscriber's status to 'inactive' by ID. */
+    /*
+     * Soft deletes a subscriber by ID
+     * (marks status as inactive instead of deleting).
+     *
+     * Returns:
+     *      boolean - true if update successful
+     */
     public boolean deleteSubscriber(int subscriberId) {
-        String sql = "UPDATE subscriber SET status = 'inactive' WHERE subscriber_id = ?";
+
+        /*
+         * SQL: Mark subscriber as inactive.
+         */
+        String sql =
+                "UPDATE subscriber "
+                        + "SET status = 'inactive' "
+                        + "WHERE subscriber_id = ?";
+
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps =
+                     conn.prepareStatement(sql)) {
+
             ps.setInt(1, subscriberId);
+
             return ps.executeUpdate() > 0;
+
         } catch (SQLException e) {
+
+            /*
+             * Handle SQL error.
+             */
             e.printStackTrace();
             return false;
         }
     }
 
-    /** Sets a subscriber's status to 'inactive' by email. */
+    /*
+     * Unsubscribes a user by email
+     * (only if currently active).
+     *
+     * Returns:
+     *      boolean - true if unsubscribed successfully
+     */
     public boolean unsubscribeByEmail(String email) {
-        String sql = "UPDATE subscriber SET status = 'inactive' WHERE email = ? AND status = 'active'";
+
+        /*
+         * SQL: Mark active subscriber as inactive.
+         */
+        String sql =
+                "UPDATE subscriber "
+                        + "SET status = 'inactive' "
+                        + "WHERE email = ? AND status = 'active'";
+
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps =
+                     conn.prepareStatement(sql)) {
+
             ps.setString(1, email.trim().toLowerCase());
+
             return ps.executeUpdate() > 0;
+
         } catch (SQLException e) {
+
+            /*
+             * Handle SQL error.
+             */
             e.printStackTrace();
             return false;
         }
     }
 
-    /** Inserts a new active subscriber row. */
+    /*
+     * Adds a new subscriber with ACTIVE status.
+     *
+     * Returns:
+     *      boolean - true if insertion successful
+     */
     public boolean addSubscriber(String email) {
-        String sql = "INSERT INTO subscriber (email, subscribed_at, status) VALUES (?, NOW(), 'active')";
+
+        /*
+         * SQL: Insert new subscriber record.
+         */
+        String sql =
+                "INSERT INTO subscriber "
+                        + "(email, subscribed_at, status) "
+                        + "VALUES (?, NOW(), 'active')";
+
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt =
+                     conn.prepareStatement(sql)) {
+
             stmt.setString(1, email);
+
             return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
-            System.out.println("Error saving subscriber: " + e.getMessage());
+
+            /*
+             * Handle SQL error.
+             */
+            System.out.println(
+                    "Error saving subscriber: "
+                            + e.getMessage()
+            );
+
             e.printStackTrace();
             return false;
         }
     }
 
-    /** Re-activates a previously inactive subscriber row. */
+    /*
+     * Reactivates a previously inactive subscriber.
+     *
+     * Returns:
+     *      boolean - true if reactivation successful
+     */
     public boolean reactivateSubscriber(String email) {
-        String sql = "UPDATE subscriber SET status = 'active', subscribed_at = NOW() WHERE email = ? AND status = 'inactive'";
+
+        /*
+         * SQL: Reactivate subscriber.
+         */
+        String sql =
+                "UPDATE subscriber "
+                        + "SET status = 'active', subscribed_at = NOW() "
+                        + "WHERE email = ? AND status = 'inactive'";
+
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps =
+                     conn.prepareStatement(sql)) {
+
             ps.setString(1, email.trim().toLowerCase());
+
             return ps.executeUpdate() > 0;
+
         } catch (SQLException e) {
+
+            /*
+             * Handle SQL error.
+             */
             e.printStackTrace();
             return false;
         }
     }
 
-    /** Returns true if the email has an ACTIVE subscription. */
+    /*
+     * Checks if an ACTIVE subscription exists for email.
+     *
+     * Returns:
+     *      boolean - true if active subscriber exists
+     */
     public boolean emailExistsActive(String email) {
-        String sql = "SELECT COUNT(*) FROM subscriber WHERE email = ? AND status = 'active'";
+
+        /*
+         * SQL: Check active email existence.
+         */
+        String sql =
+                "SELECT COUNT(*) FROM subscriber "
+                        + "WHERE email = ? AND status = 'active'";
+
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt =
+                     conn.prepareStatement(sql)) {
+
             stmt.setString(1, email);
+
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getInt(1) > 0;
+
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
             }
+
         } catch (SQLException e) {
+
+            /*
+             * Handle SQL error.
+             */
             e.printStackTrace();
         }
+
         return false;
     }
 
-    /** Returns true if the email exists at all (active or inactive). */
+    /*
+     * Checks if an email exists in subscriber table
+     * regardless of status.
+     *
+     * Returns:
+     *      boolean - true if email exists
+     */
     public boolean emailExists(String email) {
-        String sql = "SELECT COUNT(*) FROM subscriber WHERE email = ?";
+
+        /*
+         * SQL: Check email existence.
+         */
+        String sql =
+                "SELECT COUNT(*) FROM subscriber "
+                        + "WHERE email = ?";
+
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt =
+                     conn.prepareStatement(sql)) {
+
             stmt.setString(1, email);
+
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getInt(1) > 0;
+
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
             }
+
         } catch (SQLException e) {
+
+            /*
+             * Handle SQL error.
+             */
             e.printStackTrace();
         }
+
         return false;
     }
 }
