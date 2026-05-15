@@ -333,22 +333,79 @@
       </section>
 
 
-      <section class="subscribe_container">
-        <div class="subscribe_image">
-          <img src="Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
-        </div>
-        <div class="subscribe_content">
-          <h2 class="section_header">Subscribe for the latest car rental updates</h2>
-          <p class="section_description">
-            Stay in the know! Subscribe to receive the latest car rental deals,
-            exclusive offers, and updates right to your inbox.
-          </p>
-          <form action="/" class="subscribe_form">
-            <input type="email" placeholder="Enter your email address" required />
-            <button type="submit" class="button">Subscribe</button>
-          </form>
-        </div>
-      </section>
+      <section class="subscribe_container" id="subscribe">
+                               <div class="subscribe_image">
+                                 <img src="Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
+                               </div>
+                               <div class="subscribe_content">
+                                 <h2 class="section_header">Subscribe for the latest car rental updates</h2>
+                                 <p class="section_description">
+                                   Stay in the know! Subscribe to receive the latest car rental deals,
+                                   exclusive offers, and updates right to your inbox.
+                                 </p>
+
+                                 <%-- Flash messages --%>
+                                 <c:choose>
+                                   <c:when test="${param.subscribeStatus == 'success'}">
+                                     <p class="subscribe_flash subscribe_flash--success">
+                                       You have been subscribed successfully. Welcome aboard!
+                                     </p>
+                                   </c:when>
+                                   <c:when test="${param.subscribeStatus == 'unsubscribed'}">
+                                     <p class="subscribe_flash subscribe_flash--warning">
+                                       You have been unsubscribed. You can re-subscribe any time below.
+                                     </p>
+                                   </c:when>
+                                   <c:when test="${param.subscribeStatus == 'duplicate'}">
+                                     <p class="subscribe_flash subscribe_flash--warning">
+                                       That email is already subscribed.
+                                       Want to unsubscribe? Enter your email and click &ldquo;Inactive&rdquo;.
+                                     </p>
+                                   </c:when>
+                                   <c:when test="${param.subscribeStatus == 'error'}">
+                                     <p class="subscribe_flash subscribe_flash--error">
+                                       Something went wrong. Please try again shortly.
+                                     </p>
+                                   </c:when>
+                                 </c:choose>
+
+                                 <%-- Subscribe form (always visible on public index) --%>
+                                 <c:choose>
+                                   <c:when test="${param.subscribeStatus == 'duplicate'}">
+                                     <%-- Email already subscribed: offer subscribe (no-op) + unsubscribe --%>
+                                     <div class="subscribe_form" style="gap:0.5rem; flex-wrap:wrap;">
+                                       <form action="${pageContext.request.contextPath}/subscribe"
+                                             method="post" style="display:contents;">
+                                         <input type="hidden" name="action" value="subscribe" />
+                                         <input type="email" name="email"
+                                                value="${param.email}"
+                                                placeholder="Enter your email address" required />
+                                         <button type="submit" class="button">Subscribe</button>
+                                       </form>
+                                       <form action="${pageContext.request.contextPath}/subscribe"
+                                             method="post" style="display:contents;">
+                                         <input type="hidden" name="action" value="unsubscribe" />
+                                         <input type="hidden" name="email" value="${param.email}" />
+                                         <button type="submit" class="button"
+                                                 style="background:#fee2e2; color:#dc2626; border:1px solid #fca5a5;">
+                                           Inactive (Unsubscribe)
+                                         </button>
+                                       </form>
+                                     </div>
+                                   </c:when>
+                                   <c:otherwise>
+                                     <form action="${pageContext.request.contextPath}/subscribe"
+                                           method="post"
+                                           class="subscribe_form">
+                                       <input type="hidden" name="action" value="subscribe" />
+                                       <input type="email" name="email"
+                                              placeholder="Enter your email address" required />
+                                       <button type="submit" class="button">Subscribe</button>
+                                     </form>
+                                   </c:otherwise>
+                                 </c:choose>
+                               </div>
+                             </section>
 
     </section>
 

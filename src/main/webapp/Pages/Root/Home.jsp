@@ -364,44 +364,74 @@
           </div>
         </section>
 
-       <section class="subscribe_container" id="subscribe">
-                    <div class="subscribe_image">
-                      <img src="Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
-                    </div>
-                    <div class="subscribe_content">
-                      <h2 class="section_header">Subscribe for the latest car rental updates</h2>
-                      <p class="section_description">
-                        Stay in the know! Subscribe to receive the latest car rental deals,
-                        exclusive offers, and updates right to your inbox.
-                      </p>
+      <section class="subscribe_container" id="subscribe">
+                          <div class="subscribe_image">
+                            <img src="Assets/ford-raptor-r-concept-1.jpg" alt="Newsletter car" />
+                          </div>
+                          <div class="subscribe_content">
+                            <h2 class="section_header">Subscribe for the latest car rental updates</h2>
+                            <p class="section_description">
+                              Stay in the know! Subscribe to receive the latest car rental deals,
+                              exclusive offers, and updates right to your inbox.
+                            </p>
 
-                      <c:choose>
-                        <c:when test="${param.subscribeStatus == 'success'}">
-                          <p class="subscribe_flash subscribe_flash--success">
-                            You have  been subscribed successfully. Welcome aboard!
-                          </p>
-                        </c:when>
-                        <c:when test="${param.subscribeStatus == 'duplicate'}">
-                          <p class="subscribe_flash subscribe_flash--warning">
-                            &#9888; That email is already subscribed. No action needed.
-                          </p>
-                        </c:when>
-                        <c:when test="${param.subscribeStatus == 'error'}">
-                          <p class="subscribe_flash subscribe_flash--error">
-                            &#10007; Something went wrong. Please try again shortly.
-                          </p>
-                        </c:when>
-                      </c:choose>
+                            <%-- Flash messages --%>
+                            <c:choose>
+                              <c:when test="${param.subscribeStatus == 'success'}">
+                                <p class="subscribe_flash subscribe_flash--success">
+                                  You have been subscribed successfully. Welcome aboard!
+                                </p>
+                              </c:when>
+                              <c:when test="${param.subscribeStatus == 'unsubscribed'}">
+                                <p class="subscribe_flash subscribe_flash--warning">
+                                  You have been unsubscribed. You can re-subscribe any time.
+                                </p>
+                              </c:when>
+                              <c:when test="${param.subscribeStatus == 'duplicate'}">
+                                <p class="subscribe_flash subscribe_flash--warning">
+                                  That email is already subscribed. No action needed.
+                                </p>
+                              </c:when>
+                              <c:when test="${param.subscribeStatus == 'error'}">
+                                <p class="subscribe_flash subscribe_flash--error">
+                                  Something went wrong. Please try again shortly.
+                                </p>
+                              </c:when>
+                            </c:choose>
 
-                      <form action="${pageContext.request.contextPath}/subscribe"
-                            method="post"
-                            class="subscribe_form">
-                        <input type="email" name="email"
-                               placeholder="Enter your email address" required />
-                        <button type="submit" class="button">Subscribe</button>
-                      </form>
-                    </div>
-                  </section>
+                            <%-- Toggle: show Inactive button if subscribed, Subscribe form if not --%>
+                            <c:choose>
+                              <c:when test="${isSubscribed == true && param.subscribeStatus != 'unsubscribed'}">
+                                <%-- User is currently subscribed — offer to unsubscribe --%>
+                                <p class="subscribe_flash subscribe_flash--success" style="margin-bottom: 0.75rem;">
+                                  ✓ You are currently subscribed to our newsletter.
+                                </p>
+                                <form action="${pageContext.request.contextPath}/subscribe"
+                                      method="post"
+                                      class="subscribe_form">
+                                  <input type="hidden" name="action" value="unsubscribe" />
+                                  <input type="hidden" name="email" value="${sessionScope.user.customer_email}" />
+                                  <button type="submit" class="button button_outline"
+                                          style="background:#fee2e2; color:#dc2626; border:1px solid #fca5a5;">
+                                    Inactive (Unsubscribe)
+                                  </button>
+                                </form>
+                              </c:when>
+                              <c:otherwise>
+                                <%-- User is not subscribed — show subscribe form --%>
+                                <form action="${pageContext.request.contextPath}/subscribe"
+                                      method="post"
+                                      class="subscribe_form">
+                                  <input type="hidden" name="action" value="subscribe" />
+                                  <input type="email" name="email"
+                                         value="${sessionScope.user.customer_email}"
+                                         placeholder="Enter your email address" required />
+                                  <button type="submit" class="button">Subscribe</button>
+                                </form>
+                              </c:otherwise>
+                            </c:choose>
+                          </div>
+                        </section>
 
 
         <section class="section_container client_container" id="client">

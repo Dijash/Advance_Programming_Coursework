@@ -140,7 +140,10 @@
      <section class="left-col">
               <div class="content-box">
                 <h3>Newsletter Subscribers</h3>
-                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">All emails registered via the home-page subscription form.</p>
+                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">
+                  All emails registered via the home-page subscription form.
+                  Total active: <strong style="color:#22c55e;">${totalSubscribers}</strong>
+                </p>
 
                 <div class="table-responsive">
                   <table>
@@ -150,6 +153,7 @@
                         <th>Email</th>
                         <th>Subscribed At</th>
                         <th>Status</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -165,12 +169,32 @@
                               <c:out value="${sub.status}" />
                             </span>
                           </td>
+                          <td>
+                            <c:choose>
+                              <c:when test="${sub.status == 'active'}">
+                                <form action="${pageContext.request.contextPath}/report"
+                                      method="post" style="margin:0;">
+                                  <input type="hidden" name="action" value="unsubscribe" />
+                                  <input type="hidden" name="email" value="${sub.email}" />
+                                  <button type="submit"
+                                          style="background:#fee2e2; color:#dc2626; border:1px solid #fca5a5;
+                                                 padding:5px 12px; border-radius:6px; font-size:0.82rem;
+                                                 font-weight:600; cursor:pointer;">
+                                    Inactivate
+                                  </button>
+                                </form>
+                              </c:when>
+                              <c:otherwise>
+                                <span style="color:#94a3b8; font-size:0.82rem;">Inactive</span>
+                              </c:otherwise>
+                            </c:choose>
+                          </td>
                         </tr>
                       </c:forEach>
 
                       <c:if test="${empty subscribersList}">
                         <tr>
-                          <td colspan="4" style="text-align: center; color: #7f8c8d; padding: 2rem;">No subscribers yet.</td>
+                          <td colspan="5" style="text-align: center; color: #7f8c8d; padding: 2rem;">No subscribers yet.</td>
                         </tr>
                       </c:if>
                     </tbody>
@@ -178,8 +202,8 @@
                 </div>
               </div>
             </section>
-          </div>
-        </section>
+               </div>
+             </section>
   </div>
 </main>
 </body>

@@ -29,22 +29,33 @@ public class SubscribeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*
-         * Read the email parameter.
-         */
-        String email = request.getParameter("email");
+        String action = request.getParameter("action");   // "subscribe" or "unsubscribe"
+        String email  = request.getParameter("email");
+        String referer = request.getHeader("Referer");
 
-        /*
-       Returns "success", "duplicate", or "error".
-         */
+        // Determine where to redirect after the action
+        // Admin report page posts here too, so we redirect back to /report
+        boolean fromAdmin = (referer != null && referer.contains("/report"));
+
+        if ("unsubscribe".equals(action)) {
+            subscriberService.unsubscribeByEmail(email);
+            if (fromAdmin) {
+                response.sendRedirect(request.getContextPath() + "/report");
+            } else {
+                response.sendRedirect(
+                        request.getContextPath() + "/home?subscribeStatus=unsubscribed#subscribe");
+            }
+            return;
+        }
+
+        // Default: subscribe
         String status = subscriberService.subscribe(email);
 
-        /*
-         * Redirect back to the home page anchor so the user lands
-         on the subscription section and sees the flash message.
-         */
-        response.sendRedirect(
-                request.getContextPath() + "/home?subscribeStatus=" + status + "#subscribe"
-        );
+        if (fromAdmin) {
+            response.sendRedirect(request.getContextPath() + "/report");
+        } else {
+            response.sendRedirect(
+                    request.getContextPath() + "/home?subscribeStatus=" + status + "#subscribe");
+        }
     }
 }

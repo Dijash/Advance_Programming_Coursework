@@ -11,11 +11,6 @@ import java.io.IOException;
 import java.util.List;
 
 /*
- * ReportServlet handles the admin report dashboard.
- *
- * URL Mapping:
- *    /report
- *
  * Responsibilities:
  * 1. Fetch vehicle statistics
  * 2. Fetch customer and booking counts
@@ -91,8 +86,11 @@ public class ReportServlet extends HttpServlet {
          * Retrieve all newsletter subscribers and store in request scope.
          */
         List<Subscriber> subscribersList = subscriberDAO.getAllSubscribers();
+        long activeSubscribersCount = subscribersList.stream()
+                .filter(s -> "active".equals(s.getStatus()))
+                .count();
         request.setAttribute("subscribersList", subscribersList);
-        request.setAttribute("totalSubscribers", subscribersList.size());
+        request.setAttribute("totalSubscribers", activeSubscribersCount);
 
         /*
          * Store dashboard statistics in request attributes.

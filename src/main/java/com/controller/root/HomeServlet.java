@@ -4,6 +4,7 @@ import com.DAO.VehicleDAO;
 import com.DAO.FavoriteDAO;
 import com.model.Customer;
 import com.model.Vehicle;
+import com.service.SubscriberService;
 import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +13,13 @@ import java.io.IOException;
 
 @WebServlet({ "/home", "/contact", "/rentalDeals", "/viewVehicleDetails" })
 public class HomeServlet extends HttpServlet {
+
+    private SubscriberService subscriberService;
+
+    @Override
+    public void init() throws ServletException {
+        subscriberService = new SubscriberService();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,6 +32,12 @@ public class HomeServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/login");
                 return;
             }
+
+            // Check if the logged-in user is already subscribed
+            Customer user = (Customer) session.getAttribute("user");
+            boolean isSubscribed = subscriberService.isSubscribed(user.getCustomer_email());
+            request.setAttribute("isSubscribed", isSubscribed);
+
             request.getRequestDispatcher("/Pages/Root/Home.jsp").forward(request, response);
 
         } else if (path.equals("/contact")) {
@@ -57,8 +71,6 @@ public class HomeServlet extends HttpServlet {
                 FavoriteDAO favDAO = new FavoriteDAO();
                 List<Integer> favoriteIds = favDAO.getUserFavoriteVehicleIds(loggedInUser.getCustomer_id());
                 request.setAttribute("favoriteIds", favoriteIds);
-                System.out.println(
-                        "DEBUG: Loaded Favorites for " + loggedInUser.getCustomer_username() + ": " + favoriteIds);
             }
 
             request.getRequestDispatcher("/Pages/Root/RentalDeals.jsp").forward(request, response);
