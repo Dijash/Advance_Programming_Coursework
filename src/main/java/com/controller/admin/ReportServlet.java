@@ -107,4 +107,23 @@ public class ReportServlet extends HttpServlet {
         request.getRequestDispatcher("/Pages/Admin/Report/report.jsp")
                 .forward(request, response);
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        String email = request.getParameter("email");
+
+        if (email != null && !email.trim().isEmpty()) {
+            SubscriberDAO subscriberDAO = new SubscriberDAO();
+
+            if ("unsubscribe".equals(action)) {
+                subscriberDAO.unsubscribeByEmail(email);
+            } else if ("reactivate".equals(action)) {
+                subscriberDAO.reactivateSubscriber(email);
+            }
+        }
+
+        response.sendRedirect(request.getContextPath() + "/report");
+    }
 }

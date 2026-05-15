@@ -172,20 +172,50 @@
                           <td>
                             <c:choose>
                               <c:when test="${sub.status == 'active'}">
-                                <form action="${pageContext.request.contextPath}/report"
-                                      method="post" style="margin:0;">
-                                  <input type="hidden" name="action" value="unsubscribe" />
-                                  <input type="hidden" name="email" value="${sub.email}" />
-                                  <button type="submit"
-                                          style="background:#fee2e2; color:#dc2626; border:1px solid #fca5a5;
-                                                 padding:5px 12px; border-radius:6px; font-size:0.82rem;
-                                                 font-weight:600; cursor:pointer;">
-                                    Inactivate
-                                  </button>
-                                </form>
+                                <a href="#inactivateModal-${sub.subscriberId}" class="btn-inactivate" style="text-decoration: none;">
+                                  Inactivate
+                                </a>
+                                <div id="inactivateModal-${sub.subscriberId}" class="modal-overlay">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h3>Inactivate Subscriber</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Are you sure you want to inactivate this subscriber? They will no longer receive newsletter emails.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <a href="#" class="btn-cancel" style="text-decoration: none;">Cancel</a>
+                                      <form action="${pageContext.request.contextPath}/report" method="post" style="margin:0;">
+                                        <input type="hidden" name="action" value="unsubscribe" />
+                                        <input type="hidden" name="email" value="${sub.email}" />
+                                        <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Inactivate</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
                               </c:when>
                               <c:otherwise>
-                                <span style="color:#94a3b8; font-size:0.82rem;">Inactive</span>
+                                <a href="#activateModal-${sub.subscriberId}" class="btn-activate" style="text-decoration: none;">
+                                  Activate
+                                </a>
+                                <div id="activateModal-${sub.subscriberId}" class="modal-overlay">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h3>Activate Subscriber</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Are you sure you want to activate this subscriber? They will start receiving newsletter emails again.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <a href="#" class="btn-cancel" style="text-decoration: none;">Cancel</a>
+                                      <form action="${pageContext.request.contextPath}/report" method="post" style="margin:0;">
+                                        <input type="hidden" name="action" value="reactivate" />
+                                        <input type="hidden" name="email" value="${sub.email}" />
+                                        <button type="submit" class="btn-activate-confirm" style="background:#22c55e; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:600; cursor:pointer;">Yes, Activate</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
                               </c:otherwise>
                             </c:choose>
                           </td>
