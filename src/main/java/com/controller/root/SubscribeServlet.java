@@ -36,11 +36,15 @@ public class SubscribeServlet extends HttpServlet {
         // Determine where to redirect after the action
         // Admin report page posts here too, so we redirect back to /report
         boolean fromAdmin = (referer != null && referer.contains("/report"));
+        // Check if from index page (root path)
+        boolean fromIndex = (referer != null && (referer.endsWith("/") || referer.endsWith("/index.jsp")));
 
         if ("unsubscribe".equals(action)) {
             subscriberService.unsubscribeByEmail(email);
             if (fromAdmin) {
                 response.sendRedirect(request.getContextPath() + "/report");
+            } else if (fromIndex) {
+                response.sendRedirect(request.getContextPath() + "/?subscribeStatus=unsubscribed#subscribe");
             } else {
                 response.sendRedirect(
                         request.getContextPath() + "/home?subscribeStatus=unsubscribed#subscribe");
@@ -53,6 +57,8 @@ public class SubscribeServlet extends HttpServlet {
 
         if (fromAdmin) {
             response.sendRedirect(request.getContextPath() + "/report");
+        } else if (fromIndex) {
+            response.sendRedirect(request.getContextPath() + "/?subscribeStatus=" + status + "#subscribe");
         } else {
             response.sendRedirect(
                     request.getContextPath() + "/home?subscribeStatus=" + status + "#subscribe");
