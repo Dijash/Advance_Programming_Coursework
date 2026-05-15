@@ -9,6 +9,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Report/Report.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Modal.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/adminSidebar.css">
 

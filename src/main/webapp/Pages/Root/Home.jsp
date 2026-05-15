@@ -406,16 +406,29 @@
                                 <p class="subscribe_flash subscribe_flash--success" style="margin-bottom: 0.75rem;">
                                   ✓ You are currently subscribed to our newsletter.
                                 </p>
-                                <form action="${pageContext.request.contextPath}/subscribe"
-                                      method="post"
-                                      class="subscribe_form">
-                                  <input type="hidden" name="action" value="unsubscribe" />
-                                  <input type="hidden" name="email" value="${sessionScope.user.customer_email}" />
-                                  <button type="submit" class="button button_outline"
-                                          style="background:#fee2e2; color:#dc2626; border:1px solid #fca5a5;">
-                                    Inactive (Unsubscribe)
-                                  </button>
-                                </form>
+                                <a href="#unsubscribeModal" class="button button_outline"
+                                   style="background:#fee2e2; color:#dc2626; border:1px solid #fca5a5; display:inline-block; text-decoration:none;">
+                                  Inactive (Unsubscribe)
+                                </a>
+                                <div id="unsubscribeModal" class="modal-overlay">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h3>Unsubscribe Newsletter</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Are you sure you want to unsubscribe from our newsletter? You will no longer receive updates and deals via email.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <a href="#" class="btn-cancel" style="text-decoration: none;">Cancel</a>
+                                      <form action="${pageContext.request.contextPath}/subscribe"
+                                            method="post" style="margin:0;">
+                                        <input type="hidden" name="action" value="unsubscribe" />
+                                        <input type="hidden" name="email" value="${sessionScope.user.customer_email}" />
+                                        <button type="submit" class="btn-delete-confirm" style="border: none; cursor: pointer;">Yes, Unsubscribe</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
                               </c:when>
                               <c:otherwise>
                                 <%-- User is not subscribed — show subscribe form --%>

@@ -8,6 +8,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Admin/Notification/Notification.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Modal.css">
     <title>RentAll | Manage Notifications</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/Dashboard/Admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Admin/adminSidebar.css">
