@@ -55,6 +55,21 @@ body {
   color: var(--muted);
 }
 
+/* Alert Box */
+.alert {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Alert Box Error */
+.alert-error {
+  background: #fceceb;
+  color: #c0392b;
+  border: 1px solid #f5c6cb;
+}
+
 /* Social Buttons Row */
 .social-row {
   display: grid;

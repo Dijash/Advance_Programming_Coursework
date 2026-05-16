@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
             SessionUtil.setSessionTimeout(request, 30 * 60);
             SessionUtil.removeAttribute(request, "errorMsg");
 
-            // Create Admin Cookie if checked (lasts 30 days)
+            // Create Admin Cookie if checked
             if ("on".equals(rememberMe)) {
                 CookieUtil.addCookie(response, "user_email", email, 30 * 60);
             }
@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
             SessionUtil.setSessionTimeout(request, 30 * 60);
             SessionUtil.removeAttribute(request, "errorMsg");
 
-            // Create Customer Cookie if checked (lasts 30 days)
+            // Create Customer Cookie if checked
             if ("on".equals(rememberMe)) {
                 CookieUtil.addCookie(response, "user_email", email, 60 * 60 * 24 * 30);
             }

@@ -9,19 +9,18 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Auth/LoginStyle.css">
     <title>Login</title>
   </head>
-
-  <c:if test="${not empty error}">
-    <script>
-        alert("${error}");
-    </script>
-  </c:if>
-
   <body style="background-image: url('${pageContext.request.contextPath}/Assets/Background.jpg'); background-size: cover; background-position: center;">
     <div class="main">
       <div class="form-head">
         <h1>Sign in</h1>
         <p>Welcome back - login to continue</p>
       </div>
+
+      <c:if test="${not empty error}">
+        <div class="alert alert-error">
+          <c:out value="${error}" />
+        </div>
+      </c:if>
 
       <div class="social-row">
         <button class="social-btn">
