@@ -212,6 +212,10 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("/Pages/Admin/Vehicle/manageVehicle.jsp")
                         .forward(request, response);
                 break;
+            case "/addVehicle":
+                request.getRequestDispatcher("/Pages/Admin/Vehicle/addVehicle.jsp")
+                        .forward(request, response);
+                break;
 
             /*
              * View Vehicle or Edit Vehicle Section
