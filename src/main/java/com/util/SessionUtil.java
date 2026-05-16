@@ -60,4 +60,18 @@ public class SessionUtil {
             session.invalidate();
         }
     }
+
+    /**
+     * Sets a custom timeout (max inactive interval) for the current session.
+     *
+     * @param request the HttpServletRequest from which the session is obtained
+     * @param seconds the time in seconds before the session dies from inactivity
+     */
+    public static void setSessionTimeout(HttpServletRequest request, int seconds) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.setMaxInactiveInterval(seconds);
+        }
+    }
 }
+

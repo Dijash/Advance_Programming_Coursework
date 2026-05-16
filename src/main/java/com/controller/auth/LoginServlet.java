@@ -2,6 +2,8 @@ package com.controller.auth;
 
 import com.DAO.UserDAO;
 import com.model.Customer;
+import com.util.CookieUtil;
+import com.util.SessionUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,185 +11,91 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
-/*
- * Servlet responsible for handling
- * user login functionality.
- *
- * URL Mapping:
- *      /login
- *
- * Features:
- * - Displays login page
- * - Validates admin login
- * - Validates customer login
- * - Creates user session
- * - Redirects users based on role
- */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    /*
-     * Handles HTTP GET requests.
-     *
-     * Workflow:
-     * 1. Open login page.
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*
-         * Forward request to login page.
-         */
+        // AUTO-LOGIN LOGIC: Check if they have a "Remember Me" cookie
+        Cookie userCookie = CookieUtil.getCookie(request, "user_email");
+
+        if (userCookie != null && userCookie.getValue() != null) {
+            String savedEmail = userCookie.getValue();
+
+            // Rebuild their session automatically without asking for a password!
+            UserDAO dao = new UserDAO();
+            Customer returningCustomer = dao.getCustomerByEmail(savedEmail);
+
+            if (returningCustomer != null) {
+                SessionUtil.setAttribute(request, "user", returningCustomer);
+                SessionUtil.setAttribute(request, "email", savedEmail);
+                SessionUtil.setAttribute(request, "role", "customer");
+                SessionUtil.setSessionTimeout(request, 30 * 60);
+
+                response.sendRedirect(request.getContextPath() + "/home");
+                return; // Stop execution here
+            }
+        }
+
+        // If no cookie exists, show them the normal login page
         request.getRequestDispatcher("/Pages/Auth/Login.jsp")
                 .forward(request, response);
     }
 
-    /*
-     * Handles HTTP POST requests.
-     *
-     * Workflow:
-     * 1. Retrieve login credentials.
-     * 2. Create user session.
-     * 3. Check admin login.
-     * 4. Check customer login using database.
-     * 5. Redirect user based on login result.
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*
-         * Retrieve email and password
-         * entered by the user.
-         */
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        /*
-         * Create or retrieve session.
-         */
-        HttpSession session = request.getSession();
+        // Grab the value of the "Remember Me" checkbox from your Login.jsp form
+        String rememberMe = request.getParameter("rememberMe");
 
-        /*
-         * Set session timeout to 30 minutes.
-         * (30 * 60 seconds)
-         */
-        session.setMaxInactiveInterval(30 * 60);
+        /* Admin Login */
+        if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
+            SessionUtil.setAttribute(request, "email", email);
+            SessionUtil.setAttribute(request, "role", "admin");
+            SessionUtil.setSessionTimeout(request, 30 * 60);
+            SessionUtil.removeAttribute(request, "errorMsg");
 
-        /*
-         * Check for admin login credentials.
-         */
-        if ("admin@gmail.com".equals(email)
-                && "admin".equals(password)) {
+            // Create Admin Cookie if checked (lasts 30 days)
+            if ("on".equals(rememberMe)) {
+                CookieUtil.addCookie(response, "user_email", email, 30 * 60);
+            }
 
-            /*
-             * Store admin session details.
-             */
-            session.setAttribute("email", email);
-            session.setAttribute("role", "admin");
-
-            /*
-             * Remove previous error message if exists.
-             */
-            session.removeAttribute("errorMsg");
-
-            /*
-             * Redirect admin to dashboard.
-             */
-            response.sendRedirect(
-                    request.getContextPath() + "/admin"
-            );
-
-            /*
-             * Stop further execution.
-             */
+            response.sendRedirect(request.getContextPath() + "/admin");
             return;
         }
 
-        /*
-         * Create UserDAO object
-         * for database authentication.
-         */
+        /* Customer Login */
         UserDAO dao = new UserDAO();
-
-        /*
-         * Validate customer login credentials.
-         *
-         * Possible return values:
-         *      success
-         *      wrong_password
-         *      user_not_found
-         */
         String result = dao.checkLogin(email, password);
 
-        /*
-         * Login successful.
-         */
         if (result.equals("success")) {
+            Customer loggedInCustomer = dao.getCustomerByEmail(email);
 
-            /*
-             * Retrieve logged-in customer details.
-             */
-            Customer loggedInCustomer =
-                    dao.getCustomerByEmail(email);
+            SessionUtil.setAttribute(request, "user", loggedInCustomer);
+            SessionUtil.setAttribute(request, "email", email);
+            SessionUtil.setAttribute(request, "role", "customer");
+            SessionUtil.setSessionTimeout(request, 30 * 60);
+            SessionUtil.removeAttribute(request, "errorMsg");
 
-            /*
-             * Store customer information in session.
-             */
-            session.setAttribute("user", loggedInCustomer);
-            session.setAttribute("email", email);
-            session.setAttribute("role", "customer");
+            // Create Customer Cookie if checked (lasts 30 days)
+            if ("on".equals(rememberMe)) {
+                CookieUtil.addCookie(response, "user_email", email, 60 * 60 * 24 * 30);
+            }
 
-            /*
-             * Remove old error message if exists.
-             */
-            session.removeAttribute("errorMsg");
+            response.sendRedirect(request.getContextPath() + "/home");
 
-            /*
-             * Redirect customer to home page.
-             */
-            response.sendRedirect(
-                    request.getContextPath() + "/home"
-            );
-
-            /*
-             * Wrong password case.
-             */
         } else if (result.equals("wrong_password")) {
-
-            /*
-             * Set error message.
-             */
-            request.setAttribute(
-                    "error",
-                    "Wrong password!"
-            );
-
-            /*
-             * Return user to login page.
-             */
-            request.getRequestDispatcher("/Pages/Auth/Login.jsp")
-                    .forward(request, response);
-
-            /*
-             * User account not found case.
-             */
+            request.setAttribute("error", "Wrong password!");
+            request.getRequestDispatcher("/Pages/Auth/Login.jsp").forward(request, response);
         } else if (result.equals("user_not_found")) {
-
-            /*
-             * Set registration suggestion message.
-             */
-            request.setAttribute(
-                    "error",
-                    "User does not exist. Please register."
-            );
-
-            /*
-             * Return user to login page.
-             */
-            request.getRequestDispatcher("/Pages/Auth/Login.jsp")
-                    .forward(request, response);
+            request.setAttribute("error", "User does not exist. Please register.");
+            request.getRequestDispatcher("/Pages/Auth/Login.jsp").forward(request, response);
         }
     }
 }
