@@ -291,7 +291,7 @@
               NPR 4,500 <small>/ day</small>
             </div>
 
-            <a href="${pageContext.request.contextPath}/viewVehicleDetails?id=${v.vehicle_id}" class="button" ${v.vehicle_status != 'Available' ? 'style="pointer-events: none; opacity: 0.6;"' : ''}>
+            <a href="${pageContext.request.contextPath}/viewVehicleDetails?id=${v.vehicle_id}" class="button" >
               Book Now
             </a>
           </div>
