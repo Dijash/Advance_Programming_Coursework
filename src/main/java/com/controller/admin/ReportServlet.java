@@ -104,7 +104,7 @@ public class ReportServlet extends HttpServlet {
         /*
          * Forward request and response to the admin report page.
          */
-        request.getRequestDispatcher("/Pages/Admin/Report/report.jsp")
+        request.getRequestDispatcher("/WEB-INF/Pages/Admin/Report/report.jsp")
                 .forward(request, response);
     }
 

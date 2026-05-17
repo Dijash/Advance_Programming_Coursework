@@ -152,7 +152,7 @@ public class SubmitBookingServlet extends HttpServlet {
                  * Return user to vehicle details page.
                  */
                 request.getRequestDispatcher(
-                                "/Pages/Root/viewVehicleDetails.jsp")
+                                "/WEB-INF/Pages/Root/viewVehicleDetails.jsp")
                         .forward(request, response);
 
                 /*

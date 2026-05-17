@@ -122,7 +122,7 @@ public class HomeServlet extends HttpServlet {
             /*
              * Forward request to Home page.
              */
-            request.getRequestDispatcher("/Pages/Root/Home.jsp")
+            request.getRequestDispatcher("/WEB-INF/Pages/Root/Home.jsp")
                     .forward(request, response);
 
             /*
@@ -133,7 +133,7 @@ public class HomeServlet extends HttpServlet {
             /*
              * Forward request to Contact page.
              */
-            request.getRequestDispatcher("/Pages/Root/Contact.jsp")
+            request.getRequestDispatcher("/WEB-INF/Pages/Root/Contact.jsp")
                     .forward(request, response);
 
             /*
@@ -265,7 +265,7 @@ public class HomeServlet extends HttpServlet {
             /*
              * Forward request to Rental Deals page.
              */
-            request.getRequestDispatcher("/Pages/Root/RentalDeals.jsp")
+            request.getRequestDispatcher("/WEB-INF/Pages/Root/RentalDeals.jsp")
                     .forward(request, response);
 
             /*
@@ -335,7 +335,7 @@ public class HomeServlet extends HttpServlet {
                      * Forward request to vehicle details page.
                      */
                     request.getRequestDispatcher(
-                                    "/Pages/Root/ViewVehicleDetails.jsp")
+                                    "/WEB-INF/Pages/Root/ViewVehicleDetails.jsp")
                             .forward(request, response);
 
                 } else {

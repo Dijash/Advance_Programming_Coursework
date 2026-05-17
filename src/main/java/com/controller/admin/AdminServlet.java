@@ -130,7 +130,7 @@ public class AdminServlet extends HttpServlet {
                 /*
                  * Forward request to admin dashboard page.
                  */
-                request.getRequestDispatcher("/Pages/Admin/Dashboard/admin.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Dashboard/admin.jsp")
                         .forward(request, response);
                 break;
 
@@ -147,7 +147,7 @@ public class AdminServlet extends HttpServlet {
                 /*
                  * Forward to booking management page.
                  */
-                request.getRequestDispatcher("/Pages/Admin/Booking/manageBooking.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Booking/manageBooking.jsp")
                         .forward(request, response);
                 break;
 
@@ -181,8 +181,8 @@ public class AdminServlet extends HttpServlet {
                  * Determine target JSP page.
                  */
                 String target = path.equals("/viewBooking")
-                        ? "/Pages/Admin/Booking/viewBooking.jsp"
-                        : "/Pages/Admin/Booking/editBooking.jsp";
+                        ? "/WEB-INF/Pages/Admin/Booking/viewBooking.jsp"
+                        : "/WEB-INF/Pages/Admin/Booking/editBooking.jsp";
 
                 /*
                  * Forward request.
@@ -209,11 +209,11 @@ public class AdminServlet extends HttpServlet {
                 /*
                  * Forward to vehicle management page.
                  */
-                request.getRequestDispatcher("/Pages/Admin/Vehicle/manageVehicle.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Vehicle/manageVehicle.jsp")
                         .forward(request, response);
                 break;
             case "/addVehicle":
-                request.getRequestDispatcher("/Pages/Admin/Vehicle/addVehicle.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Vehicle/addVehicle.jsp")
                         .forward(request, response);
                 break;
 
@@ -251,8 +251,8 @@ public class AdminServlet extends HttpServlet {
                  * Determine target page.
                  */
                 String vTarget = path.equals("/editVehicle")
-                        ? "/Pages/Admin/Vehicle/editVehicle.jsp"
-                        : "/Pages/Admin/Vehicle/viewVehicle.jsp";
+                        ? "/WEB-INF/Pages/Admin/Vehicle/editVehicle.jsp"
+                        : "/WEB-INF/Pages/Admin/Vehicle/viewVehicle.jsp";
 
                 /*
                  * Forward request.
@@ -308,7 +308,7 @@ public class AdminServlet extends HttpServlet {
                 /*
                  * Forward to customer page.
                  */
-                request.getRequestDispatcher("/Pages/Admin/Customer/customer.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Customer/customer.jsp")
                         .forward(request, response);
                 break;
 
@@ -344,7 +344,7 @@ public class AdminServlet extends HttpServlet {
                 /*
                  * Forward to customer view page.
                  */
-                request.getRequestDispatcher("/Pages/Admin/Customer/viewCustomer.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Customer/viewCustomer.jsp")
                         .forward(request, response);
                 break;
 
@@ -369,7 +369,7 @@ public class AdminServlet extends HttpServlet {
                 /*
                  * Forward to notification page.
                  */
-                request.getRequestDispatcher("/Pages/Admin/Notification/notification.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Notification/notification.jsp")
                         .forward(request, response);
                 break;
 
@@ -391,7 +391,7 @@ public class AdminServlet extends HttpServlet {
                 /*
                  * Forward to reviews page.
                  */
-                request.getRequestDispatcher("/Pages/Admin/Review/reviews.jsp")
+                request.getRequestDispatcher("/WEB-INF/Pages/Admin/Review/reviews.jsp")
                         .forward(request, response);
                 break;
 

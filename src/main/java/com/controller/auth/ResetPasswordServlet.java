@@ -69,7 +69,7 @@ public class ResetPasswordServlet extends HttpServlet {
         /*
          * Forward request to reset password page.
          */
-        request.getRequestDispatcher("/Pages/Auth/resetPassword.jsp")
+        request.getRequestDispatcher("/WEB-INF/Pages/Auth/resetPassword.jsp")
                 .forward(request, response);
     }
 
@@ -168,7 +168,7 @@ public class ResetPasswordServlet extends HttpServlet {
             /*
              * Forward user to login page.
              */
-            request.getRequestDispatcher("/Pages/Auth/Login.jsp")
+            request.getRequestDispatcher("/WEB-INF/Pages/Auth/Login.jsp")
                     .forward(request, response);
 
         } else {
@@ -184,7 +184,7 @@ public class ResetPasswordServlet extends HttpServlet {
             /*
              * Return user to reset password page.
              */
-            request.getRequestDispatcher("/Pages/Auth/resetPassword.jsp")
+            request.getRequestDispatcher("/WEB-INF/Pages/Auth/resetPassword.jsp")
                     .forward(request, response);
         }
     }

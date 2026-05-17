@@ -78,7 +78,7 @@ public class InvoiceServlet extends HttpServlet {
                 if (booking != null) {
                     request.setAttribute("booking", booking);
 
-                    request.getRequestDispatcher("/Pages/Admin/Report/invoice.jsp")
+                    request.getRequestDispatcher("/WEB-INF/Pages/Admin/Report/invoice.jsp")
                             .forward(request, response);
                     return;
                 }

@@ -102,7 +102,7 @@ public class AboutServlet extends HttpServlet {
         /*
          * Forward request to About page.
          */
-        request.getRequestDispatcher("/Pages/Root/About.jsp")
+        request.getRequestDispatcher("/WEB-INF/Pages/Root/About.jsp")
                 .forward(request, response);
     }
 }

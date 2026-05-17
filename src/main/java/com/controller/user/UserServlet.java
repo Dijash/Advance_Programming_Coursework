@@ -201,7 +201,7 @@ public class UserServlet extends HttpServlet {
                  * Forward to dashboard page.
                  */
                 request.getRequestDispatcher(
-                                "/Pages/User/Dashboard/dashboard.jsp")
+                                "/WEB-INF/Pages/User/Dashboard/dashboard.jsp")
                         .forward(request, response);
                 break;
 
@@ -228,7 +228,7 @@ public class UserServlet extends HttpServlet {
                  * Forward to bookings page.
                  */
                 request.getRequestDispatcher(
-                                "/Pages/User/Booking/myBookings.jsp")
+                                "/WEB-INF/Pages/User/Booking/myBookings.jsp")
                         .forward(request, response);
                 break;
 
@@ -282,7 +282,7 @@ public class UserServlet extends HttpServlet {
                             );
 
                             request.getRequestDispatcher(
-                                            "/Pages/User/Booking/bookingDetails.jsp")
+                                            "/WEB-INF/Pages/User/Booking/bookingDetails.jsp")
                                     .forward(request, response);
 
                         } else {
@@ -345,7 +345,7 @@ public class UserServlet extends HttpServlet {
                  * Forward to favorites page.
                  */
                 request.getRequestDispatcher(
-                                "/Pages/User/Dashboard/myFavorites.jsp")
+                                "/WEB-INF/Pages/User/Dashboard/myFavorites.jsp")
                         .forward(request, response);
                 break;
 
@@ -358,7 +358,7 @@ public class UserServlet extends HttpServlet {
                  * Forward to settings page.
                  */
                 request.getRequestDispatcher(
-                                "/Pages/User/Dashboard/settings.jsp")
+                                "/WEB-INF/Pages/User/Dashboard/settings.jsp")
                         .forward(request, response);
                 break;
 

@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         // If no cookie exists, show them the normal login page
-        request.getRequestDispatcher("/Pages/Auth/Login.jsp")
+        request.getRequestDispatcher("/WEB-INF/Pages/Auth/Login.jsp")
                 .forward(request, response);
     }
 
@@ -92,10 +92,10 @@ public class LoginServlet extends HttpServlet {
 
         } else if (result.equals("wrong_password")) {
             request.setAttribute("error", "Wrong password!");
-            request.getRequestDispatcher("/Pages/Auth/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Pages/Auth/Login.jsp").forward(request, response);
         } else if (result.equals("user_not_found")) {
             request.setAttribute("error", "User does not exist. Please register.");
-            request.getRequestDispatcher("/Pages/Auth/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Pages/Auth/Login.jsp").forward(request, response);
         }
     }
 }

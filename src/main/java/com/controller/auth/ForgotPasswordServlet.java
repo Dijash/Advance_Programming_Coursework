@@ -38,7 +38,7 @@ public class ForgotPasswordServlet extends HttpServlet {
         /*
          * Forward request to forgot password JSP page.
          */
-        request.getRequestDispatcher("/Pages/Auth/forgotPassword.jsp")
+        request.getRequestDispatcher("/WEB-INF/Pages/Auth/forgotPassword.jsp")
                 .forward(request, response);
     }
 
@@ -108,7 +108,7 @@ public class ForgotPasswordServlet extends HttpServlet {
             /*
              * Return user back to forgot password page.
              */
-            request.getRequestDispatcher("/Pages/Auth/forgotPassword.jsp")
+            request.getRequestDispatcher("/WEB-INF/Pages/Auth/forgotPassword.jsp")
                     .forward(request, response);
         }
     }

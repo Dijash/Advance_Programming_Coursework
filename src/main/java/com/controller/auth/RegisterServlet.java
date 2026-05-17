@@ -63,7 +63,7 @@ public class RegisterServlet extends HttpServlet {
         /*
          * Forward request to registration page.
          */
-        request.getRequestDispatcher("/Pages/Auth/Register.jsp")
+        request.getRequestDispatcher("/WEB-INF/Pages/Auth/Register.jsp")
                 .forward(request, response);
     }
 
