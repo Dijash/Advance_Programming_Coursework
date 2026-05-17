@@ -26,10 +26,10 @@ import java.io.IOException;
  * - Vehicle details page
  *
  * URL Mappings:
- *      /home
- *      /contact
- *      /rentalDeals
- *      /viewVehicleDetails
+ * /home
+ * /contact
+ * /rentalDeals
+ * /viewVehicleDetails
  */
 @WebServlet({
         "/home",
@@ -90,29 +90,26 @@ public class HomeServlet extends HttpServlet {
         if (path.equals("/home")) {
 
             /*
+             * Redirect to root if the user is NOT logged in.
+             */
+            if (session == null || session.getAttribute("user") == null) {
+                response.sendRedirect(request.getContextPath() + "/");
+                return;
+            }
+
+            /*
              * Default subscription status.
              */
             Boolean isSubscribed = false;
 
+            Customer user = (Customer) session.getAttribute("user");
+
             /*
-             * Check whether user is logged in.
+             * Check whether user is subscribed.
              */
-            if (session != null
-                    && session.getAttribute("user") != null) {
-
-                /*
-                 * Retrieve logged-in customer.
-                 */
-                Customer user =
-                        (Customer) session.getAttribute("user");
-
-                /*
-                 * Check whether user is subscribed.
-                 */
-                isSubscribed = subscriberService.isSubscribed(
-                        user.getCustomer_email()
-                );
-            }
+            isSubscribed = subscriberService.isSubscribed(
+                    user.getCustomer_email()
+            );
 
             /*
              * Store subscription status.
@@ -144,30 +141,20 @@ public class HomeServlet extends HttpServlet {
             /*
              * Retrieve filter parameters from request.
              */
-            String searchParam =
-                    request.getParameter("searchParam");
-
-            String type =
-                    request.getParameter("type");
-
-            String color =
-                    request.getParameter("color");
-
-            String status =
-                    request.getParameter("status");
-
-            String condition =
-                    request.getParameter("condition");
+            String searchParam = request.getParameter("searchParam");
+            String type = request.getParameter("type");
+            String color = request.getParameter("color");
+            String status = request.getParameter("status");
+            String condition = request.getParameter("condition");
 
             /*
              * Check whether filters are applied.
              */
-            boolean hasFilters =
-                    (searchParam != null
-                            || type != null
-                            || color != null
-                            || status != null
-                            || condition != null);
+            boolean hasFilters = (searchParam != null
+                    || type != null
+                    || color != null
+                    || status != null
+                    || condition != null);
 
             /*
              * If no filters are applied,
@@ -185,14 +172,13 @@ public class HomeServlet extends HttpServlet {
             /*
              * Retrieve filtered vehicle list.
              */
-            List<Vehicle> vehicleList =
-                    vehicleDAO.getFilteredVehicles(
-                            searchParam,
-                            type,
-                            color,
-                            status,
-                            condition
-                    );
+            List<Vehicle> vehicleList = vehicleDAO.getFilteredVehicles(
+                    searchParam,
+                    type,
+                    color,
+                    status,
+                    condition
+            );
 
             /*
              * Store vehicle list in request attribute.
@@ -203,42 +189,21 @@ public class HomeServlet extends HttpServlet {
              * Store filter values
              * to preserve selected filters in UI.
              */
-            request.setAttribute(
-                    "searchParam",
-                    searchParam != null ? searchParam : ""
-            );
-
-            request.setAttribute(
-                    "filterType",
-                    type != null ? type : "All"
-            );
-
-            request.setAttribute(
-                    "filterColor",
-                    color != null ? color : "All"
-            );
-
-            request.setAttribute(
-                    "filterStatus",
-                    status != null ? status : "Available"
-            );
-
-            request.setAttribute(
-                    "filterCondition",
-                    condition != null ? condition : "All"
-            );
+            request.setAttribute("searchParam", searchParam != null ? searchParam : "");
+            request.setAttribute("filterType", type != null ? type : "All");
+            request.setAttribute("filterColor", color != null ? color : "All");
+            request.setAttribute("filterStatus", status != null ? status : "Available");
+            request.setAttribute("filterCondition", condition != null ? condition : "All");
 
             /*
              * Check whether customer is logged in.
              */
-            if (session != null
-                    && session.getAttribute("user") != null) {
+            if (session != null && session.getAttribute("user") != null) {
 
                 /*
                  * Retrieve logged-in customer.
                  */
-                Customer loggedInUser =
-                        (Customer) session.getAttribute("user");
+                Customer loggedInUser = (Customer) session.getAttribute("user");
 
                 /*
                  * Create FavoriteDAO object.
@@ -248,18 +213,14 @@ public class HomeServlet extends HttpServlet {
                 /*
                  * Retrieve favorite vehicle IDs.
                  */
-                List<Integer> favoriteIds =
-                        favDAO.getUserFavoriteVehicleIds(
-                                loggedInUser.getCustomer_id()
-                        );
+                List<Integer> favoriteIds = favDAO.getUserFavoriteVehicleIds(
+                        loggedInUser.getCustomer_id()
+                );
 
                 /*
                  * Store favorite vehicle IDs.
                  */
-                request.setAttribute(
-                        "favoriteIds",
-                        favoriteIds
-                );
+                request.setAttribute("favoriteIds", favoriteIds);
             }
 
             /*
@@ -278,9 +239,7 @@ public class HomeServlet extends HttpServlet {
                 /*
                  * Retrieve vehicle ID from request.
                  */
-                int vehicleId = Integer.parseInt(
-                        request.getParameter("id")
-                );
+                int vehicleId = Integer.parseInt(request.getParameter("id"));
 
                 /*
                  * Create VehicleDAO object.
@@ -290,8 +249,7 @@ public class HomeServlet extends HttpServlet {
                 /*
                  * Retrieve vehicle details by ID.
                  */
-                Vehicle vehicle =
-                        vehicleDAO.getVehicleById(vehicleId);
+                Vehicle vehicle = vehicleDAO.getVehicleById(vehicleId);
 
                 /*
                  * Check whether vehicle exists.
@@ -306,14 +264,12 @@ public class HomeServlet extends HttpServlet {
                     /*
                      * Check whether customer is logged in.
                      */
-                    if (session != null
-                            && session.getAttribute("user") != null) {
+                    if (session != null && session.getAttribute("user") != null) {
 
                         /*
                          * Retrieve logged-in customer.
                          */
-                        Customer loggedInUser =
-                                (Customer) session.getAttribute("user");
+                        Customer loggedInUser = (Customer) session.getAttribute("user");
 
                         /*
                          * Create FavoriteDAO object.
@@ -334,8 +290,7 @@ public class HomeServlet extends HttpServlet {
                     /*
                      * Forward request to vehicle details page.
                      */
-                    request.getRequestDispatcher(
-                                    "/WEB-INF/Pages/Root/ViewVehicleDetails.jsp")
+                    request.getRequestDispatcher("/WEB-INF/Pages/Root/ViewVehicleDetails.jsp")
                             .forward(request, response);
 
                 } else {
@@ -344,10 +299,7 @@ public class HomeServlet extends HttpServlet {
                      * If the vehicle does not exist,
                      * redirect back to the rental deals page.
                      */
-                    response.sendRedirect(
-                            request.getContextPath()
-                                    + "/rentalDeals"
-                    );
+                    response.sendRedirect(request.getContextPath() + "/rentalDeals");
                 }
 
             } catch (NumberFormatException e) {
@@ -355,10 +307,7 @@ public class HomeServlet extends HttpServlet {
                 /*
                  * Handle invalid vehicle ID format.
                  */
-                response.sendRedirect(
-                        request.getContextPath()
-                                + "/rentalDeals"
-                );
+                response.sendRedirect(request.getContextPath() + "/rentalDeals");
             }
         }
     }
