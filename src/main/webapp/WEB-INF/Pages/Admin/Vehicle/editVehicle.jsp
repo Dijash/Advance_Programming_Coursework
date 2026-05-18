@@ -1,6 +1,8 @@
+<%-- Edit Vehicle page --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-  <c:set var="activePage" value="vehicles" scope="request" />
+    <%-- Set active page for sidebar highlighting --%>
+    <c:set var="activePage" value="vehicles" scope="request" />
     <!doctype html>
     <html lang="en">
 
@@ -14,29 +16,37 @@
     </head>
 
     <body>
+      <%-- Include admin sidebar navigation --%>
       <jsp:include page="/WEB-INF/Pages/Includes/adminSidebar.jsp" />
-        <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout"><span>Logout</span></a>
       </aside>
 
       <main>
+        <%-- Page header with title and cancel button --%>
         <div class="page-header">
           <h2>Edit Vehicle</h2>
           <a href="${pageContext.request.contextPath}/manageVehicles" class="btn-secondary">Cancel</a>
         </div>
 
+        <%-- Content box containing edit form --%>
         <div class="content-box">
+          <%-- Vehicle edit form with file upload support --%>
           <form action="${pageContext.request.contextPath}/updateVehicle" method="POST" enctype="multipart/form-data">
 
+            <%-- Hidden fields for vehicle ID and existing image --%>
             <input type="hidden" name="vehicle_id" value="${vehicle.vehicle_id}">
             <input type="hidden" name="existing_image" value="${vehicle.vehicle_image}">
 
+            <%-- Form grid layout --%>
             <div class="form-grid">
+              <%-- Vehicle brand and model input --%>
               <div class="form-group">
                 <label for="vehicle_brand">Vehicle Brand & Model</label>
                 <input type="text" id="vehicle_brand" name="vehicle_brand" class="form-control"
                   value="<c:out value='${vehicle.vehicle_brand}'/>" required>
               </div>
 
+              <%-- Vehicle type/category select --%>
               <div class="form-group">
                 <label for="vehicle_type">Vehicle Type / Category</label>
                 <select id="vehicle_type" name="vehicle_type" class="form-control" required>
@@ -50,18 +60,21 @@
                 </select>
               </div>
 
+              <%-- Vehicle color input --%>
               <div class="form-group">
                 <label for="vehicle_color">Vehicle Color</label>
                 <input type="text" id="vehicle_color" name="vehicle_color" class="form-control"
                   value="<c:out value='${vehicle.vehicle_color}'/>" required>
               </div>
 
+              <%-- Number plate input --%>
               <div class="form-group">
                 <label for="vehicle_numberPlate">Number Plate</label>
                 <input type="text" id="vehicle_numberPlate" name="vehicle_numberPlate" class="form-control"
                   value="<c:out value='${vehicle.vehicle_numberPlate}'/>" required>
               </div>
 
+              <%-- Vehicle condition select --%>
               <div class="form-group">
                 <label for="vehicle_condition">Vehicle Condition</label>
                 <select id="vehicle_condition" name="vehicle_condition" class="form-control" required>
@@ -74,6 +87,7 @@
                 </select>
               </div>
 
+              <%-- Current status select --%>
               <div class="form-group">
                 <label for="vehicle_status">Current Status</label>
                 <select id="vehicle_status" name="vehicle_status" class="form-control" required>
@@ -83,12 +97,14 @@
                 </select>
               </div>
 
+              <%-- Rental price input --%>
               <div class="form-group">
                 <label for="vehicle_price">Rental Price / Day (NPR)</label>
                 <input type="number" id="vehicle_price" name="vehicle_price" class="form-control"
                   value="<c:out value='${vehicle.vehicle_price}'/>" step="0.01" min="0" required>
               </div>
 
+              <%-- Vehicle image file upload (full width, optional) --%>
               <div class="form-group full-width">
                 <label for="vehicle_image">Update Vehicle Photo (Optional)</label>
                 <input type="file" id="vehicle_image" name="vehicle_image" class="form-control"
@@ -98,6 +114,7 @@
               </div>
             </div>
 
+            <%-- Submit button (full width) --%>
             <div class="form-group full-width">
               <button type="submit" class="btn-primary">Update Details</button>
             </div>
@@ -107,4 +124,4 @@
       </main>
     </body>
 
-  </html>
+    </html>

@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%-- 404 Not Found error page --%>
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,26 +11,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
 </head>
+
 <body>
+  <%-- Error page container --%>
   <div class="error-container">
+    <%-- Logo link --%>
     <a href="${pageContext.request.contextPath}/" class="logo">Rent<span>All</span></a>
 
+    <%-- 404 error code with wobbly animation --%>
     <div class="error-code">
       4<span class="wobbly-tire">0</span>4
     </div>
 
+    <%-- Error title --%>
     <div class="error-title">Whoops! Dead End.</div>
 
+    <%-- Error message --%>
     <div class="error-message">
       Looks like you've driven off the map. The vehicle or page you're looking for doesn't exist in our current fleet.
     </div>
 
+    <%-- Return home button --%>
     <a href="${pageContext.request.contextPath}/home" class="btn-home">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
       Turn Around
     </a>
   </div>
 </body>
+
 </html>

@@ -2,9 +2,11 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="com.model.Customer" %>
 <%@ page isELIgnored="false" %>
+<%-- Vehicle Details page --%>
 
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,38 +15,50 @@
 </head>
 
 <body>
-
+  <%-- Navigation bar --%>
   <jsp:include page="/WEB-INF/Pages/Includes/navbar.jsp" />
 
+  <%-- Main content area --%>
   <div style="background: var(--bg);">
     <main class="container">
 
+      <%-- Breadcrumb navigation --%>
       <div style="margin-bottom: 2rem; color: #64748b; font-size: 0.9rem; font-weight: 500;">
-        <a href="${pageContext.request.contextPath}/rentalDeals" style="color: #2563eb; text-decoration: none;">Fleet & Deals</a>
+        <a href="${pageContext.request.contextPath}/rentalDeals"
+          style="color: #2563eb; text-decoration: none;">Fleet & Deals</a>
         <span style="margin: 0 0.5rem;">/</span>
         <span style="color: #0f172a;">${vehicle.vehicle_brand} ${vehicle.vehicle_type}</span>
       </div>
 
+      <%-- Vehicle details display --%>
       <c:if test="${not empty vehicle}">
         <div class="layout">
 
+          <%-- Vehicle details card --%>
           <div class="vehicle_details">
             <div class="image_card">
+              <%-- Vehicle image container --%>
               <div class="image_container">
+                <%-- Status badge --%>
                 <span class="status_badge ${vehicle.vehicle_status != 'Available' ? 'unavailable' : ''}">
                   ${vehicle.vehicle_status}
                 </span>
-                <img src="${pageContext.request.contextPath}/Assets/${vehicle.vehicle_image}" alt="${vehicle.vehicle_brand} ${vehicle.vehicle_type}" />
+                <img src="${pageContext.request.contextPath}/Assets/${vehicle.vehicle_image}"
+                  alt="${vehicle.vehicle_brand} ${vehicle.vehicle_type}" />
               </div>
+              <%-- Vehicle content with specs and features --%>
               <div class="content_padding">
                 <span class="brand_tag">${vehicle.vehicle_brand}</span>
                 <h1 class="title">${vehicle.vehicle_type}</h1>
 
+                <%-- Vehicle specifications list --%>
                 <div class="specs_list">
+                  <%-- Type spec --%>
                   <div class="spec_row">
                     <span class="spec_label">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-4h10l2 4h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2" />
+                        <path
+                          d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-4h10l2 4h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2" />
                         <circle cx="7.5" cy="17" r="2.5" />
                         <circle cx="16.5" cy="17" r="2.5" />
                       </svg>
@@ -52,6 +66,7 @@
                     </span>
                     <span class="spec_value">${vehicle.vehicle_type}</span>
                   </div>
+                  <%-- Color spec --%>
                   <div class="spec_row">
                     <span class="spec_label">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -61,6 +76,7 @@
                     </span>
                     <span class="spec_value">${vehicle.vehicle_color}</span>
                   </div>
+                  <%-- Condition spec --%>
                   <div class="spec_row">
                     <span class="spec_label">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -70,6 +86,7 @@
                     </span>
                     <span class="spec_value">${vehicle.vehicle_condition}</span>
                   </div>
+                  <%-- Plate number spec --%>
                   <div class="spec_row">
                     <span class="spec_label">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -82,29 +99,43 @@
                   </div>
                 </div>
 
+                <%-- Included features section --%>
                 <h3 style="margin-bottom: 1.5rem;">Included Features</h3>
+                <%-- Features list --%>
                 <div class="features_list">
+                  <%-- Insurance coverage --%>
                   <div class="feature_item">
                     <svg fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
                     </svg>
                     Insurance Coverage
                   </div>
+                  <%-- Roadside assistance --%>
                   <div class="feature_item">
                     <svg fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
                     </svg>
                     24/7 Roadside Assistance
                   </div>
+                  <%-- Free cancellation --%>
                   <div class="feature_item">
                     <svg fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
                     </svg>
                     Free Cancellation
                   </div>
+                  <%-- Sanitized interior --%>
                   <div class="feature_item">
                     <svg fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
                     </svg>
                     Sanitized Interior
                   </div>
@@ -113,29 +144,38 @@
             </div>
           </div>
 
+          <%-- Booking container --%>
           <div class="booking_container">
             <div class="booking_card">
-
+              <%-- Date error message --%>
               <c:if test="${not empty dateError}">
-                <div style="background: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #f87171; font-weight: 600; font-size: 0.9rem;">
+                <div
+                  style="background: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #f87171; font-weight: 600; font-size: 0.9rem;">
                   ${dateError}
                 </div>
               </c:if>
 
+              <%-- Daily price display --%>
               <div class="price_display">
-                <h2>NPR <c:out value="${vehicle.vehicle_price}" /></h2>
+                <h2>NPR
+                  <c:out value="${vehicle.vehicle_price}" />
+                </h2>
                 <span>/ day</span>
               </div>
 
+              <%-- Booking form --%>
               <form action="${pageContext.request.contextPath}/submitBooking" method="POST">
                 <input type="hidden" name="vehicle_id" value="${vehicle.vehicle_id}">
 
                 <label class="form_label" for="pickupDate">Start Date</label>
-                <input type="date" id="pickupDate" name="booking_startDate" required class="input_field" onchange="calcTotal()">
+                <input type="date" id="pickupDate" name="booking_startDate" required class="input_field"
+                  onchange="calcTotal()">
 
                 <label class="form_label" for="returnDate">End Date</label>
-                <input type="date" id="returnDate" name="booking_endDate" required class="input_field" onchange="calcTotal()">
+                <input type="date" id="returnDate" name="booking_endDate" required class="input_field"
+                  onchange="calcTotal()">
 
+                <%-- Booking summary --%>
                 <div class="summary_box">
                   <div class="summary_row">
                     <span>Duration</span>
@@ -143,14 +183,18 @@
                   </div>
                   <div class="summary_row">
                     <span>Rate per day</span>
-                    <span>NPR <c:out value="${vehicle.vehicle_price}" /></span>
+                    <span>NPR
+                      <c:out value="${vehicle.vehicle_price}" />
+                    </span>
                   </div>
+                  <%-- Total price row --%>
                   <div class="total_row">
                     <span>Total Price</span>
                     <span id="totalPrice">NPR 0</span>
                   </div>
                 </div>
 
+                <%-- Submit button: disabled if vehicle not available --%>
                 <c:choose>
                   <c:when test="${vehicle.vehicle_status == 'Available'}">
                     <button type="submit" class="book_btn">Confirm Reservation</button>
@@ -168,17 +212,17 @@
     </main>
   </div>
 
+  <%-- Footer include --%>
   <jsp:include page="/WEB-INF/Pages/Includes/footer.jsp" />
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Set minimum date to today to prevent past bookings
       const today = new Date().toISOString().split('T')[0];
       document.getElementById("pickupDate").min = today;
       document.getElementById("returnDate").min = today;
     });
 
-    // Dynamically calculate total booking cost
+    <%-- Dynamic total price calculation --%>
     function calcTotal() {
       const start = document.getElementById('pickupDate').value;
       const end = document.getElementById('returnDate').value;
@@ -193,7 +237,7 @@
           document.getElementById('daysCount').innerText = "0";
           document.getElementById('totalPrice').innerText = "NPR 0";
         } else {
-          if (diff === 0) diff = 1; // Same day counts as 1 day minimum
+          if (diff === 0) diff = 1;
           document.getElementById('daysCount').innerText = diff;
           document.getElementById('totalPrice').innerText = "NPR " + (diff * dailyRate).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
@@ -201,4 +245,5 @@
     }
   </script>
 </body>
+
 </html>

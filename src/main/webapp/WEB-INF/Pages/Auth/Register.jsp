@@ -1,54 +1,74 @@
+<%-- Registration page --%>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Auth/RegisterStyle.css">
 
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Auth/RegisterStyle.css">
 
-  <body style="background-image: url('${pageContext.request.contextPath}/Assets/Background.jpg'); background-size: cover; background-position: center;">
+</head>
+
+<%-- Background image with cover styling --%>
+  <body
+    style="background-image: url('${pageContext.request.contextPath}/Assets/Background.jpg'); background-size: cover; background-position: center;">
+    <%-- Main form container --%>
     <div class="main">
+      <%-- Top bar with header and social buttons --%>
       <div class="top-bar">
+        <%-- Form header with title and subtitle --%>
         <div class="form-head">
           <h1>Create Account</h1>
           <p>Fill in the details below to get started</p>
         </div>
+        <%-- Social registration buttons --%>
         <div class="social-row">
+          <%-- Google sign-up button --%>
           <button class="social-btn" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48">
-              <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
-              <path fill="#FF3D00" d="m6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z"/>
-              <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
-              <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+              <path fill="#FFC107"
+                d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" />
+              <path fill="#FF3D00"
+                d="m6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z" />
+              <path fill="#4CAF50"
+                d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" />
+              <path fill="#1976D2"
+                d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" />
             </svg>
             Google
           </button>
+          <%-- Facebook sign-up button --%>
           <button class="social-btn" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
             </svg>
             Facebook
           </button>
         </div>
       </div>
 
-      <form id="registerForm" method="post" action="${pageContext.request.contextPath}/register" enctype="multipart/form-data">
+      <%-- Registration form with personal, contact, and security sections --%>
+      <form id="registerForm" method="post" action="${pageContext.request.contextPath}/register"
+        enctype="multipart/form-data">
+        <%-- Form body with three columns --%>
         <div class="form-body">
+          <%-- Left column: Personal Information --%>
           <div class="form-col">
+            <%-- Section label for personal info --%>
             <div class="section-label">Personal Information</div>
 
+            <%-- Profile photo input --%>
             <div class="field">
               <label>Profile Photo</label>
               <div class="field-inner">
-                <input type="file" id="customer_image" name="customer_image" accept="image/*" style="padding-top: 8px;" required />
+                <input type="file" id="customer_image" name="customer_image" accept="image/*" style="padding-top: 8px;"
+                  required />
               </div>
             </div>
 
+            <%-- First name input --%>
             <div class="field">
               <label>First Name</label>
               <div class="field-inner">
@@ -56,6 +76,7 @@
               </div>
             </div>
 
+            <%-- Last name input --%>
             <div class="field">
               <label>Last Name</label>
               <div class="field-inner">
@@ -63,6 +84,7 @@
               </div>
             </div>
 
+            <%-- Date of birth input --%>
             <div class="field">
               <label>Date of Birth</label>
               <div class="field-inner">
@@ -70,6 +92,7 @@
               </div>
             </div>
 
+            <%-- Gender select --%>
             <div class="field">
               <label>Gender</label>
               <div class="field-inner">
@@ -84,50 +107,39 @@
             </div>
           </div>
 
+          <%-- Column divider --%>
           <div class="col-divider"></div>
 
+          <%-- Middle column: Contact Details --%>
           <div class="form-col">
+            <%-- Section label for contact details --%>
             <div class="section-label">Contact Details</div>
 
+            <%-- Email input --%>
             <div class="field">
               <label>Email</label>
               <div class="field-inner">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="example@gmail.com"
-                  required
-                />
+                <input type="email" id="email" name="email" placeholder="example@gmail.com" required />
               </div>
             </div>
 
+            <%-- Phone number input --%>
             <div class="field">
               <label>Phone Number</label>
               <div class="field-inner">
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="+977 9800000000"
-                  required
-                />
+                <input type="tel" id="phone" name="phone" placeholder="+977 9800000000" required />
               </div>
             </div>
 
+            <%-- Address input --%>
             <div class="field">
               <label>Address</label>
               <div class="field-inner">
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  placeholder="Street, City"
-                  required
-                />
+                <input type="text" id="address" name="address" placeholder="Street, City" required />
               </div>
             </div>
 
+            <%-- Country select --%>
             <div class="field">
               <label>Country</label>
               <div class="field-inner">
@@ -143,81 +155,81 @@
             </div>
           </div>
 
+          <%-- Column divider --%>
           <div class="col-divider"></div>
 
+          <%-- Right column: Security --%>
           <div class="form-col">
+            <%-- Section label for security --%>
             <div class="section-label">Security</div>
 
+            <%-- Username input --%>
             <div class="field">
               <label>Username</label>
               <div class="field-inner">
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  placeholder="Username"
-                  required
-                />
+                <input type="text" id="username" name="username" placeholder="Username" required />
               </div>
             </div>
 
+            <%-- Password input with visibility toggle --%>
             <div class="field">
               <label>Password</label>
               <div class="field-inner">
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                  required
-                />
-                <button type="button" class="eye" onclick="togglePassword('password', 'eyeOpen1', 'eyeClosed1')" style="display: flex; align-items: center; justify-content: center;">
-                  <svg id="eyeOpen1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                    <circle cx="12" cy="12" r="3"/>
+                <input type="password" id="password" name="password" placeholder="Password" required />
+                <%-- Toggle password visibility button --%>
+                <button type="button" class="eye" onclick="togglePassword('password', 'eyeOpen1', 'eyeClosed1')"
+                  style="display: flex; align-items: center; justify-content: center;">
+                  <%-- Eye open icon --%>
+                  <svg id="eyeOpen1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                    <circle cx="12" cy="12" r="3" />
                   </svg>
-                  <svg id="eyeClosed1" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
-                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
-                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
-                    <line x1="2" y1="2" x2="22" y2="22"/>
+                  <%-- Eye closed icon --%>
+                  <svg id="eyeClosed1" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+                    <line x1="2" y1="2" x2="22" y2="22" />
                   </svg>
                 </button>
               </div>
             </div>
 
+            <%-- Confirm password input with visibility toggle --%>
             <div class="field">
               <label>Confirm Password</label>
               <div class="field-inner">
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
-                  required
-                />
-                <button type="button" class="eye" onclick="togglePassword('confirmPassword', 'eyeOpen2', 'eyeClosed2')" style="display: flex; align-items: center; justify-content: center;">
-                  <svg id="eyeOpen2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                    <circle cx="12" cy="12" r="3"/>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
+                  required />
+                <%-- Toggle password visibility button --%>
+                <button type="button" class="eye" onclick="togglePassword('confirmPassword', 'eyeOpen2', 'eyeClosed2')"
+                  style="display: flex; align-items: center; justify-content: center;">
+                  <%-- Eye open icon --%>
+                  <svg id="eyeOpen2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                    <circle cx="12" cy="12" r="3" />
                   </svg>
-                  <svg id="eyeClosed2" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
-                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
-                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
-                    <line x1="2" y1="2" x2="22" y2="22"/>
+                  <%-- Eye closed icon --%>
+                  <svg id="eyeClosed2" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+                    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+                    <line x1="2" y1="2" x2="22" y2="22" />
                   </svg>
                 </button>
               </div>
             </div>
 
+            <%-- Referral code input (optional) --%>
             <div class="field">
-              <label
-                >Referral Code
-                <span style="color: var(--muted); font-weight: 400"
-                  >(optional)</span
-                ></label
-              >
+              <label>Referral Code
+                <span style="color: var(--muted); font-weight: 400">(optional)</span></label>
               <div class="field-inner">
                 <input type="text" id="referral" placeholder="Referral Code" name="referral" />
               </div>
@@ -225,15 +237,19 @@
           </div>
         </div>
 
+        <%-- Bottom bar with login link and submit button --%>
         <div class="bottom-bar">
+          <%-- Form footer with login link --%>
           <div class="form-foot">
             Already have an account? <a href="${pageContext.request.contextPath}/login">Sign in</a>
           </div>
+          <%-- Submit button for registration --%>
           <button type="submit" class="submit-btn">Create Account</button>
         </div>
       </form>
     </div>
 
+    <%-- Password visibility toggle JavaScript function --%>
     <script>
       function togglePassword(inputId, eyeOpenId, eyeClosedId) {
         const passwordInput = document.getElementById(inputId);
@@ -251,5 +267,6 @@
         }
       }
     </script>
-  </body>
+</body>
+
 </html>

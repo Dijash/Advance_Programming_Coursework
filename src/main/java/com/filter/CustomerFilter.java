@@ -27,8 +27,7 @@ import java.io.IOException;
  *
  * This filter checks whether the current user is logged in as a customer.
  * If yes, the request proceeds. If not, the user is redirected to the login
- * page (or, for AJAX calls like /toggleFavorite, returns a JSON unauthorized
- * response). Additionally, it sets HTTP headers to prevent caching of
+ * page. Additionally, it sets HTTP headers to prevent caching of
  * protected pages for security reasons.
  */
 @WebFilter({
@@ -61,8 +60,6 @@ public class CustomerFilter implements Filter {
      * 4. Check if a user is logged in as a customer.
      * 5. If yes, forward the request to the target servlet/JSP.
      * 6. If not:
-     *    - For AJAX calls to '/toggleFavorite', return a JSON "unauthorized"
-     *      response and stop further processing.
      *    - For normal page requests, store an error message in the session
      *      and redirect the user to the login page.
      */
@@ -122,7 +119,6 @@ public class CustomerFilter implements Filter {
             session = httpRequest.getSession(true);
 
             /*
-             * Get the original request URI to determine if this is an AJAX call.
              * The filter protects multiple URLs; we need special handling for
              * '/toggleFavorite' because it is called asynchronously by JavaScript.
              */
@@ -130,13 +126,11 @@ public class CustomerFilter implements Filter {
 
             /*
              * Check if the request is for the 'toggleFavorite' endpoint.
-             * This endpoint is expected to be called via AJAX (e.g., fetch or XMLHttpRequest).
              * Returning a full HTML redirect would break the JavaScript client.
              */
             if (uri.endsWith("/toggleFavorite")) {
 
                 /*
-                 * For AJAX calls, return a JSON response with HTTP 200 (OK)
                  * but status field set to "unauthorized". The client-side code
                  * should check this field and redirect or show a message accordingly.
                  */
@@ -150,7 +144,6 @@ public class CustomerFilter implements Filter {
             }
 
             /*
-             * For regular page requests (non-AJAX):
              * Store a user-friendly error message in the session.
              * This message will be displayed on the login page.
              */
