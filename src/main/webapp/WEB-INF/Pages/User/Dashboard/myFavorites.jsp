@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.model.Customer" %>
 <%-- My Favorites page --%>
-<c:set var="activePage" value="myFavorites" scope="request" %>
+<c:set var="activePage" value="myFavorites" scope="request" />
 
 <!doctype html>
 <html lang="en">

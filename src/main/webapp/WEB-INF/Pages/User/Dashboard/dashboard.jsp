@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%-- User Dashboard page --%>
-<c:set var="activePage" value="dashboard" scope="request" %>
+<c:set var="activePage" value="dashboard" scope="request" />
 
 <!doctype html>
 <html lang="en">

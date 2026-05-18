@@ -158,6 +158,7 @@ public class UserServlet extends HttpServlet {
              * User Dashboard Section
              */
             case "/userDashboard":
+                System.out.println("UserServlet is running! The path is: " + request.getServletPath());
 
                 /*
                  * Retrieve dashboard statistics.

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%-- Booking Details page --%>
-<c:set var="activePage" value="myBookings" scope="request" %>
+<c:set var="activePage" value="myBookings" scope="request" />
 
 <!doctype html>
 <html lang="en">
