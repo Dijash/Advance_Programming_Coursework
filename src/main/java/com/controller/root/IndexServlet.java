@@ -1,3 +1,4 @@
+
 package com.controller.root;
 
 import com.model.Review;
@@ -19,7 +20,7 @@ import java.util.List;
  * URL Mapping:
  *      /index  (mapped as the welcome-file target via web.xml)
  */
-@WebServlet({"", "/"})
+@WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 
     /*

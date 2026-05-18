@@ -1,6 +1,8 @@
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
     <!-- 404 Page -->
     <error-page>
         <error-code>404</error-code>
