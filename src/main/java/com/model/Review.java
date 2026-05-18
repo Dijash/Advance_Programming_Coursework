@@ -56,6 +56,14 @@ public class Review {
     private Timestamp reviewDate;
 
     /*
+     * Profile image filename of the customer who wrote the review.
+     * Fetched via JOIN with the customer table.
+     * May be null if the customer has not uploaded a profile photo;
+     * the UI should fall back to a default avatar in that case.
+     */
+    private String customerImage;
+
+    /*
      * Constructs a new Review object with all fields initialized.
      *
      * Parameters:
@@ -64,16 +72,19 @@ public class Review {
      *      customerName       - Full name of the customer (denormalized)
      *      reviewDescription  - The review/feedback content text
      *      reviewDate         - Submission timestamp
+     *      customerImage      - Profile image filename of the reviewer (nullable)
      *
      * Called by the DAO when reading a row from the 'reviews' table.
      * Also used by service layer when creating a new review from form data.
      */
-    public Review(int reviewId, int customerId, String customerName, String reviewDescription, Timestamp reviewDate) {
+    public Review(int reviewId, int customerId, String customerName,
+                  String reviewDescription, Timestamp reviewDate, String customerImage) {
         this.reviewId = reviewId;
         this.customerId = customerId;
         this.customerName = customerName;
         this.reviewDescription = reviewDescription;
         this.reviewDate = reviewDate;
+        this.customerImage = customerImage;
     }
 
     /*
@@ -118,4 +129,14 @@ public class Review {
      * @return reviewDate as Timestamp
      */
     public Timestamp getReviewDate() { return reviewDate; }
+
+    /*
+     * Returns the profile image filename of the reviewer.
+     *
+     * Used to display the reviewer's actual photo in the testimonials section.
+     * May be null — JSP must fall back to a default avatar when null or empty.
+     *
+     * @return customerImage as String (nullable)
+     */
+    public String getCustomerImage() { return customerImage; }
 }

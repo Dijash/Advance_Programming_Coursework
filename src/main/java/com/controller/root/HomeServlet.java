@@ -4,8 +4,10 @@ import com.DAO.VehicleDAO;
 import com.DAO.FavoriteDAO;
 
 import com.model.Customer;
+import com.model.Review;
 import com.model.Vehicle;
 
+import com.service.ReviewService;
 import com.service.SubscriberService;
 
 import java.util.List;
@@ -45,6 +47,11 @@ public class HomeServlet extends HttpServlet {
     private SubscriberService subscriberService;
 
     /*
+     * Service object for review operations.
+     */
+    private ReviewService reviewService;
+
+    /*
      * Initializes servlet resources.
      *
      * Workflow:
@@ -57,6 +64,11 @@ public class HomeServlet extends HttpServlet {
          * Initialize SubscriberService.
          */
         subscriberService = new SubscriberService();
+
+        /*
+         * Initialize ReviewService.
+         */
+        reviewService = new ReviewService();
     }
 
     /*
@@ -115,6 +127,20 @@ public class HomeServlet extends HttpServlet {
              * Store subscription status.
              */
             request.setAttribute("isSubscribed", isSubscribed);
+
+            /*
+             * Retrieve latest reviews for the home page.
+             * Fetch all and limit to 3 in the JSP, or slice here.
+             */
+            List<Review> allReviews = reviewService.getAllReviews();
+            List<Review> latestReviews = allReviews.size() > 3
+                    ? allReviews.subList(0, 3)
+                    : allReviews;
+
+            /*
+             * Store latest reviews for the "What people say" section.
+             */
+            request.setAttribute("latestReviews", latestReviews);
 
             /*
              * Forward request to Home page.

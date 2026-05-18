@@ -36,15 +36,19 @@ public class ReviewDAO {
                 new ArrayList<>();
 
         /*
-         * SQL: Fetch reviews with customer full name.
+         * SQL: Fetch reviews with customer full name and profile image.
+         * ORDER BY review_id DESC — auto-increment PK guarantees newest
+         * review is always first, regardless of whether review_date is
+         * stored as DATE or DATETIME (same-day ties are broken correctly).
          */
         String sql =
                 "SELECT r.review_id, r.customer_id, "
                         + "CONCAT(c.first_name, ' ', c.last_name) as customer_name, "
-                        + "r.review_description, r.review_date "
+                        + "r.review_description, r.review_date, "
+                        + "c.customer_image "
                         + "FROM review r "
                         + "JOIN customer c ON r.customer_id = c.customer_id "
-                        + "ORDER BY r.review_date DESC";
+                        + "ORDER BY r.review_id DESC";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt =
@@ -62,7 +66,8 @@ public class ReviewDAO {
                                 rs.getInt("customer_id"),
                                 rs.getString("customer_name"),
                                 rs.getString("review_description"),
-                                rs.getTimestamp("review_date")
+                                rs.getTimestamp("review_date"),
+                                rs.getString("customer_image")
                         )
                 );
             }
@@ -122,11 +127,14 @@ public class ReviewDAO {
 
         /*
          * SQL: Insert new review.
+         * Uses NOW() instead of CURDATE() to store the full datetime,
+         * enabling accurate ordering when multiple reviews are written
+         * on the same day.
          */
         String sql =
                 "INSERT INTO review "
                         + "(customer_id, review_description, review_date) "
-                        + "VALUES (?, ?, CURDATE())";
+                        + "VALUES (?, ?, NOW())";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt =

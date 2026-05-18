@@ -11,6 +11,9 @@
 
   </head>
   <body>
+
+
+
     <section>
       <header>
         <nav>
@@ -451,74 +454,44 @@
           <h2 class="section_header">What people say about us</h2>
           <p class="section_description">Discover why our customers love renting with us!</p>
           <div class="client_grid">
-            <div class="client_card">
-              <div class="client_details">
-                <img src="${pageContext.request.contextPath}/Assets/images.jpeg" alt="Kushal Khanal"
-                class="client_avatar" />
-                <div>
-                  <h4>Kushal Khanal</h4>
-                  <div class="client_rating">
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2">
-                    <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <p>Affordable prices and great selection of vehicles! I found exactly what I needed, and the pick-up and
-              drop-off process was seamless.</p>
-            </div>
-            <div class="client_card">
-              <div class="client_details">
-                <img src="${pageContext.request.contextPath}/Assets/images.jpeg" alt="Rehan Basnet"
-                class="client_avatar" />
-                <div>
-                  <h4>Rehan Basnet</h4>
-                  <div class="client_rating">
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    <svg class="star-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2">
-                    <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <p>The flexibility of free cancellations made my trip stress-free. Great service overall — will definitely
-              rent again!</p>
-            </div>
+
+            <c:choose>
+              <c:when test="${not empty latestReviews}">
+                <c:forEach var="review" items="${latestReviews}">
+                  <div class="client_card">
+                    <div class="client_details">
+                      <%-- Show reviewer's profile photo; fall back to default avatar if none uploaded --%>
+                      <c:choose>
+                        <c:when test="${not empty review.customerImage}">
+                          <img src="${pageContext.request.contextPath}/Assets/Profiles/${review.customerImage}"
+                               alt="<c:out value='${review.customerName}' />"
+                               class="client_avatar" />
+                        </c:when>
+                        <c:otherwise>
+                          <div class="client_avatar default-avatar">
+
+                          </div>
+                        </c:otherwise>
+                      </c:choose>
+                      <div>
+                        <h4><c:out value="${review.customerName}" /></h4>
+                        <div class="client_rating">
+                          <c:forEach begin="1" end="5">
+                            <svg class="star-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          </c:forEach>
+                        </div>
+                        <small class="review-date">
+                          <fmt:formatDate value="${review.reviewDate}" pattern="MMM dd, yyyy" />
+                        </small>
+                      </div>
+                    </div>
+                    <p><c:out value="${review.reviewDescription}" /></p>
+                  </div>
+                </c:forEach>
+              </c:when>
+            </c:choose>
+
+          </div>
           </section>
         </section>
 <jsp:include page="/WEB-INF/Pages/Includes/footer.jsp" />
