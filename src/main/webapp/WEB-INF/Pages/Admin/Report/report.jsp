@@ -264,7 +264,7 @@
                             <c:when test="${sub.status == 'active'}">
                               <a href="#inactivateModal-${sub.subscriberId}" class="btn-inactivate"
                                 style="text-decoration: none;">
-                                Inactivate
+                                Deactivate
                               </a>
                               <%-- Inactivate confirmation modal --%>
                               <div id="inactivateModal-${sub.subscriberId}" class="modal-overlay">
@@ -275,7 +275,7 @@
                                   </div>
                                   <%-- Modal body --%>
                                   <div class="modal-body">
-                                    <p>Are you sure you want to inactivate this subscriber? They will no longer receive
+                                    <p>Are you sure you want to deactivate this subscriber? They will no longer receive
                                       newsletter emails.</p>
                                   </div>
                                   <%-- Modal footer with buttons --%>
@@ -286,7 +286,7 @@
                                       <input type="hidden" name="action" value="unsubscribe" />
                                       <input type="hidden" name="email" value="${sub.email}" />
                                       <button type="submit" class="btn-delete-confirm"
-                                        style="border: none; cursor: pointer;">Yes, Inactivate</button>
+                                        style="border: none; cursor: pointer;">Yes, Deactivate</button>
                                     </form>
                                   </div>
                                 </div>
