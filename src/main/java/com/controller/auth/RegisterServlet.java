@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import com.DAO.UserDAO;
 import com.util.DBConnection;
 import com.util.PasswordUtil;
 
@@ -18,30 +19,9 @@ import com.util.PasswordUtil;
  * customer registration functionality.
  *
  * URL Mapping:
- *      /register
- *
- * Features:
- * - Displays registration form
- * - Receives customer details
- * - Uploads profile image
- * - Encrypts password
- * - Stores customer information in database
+ * /register
  */
 @WebServlet("/register")
-
-/*
- * Multipart configuration for file uploads.
- *
- * fileSizeThreshold:
- *      Size threshold after which files
- *      are written to disk.
- *
- * maxFileSize:
- *      Maximum size allowed for a single file.
- *
- * maxRequestSize:
- *      Maximum size allowed for entire request.
- */
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 1,
         maxFileSize = 1024 * 1024 * 10,
@@ -49,34 +29,15 @@ import com.util.PasswordUtil;
 )
 public class RegisterServlet extends HttpServlet {
 
-    /*
-     * Handles HTTP GET requests.
-     *
-     * Workflow:
-     * 1. Open registration page.
-     */
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*
-         * Forward request to registration page.
-         */
         request.getRequestDispatcher("/WEB-INF/Pages/Auth/Register.jsp")
                 .forward(request, response);
     }
 
-    /*
-     * Handles HTTP POST requests.
-     *
-     * Workflow:
-     * 1. Retrieve form data.
-     * 2. Encrypt password.
-     * 3. Upload customer profile image.
-     * 4. Insert customer data into database.
-     * 5. Redirect user after registration.
-     */
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
@@ -84,10 +45,6 @@ public class RegisterServlet extends HttpServlet {
 
         try {
 
-            /*
-             * Retrieve customer details
-             * from registration form.
-             */
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String dob = request.getParameter("dob");
@@ -101,96 +58,50 @@ public class RegisterServlet extends HttpServlet {
             String referral = request.getParameter("referral");
 
             /*
-             * Encrypt user password
-             * before storing in database.
+             * BACKEND VALIDATION 1: Check if email contains '@'
              */
-            String hashedPassword =
-                    PasswordUtil.getHashPassword(password);
-
-            /*
-             * Retrieve uploaded profile image.
-             */
-            Part filePart = request.getPart("customer_image");
-
-            /*
-             * Variable to store uploaded file name.
-             */
-            String fileName = null;
-
-            /*
-             * Check whether image file exists.
-             */
-            if (filePart != null && filePart.getSize() > 0) {
-
-                /*
-                 * Retrieve original uploaded file name.
-                 */
-                String originalFileName =
-                        filePart.getSubmittedFileName();
-
-                /*
-                 * Generate unique file name
-                 * using current timestamp.
-                 */
-                fileName = System.currentTimeMillis()
-                        + "_" + originalFileName;
-
-                /*
-                 * Define upload folder path.
-                 */
-                String uploadPath =
-                        getServletContext().getRealPath("")
-                                + File.separator
-                                + "Assets"
-                                + File.separator
-                                + "Profiles";
-
-                /*
-                 * Create upload directory object.
-                 */
-                File uploadDir = new File(uploadPath);
-
-                /*
-                 * Create a folder if it does not exist.
-                 */
-                if (!uploadDir.exists()) {
-                    uploadDir.mkdirs();
-                }
-
-                /*
-                 * Save uploaded image file.
-                 */
-                filePart.write(
-                        uploadPath + File.separator + fileName
-                );
+            if (email == null || !email.contains("@")) {
+                response.sendRedirect("register?error=invalid_email");
+                return;
             }
 
             /*
-             * Establish database connection.
+             * BACKEND VALIDATION 2: Check if email already exists in DB
              */
+            UserDAO userDAO = new UserDAO();
+            if (userDAO.checkEmailExists(email)) {
+                response.sendRedirect("register?error=email_exists");
+                return;
+            }
+
+            String hashedPassword = PasswordUtil.getHashPassword(password);
+            Part filePart = request.getPart("customer_image");
+            String fileName = null;
+
+            if (filePart != null && filePart.getSize() > 0) {
+                String originalFileName = filePart.getSubmittedFileName();
+                fileName = System.currentTimeMillis() + "_" + originalFileName;
+
+                String uploadPath = getServletContext().getRealPath("")
+                        + File.separator + "Assets" + File.separator + "Profiles";
+
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+                filePart.write(uploadPath + File.separator + fileName);
+            }
+
             Connection con = DBConnection.getConnection();
+            String sql = "INSERT INTO customer "
+                    + "(first_name, last_name, gender, password, "
+                    + "referral_code, customer_username, "
+                    + "customer_phoneNo, customer_email, "
+                    + "customer_dob, customer_address, "
+                    + "customer_country, customer_image) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            /*
-             * SQL query for inserting customer data.
-             */
-            String sql =
-                    "INSERT INTO customer "
-                            + "(first_name, last_name, gender, password, "
-                            + "referral_code, customer_username, "
-                            + "customer_phoneNo, customer_email, "
-                            + "customer_dob, customer_address, "
-                            + "customer_country, customer_image) "
-                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-            /*
-             * Create PreparedStatement object.
-             */
-            PreparedStatement statement =
-                    con.prepareStatement(sql);
-
-            /*
-             * Set query parameter values.
-             */
+            PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, gender);
@@ -204,29 +115,12 @@ public class RegisterServlet extends HttpServlet {
             statement.setString(11, country);
             statement.setString(12, fileName);
 
-            /*
-             * Execute insert query.
-             */
             statement.executeUpdate();
-
-            /*
-             * Redirect user to login page
-             * after successful registration.
-             */
             response.sendRedirect("login");
 
         } catch (Exception e) {
-
-            /*
-             * Print error details in console.
-             */
             e.printStackTrace();
-
-            /*
-             * Redirect user back to registration page
-             * with an error message.
-             */
-            response.sendRedirect("register?error=true");
+            response.sendRedirect("register?error=username_exists");
         }
     }
 }

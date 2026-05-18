@@ -1,4 +1,6 @@
-<%-- Registration page --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page isELIgnored="false" %>
 <html lang="en">
 
 <head>
@@ -7,12 +9,36 @@
   <title>Register</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Auth/RegisterStyle.css">
-
 </head>
 
-<%-- Background image with cover styling --%>
-  <body
-    style="background-image: url('${pageContext.request.contextPath}/Assets/Background.jpg'); background-size: cover; background-position: center;">
+  <body style="background-image: url('${pageContext.request.contextPath}/Assets/Background.jpg'); background-size: cover; background-position: center;">
+
+    <%-- PURE CSS ERROR MODAL --%>
+    <c:if test="${not empty param.error}">
+      <div class="modal-overlay">
+        <div class="modal-content">
+          <h3>Registration Failed</h3>
+          <p>
+            <c:choose>
+              <c:when test="${param.error == 'invalid_email'}">
+                Please enter a valid email address containing an '@' symbol.
+              </c:when>
+              <c:when test="${param.error == 'email_exists'}">
+                This email is already registered to an existing account.
+              </c:when>
+              <c:when test="${param.error == 'username_exists'}">
+                This username is already taken. Please choose another one.
+              </c:when>
+              <c:otherwise>
+                An unexpected error occurred during registration.
+              </c:otherwise>
+            </c:choose>
+          </p>
+          <a href="${pageContext.request.contextPath}/register" class="btn-close">Try Again</a>
+        </div>
+      </div>
+    </c:if>
+
     <%-- Main form container --%>
     <div class="main">
       <%-- Top bar with header and social buttons --%>
@@ -268,5 +294,4 @@
       }
     </script>
 </body>
-
 </html>
