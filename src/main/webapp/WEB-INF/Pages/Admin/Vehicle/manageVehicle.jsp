@@ -132,8 +132,7 @@
                             </div>
                             <%-- Modal body with warning --%>
                             <div class="modal-body">
-                              <p>Are you sure you want to delete this vehicle? This action cannot be undone and will
-                                remove it from the fleet.</p>
+                              <p>Are you sure you want to delete this vehicle?</p>
                             </div>
                             <%-- Modal footer with buttons --%>
                             <div class="modal-footer">
