@@ -9,17 +9,16 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.DAO.UserDAO;
+import com.service.SubscriberService;
 import com.util.DBConnection;
 import com.util.PasswordUtil;
 
 /*
  * Servlet responsible for handling
  * customer registration functionality.
- *
- * URL Mapping:
- * /register
  */
 @WebServlet("/register")
 @MultipartConfig(
@@ -101,7 +100,8 @@ public class RegisterServlet extends HttpServlet {
                     + "customer_country, customer_image) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement statement = con.prepareStatement(sql);
+            // --- NEW LOGIC: Request generated keys so we can get the new ID ---
+            PreparedStatement statement = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, gender);
@@ -115,7 +115,19 @@ public class RegisterServlet extends HttpServlet {
             statement.setString(11, country);
             statement.setString(12, fileName);
 
-            statement.executeUpdate();
+            int rowsAffected = statement.executeUpdate();
+
+            // --- NEW LOGIC: Automatically subscribe the new user ---
+            if (rowsAffected > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int newCustomerId = generatedKeys.getInt(1);
+                        SubscriberService subscriberService = new SubscriberService();
+                        subscriberService.subscribe(email, newCustomerId);
+                    }
+                }
+            }
+
             response.sendRedirect("login");
 
         } catch (Exception e) {

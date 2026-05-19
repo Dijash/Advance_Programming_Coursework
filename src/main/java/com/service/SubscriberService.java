@@ -1,50 +1,33 @@
 package com.service;
 
 import com.DAO.SubscriberDAO;
-import com.model.Subscriber;
-
-import java.util.List;
 
 public class SubscriberService {
 
-    private final SubscriberDAO subscriberDAO = new SubscriberDAO();
+    private SubscriberDAO subscriberDAO;
 
-    public String subscribe(String email) {
-        if (email == null || email.trim().isEmpty()) {
-            return "error";
-        }
+    public SubscriberService() {
+        this.subscriberDAO = new SubscriberDAO();
+    }
 
-        // Already active — tell the user it's a duplicate
+    // FIXED: Now accepts customerId and passes it to the DAO
+    public String subscribe(String email, Integer customerId) {
         if (subscriberDAO.emailExistsActive(email)) {
             return "duplicate";
         }
-
-        // Was inactive before — reactivate instead of inserting a new row
         if (subscriberDAO.emailExists(email)) {
-            boolean reactivated = subscriberDAO.reactivateSubscriber(email);
-            return reactivated ? "success" : "error";
+            boolean success = subscriberDAO.reactivateSubscriber(email, customerId);
+            return success ? "success" : "error";
         }
-
-        // Brand-new email
-        boolean saved = subscriberDAO.addSubscriber(email);
-        return saved ? "success" : "error";
-    }
-
-    public boolean unsubscribe(int subscriberId) {
-        return subscriberDAO.deleteSubscriber(subscriberId);
+        boolean success = subscriberDAO.addSubscriber(email, customerId);
+        return success ? "success" : "error";
     }
 
     public boolean unsubscribeByEmail(String email) {
-        if (email == null || email.trim().isEmpty()) return false;
-        return subscriberDAO.unsubscribeByEmail(email.trim().toLowerCase());
+        return subscriberDAO.unsubscribeByEmail(email);
     }
 
     public boolean isSubscribed(String email) {
-        if (email == null || email.trim().isEmpty()) return false;
-        return subscriberDAO.emailExistsActive(email.trim().toLowerCase());
-    }
-
-    public List<Subscriber> getAllSubscribers() {
-        return subscriberDAO.getAllSubscribers();
+        return subscriberDAO.emailExistsActive(email);
     }
 }

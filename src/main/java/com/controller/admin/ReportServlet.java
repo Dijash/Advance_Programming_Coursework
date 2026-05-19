@@ -2,11 +2,11 @@ package com.controller.admin;
 
 import com.DAO.*;
 import com.model.ContactMessage;
-
 import com.model.Subscriber;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -41,6 +41,7 @@ public class ReportServlet extends HttpServlet {
         BookingDAO bookingDAO = new BookingDAO();
         ContactDAO contactDAO = new ContactDAO();
         SubscriberDAO subscriberDAO = new SubscriberDAO();
+
         /*
          * Retrieve vehicle-related statistics.
          */
@@ -120,7 +121,7 @@ public class ReportServlet extends HttpServlet {
             if ("unsubscribe".equals(action)) {
                 subscriberDAO.unsubscribeByEmail(email);
             } else if ("reactivate".equals(action)) {
-                subscriberDAO.reactivateSubscriber(email);
+                subscriberDAO.reactivateSubscriber(email, null);
             }
         }
 
