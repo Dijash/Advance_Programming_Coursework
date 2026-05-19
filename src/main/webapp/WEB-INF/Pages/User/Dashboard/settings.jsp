@@ -152,13 +152,13 @@
           <%-- Driver's license field --%>
           <div class="form-group">
             <label>Driver's License Number</label>
-            <input type="text" name="license" class="info-box" value="${sessionScope.user.customer_license}"
+            <input type="number" name="license" class="info-box" value="${sessionScope.user.customer_license}"
               required>
           </div>
           <%-- Phone number field --%>
           <div class="form-group">
             <label>Phone Number</label>
-            <input type="text" name="phone" class="info-box" value="${sessionScope.user.customer_phoneNo}" required>
+            <input type="number" name="phone" class="info-box" value="${sessionScope.user.customer_phoneNo}" required>
           </div>
 
           <%-- Address field --%>

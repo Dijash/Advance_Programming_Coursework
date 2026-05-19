@@ -153,7 +153,7 @@
             <div class="field">
               <label>Phone Number</label>
               <div class="field-inner">
-                <input type="tel" id="phone" name="phone" placeholder="+977 9800000000" required />
+                <input type="number" id="phone" name="phone" placeholder="+977 9800000000" required />
               </div>
             </div>
 
