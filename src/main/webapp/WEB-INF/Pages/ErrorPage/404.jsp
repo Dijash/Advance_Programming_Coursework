@@ -20,7 +20,7 @@
 
     <%-- 404 error code with wobbly animation --%>
     <div class="error-code">
-      4<span class="wobbly-tire">0</span>4
+      5<span class="wobbly-tire">0</span>4
     </div>
 
     <%-- Error title --%>
