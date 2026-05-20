@@ -198,7 +198,7 @@
           <%-- Vehicle image and info preview --%>
           <div class="vehicle-preview-card">
             <img
-              src="${pageContext.request.contextPath}/Assets/${not empty vehicleImage ? vehicleImage : 'images.jpeg'}"
+              src="${pageContext.request.contextPath}/Assets/${not empty vehicleImage ? vehicleImage : 'mustang.jpg'}"
               alt="Vehicle Image" class="vehicle-preview-img" />
             <h3 class="vehicle-preview-title">
               <c:out value="${bookingDetails.vehicleDetails}" />

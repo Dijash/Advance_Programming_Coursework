@@ -100,7 +100,6 @@ public class RegisterServlet extends HttpServlet {
                     + "customer_country, customer_image) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            // --- NEW LOGIC: Request generated keys so we can get the new ID ---
             PreparedStatement statement = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, firstName);
             statement.setString(2, lastName);
@@ -117,7 +116,6 @@ public class RegisterServlet extends HttpServlet {
 
             int rowsAffected = statement.executeUpdate();
 
-            // --- NEW LOGIC: Automatically subscribe the new user ---
             if (rowsAffected > 0) {
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
