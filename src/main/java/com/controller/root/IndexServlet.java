@@ -18,7 +18,7 @@ import java.util.List;
  * as a request attribute before forwarding to index.jsp.
  *
  * URL Mapping:
- *      /index  (mapped as the welcome-file target via web.xml)
+ *      /index is  mapped as the welcome-file target via web.xml
  */
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
